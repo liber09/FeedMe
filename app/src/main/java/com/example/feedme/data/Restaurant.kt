@@ -1,8 +1,6 @@
 package com.example.feedme.data
 
-import java.security.KeyStore.TrustedCertificateEntry
-
-data class restaurant (
+data class Restaurant (
     val name: String = "",
     val orgNr: String = "",
     val address: String = "",
