@@ -8,6 +8,7 @@ data class User (
     val postalCode: String = "",
     val phoneNumber: String = "",
     val eMail: String = "",
+    val typeOfUser: String = "", //customer, administrator, delivery
 
 
 

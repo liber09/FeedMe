@@ -25,16 +25,16 @@ class MainActivity : AppCompatActivity() {
         //Create new restaurant object
         val user1 = User("Olof",
             "Svensson","Storgatan 95", "Storstan",
-            "54648", "944237524", "olof.svensson@svensson.nu")
+            "54648", "944237524", "olof.svensson@svensson.nu","administrator")
         val user2 = User("Lisa",
             "Ahl","Lilla vägen 5", "byn",
-            "56343", "2343435", "lisa.ahl@ahl.com")
+            "56343", "2343435", "lisa.ahl@ahl.com", "customer")
         val user3 = User("Lina",
             "Green","Stora vägen 27", "Göteborg",
-            "45698", "234554346", "Lina.green@green.com")
+            "45698", "234554346", "Lina.green@green.com", "customer")
         val user4 = User("Anna",
             "Anderson","Norra gatan 1", "Göteborg",
-            "45632", "62354634", "anna.andersson@andersson.nu")
+            "45632", "62354634", "anna.andersson@andersson.nu", "delivery")
 
         //Add it to collection restaurants, SetOptions.merge() = do not overwrite if exists
         db.collection("users").document("user1").set(user1, SetOptions.merge())
