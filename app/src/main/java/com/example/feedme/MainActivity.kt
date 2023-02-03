@@ -1,34 +1,24 @@
 package com.example.feedme
-
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-
-val db = Firebase.firestore //Firebase db object
-import android.util.Log
 import com.example.feedme.data.User
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.example.feedme.data.Restaurant
 
 val db = Firebase.firestore
-
-
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mockUserData()
-        setupRestaurantMockData()
+        mockRestaurantData()
     }
 
-    private fun setupRestaurantMockData() {
+    //Mock restaurant daata, create 4 restaurants and push to DB
+    private fun mockRestaurantData() {
         val restaurant1 = Restaurant(
             "Karlbergs Krog","5454-5454","Västanvindsgatan 1","44454",
             "Stenungsund","030323654","info@karlbergs.se","Husmanskost",
@@ -56,8 +46,7 @@ class MainActivity : AppCompatActivity() {
         db.collection("restaurants").document("restaurant3").set(restaurant3, SetOptions.merge())
         db.collection("restaurants").document("restaurant4").set(restaurant4, SetOptions.merge())
     }
-}
-
+    //Mock user data, creates 4 users and push to DB
     private fun mockUserData() {
         //Create new restaurant object
         val user1 = User("Olof",
