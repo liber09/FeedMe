@@ -1,26 +1,52 @@
 package com.example.feedme
-
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.feedme.data.User
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.example.feedme.data.User
+import com.example.feedme.data.Restaurant
 
 val db = Firebase.firestore
-
-
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mockUserData()
+        mockRestaurantData()
     }
 
+    //Mock restaurant daata, create 4 restaurants and push to DB
+    private fun mockRestaurantData() {
+        val restaurant1 = Restaurant(
+            "Karlbergs Krog","5454-5454","Västanvindsgatan 1","44454",
+            "Stenungsund","030323654","info@karlbergs.se","Husmanskost",
+            50,true,true,true,
+            false)
+        val restaurant2 = Restaurant(
+            "Restaurant 2012","5580-5465","Storgatan 12","56234",
+            "Göteborg","0315648958","info@restaurant2012.se","Italienskt",
+            45,true,false,true,
+            true)
+        val restaurant3 = Restaurant(
+            "Jamie Oliver's gardens","5555-5454","Fancy Pancy street 15","12345",
+            "Posh city","254685478","info@jamieoliver.com","Ala carté",
+            150,true,true,true,
+            true)
+        val restaurant4 = Restaurant(
+            "King Charles III","6555-5454","Buckingham palace 1","56458",
+            "London","45213658","info@buckingham.co.uk","Ala carté",
+            100,true,true,true,
+            false)
+
+        //Add restaurants to collection restaurants, SetOptions.merge() = do not overwrite if exists
+        db.collection("restaurants").document("restaurant1").set(restaurant1, SetOptions.merge())
+        db.collection("restaurants").document("restaurant2").set(restaurant2, SetOptions.merge())
+        db.collection("restaurants").document("restaurant3").set(restaurant3, SetOptions.merge())
+        db.collection("restaurants").document("restaurant4").set(restaurant4, SetOptions.merge())
+    }
+    //Mock user data, creates 4 users and push to DB
     private fun mockUserData() {
         //Create new restaurant object
         val user1 = User("Olof",
