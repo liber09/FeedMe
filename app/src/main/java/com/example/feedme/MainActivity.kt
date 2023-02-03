@@ -3,6 +3,11 @@ package com.example.feedme
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.feedme.data.Restaurant
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
+val db = Firebase.firestore //Firebase db object
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,5 +37,11 @@ class MainActivity : AppCompatActivity() {
             "London","45213658","info@buckingham.co.uk","Ala carté",
             100,true,true,true,
             false)
+
+        //Add restaurants to collection restaurants, SetOptions.merge() = do not overwrite if exists
+        db.collection("restaurants").document("restaurant1").set(restaurant1, SetOptions.merge())
+        db.collection("restaurants").document("restaurant2").set(restaurant2, SetOptions.merge())
+        db.collection("restaurants").document("restaurant3").set(restaurant3, SetOptions.merge())
+        db.collection("restaurants").document("restaurant4").set(restaurant4, SetOptions.merge())
     }
 }
