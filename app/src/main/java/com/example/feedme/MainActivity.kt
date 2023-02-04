@@ -19,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mockUserData()
         mockRestaurantData()
+
+        val test = findViewById<Button>(R.id.button7)
+
+        test.setOnClickListener{
+            val register = Intent(this,RegisterUserInfo::class.java)
+            startActivity(register)
+        }
     }
 
     //Mock restaurant daata, create 4 restaurants and push to DB

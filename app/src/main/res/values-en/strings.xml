@@ -2,4 +2,12 @@
 <resources>
     <string name="app_name">FeedMe</string>
     <string name="my_profile">My profile</string>
+    <string name="firstname">Firstname</string>
+    <string name="address">Address</string>
+    <string name="lastname">Lastname</string>
+    <string name="postalCode">Postalcode</string>
+    <string name="city">City</string>
+    <string name="phoneNumber">Phonenumber</string>
+    <string name="mail">Mail</string>
+    <string name="userName">Username</string>
 </resources>
