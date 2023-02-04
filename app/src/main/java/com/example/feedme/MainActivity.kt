@@ -1,13 +1,11 @@
 package com.example.feedme
-<<<<<<< HEAD
+
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-=======
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,23 +13,32 @@ import com.example.feedme.data.User
 import com.example.feedme.data.Restaurant
 
 val db = Firebase.firestore
->>>>>>> Sprint-1
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-<<<<<<< HEAD
 
-
-
-
-
-
-=======
         mockUserData()
         mockRestaurantData()
+
+        val add = findViewById<Button>(R.id.btn_add_act)
+        val rv = findViewById<Button>(R.id.btn_RV_act)
+
+        add.setOnClickListener {
+            val intent = Intent(this, AddNChangeFoodActivity::class.java)
+
+            startActivity(intent)
+
+        }
+        rv.setOnClickListener {
+            val intent = Intent(this, FoodViewActivity::class.java)
+
+            startActivity(intent)
+        }
+
     }
 
     //Mock restaurant daata, create 4 restaurants and push to DB
@@ -84,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         db.collection("users").document("user2").set(user2, SetOptions.merge())
         db.collection("users").document("user3").set(user3, SetOptions.merge())
         db.collection("users").document("user4").set(user4, SetOptions.merge())
->>>>>>> Sprint-1
+
 
     }
 }

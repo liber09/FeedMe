@@ -63,6 +63,8 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
             holder.tv_priceVegetarian.isInvisible = true
         }
 
+        // for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
+
 
 
 
