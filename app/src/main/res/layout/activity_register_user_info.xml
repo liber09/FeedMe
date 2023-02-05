@@ -100,6 +100,30 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="360dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/firstname"
+                app:endIconMode="clear_text"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/Red"
+                app:hintTextColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFirstname">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutLastname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="160dp"
