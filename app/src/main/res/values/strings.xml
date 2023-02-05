@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">FeedMe</string>
+    <string name="my_profile">Min profil</string>
+    <string name="firstname">Förnamn</string>
+    <string name="address">Adress</string>
+    <string name="lastname">Efternamn</string>
+    <string name="postalCode">Postnummer</string>
+    <string name="city">Ort</string>
+    <string name="phoneNumber">Telefonnummer</string>
+    <string name="mail">Meljadress</string>
+    <string name="userName">Användarnamn</string>
+    <string name="required">* Obligatorisk</string>
+    <string name="allergies">Mina allergier</string>
+    <string name="save">Spara</string>
 </resources>
