@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val test = findViewById<Button>(R.id.button7)
 
         test.setOnClickListener{
-            val register = Intent(this,RegisterUserInfo::class.java)
+            val register = Intent(this,RegisterCustomerInfo::class.java)
             startActivity(register)
         }
     }
