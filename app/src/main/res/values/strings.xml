@@ -10,4 +10,6 @@
     <string name="mail">Meljadress</string>
     <string name="userName">Användarnamn</string>
     <string name="required">* Obligatorisk</string>
+    <string name="allergies">Mina allergier</string>
+    <string name="save">Spara</string>
 </resources>

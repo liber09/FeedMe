@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
+    android:backgroundTint="#000000"
     tools:context=".RegisterUserInfo">
 
     <Button
@@ -84,10 +85,12 @@
         app:layout_constraintTop_toBottomOf="@+id/profileButton" />
 
     <ScrollView
-        android:layout_width="419dp"
-        android:layout_height="694dp"
+        android:layout_width="457dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="50dp"
         android:fillViewport="true"
+        android:isScrollContainer="true"
+        android:screenReaderFocusable="true"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -97,12 +100,38 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutAllergies"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="375dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/allergies"
+                app:endIconMode="clear_text"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/Red"
+                app:hintTextColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextALlergies"
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:background="@drawable/border"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="360dp"
+                android:layout_width="375dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
@@ -226,7 +255,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutAddress"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="360dp"
+                android:layout_width="372dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
@@ -321,6 +350,29 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/allergies"
+                android:textColor="#F29D38"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail" />
+
+            <Button
+                android:id="@+id/containedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#F29D38"
+                android:text="@string/save"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAllergies" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

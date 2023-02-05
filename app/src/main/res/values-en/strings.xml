@@ -11,4 +11,6 @@
     <string name="mail">Mail</string>
     <string name="userName">Username</string>
     <string name="required">* Required</string>
+    <string name="allergies">My allergies</string>
+    <string name="save">Save</string>
 </resources>
