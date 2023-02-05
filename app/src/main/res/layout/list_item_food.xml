@@ -4,48 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="5dp"
-    android:background="#2C2E5F"
-    android:backgroundTint="#2C2E5F"
+    android:background="#000000"
+    android:backgroundTint="#000000"
 
 
-    app:circularflow_radiusInDP="20dp"
     app:layout_constraintCircleRadius="20dp"
 
     >
-
-    <TextView
-        android:id="@+id/tv_RV_DishName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_RV_dishDescription"
-        android:layout_width="165dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/tv_RV_DishName" />
 
     <Button
         android:id="@+id/btn_AddSmallPrice"
         android:layout_width="80dp"
         android:layout_height="48dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#F29D38"
@@ -54,19 +25,8 @@
         android:textSize="12sp"
         app:cornerRadius="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_RV_dishDescription"
+        app:layout_constraintStart_toEndOf="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/tv_RV_SmalpPrice" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#F29D38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_outline_food_bank_24" />
 
     <Button
         android:id="@+id/btn_AddNormalPrice"
@@ -86,9 +46,9 @@
         android:id="@+id/btn_AddLarge"
         android:layout_width="80dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#F29D38"
         android:text="Add +"
         android:textColor="#000000"
@@ -104,9 +64,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="17dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cB_glutenFree"
         app:layout_constraintTop_toBottomOf="@+id/cN_laktosFree" />
 
@@ -114,8 +76,8 @@
         android:id="@+id/tv_RV_NormalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="23dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
@@ -128,9 +90,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="17dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cN_laktosFree"
         app:layout_constraintTop_toBottomOf="@+id/cB_vegeterian" />
 
@@ -138,12 +102,14 @@
         android:id="@+id/tv_priceGlutenFree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="18dp"
         android:paddingEnd="8dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cB_glutenFree" />
 
@@ -157,7 +123,7 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/cB_vegeterian"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <CheckBox
         android:id="@+id/cB_glutenFree"
@@ -169,7 +135,7 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <CheckBox
         android:id="@+id/cN_laktosFree"
@@ -181,7 +147,7 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/cB_glutenFree"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <CheckBox
         android:id="@+id/cB_vegeterian"
@@ -193,14 +159,14 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/cN_laktosFree"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <TextView
         android:id="@+id/tv_RV_SmalpPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="23dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
@@ -211,8 +177,8 @@
         android:id="@+id/tv_RV_LargePrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="23dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
@@ -225,10 +191,69 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="17dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cB_vegeterian"
         app:layout_constraintTop_toBottomOf="@+id/cB_vegan" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="304dp"
+        android:layout_height="149dp"
+        android:layout_margin="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="#2C2E5F"
+        android:paddingStart="4dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#F29D38"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_outline_food_bank_24" />
+
+        <TextView
+            android:id="@+id/tv_RV_dishDescription"
+            android:layout_width="151dp"
+            android:layout_height="84dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/tv_RV_DishName" />
+
+        <TextView
+            android:id="@+id/tv_RV_DishName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
