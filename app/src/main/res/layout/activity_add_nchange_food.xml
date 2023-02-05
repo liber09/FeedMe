@@ -4,32 +4,676 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
+    android:isScrollContainer="true"
     tools:context=".AddNChangeFoodActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <ScrollView
         android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="213dp"
-        android:layout_marginEnd="32dp"
-        android:hint="Password"
-        app:helperText="Obligatoriskt"
-        app:endIconMode="password_toggle"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-
-        app:helperTextTextColor="#D32F2F"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:foregroundTintMode="add"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:maxLength="20"
-            android:id="@+id/textInputEditText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iV_AddDishAdminUploadFoodPic"
+                    android:layout_width="136dp"
+                    android:layout_height="140dp"
+                    android:backgroundTint="#512DA8"
+                    android:foreground="@drawable/logo"
+                    android:outlineProvider="none"
+                    android:visibility="visible"
+                    tools:srcCompat="@drawable/ic_outline_food_bank_24" />
+
+                <Button
+                    android:id="@+id/btn_AddDishAdminPicUploaad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Lägg till "
+                    app:cornerRadius="10sp" />
+            </TableRow>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/AddDishAdminFoodTitleLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Matens namn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/AddDishAdminFoodTitleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/AddDishAdminFoodDescriptionLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Beskrivning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/AddDishAdminFoodDescriptionLayoutEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:minHeight="100dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_AddDishAdminfoodType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+
+                    android:text="Typ av Mat"
+
+                    android:textColor="#F29D38"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner_AddDishAdminTypeOfFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/food_type_array"
+                    android:minWidth="40dp"
+                    android:minHeight="16dp"
+                    android:outlineAmbientShadowColor="#F29D38"
+                    android:outlineSpotShadowColor="#F29D38"
+                    android:textColor="#F29D38" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/tv_AddDishAdminFoodContainsNaturally"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Maten är i sin vanlig form"
+                android:textColor="#F29D38"
+
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminisGlutenfree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:text="Glutenfri"
+                        android:textColor="#F29D38" />
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminisSoyFree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="62dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Sojafri"
+                        android:textColor="#F29D38" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminisLaktosfree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Laktosfri"
+                        android:textColor="#F29D38" />
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminisNutFree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="62dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Nötfri"
+                        android:textColor="#F29D38" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminIsFreefromSeefood"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Fri från fisk/skaldjur"
+                        android:textColor="#F29D38" />
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminIsEggFree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="62dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Äggfri"
+                        android:textColor="#F29D38" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminIsVegeterian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Vegetariskt"
+                        android:textColor="#F29D38" />
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminIsVegan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="62dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Veganskt"
+                        android:textColor="#F29D38" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/tv_AddDishAdminPossible2beMadeOtherWise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Rätten kan även göras"
+
+                android:textColor="#F29D38"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_AddDishAdminCanBMadeVegeterian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Vegetariskt"
+                        android:textColor="#F29D38" />
+
+                    <TextView
+                        android:id="@+id/tv_AddDishAdminexrakostVegeterian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+
+                        android:text="till en extrakostnad av"
+                        android:textColor="#F29D38" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/AddDishAdminExtrakostVegeterianTitleLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border"
+                        android:minWidth="36dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ET_AddDishAdminExtrakostVegeterian"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:paddingStart="8dp"
+                            android:paddingLeft="8dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingRight="8dp"
+                            android:paddingBottom="8dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="10sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_AddDishAdminextrkostinCrownsVgt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="kr"
+                        android:textColor="#F29D38" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_kanBMadeGlutenfree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Glutenfri"
+                        android:textColor="#F29D38" />
+
+                    <TextView
+                        android:id="@+id/tv_extraCostGluten"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+
+                        android:text="till en extrakostnad av"
+                        android:textColor="#F29D38" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/AddDishAdminExtrakostGlutenTitleLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border"
+                        android:minWidth="36dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:paddingStart="8dp"
+                            android:paddingLeft="8dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingRight="8dp"
+                            android:paddingBottom="8dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="10sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_AddDishAdminextrkostinCrownG"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="kr"
+                        android:textColor="#F29D38" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_CanBMadeLaktoseFree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Laktosfri"
+                        android:textColor="#F29D38" />
+
+                    <TextView
+                        android:id="@+id/tv_extraCostlaktose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+
+                        android:text="till en extrakostnad av"
+                        android:textColor="#F29D38" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/AddDishAdminExtrakostLaktosFreeTitleLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border"
+                        android:minWidth="36dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:paddingStart="8dp"
+                            android:paddingLeft="8dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingRight="8dp"
+                            android:paddingBottom="8dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="10sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_AddDishAdminextrkostinCrownsL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="kr"
+                        android:textColor="#F29D38" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/cb_canBMadeVegan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="#F29D38"
+                        android:text="Vegan"
+                        android:textColor="#F29D38" />
+
+                    <TextView
+                        android:id="@+id/tv_extraKostVegan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+
+                        android:text="till en extrakostnad av"
+                        android:textColor="#F29D38" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/AddDishAdminExtrakostVeganTitleLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border"
+                        android:minWidth="36dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ET_AddDishAdminExtrakostVegan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:paddingStart="8dp"
+                            android:paddingLeft="8dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingRight="8dp"
+                            android:paddingBottom="8dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="10sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_AddDishAdminextrkostinCrownsV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="kr"
+                        android:textColor="#F29D38" />
+
+                </TableRow>
+            </TableLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Pris"
+                    android:textColor="#F29D38"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_OnlyIfSuitable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="202dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Fyll bara i om relevant"
+                    android:textColor="#FFA000"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_PriceNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+
+                    android:text="Normal"
+                    android:textColor="#F29D38" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/AddDishAdminCostsNormalSizeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border"
+                    android:minWidth="36dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ET_AddDishAdminCostsNormalSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:paddingStart="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="-"
+                        android:textAlignment="center"
+                        android:textSize="10sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_AddDishAdminextrkostinCrownsNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="kr"
+                    android:textColor="#F29D38" />
+
+                <TextView
+                    android:id="@+id/tv_priceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+
+                    android:text="Liten"
+                    android:textColor="#F29D38" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/AddDishAdminCostsSmalSizeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border"
+                    android:minWidth="36dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ET_AddDishAdminCostsSmalSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:paddingStart="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="-"
+                        android:textAlignment="center"
+                        android:textSize="10sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_AddDishAdminextrkostinCrownsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="kr"
+                    android:textColor="#F29D38" />
+
+                <TextView
+                    android:id="@+id/tv_PriceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+
+                    android:text="Stor"
+                    android:textColor="#F29D38" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/AddDishAdminCostsLargelSizeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border"
+                    android:minWidth="36dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ET_AddDishAdminCostsLargelSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:paddingStart="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="-"
+                        android:textAlignment="center"
+                        android:textSize="10sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_AddDishAdminextrkostinCrownsLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="kr"
+                    android:textColor="#F29D38" />
+
+            </TableRow>
+
+            <Button
+                android:id="@+id/btn_AddDishToFirebase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Lägg till" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
