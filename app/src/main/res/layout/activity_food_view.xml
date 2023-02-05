@@ -9,7 +9,7 @@
     tools:context=".FoodViewActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/profileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -76,7 +76,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/RV_Food"
         app:layout_constraintStart_toEndOf="@+id/tv_Deserts"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
 
     <Button
         android:id="@+id/button4"

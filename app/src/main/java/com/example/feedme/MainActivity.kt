@@ -14,12 +14,12 @@ import com.example.feedme.data.Restaurant
 
 val db = Firebase.firestore
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         mockUserData()
         mockRestaurantData()
@@ -37,6 +37,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, FoodViewActivity::class.java)
 
             startActivity(intent)
+        }
+
+
+        mockUserData()
+        mockRestaurantData()
+
+        val test = findViewById<Button>(R.id.button7)
+
+        test.setOnClickListener{
+            val register = Intent(this,RegisterCustomerInfo::class.java)
+            startActivity(register)
         }
 
     }
@@ -91,7 +102,6 @@ class MainActivity : AppCompatActivity() {
         db.collection("users").document("user2").set(user2, SetOptions.merge())
         db.collection("users").document("user3").set(user3, SetOptions.merge())
         db.collection("users").document("user4").set(user4, SetOptions.merge())
-
 
     }
 }
