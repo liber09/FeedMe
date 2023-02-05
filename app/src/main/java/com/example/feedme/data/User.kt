@@ -9,8 +9,7 @@ data class User (
     val phoneNumber: String = "",
     val eMail: String = "",
     val typeOfUser: String = "", //customer, administrator, delivery
-
-
-
-        )
+    val allergies: String = "",
+    val userName: String = ""
+)
 
