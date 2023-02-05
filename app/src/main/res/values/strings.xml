@@ -9,4 +9,5 @@
     <string name="phoneNumber">Telefonnummer</string>
     <string name="mail">Meljadress</string>
     <string name="userName">Användarnamn</string>
+    <string name="required">* Obligatorisk</string>
 </resources>
