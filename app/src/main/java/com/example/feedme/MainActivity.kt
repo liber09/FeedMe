@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Mock restaurant daata, create 4 restaurants and push to DB
+    //Mock restaurant data, create 4 restaurants and push to DB
     private fun mockRestaurantData() {
         val restaurant1 = Restaurant(
             "Karlbergs Krog","5454-5454","Västanvindsgatan 1","44454",
@@ -62,16 +62,20 @@ class MainActivity : AppCompatActivity() {
         //Create new restaurant object
         val user1 = User("Olof",
             "Svensson","Storgatan 95", "Storstan",
-            "54648", "944237524", "olof.svensson@svensson.nu","administrator")
+            "54648", "944237524", "olof.svensson@svensson.nu","administrator",
+            "Fisk, skaldjur, ägg","olle_svenne")
         val user2 = User("Lisa",
             "Ahl","Lilla vägen 5", "byn",
-            "56343", "2343435", "lisa.ahl@ahl.com", "customer")
+            "56343", "2343435", "lisa.ahl@ahl.com", "customer",
+            "","Liiiisa")
         val user3 = User("Lina",
             "Green","Stora vägen 27", "Göteborg",
-            "45698", "234554346", "Lina.green@green.com", "customer")
+            "45698", "234554346", "Lina.green@green.com", "customer",
+            "Äcklig mat","Greniz")
         val user4 = User("Anna",
             "Anderson","Norra gatan 1", "Göteborg",
-            "45632", "62354634", "anna.andersson@andersson.nu", "delivery")
+            "45632", "62354634", "anna.andersson@andersson.nu", "delivery",
+            "Gluten, laktos", "aannndae")
 
         //Add it to collection restaurants, SetOptions.merge() = do not overwrite if exists
         db.collection("users").document("user1").set(user1, SetOptions.merge())
