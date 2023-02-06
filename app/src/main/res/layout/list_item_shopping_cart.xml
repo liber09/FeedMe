@@ -7,7 +7,7 @@
     android:background=" #2C2E5F">
 
     <TextView
-        android:id="@+id/textViewCount"
+        android:id="@+id/textViewCartRowCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewCount3"
+        android:id="@+id/textViewCartRowItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -27,11 +27,11 @@
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewCount"
+        app:layout_constraintStart_toEndOf="@+id/textViewCartRowCount"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewPrice"
+        android:id="@+id/textViewCartItemRowPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
@@ -43,14 +43,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/chipAlergen"
+        android:id="@+id/chipCartRowItemAlergen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:backgroundTint="#F29D38"
         android:text="@string/vegetarian"
-        app:layout_constraintStart_toEndOf="@+id/textViewCount"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCartItemRowPrice"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
