@@ -13,4 +13,5 @@
     <string name="required">* Required</string>
     <string name="allergies">My allergies</string>
     <string name="save">Save</string>
+    <string name="wrongInput">Wrong input, please correct your input and try again</string>
 </resources>
