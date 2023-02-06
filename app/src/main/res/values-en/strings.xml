@@ -21,4 +21,8 @@
     <string name="deliveryPriceAmount">0 usd</string>
     <string name="leftTofreeDelivery">Only 0 usd left to get free delivery</string>
     <string name="totalPrice">Total :</string>
+    <string name="glutenFree">Gluten free</string>
+    <string name="lactoseFree">Lactose free</string>
+    <string name="vegan">Vegan</string>
+    <string name="vegetarian">Vegetarian</string>
 </resources>

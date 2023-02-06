@@ -23,5 +23,9 @@
     <string name="deliveryPriceAmount">0 kr</string>
     <string name="leftTofreeDelivery">Bara 0 kr fattas för fri leverans</string>
     <string name="totalPrice">Total :</string>
+    <string name="glutenFree">Glutenfri</string>
+    <string name="lactoseFree">Laktos fri</string>
+    <string name="vegan">Vegansk</string>
+    <string name="vegetarian">Vegetarisk</string>
 
 </resources>
