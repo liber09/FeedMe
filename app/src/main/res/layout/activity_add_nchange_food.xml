@@ -318,7 +318,7 @@
                     android:layout_height="match_parent">
 
                     <CheckBox
-                        android:id="@+id/cb_kanBMadeGlutenfree"
+                        android:id="@+id/cb_canBMadeGlutenfree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -347,6 +347,7 @@
                         android:minWidth="36dp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ET_AddDishAdminExtrakostGluten"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/border"
@@ -407,6 +408,7 @@
                         android:minWidth="36dp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ET_AddDishAdminExtrakostLaktosFree"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/border"
@@ -453,7 +455,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="8dp"
-
                         android:text="till en extrakostnad av"
                         android:textColor="#F29D38" />
 
@@ -563,7 +564,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/tv_AddDishAdminextrkostinCrownsNormal"
+                    android:id="@+id/tv_AddDishAdminCostinCrownsNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
