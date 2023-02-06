@@ -17,5 +17,11 @@
     <string name="save">Spara</string>
     <string name="wrongInput">Felaktig inmatning, kontrollera att du fyllt i korrekta uppgifter</string>
     <string name="saveSuccess">Sparat</string>
+    <string name="yourOrder">Din beställning:</string>
+    <string name="deliveryPrice">Pris för utkörning</string>
+    <string name="deliveryArea">område</string>
+    <string name="deliveryPriceAmount">0 kr</string>
+    <string name="leftTofreeDelivery">Bara 0 kr fattas för fri leverans</string>
+    <string name="totalPrice">Total :</string>
 
 </resources>

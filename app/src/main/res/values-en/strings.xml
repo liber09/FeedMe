@@ -15,4 +15,10 @@
     <string name="save">Save</string>
     <string name="wrongInput">Wrong input, please correct your input and try again</string>
     <string name="saveSuccess">Save successful</string>
+    <string name="yourOrder">Your order:</string>
+    <string name="deliveryPrice">Delivery cost</string>
+    <string name="deliveryArea">area</string>
+    <string name="deliveryPriceAmount">0 usd</string>
+    <string name="leftTofreeDelivery">Only 0 usd left to get free delivery</string>
+    <string name="totalPrice">Total :</string>
 </resources>
