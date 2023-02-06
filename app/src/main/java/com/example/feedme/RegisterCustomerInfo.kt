@@ -23,7 +23,7 @@ class RegisterCustomerInfo : AppCompatActivity() {
     //Function that saves the information the customer has entered as a new customer user in the database
     private fun saveCustomerInfoToDatabase() {
         //First, validate if input is correct
-        if (ValidateInput()){
+        if (validateInput()){
             val firstName = findViewById<EditText>(R.id.textInputEditTextFirstname).text.toString()
             val lastName = findViewById<EditText>(R.id.textInputEditTextLastname).text.toString()
             val address = findViewById<EditText>(R.id.textInputEditTextAddress).text.toString()
@@ -53,15 +53,11 @@ class RegisterCustomerInfo : AppCompatActivity() {
             //Input was not correct, give user a ,message to correct and try again
             Toast.makeText(this, getString(R.string.wrongInput), Toast.LENGTH_SHORT).show()
         }
-
-
-
-
     }
 
     //Check if any fields are empty except for allergies and userName which can be empty
-    private fun ValidateInput():Boolean {
-        var isInputOk = true
+    private fun validateInput():Boolean {
+        var isInputOk = true //Set to true first, change to false if anything is not correct
         val firstName = findViewById<EditText>(R.id.textInputEditTextFirstname).text.toString()
         val lastName = findViewById<EditText>(R.id.textInputEditTextLastname).text.toString()
         val address = findViewById<EditText>(R.id.textInputEditTextAddress).text.toString()
