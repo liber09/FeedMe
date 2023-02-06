@@ -49,6 +49,8 @@ class RegisterCustomerInfo : AppCompatActivity() {
             )
             //Add user to users collection
             db.collection("customers").add(customer) //Add restaurant to database
+            //Tell user save was successful
+            Toast.makeText(this, getString(R.string.saveSuccess), Toast.LENGTH_SHORT).show()
         }else {
             //Input was not correct, give user a ,message to correct and try again
             Toast.makeText(this, getString(R.string.wrongInput), Toast.LENGTH_SHORT).show()
