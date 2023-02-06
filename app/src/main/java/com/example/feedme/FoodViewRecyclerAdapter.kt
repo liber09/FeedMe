@@ -1,11 +1,13 @@
 package com.example.feedme
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
@@ -34,15 +36,15 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
         holder.tv_priceVegan.text = dishes.extraCostVegan.toString()+" kr"
         holder.tv_priceVegetarian.text = dishes.extraCostVegeterian.toString()+ " kr"
 
-        if (dishes.priceSmallPortion == null){
+        if (dishes.priceSmallPortion == null|| dishes.priceSmallPortion == 0.0){
             holder.addButtonSmalPrice.isInvisible = true
             holder.smalPriceTextView.isInvisible = true
         }
-        if (dishes.priceLargePortion == null){
+        if (dishes.priceLargePortion == null|| dishes.priceLargePortion == 0.0){
             holder.addButtonLargePrice.isInvisible = true
             holder.largePriceTextView.isInvisible = true
         }
-        if (dishes.priceNormalPortion == null){
+        if (dishes.priceNormalPortion == null|| dishes.priceNormalPortion == 0.0){
             holder.addButtonNormalPrice.isInvisible = true
             holder.normalPriceTextView.isInvisible = true
         }
@@ -63,7 +65,14 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
             holder.tv_priceVegetarian.isInvisible = true
         }
 
-        // for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
+        if (dishes.dishImagePath.isEmpty()){
+            holder.iv_foodImage.setImageResource(R.drawable.logo)
+
+        }
+
+        // TODO for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
+
+        holder.foodDisplayPosition = position
 
 
 
@@ -96,6 +105,27 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
         var tv_priceLaktose = itemView.findViewById<TextView>(R.id.tv_priceLaktosFree)
         var tv_priceVegan = itemView.findViewById<TextView>(R.id.tv_priceVegan)
         var tv_priceVegetarian = itemView.findViewById<TextView>(R.id.tv_RV_priceVegeterian)
+        var iv_foodImage = itemView.findViewById<ImageView>(R.id.iV_foodDisplay_RV)
+        var foodDisplayPosition = 0
+
+
+        //TODO init block för Addfunktions, and an only admin delete and change funktion
+
+  init {
+
+    itemView.setOnClickListener(){
+    val intent = Intent(context,AddNChangeFoodActivity::class.java)
+    intent.putExtra(DISH_POSTION_KEY, foodDisplayPosition)
+    context.startActivity(intent)
+     }}
+    /*
+    //
+    // addsmall, addlarge, adddeletebutton.onClicklisterna {
+    // dataManger.Dishes[foodDisplayPosition]. Video RV2   18:00
+
+   }
+    deleteButton.setOnClickListener {}
+     } */
 
 
 

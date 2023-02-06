@@ -96,7 +96,7 @@
 
                 <TextView
                     android:id="@+id/tv_AddDishAdminfoodType"
-                    android:layout_width="match_parent"
+                    android:layout_width="128dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
 
@@ -108,11 +108,12 @@
 
                 <Spinner
                     android:id="@+id/spinner_AddDishAdminTypeOfFood"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:backgroundTint="#F29D38"
                     android:entries="@array/food_type_array"
-                    android:minWidth="40dp"
-                    android:minHeight="16dp"
+                    android:minHeight="48dp"
                     android:outlineAmbientShadowColor="#F29D38"
                     android:outlineSpotShadowColor="#F29D38"
                     android:textColor="#F29D38" />
@@ -233,8 +234,19 @@
                         android:buttonTint="#F29D38"
                         android:text="Veganskt"
                         android:textColor="#F29D38" />
+
                 </TableRow>
             </TableLayout>
+
+            <CheckBox
+                android:id="@+id/cb_AddDishAdminIsLCHF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:buttonTint="#F29D38"
+                android:text="LCHF"
+                android:textColor="#F29D38" />
 
             <TextView
                 android:id="@+id/tv_AddDishAdminPossible2beMadeOtherWise"
@@ -318,7 +330,7 @@
                     android:layout_height="match_parent">
 
                     <CheckBox
-                        android:id="@+id/cb_kanBMadeGlutenfree"
+                        android:id="@+id/cb_canBMadeGlutenfree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -347,6 +359,7 @@
                         android:minWidth="36dp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ET_AddDishAdminExtrakostGluten"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/border"
@@ -407,6 +420,7 @@
                         android:minWidth="36dp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ET_AddDishAdminExtrakostLaktosFree"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/border"
@@ -453,7 +467,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="8dp"
-
                         android:text="till en extrakostnad av"
                         android:textColor="#F29D38" />
 
@@ -563,7 +576,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/tv_AddDishAdminextrkostinCrownsNormal"
+                    android:id="@+id/tv_AddDishAdminCostinCrownsNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
