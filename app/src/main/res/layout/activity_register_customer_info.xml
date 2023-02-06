@@ -363,7 +363,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail" />
 
             <Button
-                android:id="@+id/containedButton"
+                android:id="@+id/btnSaveCustomerInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

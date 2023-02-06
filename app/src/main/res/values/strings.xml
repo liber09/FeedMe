@@ -15,5 +15,7 @@
     <string name="required">* Obligatorisk</string>
     <string name="allergies">Mina allergier</string>
     <string name="save">Spara</string>
+    <string name="wrongInput">Felaktig inmatning, kontrollera att du fyllt i korrekta uppgifter</string>
+    <string name="saveSuccess">Sparat</string>
 
 </resources>

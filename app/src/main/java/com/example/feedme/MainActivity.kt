@@ -9,7 +9,7 @@ import android.widget.Button
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.example.feedme.data.User
+import com.example.feedme.data.Customer
 import com.example.feedme.data.Restaurant
 
 val db = Firebase.firestore
@@ -19,9 +19,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        mockUserData()
+        //Create mock data
+        mockCustomerData()
         mockRestaurantData()
 
         val add = findViewById<Button>(R.id.btn_add_act)
@@ -29,27 +28,13 @@ class MainActivity : AppCompatActivity() {
 
         add.setOnClickListener {
             val intent = Intent(this, AddNChangeFoodActivity::class.java)
-
             startActivity(intent)
-
         }
         rv.setOnClickListener {
             val intent = Intent(this, FoodViewActivity::class.java)
 
             startActivity(intent)
         }
-
-
-        mockUserData()
-        mockRestaurantData()
-
-        val test = findViewById<Button>(R.id.button7)
-
-        test.setOnClickListener{
-            val register = Intent(this,RegisterCustomerInfo::class.java)
-            startActivity(register)
-        }
-
     }
 
     //Mock restaurant data, create 4 restaurants and push to DB
@@ -82,30 +67,30 @@ class MainActivity : AppCompatActivity() {
         db.collection("restaurants").document("restaurant4").set(restaurant4, SetOptions.merge())
     }
     //Mock user data, creates 4 users and push to DB
-    private fun mockUserData() {
-        //Create new restaurant object
-        val user1 = User("Olof",
+    private fun mockCustomerData() {
+        //Create new customer object
+        val customer1 = Customer("Olof",
             "Svensson","Storgatan 95", "Storstan",
             "54648", "944237524", "olof.svensson@svensson.nu","administrator",
             "Fisk, skaldjur, ägg","olle_svenne")
-        val user2 = User("Lisa",
+        val customer2 = Customer("Lisa",
             "Ahl","Lilla vägen 5", "byn",
             "56343", "2343435", "lisa.ahl@ahl.com", "customer",
             "","Liiiisa")
-        val user3 = User("Lina",
+        val customer3 = Customer("Lina",
             "Green","Stora vägen 27", "Göteborg",
             "45698", "234554346", "Lina.green@green.com", "customer",
             "Äcklig mat","Greniz")
-        val user4 = User("Anna",
+        val customer4 = Customer("Anna",
             "Anderson","Norra gatan 1", "Göteborg",
             "45632", "62354634", "anna.andersson@andersson.nu", "delivery",
             "Gluten, laktos", "aannndae")
 
         //Add it to collection restaurants, SetOptions.merge() = do not overwrite if exists
-        db.collection("users").document("user1").set(user1, SetOptions.merge())
-        db.collection("users").document("user2").set(user2, SetOptions.merge())
-        db.collection("users").document("user3").set(user3, SetOptions.merge())
-        db.collection("users").document("user4").set(user4, SetOptions.merge())
+        db.collection("customers").document("customer1").set(customer1, SetOptions.merge())
+        db.collection("customers").document("customer2").set(customer2, SetOptions.merge())
+        db.collection("customers").document("customer3").set(customer3, SetOptions.merge())
+        db.collection("customers").document("customer4").set(customer4, SetOptions.merge())
 
     }
 }

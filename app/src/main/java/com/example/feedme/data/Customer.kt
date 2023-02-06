@@ -1,6 +1,6 @@
 package com.example.feedme.data
 
-data class User (
+data class Customer (
     val firstName: String = "",
     val lastName: String = "",
     val address: String = "",
