@@ -4,6 +4,7 @@ package com.example.feedme
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 
 import com.google.firebase.firestore.SetOptions
@@ -11,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.feedme.data.Customer
 import com.example.feedme.data.Restaurant
+import com.google.firebase.firestore.ktx.toObject
 
 val db = Firebase.firestore
 
@@ -25,6 +27,14 @@ class MainActivity : AppCompatActivity() {
 
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
+        val ra = findViewById<Button>(R.id.buttonRegister)
+
+        ra.setOnClickListener{
+            val intent= Intent(this,RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         add.setOnClickListener {
             val intent = Intent(this, AddNChangeFoodActivity::class.java)
@@ -35,6 +45,31 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+        // TODO THIS below
+        //  here we need to get the intent from the restaurant
+        //  RecyclerView for the documentpath as soon as that is
+        //  fixed så we can put the extra in the documentPaht
+
+
+        val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
+        docRef.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                for (document in snapshot.documents)
+                { val item = document.toObject<Dishes>()
+                    if (item != null) {
+                        DataManagerDishes.dishes.add(item)
+                    }
+                }
+
+                printDishes()
+            }
+        }
+
+
+
+
+
+
     }
 
     //Mock restaurant data, create 4 restaurants and push to DB
@@ -91,6 +126,16 @@ class MainActivity : AppCompatActivity() {
         db.collection("customers").document("customer2").set(customer2, SetOptions.merge())
         db.collection("customers").document("customer3").set(customer3, SetOptions.merge())
         db.collection("customers").document("customer4").set(customer4, SetOptions.merge())
+
+    }
+    fun  printDishes(){
+
+        for (item in DataManagerDishes.dishes)
+        {
+            Log.d("HHH", "${item.title}")
+
+        }
+
 
     }
 }
