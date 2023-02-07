@@ -569,7 +569,7 @@
                         android:paddingEnd="8dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
-                        android:text="-"
+                        android:text="0"
                         android:textAlignment="center"
                         android:textSize="10sp"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -615,7 +615,7 @@
                         android:paddingEnd="8dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
-                        android:text="-"
+                        android:text="0"
                         android:textAlignment="center"
                         android:textSize="10sp"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -661,7 +661,7 @@
                         android:paddingEnd="8dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
-                        android:text="-"
+                        android:text="0"
                         android:textAlignment="center"
                         android:textSize="10sp"
                         tools:ignore="TouchTargetSizeCheck" />

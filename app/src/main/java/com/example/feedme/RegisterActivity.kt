@@ -41,6 +41,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+
     fun goToActivity() {
 
         val intent1 = Intent(this, LoginAndRegisterActivity::class.java)
