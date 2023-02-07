@@ -22,7 +22,6 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems : L
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cartItems = shoppingCartItems[position]
-        holder.cartItemRowCount.text = cartItems.rowCount.toString()
         holder.cartItemRowTitle.text = cartItems.rowTitle
         holder.cartItemRowAllergen.text = cartItems.rowAllergen
         holder.cartItemRowPrice.text = cartItems.rowPrice.toString()
@@ -35,7 +34,6 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems : L
 
 
     inner class  ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cartItemRowCount = itemView.findViewById<TextView>(R.id.textViewCartRowCount)
         val cartItemRowAllergen = itemView.findViewById<Chip>(R.id.chipCartRowItemAlergen)
         val cartItemRowTitle = itemView.findViewById<TextView>(R.id.textViewCartRowItemTitle)
         val cartItemRowPrice = itemView.findViewById<TextView>(R.id.textViewCartItemRowPrice)
