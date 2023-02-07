@@ -27,5 +27,11 @@
     <string name="lactoseFree">Laktos fri</string>
     <string name="vegan">Vegansk</string>
     <string name="vegetarian">Vegetarisk</string>
+    <string name="preliminaryWaitTime">Preliminär väntetid</string>
+    <string name="messageToRestaurant">Meddelande till restaurangen</string>
+    <string name="characters">33/350 tecken</string>
+    <string name="extraInfoToRestaurant">Snälla gör diavolon extra stark!</string>
+    <string name="checkout">Slutför</string>
+    <string name="waitingTime">45 min</string>
 
 </resources>
