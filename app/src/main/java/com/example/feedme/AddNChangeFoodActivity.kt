@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -12,7 +13,7 @@ const val DiSH_POSITION_NOT_SET = -1
 
 class AddNChangeFoodActivity : AppCompatActivity() {
 
-    // lateinit var db :FirebaseFirestore
+
     lateinit var dishNameET: EditText
     lateinit var descriptionET: EditText
     lateinit var foodCategorySpinner: Spinner
@@ -39,9 +40,13 @@ class AddNChangeFoodActivity : AppCompatActivity() {
     lateinit var categoryOfDishString: String
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_nchange_food)
+
+
+
 
 
 
@@ -69,7 +74,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         veganExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegan)
         vegeterianExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegeterian)
 
-        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
+       // val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
 
 
@@ -105,12 +110,17 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
         var saveDishBUTTON = findViewById<Button>(R.id.btn_AddDishToFirebase)
-        if (dishPosition != DiSH_POSITION_NOT_SET) {
+       /* if (dishPosition != DiSH_POSITION_NOT_SET) {
             displayDish(dishPosition)
             saveDishBUTTON.setOnClickListener{EditDish(dishPosition)}
-        } else {saveDishBUTTON.setOnClickListener { AddDish() }}
+        } else {*/
+        saveDishBUTTON.setOnClickListener {
+        AddDish() }
+//}
 
     }
+
+    //TODO rule only if  youre logged in as a restaurount - but works
 
     fun displayDish(position: Int) {
 
@@ -182,8 +192,13 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
     }
-
+// TODO - edit through firebase - only possible local
     fun EditDish(position: Int){
+
+       // val restaurant = auth.currentUser
+
+
+
         DataManagerDishes.dishes[position].title =dishNameET.text.toString()
         DataManagerDishes.dishes[position].description = descriptionET.text.toString()
         DataManagerDishes.dishes[position].isGlutenFree = false
@@ -250,8 +265,20 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
 
         DataManagerDishes.dishes[position].extraCostGluten ==  0.0
-        if (glutenExtraCostET.text.toString() != "0" && glutenExtraCostET.text.toString() != "null" &&glutenExtraCostET.text.toString() != "0.0") {
-            DataManagerDishes.dishes[position].extraCostGluten = glutenExtraCostET.text.toString().toDouble()
+        if (glutenExtraCostET.text.toString() != "0"
+            && glutenExtraCostET.text.toString() != "null" &&glutenExtraCostET.text.toString() != "0.0") {
+         if(glutenExtraCostET.text.toString().contains(",")){
+             // ToDo right syntax to change to .
+         }
+
+            try { DataManagerDishes.dishes[position].extraCostGluten = glutenExtraCostET.text.toString().toDouble()}
+         catch (e: java.lang.NumberFormatException) {
+             Toast.makeText( applicationContext,"Only numbers allowed", Toast.LENGTH_SHORT).show()
+             DataManagerDishes.dishes[position].extraCostGluten ==0.0
+
+         }
+
+
         }
 
         DataManagerDishes.dishes[position].extraCostLaktose ==  0.0
@@ -279,6 +306,15 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
     fun AddDish() {
+
+        // TODO when restaurants are logged in
+       /* var auth = Firebase.auth
+
+        val restaurant = auth.currentUser
+        if (restaurant == null){
+            return
+        } */
+
 
         val dishName = dishNameET.text.toString()
         val description = descriptionET.text.toString()
@@ -427,8 +463,9 @@ class AddNChangeFoodActivity : AppCompatActivity() {
                 ""
             )
 
-            DataManagerDishes.dishes.add(newDish)
-           // db.collection("restaurants")
+           // DataManagerDishes.dishes.add(newDish) only local
+            db.collection("restaurants").document("restaurant2").collection("dishes").add(newDish)
+
             finish()
 
         }

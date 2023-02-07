@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.ktx.toObject
 
 class FoodViewActivity : AppCompatActivity() {
 
@@ -15,10 +16,13 @@ class FoodViewActivity : AppCompatActivity() {
 
         foodRecyclerView = findViewById<RecyclerView>(R.id.RV_Food)
         foodRecyclerView.layoutManager= LinearLayoutManager(this)
-
         val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes)
-
         foodRecyclerView.adapter = adapter
+
+
+
+
+
 
 
     }
@@ -30,5 +34,7 @@ class FoodViewActivity : AppCompatActivity() {
 
 
     }
+
+
 
 }
