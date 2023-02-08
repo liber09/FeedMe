@@ -2,6 +2,7 @@ package com.example.feedme
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,9 @@ import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import kotlin.math.log
+
+lateinit var dishes: Dishes
 
 class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishes>): RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
@@ -37,7 +41,7 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
         holder.tv_priceVegetarian.text = dishes.extraCostVegeterian.toString()+ " kr"
 
         if (dishes.priceSmallPortion == null|| dishes.priceSmallPortion == 0.0){
-            holder.addButtonSmalPrice.isInvisible = true
+            holder.addButtonSmallPrice.isInvisible = true
             holder.smalPriceTextView.isInvisible = true
         }
         if (dishes.priceLargePortion == null|| dishes.priceLargePortion == 0.0){
@@ -94,7 +98,7 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
         var normalPriceTextView = itemView.findViewById<TextView>(R.id.tv_RV_NormalPrice)
         var smalPriceTextView = itemView.findViewById<TextView>(R.id.tv_RV_SmalpPrice)
         var largePriceTextView = itemView.findViewById<TextView>(R.id.tv_RV_LargePrice)
-        var addButtonSmalPrice = itemView.findViewById<Button>(R.id.btn_AddSmallPrice)
+        var addButtonSmallPrice = itemView.findViewById<Button>(R.id.btn_AddSmallPrice)
         var addButtonLargePrice = itemView.findViewById<Button>(R.id.btn_AddLarge)
         var addButtonNormalPrice = itemView.findViewById<Button>(R.id.btn_AddNormalPrice)
         var checkBoxGluten = itemView.findViewById<CheckBox>(R.id.cB_glutenFree)
@@ -117,18 +121,39 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
     val intent = Intent(context,AddNChangeFoodActivity::class.java)
     intent.putExtra(DISH_POSTION_KEY, foodDisplayPosition)
     context.startActivity(intent)
-     }}
+     }
+      //Add dish with size small to cart
+      addButtonSmallPrice.setOnClickListener{
+          ShoppingCart().addToCart(DataManagerDishes.dishes[foodDisplayPosition])
+          Log.d("ADDTOCART","Somewhiing wwqw")
+      }
+
+      //Add dish with size normal to cart
+      addButtonNormalPrice.setOnClickListener{
+          ShoppingCart().addToCart(DataManagerDishes.dishes[foodDisplayPosition])
+          Log.d("ADDTOCART","Somewhiing wwqw")
+      }
+
+      //Add dish with size large to cart
+      addButtonLargePrice.setOnClickListener{
+          ShoppingCart().addToCart(DataManagerDishes.dishes[foodDisplayPosition])
+          Log.d("ADDTOCART","Somewhiing wwqw")
+      }
+  }
     /*
     //
     // addsmall, addlarge, adddeletebutton.onClicklisterna {
     // dataManger.Dishes[foodDisplayPosition]. Video RV2   18:00
 
    }
+
     deleteButton.setOnClickListener {}
      } */
 
 
-
+    }
+    fun addToShoppingCart(){
+            
     }
 
 }

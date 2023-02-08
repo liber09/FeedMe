@@ -20,8 +20,8 @@
     <string name="yourOrder">Din beställning:</string>
     <string name="deliveryPrice">Pris för utkörning</string>
     <string name="deliveryArea">område</string>
-    <string name="deliveryPriceAmount">0 kr</string>
-    <string name="leftTofreeDelivery">Bara 0 kr fattas för fri leverans</string>
+    <string name="deliveryPriceAmount">0 Kr</string>
+    <string name="leftTofreeDelivery">Bara 0 Kr fattas för fri leverans</string>
     <string name="totalPrice">Total :</string>
     <string name="glutenFree">Glutenfri</string>
     <string name="lactoseFree">Laktos fri</string>
@@ -33,5 +33,4 @@
     <string name="extraInfoToRestaurant">Snälla gör diavolon extra stark!!</string>
     <string name="checkout">Slutför</string>
     <string name="waitingTime">45 min</string>
-
 </resources>
