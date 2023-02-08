@@ -16,7 +16,7 @@ class ShoppingCart : AppCompatActivity() {
     fun addToCart(item:Dishes){
         var cartItem = item.title?.let {
             Cart(
-                rowCount = 1,
+                rowCount = 2,
                 rowTitle = item.title!!,
                 rowAllergen = item.isEggFree.toString()
             )

@@ -37,6 +37,7 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems : L
         val cartItemRowAllergen = itemView.findViewById<Chip>(R.id.chipCartRowItemAlergen)
         val cartItemRowTitle = itemView.findViewById<TextView>(R.id.textViewCartRowItemTitle)
         val cartItemRowPrice = itemView.findViewById<TextView>(R.id.textViewCartItemRowPrice)
+
         var cartDisplayPosition = 0
 
 
