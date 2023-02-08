@@ -8,6 +8,7 @@
     tools:context=".InfoRestaurantActivity">
 
     <ScrollView
+        android:id="@+id/scView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -17,6 +18,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
@@ -155,7 +157,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageViewRestaurant" />
 
             <CheckBox
-                android:id="@+id/cb_Afrikansk"
+                android:tag="type"
+                android:id="@+id/cb_type_Afrikansk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -166,11 +169,12 @@
                 android:text="Afrikansk"
                 android:textColor="#F29D38"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cb_Alacarte"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Alacarte"
                 app:layout_constraintTop_toBottomOf="@+id/textViewRestaurantType"/>
 
             <CheckBox
-                android:id="@+id/cb_Alacarte"
+                android:tag="type"
+                android:id="@+id/cb_type_Alacarte"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -179,12 +183,13 @@
                 android:paddingBottom="0dp"
                 android:text="A la carte"
                 android:textColor="#F29D38"
-                app:layout_constraintEnd_toStartOf="@id/cb_Amerikansk"
-                app:layout_constraintStart_toEndOf="@+id/cb_Afrikansk"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Amerikansk"
+                app:layout_constraintStart_toEndOf="@+id/cb_type_Afrikansk"
                 app:layout_constraintTop_toBottomOf="@+id/textViewRestaurantType" />
 
             <CheckBox
-                android:id="@+id/cb_Amerikansk"
+                android:tag="type"
+                android:id="@+id/cb_type_Amerikansk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -195,12 +200,13 @@
                 android:paddingBottom="0dp"
                 android:text="Amerikansk"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@+id/cb_Alacarte"
+                app:layout_constraintStart_toEndOf="@+id/cb_type_Alacarte"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewRestaurantType"/>
 
             <CheckBox
-                android:id="@+id/cb_Asiatisk"
+                android:tag="type"
+                android:id="@+id/cb_type_Asiatisk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -210,11 +216,12 @@
                 android:text="Asiatisk"
                 android:textColor="#F29D38"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cb_Fransk"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Afrikansk"/>
+                app:layout_constraintEnd_toStartOf="@+id/cb_type_Fransk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Afrikansk"/>
 
             <CheckBox
-                android:id="@+id/cb_Fransk"
+                android:tag="type"
+                android:id="@+id/cb_type_Fransk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -223,12 +230,13 @@
                 android:paddingBottom="0dp"
                 android:text="Fransk"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Asiatisk"
-                app:layout_constraintEnd_toStartOf="@id/cb_Frukost"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Afrikansk"/>
+                app:layout_constraintStart_toEndOf="@id/cb_type_Asiatisk"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Frukost"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Afrikansk"/>
 
             <CheckBox
-                android:id="@+id/cb_Frukost"
+                android:tag="type"
+                android:id="@+id/cb_type_Frukost"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -238,12 +246,13 @@
                 android:paddingBottom="0dp"
                 android:text="Frukost"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Fransk"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Fransk"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Afrikansk"/>
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Afrikansk"/>
 
             <CheckBox
-                android:id="@+id/cb_Grekisk"
+                android:tag="type"
+                android:id="@+id/cb_type_Grekisk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -253,11 +262,12 @@
                 android:text="Grekisk"
                 android:textColor="#F29D38"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cb_Hamburgare"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Asiatisk"/>
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Hamburgare"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Asiatisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Hamburgare"
+                android:tag="type"
+                android:id="@+id/cb_type_Hamburgare"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="#F29D38"
@@ -265,12 +275,13 @@
                 android:paddingBottom="0dp"
                 android:text="Hamburgare"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Grekisk"
-                app:layout_constraintEnd_toStartOf="@id/cb_Husman"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Asiatisk"/>
+                app:layout_constraintStart_toEndOf="@id/cb_type_Grekisk"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Husman"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Asiatisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Husman"
+                android:tag="type"
+                android:id="@+id/cb_type_Husman"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -279,12 +290,13 @@
                 android:paddingBottom="0dp"
                 android:text="Husman"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Hamburgare"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Hamburgare"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Asiatisk"/>
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Asiatisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Indisk"
+                android:tag="type"
+                android:id="@+id/cb_type_Indisk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -294,11 +306,12 @@
                 android:text="Indisk"
                 android:textColor="#F29D38"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cb_Japansk"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Grekisk"/>
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Japansk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Grekisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Japansk"
+                android:tag="type"
+                android:id="@+id/cb_type_Japansk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="#F29D38"
@@ -306,12 +319,13 @@
                 android:paddingBottom="0dp"
                 android:text="Japansk"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Indisk"
-                app:layout_constraintEnd_toStartOf="@id/cb_Kinesisk"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Grekisk"/>
+                app:layout_constraintStart_toEndOf="@id/cb_type_Indisk"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Kinesisk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Grekisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Kinesisk"
+                android:tag="type"
+                android:id="@+id/cb_type_Kinesisk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -320,12 +334,13 @@
                 android:paddingBottom="0dp"
                 android:text="Kinesisk"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Japansk"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Japansk"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Grekisk"/>
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Grekisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Lunch"
+                android:tag="type"
+                android:id="@+id/cb_type_Lunch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -335,11 +350,12 @@
                 android:text="Lunch"
                 android:textColor="#F29D38"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cb_Mexikansk"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Kinesisk"/>
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Mexikansk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Kinesisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Mexikansk"
+                android:tag="type"
+                android:id="@+id/cb_type_Mexikansk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="#F29D38"
@@ -347,12 +363,13 @@
                 android:paddingBottom="0dp"
                 android:text="Mexikansk"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Lunch"
-                app:layout_constraintEnd_toStartOf="@id/cb_Pizzeria"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Kinesisk"/>
+                app:layout_constraintStart_toEndOf="@id/cb_type_Lunch"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Pizzeria"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Kinesisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Pizzeria"
+                android:tag="type"
+                android:id="@+id/cb_type_Pizzeria"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -361,12 +378,13 @@
                 android:paddingBottom="0dp"
                 android:text="Pizzeria"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Mexikansk"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Mexikansk"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Kinesisk"/>
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Kinesisk"/>
 
             <CheckBox
-                android:id="@+id/cb_Snabbmat"
+                android:tag="type"
+                android:id="@+id/cb_type_Snabbmat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -376,11 +394,12 @@
                 android:text="Snabbmat"
                 android:textColor="#F29D38"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cb_Thai"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Lunch"/>
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Thai"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Lunch"/>
 
             <CheckBox
-                android:id="@+id/cb_Thai"
+                android:tag="type"
+                android:id="@+id/cb_type_Thai"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="#F29D38"
@@ -388,12 +407,13 @@
                 android:paddingBottom="0dp"
                 android:text="Thai"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Snabbmat"
-                app:layout_constraintEnd_toStartOf="@id/cb_Annat"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Lunch"/>
+                app:layout_constraintStart_toEndOf="@id/cb_type_Snabbmat"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Annat"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Lunch"/>
 
             <CheckBox
-                android:id="@+id/cb_Annat"
+                android:tag="type"
+                android:id="@+id/cb_type_Annat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -402,9 +422,9 @@
                 android:paddingBottom="0dp"
                 android:text="Annat"
                 android:textColor="#F29D38"
-                app:layout_constraintStart_toEndOf="@id/cb_Thai"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Thai"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Lunch"/>
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Lunch"/>
 
             <TextView
                 android:id="@+id/textViewOpeningHours"
@@ -418,7 +438,7 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_Snabbmat" />
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Snabbmat" />
 
             <TextView
                 android:id="@+id/textViewMonday"
