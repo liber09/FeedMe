@@ -3,16 +3,25 @@ package com.example.feedme
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.example.feedme.data.Cart
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 var shoppingCartItems: MutableList<Dishes> = arrayListOf()
 
-
+lateinit var recyclerViewShoppingCart : RecyclerView
 class ShoppingCart : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
+
+        recyclerViewShoppingCart = findViewById<RecyclerView>(R.id.rvShoppingCart)
+        recyclerViewShoppingCart.layoutManager= LinearLayoutManager(this)
+        val adapter = ShoppingCartReyclerAdapter(this,shoppingCartItems)
+        recyclerViewShoppingCart.adapter = adapter
     }
+
+
+
 
     //Function to add dish to cart
     fun addToCart(item:Dishes){

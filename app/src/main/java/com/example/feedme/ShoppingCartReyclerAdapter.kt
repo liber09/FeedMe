@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.feedme.data.Cart
 import com.google.android.material.chip.Chip
 
-class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems : List<Cart>): RecyclerView.Adapter<ShoppingCartReyclerAdapter.ViewHolder>() {
+class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: List<Dishes>): RecyclerView.Adapter<ShoppingCartReyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
 
@@ -22,9 +20,18 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems : L
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cartItems = shoppingCartItems[position]
-        holder.cartItemRowTitle.text = cartItems.rowTitle
-        holder.cartItemRowAllergen.text = cartItems.rowAllergen
-        holder.cartItemRowPrice.text = cartItems.rowPrice.toString()
+            holder.cartItemRowTitle.text = cartItems.title
+        if(cartItems.title?.startsWith("S   ") == true){
+            holder.cartItemRowPrice.text = cartItems.priceSmallPortion.toString()
+        }
+        if(cartItems.title?.startsWith("R   ") == true){
+            holder.cartItemRowPrice.text = cartItems.priceNormalPortion.toString()
+        }
+        if(cartItems.title?.startsWith("L   ") == true){
+            holder.cartItemRowPrice.text = cartItems.priceLargePortion.toString()
+        }
+
+
 
     }
 
