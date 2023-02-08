@@ -31,7 +31,6 @@
 
         <activity
             android:name=".RegisterCustomerInfo"
-
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
