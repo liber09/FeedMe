@@ -1,4 +1,4 @@
-package com.example.feedme
+package com.example.feedme.data
 
 data class Dishes(
     var title: String? = null,

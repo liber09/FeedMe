@@ -1,6 +1,6 @@
 package com.example.feedme
 
-import com.google.firebase.firestore.SetOptions
+import com.example.feedme.data.Dishes
 
 object DataManagerDishes {
 

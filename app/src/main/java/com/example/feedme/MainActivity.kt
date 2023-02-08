@@ -11,6 +11,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.feedme.data.Customer
+import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val ra = findViewById<Button>(R.id.buttonRegister)
 
         ra.setOnClickListener{
-            val intent= Intent(this,RegisterActivity::class.java)
+            val intent= Intent(this,LoginAndRegisterActivity::class.java)
             startActivity(intent)
         }
 
