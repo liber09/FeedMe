@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Dishes
-import com.google.android.material.chip.Chip
 
 class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: List<Dishes>): RecyclerView.Adapter<ShoppingCartReyclerAdapter.ViewHolder>() {
 
@@ -23,6 +22,7 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cartItems = shoppingCartItems[position]
         holder.cartItemRowTitle.text = cartItems.title
+        holder.cartItemRowCount.text = cartItems.count.toString()
         if(cartItems.selectedFoodSize == "s"){
             holder.cartItemRowPrice.text = cartItems.priceSmallPortion.toString()+ " Kr"
         }
@@ -42,6 +42,7 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
     inner class  ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cartItemRowTitle = itemView.findViewById<TextView>(R.id.textViewCartRowItemTitle)
         val cartItemRowPrice = itemView.findViewById<TextView>(R.id.textViewCartItemRowPrice)
+        val cartItemRowCount = itemView.findViewById<TextView>(R.id.TVShoppingCartItemCount)
 
         var cartDisplayPosition = 0
 

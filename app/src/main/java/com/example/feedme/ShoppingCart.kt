@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.feedme.data.Dishes
-
 
 
 lateinit var recyclerViewShoppingCart : RecyclerView

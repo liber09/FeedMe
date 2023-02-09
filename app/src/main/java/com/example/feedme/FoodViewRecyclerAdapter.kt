@@ -113,22 +113,27 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
     intent.putExtra(DISH_POSTION_KEY, foodDisplayPosition)
     context.startActivity(intent)
      }
+
+      val selectedDish = DataManagerDishes.dishes[foodDisplayPosition]
       //Add dish with size small to cart
       addButtonSmallPrice.setOnClickListener{
-          DataManagerDishes.dishes[foodDisplayPosition].selectedFoodSize = "s"
-          DataManagerShoppingCart.shoppingCartItems.add(DataManagerDishes.dishes[foodDisplayPosition])
+          selectedDish.selectedFoodSize = "s"
+          selectedDish.title += "  S"
+          handleExistsInCart()
       }
 
       //Add dish with size normal to cart
       addButtonNormalPrice.setOnClickListener{
-          DataManagerDishes.dishes[foodDisplayPosition].selectedFoodSize = "n"
-          DataManagerShoppingCart.shoppingCartItems.add(DataManagerDishes.dishes[foodDisplayPosition])
+          selectedDish.selectedFoodSize = "n"
+          selectedDish.title += "  N"
+          handleExistsInCart()
       }
 
       //Add dish with size large to cart
       addButtonLargePrice.setOnClickListener{
-          DataManagerDishes.dishes[foodDisplayPosition].selectedFoodSize = "l"
-          DataManagerShoppingCart.shoppingCartItems.add(DataManagerDishes.dishes[foodDisplayPosition])
+          selectedDish.selectedFoodSize = "l"
+          selectedDish.title += "  L"
+          handleExistsInCart()
       }
   }
     /*
@@ -141,6 +146,19 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
     deleteButton.setOnClickListener {}
      } */
 
-
+        fun handleExistsInCart() {
+            var alreadyInCart = false
+            val dishToAdd = DataManagerDishes.dishes[foodDisplayPosition]
+            for (dish in DataManagerShoppingCart.shoppingCartItems) {
+                if (dishToAdd.equals(dish)) {
+                    dish.count++
+                    alreadyInCart = true
+                }
+            }
+            dishToAdd.count++
+            if (!alreadyInCart) {
+                DataManagerShoppingCart.shoppingCartItems.add(dishToAdd)
+            }
+        }
     }
 }
