@@ -49,24 +49,12 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in the location and move the camera
         val address = "Gamla vägen 12, 282 67 Vittsjö, SWEDEN"
-        val location = getLocationFromAddress(address)
-        if (location != null) {
-            val latLng = LatLng(location.latitude, location.longitude)
-            mMap.addMarker(MarkerOptions().position(latLng).title(address))
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        }
-    }
-
-    private fun getLocationFromAddress(address: String): LatLng? {
-        val geocoder = Geocoder(this)
-        val addresses = geocoder.getFromLocationName(address,1 )
-        if (addresses.isNotEmpty()) {
-            val location = addresses[0]
-            return LatLng(location.latitude, location.longitude)
-        }
-        return null
 
     }
+
+
+//
+
 
 }
 

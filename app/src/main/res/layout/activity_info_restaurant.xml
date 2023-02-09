@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".InfoRestaurantActivity">
+
+    <ScrollView
+        android:id="@+id/scView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <ImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="Företagsnamn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="Adress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputName" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputPostalCode"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="129dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="Postnr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputCity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="Stad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textInputPostalCode"
+                app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputPhone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="Telefonnummer"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputPostalCode" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="E-mail"
+                android:inputType="textWebEmailAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputPhone" />
+
+            <ImageView
+                android:id="@+id/imageViewRestaurant"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputEmail"
+                app:srcCompat="@drawable/logo" />
+
+            <Button
+                android:id="@+id/btn_add_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Lägg till bild"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewRestaurant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/imageViewRestaurant" />
+
+            <TextView
+                android:id="@+id/textViewRestaurantType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Vilken typ av restaurang är ni?"
+                android:textColor="#FF9800"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewRestaurant" />
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Afrikansk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Afrikansk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Alacarte"
+                app:layout_constraintTop_toBottomOf="@+id/textViewRestaurantType"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Alacarte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="A la carte"
+                android:textColor="#F29D38"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Amerikansk"
+                app:layout_constraintStart_toEndOf="@+id/cb_type_Afrikansk"
+                app:layout_constraintTop_toBottomOf="@+id/textViewRestaurantType" />
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Amerikansk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Amerikansk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@+id/cb_type_Alacarte"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewRestaurantType"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Asiatisk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Asiatisk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cb_type_Fransk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Afrikansk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Fransk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Fransk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Asiatisk"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Frukost"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Afrikansk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Frukost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Frukost"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Fransk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Afrikansk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Grekisk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Grekisk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Hamburgare"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Asiatisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Hamburgare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Hamburgare"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Grekisk"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Husman"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Asiatisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Husman"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Husman"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Hamburgare"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Asiatisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Indisk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Indisk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Japansk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Grekisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Japansk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Japansk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Indisk"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Kinesisk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Grekisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Kinesisk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Kinesisk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Japansk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Grekisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Lunch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Lunch"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Mexikansk"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Kinesisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Mexikansk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Mexikansk"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Lunch"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Pizzeria"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Kinesisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Pizzeria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Pizzeria"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Mexikansk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Kinesisk"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Snabbmat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Snabbmat"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Thai"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Lunch"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Thai"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Thai"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Snabbmat"
+                app:layout_constraintEnd_toStartOf="@id/cb_type_Annat"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Lunch"/>
+
+            <CheckBox
+                android:tag="type"
+                android:id="@+id/cb_type_Annat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Annat"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@id/cb_type_Thai"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Lunch"/>
+
+            <TextView
+                android:id="@+id/textViewOpeningHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Era öppettider"
+                android:textColor="#FF9800"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_type_Snabbmat" />
+
+            <TextView
+                android:id="@+id/textViewMonday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Måndag"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/textViewTuesday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewOpeningHours" />
+
+            <TextView
+                android:id="@+id/textViewTuesday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Tisdag"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewMonday"
+                app:layout_constraintTop_toBottomOf="@+id/textViewOpeningHours"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputMondayStart"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textInputMondayEnd"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputMondayEnd"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toEndOf="@+id/textInputMondayStart"
+                app:layout_constraintEnd_toStartOf="@+id/textInputTuesdayStart"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputTuesdayStart"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toEndOf="@+id/textInputMondayEnd"
+                app:layout_constraintEnd_toStartOf="@+id/textInputTuesdayEnd"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputTuesdayEnd"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textInputTuesdayStart"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+
+            <TextView
+                android:id="@+id/textViewWednesday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Onsdag"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/textViewThursday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputMondayStart" />
+
+            <TextView
+                android:id="@+id/textViewThursday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Torsdag"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewWednesday"
+                app:layout_constraintTop_toBottomOf="@+id/textInputMondayStart"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputWednesdayStart"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textInputWednesdayEnd"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputWednesdayEnd"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toEndOf="@+id/textInputWednesdayStart"
+                app:layout_constraintEnd_toStartOf="@+id/textInputThursdayStart"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputThursdayStart"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toEndOf="@+id/textInputWednesdayEnd"
+                app:layout_constraintEnd_toStartOf="@+id/textInputThursdayEnd"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputThursdayEnd"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textInputThursdayStart"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+
+            <TextView
+                android:id="@+id/textViewFriday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Fredag"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/textViewSaturday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputWednesdayStart" />
+
+            <TextView
+                android:id="@+id/textViewSaturday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Lördag"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewFriday"
+                app:layout_constraintTop_toBottomOf="@+id/textInputWednesdayStart"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputFridayStart"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textInputFridayEnd"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputFridayEnd"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toEndOf="@+id/textInputFridayStart"
+                app:layout_constraintEnd_toStartOf="@+id/textInputSaturdayStart"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputSaturdayStart"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toEndOf="@+id/textInputFridayEnd"
+                app:layout_constraintEnd_toStartOf="@+id/textInputSaturdayEnd"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputSaturdayEnd"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textInputSaturdayStart"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+
+            <TextView
+                android:id="@+id/textViewSunday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Söndag"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputFridayStart"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputSundayStart"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textInputSundayEnd"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSunday" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputSundayEnd"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/border"
+                android:hint="00:00"
+                app:layout_constraintStart_toEndOf="@+id/textInputSundayStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSunday" />
+
+            <TextView
+                android:id="@+id/textViewDeliveryOptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Erbjudna leveransmetoder"
+                android:textColor="#FF9800"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputSundayStart" />
+
+            <CheckBox
+                android:id="@+id/cb_takeaway"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Take Away"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cb_tableBooking"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDeliveryOptions"/>
+
+            <CheckBox
+                android:id="@+id/cb_tableBooking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Bordsbokning"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@+id/cb_takeaway"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDeliveryOptions"/>
+
+            <CheckBox
+                android:id="@+id/cb_homeDelivery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Hemleverans"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cb_atRestaurant"
+                app:layout_constraintTop_toBottomOf="@+id/cb_takeaway"/>
+
+            <CheckBox
+                android:id="@+id/cb_atRestaurant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:buttonTint="#F29D38"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="På resturangen"
+                android:textColor="#F29D38"
+                app:layout_constraintStart_toEndOf="@+id/cb_homeDelivery"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_takeaway"/>
+
+            <TextView
+                android:id="@+id/textViewDeliveryPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="Utkörningsavgift"
+                android:textColor="#FF9800"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@id/textInputDeliveryPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_homeDelivery" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputDeliveryPrice"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewDeliveryPrice"
+                app:layout_constraintTop_toBottomOf="@+id/cb_homeDelivery" />
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Kort beskrivning"
+                android:textColor="#FF9800"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputDeliveryPrice" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputDescription"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/border"
+                android:hint="Tjoho"
+                android:textColorHint="#827717"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Spara"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintTop_toBottomOf="@id/textInputDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
