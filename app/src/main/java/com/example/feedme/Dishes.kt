@@ -26,7 +26,7 @@ data class Dishes(
     var extraCostLaktose: Double? = null,
     var extraCostVegan: Double? = null,
     var extraCostVegeterian: Double? = null,
-
+    var selectedFoodSize : String = "",
     var dishImagePath :String = "",
     @DocumentId var documentId : String? = null,
 

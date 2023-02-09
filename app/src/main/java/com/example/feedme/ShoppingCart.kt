@@ -27,7 +27,7 @@ class ShoppingCart : AppCompatActivity() {
     fun addToCart(item:Dishes){
         shoppingCartItems.add(item)
         //Calculate new cart total
-        //calculateShoppingCartTotal()
+        calculateShoppingCartTotal()
     }
 
     //Function to remove dish from cart
@@ -42,13 +42,13 @@ class ShoppingCart : AppCompatActivity() {
         var sum:Double = 0.0
         for (item in shoppingCartItems) {
             //if title prefixed "s " customer has chosen small portion
-            if (item.title?.startsWith("s ") == true) {
+            if (item.selectedFoodSize == "s") {
                 sum += item.priceSmallPortion!!
                 //if title prefixed "n " customer has chosen normal portion
-            } else if (item.title?.startsWith("n ") == true) {
+            } else if (item.selectedFoodSize == "n") {
                 sum += item.priceNormalPortion!!
                 //if title prefixed "l " customer has chosen large portion
-            } else if (item.title?.startsWith("l ") == true) {
+            } else if (item.selectedFoodSize == "l") {
                 sum += item.priceLargePortion!!
             }
             //add extraCost for vegan
