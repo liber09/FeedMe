@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -35,7 +36,9 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         val registerButton = findViewById<Button>(R.id.registerButton)
         registerButton.setOnClickListener {
             val register = Intent(this,RegisterActivity::class.java)
+            createUser()
             startActivity(register)
+
         }
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
@@ -43,9 +46,25 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         }
     }
 
-    /*fun goToActivity(){
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent) */ //  Kommer att länkas till första sidan när den är skapad efter att man loggat in
+    fun createUser() {
+        val email = emailView.text.toString()
+        val password = passwordView.text.toString()
+
+
+        if (email.isEmpty() || password.isEmpty()) {
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Register Complete", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
 
     fun loginUser() {
         val email = emailView.text.toString()
@@ -53,20 +72,25 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
         if (email.isEmpty() || password.isEmpty())
             return
-            auth.signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("!!!", "Sign in succeeded")
                     /*goToActivity()*/ // Kommer att länkas till första sidan när den är skapad efter att man loggat in
                 } else {
                     Log.d("!!!", "user not signed in ${task.exception}")
+
+
+
                 }
             }
-
-
         }
-
 }
+
+
+
+
+
 
 
 
