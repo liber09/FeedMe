@@ -1,5 +1,7 @@
 package com.example.feedme.data
 
+import com.google.firebase.firestore.DocumentId
+
 data class Restaurant (
     val name: String = "",
     val orgNr: String = "",
@@ -13,5 +15,6 @@ data class Restaurant (
     val deliveryTypePickup: Boolean = true,
     val deliveryTypeHome: Boolean = false,
     val deliveryTypeAtRestaurant: Boolean = true,
-    val tableBooking: Boolean = false
+    val tableBooking: Boolean = false,
+
 )
