@@ -29,9 +29,16 @@ class MainActivity : AppCompatActivity() {
         val rv = findViewById<Button>(R.id.btn_RV_act)
         val ra = findViewById<Button>(R.id.buttonRegister)
         val bv = findViewById<Button>(R.id.btn_budView)
+        val mv = findViewById<Button>(R.id.btn_toMapsDel)
+
 
         bv.setOnClickListener{
             val intent= Intent(this,DeliveryPersonViewActivity::class.java)
+            startActivity(intent)
+
+        }
+        mv.setOnClickListener{
+            val intent= Intent(this,DeliveryMapsActivity::class.java)
             startActivity(intent)
 
         }

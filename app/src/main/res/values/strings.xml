@@ -55,5 +55,6 @@
     <string name="smal">Liten</string>
     <string name="big">Stor</string>
     <string name="add">Lägg till</string>
+    <string name="title_activity_delivery_maps">DeliveryMapsActivity</string>
 
 </resources>

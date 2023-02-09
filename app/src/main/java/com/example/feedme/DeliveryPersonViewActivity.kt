@@ -94,8 +94,11 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
         super.onResume()
 
        deliveryRestaurantRecyclerView.adapter?.notifyDataSetChanged()
+        startLocationUpdates()
 
 
     }
+
+    // on pause behöver jag kanske inte riktig än - jag tänker jag
 
 }
