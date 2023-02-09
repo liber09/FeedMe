@@ -34,10 +34,10 @@ class ShoppingCart : AppCompatActivity() {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             //if title prefixed "s " customer has chosen small portion
             if (item.selectedFoodSize == "s") {
                 sum += (item.priceSmallPortion!!)*item.count
-                //if title prefixed "n " customer has chosen normal portion
+                //if selectedFoodSize = "s" customer has chosen normal portion
             } else if (item.selectedFoodSize == "n") {
                 sum += (item.priceNormalPortion!!)*item.count
-                //if title prefixed "l " customer has chosen large portion
+                //if selectedFoodSize = "l" customer has chosen large portion
             } else if (item.selectedFoodSize == "l") {
                 sum += (item.priceLargePortion!!)*item.count
             }

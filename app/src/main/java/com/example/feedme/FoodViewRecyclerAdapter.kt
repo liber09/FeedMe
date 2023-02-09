@@ -152,7 +152,6 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
                     alreadyInCart = true
                 }
             }
-
             if (!alreadyInCart) {
                 selectedDish.count++
                 DataManagerShoppingCart.shoppingCartItems.add(selectedDish)
