@@ -20,6 +20,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name=".InfoRestaurantActivity"
+            android:exported="false" />
+
         <activity
             android:name=".AddNChangeFoodActivity"
             android:exported="false">
@@ -28,6 +33,7 @@
                 android:value="" />
         </activity>
         <activity
+
             android:name=".RegisterActivity"
             android:exported="false">
             <meta-data
@@ -42,6 +48,7 @@
                 android:value="" />
         </activity>
         <activity
+
             android:name=".RegisterCustomerInfo"
             android:exported="false">
             <meta-data

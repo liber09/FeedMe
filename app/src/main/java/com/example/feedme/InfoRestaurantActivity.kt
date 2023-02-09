@@ -76,9 +76,9 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
         )
-    /*
+
         db.collection("restaurantTibTest").document(name)
-            .set(rest)*/
+            .set(rest)
     }
 
     fun getType() : String {

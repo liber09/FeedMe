@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'com.example.feedme'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.feedme"
@@ -47,6 +47,7 @@ dependencies {
     implementation "com.google.android.material:material:1.8.0"
 
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'androidx.core:core-ktx:+'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
