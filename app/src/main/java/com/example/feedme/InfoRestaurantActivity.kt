@@ -20,7 +20,6 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
     val registerNew = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
@@ -30,24 +29,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val monSta = findViewById<EditText>(R.id.textInputMondayStart)
         val editName = findViewById<EditText>(R.id.textInputName)
 
-        /*editName.onFocusChangeListener {
-
-        }*/
-
-        monSta.setOnClickListener {
-            Log.v("!!!","clicked")
-
-            val cal = Calendar.getInstance()
-
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                cal.set(Calendar.HOUR_OF_DAY, hour)
-                cal.set(Calendar.MINUTE, minute)
-
-                monSta.setText(SimpleDateFormat("HH:mm").format(cal.time))
-            }
-
-            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
-        }
+        var openingHours : HashMap<String, String> = HashMap<String, String>()
 
         btnAddImage.setOnClickListener {
 
@@ -55,6 +37,30 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         btnSave.setOnClickListener {
             saveInfo()
+        }
+    }
+
+    fun setTime(view: View) {
+
+        if(view is EditText) {
+            val cal = Calendar.getInstance()
+
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+
+                view.setText(SimpleDateFormat("HH:mm").format(cal.time))
+                //openingHours.put(view.tag.toString(), view.text.toString());
+                //Log.v("!!!", openingHours.size.toString() + " " + view.tag.toString() + " " + view.text.toString())
+            }
+
+            TimePickerDialog(
+                this,
+                timeSetListener,
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                true
+            ).show()
         }
     }
 
