@@ -21,15 +21,15 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cartItems = shoppingCartItems[position]
-            holder.cartItemRowTitle.text = cartItems.title
-        if(cartItems.title?.startsWith("S   ") == true){
-            holder.cartItemRowPrice.text = cartItems.priceSmallPortion.toString()
+        holder.cartItemRowTitle.text = cartItems.title
+        if(cartItems.selectedFoodSize == "s"){
+            holder.cartItemRowPrice.text = cartItems.priceSmallPortion.toString()+ " Kr"
         }
-        if(cartItems.title?.startsWith("R   ") == true){
-            holder.cartItemRowPrice.text = cartItems.priceNormalPortion.toString()
+        if(cartItems.selectedFoodSize == "n"){
+            holder.cartItemRowPrice.text = cartItems.priceNormalPortion.toString()+ " Kr"
         }
-        if(cartItems.title?.startsWith("L   ") == true){
-            holder.cartItemRowPrice.text = cartItems.priceLargePortion.toString()
+        if(cartItems.selectedFoodSize == "l"){
+            holder.cartItemRowPrice.text = cartItems.priceLargePortion.toString()+ " Kr"
         }
 
 

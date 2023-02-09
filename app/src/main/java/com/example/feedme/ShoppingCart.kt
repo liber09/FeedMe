@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Dishes
 
-var shoppingCartItems: MutableList<Dishes> = arrayListOf()
+
 
 lateinit var recyclerViewShoppingCart : RecyclerView
 class ShoppingCart : AppCompatActivity() {
@@ -17,31 +17,16 @@ class ShoppingCart : AppCompatActivity() {
 
         recyclerViewShoppingCart = findViewById<RecyclerView>(R.id.rvShoppingCart)
         recyclerViewShoppingCart.layoutManager= LinearLayoutManager(this)
-        val adapter = ShoppingCartReyclerAdapter(this,shoppingCartItems)
+        val adapter = ShoppingCartReyclerAdapter(this,DataManagerShoppingCart.shoppingCartItems)
         recyclerViewShoppingCart.adapter = adapter
-    }
-
-
-
-
-    //Function to add dish to cart
-    fun addToCart(item: Dishes){
-        shoppingCartItems.add(item)
-        //Calculate new cart total
-        calculateShoppingCartTotal()
-    }
-
-    //Function to remove dish from cart
-    fun removeFromCart(item: Dishes){
-        shoppingCartItems.remove(item)
-        //Calculate new cart total
         calculateShoppingCartTotal()
     }
 
     //Calculates shoppingCart total.
     fun calculateShoppingCartTotal(){
         var sum:Double = 0.0
-        for (item in shoppingCartItems) {
+        var restaurantId = ""
+        for (item in DataManagerShoppingCart.shoppingCartItems) {
             //if title prefixed "s " customer has chosen small portion
             if (item.selectedFoodSize == "s") {
                 sum += item.priceSmallPortion!!
@@ -68,17 +53,17 @@ class ShoppingCart : AppCompatActivity() {
             if(item.isLaktoseFree) {
                 sum += item.extraCostLaktose!!
             }
+            restaurantId = item.restaurantDocumentId.toString()
         }
+        val deliveryPrice = DataManagerRestaurants.getByDocumentId(restaurantId)?.deliveryFee
         //Print new shoppingCart total to screen
-        val deliveryPrice = findViewById<TextView>(R.id.textViewShoppingCartDeliveryPrice).text.toString()
-        val numericDeliveryPrice = stripAllButNumbers(deliveryPrice).toDouble()
-        sum += numericDeliveryPrice
-        findViewById<TextView>(R.id.textViewTotalShoppingCartAmount).text = sum.toString()+ " Kr"
-    }
 
-    //Function that removes all but numbers from a string and return the numeric only string
-    fun stripAllButNumbers(stringToStrip: String): String {
-        val reg = Regex("[^0-9 ]")
-        return reg.replace(stringToStrip, "")
+        if (deliveryPrice != null) {
+            sum += deliveryPrice
+        }
+        val deliveryFee = findViewById<TextView>(R.id.TVShoppingCartDeliveryFee)
+        val totalPriceView = findViewById<TextView>(R.id.TVShoppingCartTotal)
+        totalPriceView.text = sum.toString()+ " Kr"
+        deliveryFee.text = deliveryPrice.toString() + " Kr"
     }
 }
