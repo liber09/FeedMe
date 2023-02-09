@@ -22,12 +22,17 @@ class ShoppingCart : AppCompatActivity() {
         calculateShoppingCartTotal()
     }
 
+    override fun onResume() {
+        super.onResume()
+        recyclerViewShoppingCart.adapter?.notifyDataSetChanged()
+    }
+
     //Calculates shoppingCart total.
     fun calculateShoppingCartTotal(){
         var sum:Double = 0.0
         var restaurantId = ""
         for (item in DataManagerShoppingCart.shoppingCartItems) {
-            //if title prefixed "s " customer has chosen small portion
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            //if title prefixed "s " customer has chosen small portion
             if (item.selectedFoodSize == "s") {
                 sum += item.priceSmallPortion!!
                 //if title prefixed "n " customer has chosen normal portion

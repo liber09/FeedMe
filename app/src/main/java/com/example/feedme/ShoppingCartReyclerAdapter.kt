@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,18 +32,14 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         if(cartItems.selectedFoodSize == "l"){
             holder.cartItemRowPrice.text = cartItems.priceLargePortion.toString()+ " Kr"
         }
-
-
-
+        holder.cartDisplayPosition = position
     }
 
     override fun getItemCount(): Int {
         return shoppingCartItems.size
     }
 
-
     inner class  ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cartItemRowAllergen = itemView.findViewById<Chip>(R.id.chipCartRowItemAlergen)
         val cartItemRowTitle = itemView.findViewById<TextView>(R.id.textViewCartRowItemTitle)
         val cartItemRowPrice = itemView.findViewById<TextView>(R.id.textViewCartItemRowPrice)
 
@@ -50,7 +47,11 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
 
 
         init {
-
+            itemView.setOnClickListener(){
+                val intent = Intent(context,AddNChangeFoodActivity::class.java)
+                intent.putExtra(DISH_POSTION_KEY, cartDisplayPosition)
+                context.startActivity(intent)
+            }
         }
     }
 }

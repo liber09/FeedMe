@@ -75,13 +75,6 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
         // TODO for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
 
         holder.foodDisplayPosition = position
-
-
-
-
-
-
-
     }
 
     override fun getItemCount(): Int {
@@ -150,8 +143,4 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
 
 
     }
-    fun addToShoppingCart(){
-            
-    }
-
 }
