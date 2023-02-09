@@ -114,25 +114,31 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
     context.startActivity(intent)
      }
 
-      val selectedDish = DataManagerDishes.dishes[foodDisplayPosition]
+
       //Add dish with size small to cart
       addButtonSmallPrice.setOnClickListener{
+          val selectedDish = DataManagerDishes.dishes[foodDisplayPosition]
           selectedDish.selectedFoodSize = "s"
           selectedDish.title += "  S"
+          handleExistsInCart(selectedDish)
       }
 
       //Add dish with size normal to cart
       addButtonNormalPrice.setOnClickListener{
+          val selectedDish = DataManagerDishes.dishes[foodDisplayPosition]
           selectedDish.selectedFoodSize = "n"
           selectedDish.title += "  N"
+          handleExistsInCart(selectedDish)
       }
 
       //Add dish with size large to cart
       addButtonLargePrice.setOnClickListener{
+          val selectedDish = DataManagerDishes.dishes[foodDisplayPosition]
           selectedDish.selectedFoodSize = "l"
           selectedDish.title += "  L"
+          handleExistsInCart(selectedDish)
       }
-      handleExistsInCart(selectedDish)
+
   }
     /*
     //
