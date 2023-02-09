@@ -1,5 +1,7 @@
 package com.example.feedme
 
+import com.example.feedme.data.Dishes
+
 object DataManagerDishes {
 
     val dishes = mutableListOf<Dishes>()

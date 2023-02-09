@@ -1,4 +1,4 @@
-package com.example.feedme
+package com.example.feedme.data
 
 import com.google.firebase.firestore.DocumentId
 

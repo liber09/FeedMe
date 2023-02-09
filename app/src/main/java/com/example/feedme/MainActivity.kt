@@ -11,6 +11,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.feedme.data.Customer
+import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 
@@ -84,6 +85,20 @@ class MainActivity : AppCompatActivity() {
                 printDishes()
             }
         }
+        val restaurantRef = db.collection("restaurants")
+        restaurantRef.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                for (document in snapshot.documents)
+                { val item = document.toObject<Restaurant>()
+                    if (item != null) {
+                        DataManagerRestaurants.restaurants.add(item)
+                    }
+                }
+
+                printDishes()
+            }
+        }
+
 
 
 

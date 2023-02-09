@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.feedme.data.Dishes
 
 var shoppingCartItems: MutableList<Dishes> = arrayListOf()
 
@@ -24,14 +25,14 @@ class ShoppingCart : AppCompatActivity() {
 
 
     //Function to add dish to cart
-    fun addToCart(item:Dishes){
+    fun addToCart(item: Dishes){
         shoppingCartItems.add(item)
         //Calculate new cart total
         calculateShoppingCartTotal()
     }
 
     //Function to remove dish from cart
-    fun removeFromCart(item:Dishes){
+    fun removeFromCart(item: Dishes){
         shoppingCartItems.remove(item)
         //Calculate new cart total
         calculateShoppingCartTotal()
