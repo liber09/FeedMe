@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishes>): RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 

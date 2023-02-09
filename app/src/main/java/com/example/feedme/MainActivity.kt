@@ -28,9 +28,17 @@ class MainActivity : AppCompatActivity() {
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
         val ra = findViewById<Button>(R.id.buttonRegister)
+        val bv = findViewById<Button>(R.id.btn_budView)
+
+        bv.setOnClickListener{
+            val intent= Intent(this,DeliveryPersonViewActivity::class.java)
+            startActivity(intent)
+
+        }
+
 
         ra.setOnClickListener{
-            val intent= Intent(this,RegisterActivity::class.java)
+            val intent= Intent(this,LoginAndRegisterActivity::class.java)
             startActivity(intent)
         }
 
