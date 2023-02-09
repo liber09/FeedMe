@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
+
         val ra = findViewById<Button>(R.id.buttonRegister)
         val bv = findViewById<Button>(R.id.btn_budView)
 
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        val infoRes = findViewById<Button>(R.id.btn_infoRes)
 
         add.setOnClickListener {
             val intent = Intent(this, AddNChangeFoodActivity::class.java)
@@ -62,6 +63,12 @@ class MainActivity : AppCompatActivity() {
         //  here we need to get the intent from the restaurant
         //  RecyclerView for the documentpath as soon as that is
         //  fixed så we can put the extra in the documentPaht
+
+        infoRes.setOnClickListener {
+            val intent = Intent(this, InfoRestaurantActivity::class.java)
+
+            startActivity(intent)
+        }
 
 
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
