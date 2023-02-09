@@ -119,22 +119,20 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
       addButtonSmallPrice.setOnClickListener{
           selectedDish.selectedFoodSize = "s"
           selectedDish.title += "  S"
-          handleExistsInCart()
       }
 
       //Add dish with size normal to cart
       addButtonNormalPrice.setOnClickListener{
           selectedDish.selectedFoodSize = "n"
           selectedDish.title += "  N"
-          handleExistsInCart()
       }
 
       //Add dish with size large to cart
       addButtonLargePrice.setOnClickListener{
           selectedDish.selectedFoodSize = "l"
           selectedDish.title += "  L"
-          handleExistsInCart()
       }
+      handleExistsInCart(selectedDish)
   }
     /*
     //
@@ -146,18 +144,18 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
     deleteButton.setOnClickListener {}
      } */
 
-        fun handleExistsInCart() {
+        fun handleExistsInCart(selectedDish: Dishes) {
             var alreadyInCart = false
-            val dishToAdd = DataManagerDishes.dishes[foodDisplayPosition]
             for (dish in DataManagerShoppingCart.shoppingCartItems) {
-                if (dishToAdd.equals(dish)) {
+                if (selectedDish.equals(dish)) {
                     dish.count++
                     alreadyInCart = true
                 }
             }
-            dishToAdd.count++
+
             if (!alreadyInCart) {
-                DataManagerShoppingCart.shoppingCartItems.add(dishToAdd)
+                selectedDish.count++
+                DataManagerShoppingCart.shoppingCartItems.add(selectedDish)
             }
         }
     }

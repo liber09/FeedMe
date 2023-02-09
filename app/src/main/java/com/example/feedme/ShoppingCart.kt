@@ -27,39 +27,41 @@ class ShoppingCart : AppCompatActivity() {
 
     //Calculates shoppingCart total.
     fun calculateShoppingCartTotal(){
-        var sum:Double = 0.0
+        var sum = 0.0
+        var specialsSum = 0.0
         var restaurantId = ""
         for (item in DataManagerShoppingCart.shoppingCartItems) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             //if title prefixed "s " customer has chosen small portion
             if (item.selectedFoodSize == "s") {
-                sum += item.priceSmallPortion!!
+                sum += (item.priceSmallPortion!!)*item.count
                 //if title prefixed "n " customer has chosen normal portion
             } else if (item.selectedFoodSize == "n") {
-                sum += item.priceNormalPortion!!
+                sum += (item.priceNormalPortion!!)*item.count
                 //if title prefixed "l " customer has chosen large portion
             } else if (item.selectedFoodSize == "l") {
-                sum += item.priceLargePortion!!
+                sum += (item.priceLargePortion!!)*item.count
             }
             //add extraCost for vegan
             if(item.isVegan) {
-                sum+= item.extraCostVegan!!
+                specialsSum+= (item.extraCostVegan!!)*item.count
             }
             //add extraCost for vegetarian
             if(item.isVegetarian){
-                sum += item.extraCostVegeterian!!
+                specialsSum += (item.extraCostVegeterian!!)*item.count
             }
             //add extraCost for glutenFree
             if(item.isGlutenFree) {
-                sum += item.extraCostGluten!!
+                specialsSum += (item.extraCostGluten!!)
             }
             //add extraCost for lactoseFree
             if(item.isLaktoseFree) {
-                sum += item.extraCostLaktose!!
+                specialsSum += (item.extraCostLaktose!!)
             }
             restaurantId = item.restaurantDocumentId.toString()
         }
         val deliveryPrice = DataManagerRestaurants.getByDocumentId(restaurantId)?.deliveryFee
-        //Print new shoppingCart total to screen
+        sum += specialsSum
+
 
         if (deliveryPrice != null) {
             sum += deliveryPrice

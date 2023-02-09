@@ -32,7 +32,26 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         if(cartItems.selectedFoodSize == "l"){
             holder.cartItemRowPrice.text = cartItems.priceLargePortion.toString()+ " Kr"
         }
+        var specialsSum = 0.0
+        //add extraCost for vegan
+        if(cartItems.isVegan) {
+            specialsSum+= cartItems.extraCostVegan!!
+        }
+        //add extraCost for vegetarian
+        if(cartItems.isVegetarian){
+            specialsSum += cartItems.extraCostVegeterian!!
+        }
+        //add extraCost for glutenFree
+        if(cartItems.isGlutenFree) {
+            specialsSum += cartItems.extraCostGluten!!
+        }
+        //add extraCost for lactoseFree
+        if(cartItems.isLaktoseFree) {
+            specialsSum += cartItems.extraCostLaktose!!
+        }
+        holder.cartItemRowSpecialsPrice.text = specialsSum.toString() + " Kr"
         holder.cartDisplayPosition = position
+
     }
 
     override fun getItemCount(): Int {
@@ -43,6 +62,7 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         val cartItemRowTitle = itemView.findViewById<TextView>(R.id.textViewCartRowItemTitle)
         val cartItemRowPrice = itemView.findViewById<TextView>(R.id.textViewCartItemRowPrice)
         val cartItemRowCount = itemView.findViewById<TextView>(R.id.TVShoppingCartItemCount)
+        val cartItemRowSpecialsPrice = itemView.findViewById<TextView>(R.id.TVShoppingCartRowItemSpeecialsAmount)
 
         var cartDisplayPosition = 0
 
