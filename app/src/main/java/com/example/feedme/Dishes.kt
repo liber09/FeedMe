@@ -1,18 +1,20 @@
 package com.example.feedme
 
+import com.google.firebase.firestore.DocumentId
+
 data class Dishes(
     var title: String? = null,
     var description: String? = null,
     var priceNormalPortion: Double? = null,
     var priceSmallPortion: Double? = null,
     var priceLargePortion: Double? = null,
-    var containsGluten: Boolean = true,
-    var containsLaktose: Boolean = true,
-    var containsEggs: Boolean = true,
-    var containsNuts: Boolean= true,
-    var containsSeeFood: Boolean = true,
-    var containsSoy: Boolean = true,
-   // var isLCHF: Boolean = true,
+    var isGlutenFree: Boolean = false,
+    var isLaktoseFree: Boolean = false,
+    var isEggFree: Boolean = false,
+    var isNutfree: Boolean= false,
+    var isFreeFromSeeFood: Boolean = false,
+    var isSoyfree: Boolean = false,
+    var isLCHF: Boolean = false,
     var isVegetarian: Boolean = false,
     var isVegan: Boolean = false,
     var category: String = "Huvudrätt", // dropdownfält?
@@ -25,9 +27,7 @@ data class Dishes(
     var extraCostVegan: Double? = null,
     var extraCostVegeterian: Double? = null,
 
-
-
     var dishImagePath :String = "",
-  //  @DocumentId var documentId : String? = null,
+    @DocumentId var documentId : String? = null,
 
-)
+    )

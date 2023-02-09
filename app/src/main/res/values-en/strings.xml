@@ -13,4 +13,43 @@
     <string name="required">* Required</string>
     <string name="allergies">My allergies</string>
     <string name="save">Save</string>
+    <string name="wrongInput">Wrong input, please correct your input and try again</string>
+    <string name="saveSuccess">Save successful</string>
+    <string name="yourOrder">Your order:</string>
+    <string name="deliveryPrice">Delivery cost</string>
+    <string name="deliveryArea">area</string>
+    <string name="deliveryPriceAmount">0 usd</string>
+    <string name="leftTofreeDelivery">Only 0 usd left to get free delivery</string>
+    <string name="totalPrice">Total :</string>
+    <string name="glutenFree">Gluten free</string>
+    <string name="lactoseFree">Lactose free</string>
+    <string name="vegan">Vegan</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="preliminaryWaitTime">Preliminary wait time</string>
+    <string name="messageToRestaurant">Message to the restaurant</string>
+    <string name="characters">33/350 characters</string>
+    <string name="extraInfoToRestaurant">Please make the Diavolo extra strong!</string>
+    <string name="checkout">Checkout</string>
+    <string name="waitingTime">45 min</string>
+    <string name="dishName">Dish name</string>
+    <string name="description">Description</string>
+    <string name="type_of_food">Type of food</string>
+    <string name="food_contains_naturally">Food contains naturally</string>
+
+    <string name="soy_free">free from soy </string>
+
+    <string name="nut_free">free from nuts</string>
+    <string name="free_from_sea_food">free from sea food</string>
+    <string name="egg_free">egg free</string>
+
+    <string name="lchf">LCHF</string>
+    <string name="can_be_made_as">Can be made</string>
+    <string name="extra_cost">extra cost</string>
+    <string name="kr">kr</string>
+    <string name="price">Price</string>
+    <string name="only_if_relevant">Only if relevant</string>
+    <string name="normal">normal</string>
+    <string name="smal">smal</string>
+    <string name="big">big</string>
+    <string name="add">Add</string>
 </resources>

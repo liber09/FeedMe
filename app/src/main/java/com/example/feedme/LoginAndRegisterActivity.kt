@@ -50,6 +50,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
     fun loginUser() {
         val email = emailView.text.toString()
         val password = passwordView.text.toString()
+
         if (email.isEmpty() || password.isEmpty())
             return
             auth.signInWithEmailAndPassword(email, password)
