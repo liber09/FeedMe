@@ -29,5 +29,6 @@ data class Dishes(
     var selectedFoodSize : String = "",
     var dishImagePath :String = "",
     @DocumentId var documentId : String? = null,
+    @DocumentId var restaurantDocumentId : String? = null,
 
     )

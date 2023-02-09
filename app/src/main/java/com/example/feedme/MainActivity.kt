@@ -77,6 +77,8 @@ class MainActivity : AppCompatActivity() {
             if (snapshot != null) {
                 for (document in snapshot.documents)
                 { val item = document.toObject<Dishes>()
+                    //Get parent documentId - restaurant in this case
+                    item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
                     if (item != null) {
                         DataManagerDishes.dishes.add(item)
                     }
