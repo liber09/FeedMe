@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Dishes
@@ -51,7 +52,14 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         }
         holder.cartItemRowSpecialsPrice.text = specialsSum.toString() + " Kr"
         holder.cartDisplayPosition = position
-
+        holder.increaseButton.setOnClickListener{
+            cartItems.count++
+            holder.cartItemRowCount.text = cartItems.count.toString()
+        }
+        holder.decreaseButton.setOnClickListener{
+            cartItems.count--
+            holder.cartItemRowCount.text = cartItems.count.toString()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -63,6 +71,8 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         val cartItemRowPrice = itemView.findViewById<TextView>(R.id.textViewCartItemRowPrice)
         val cartItemRowCount = itemView.findViewById<TextView>(R.id.TVShoppingCartItemCount)
         val cartItemRowSpecialsPrice = itemView.findViewById<TextView>(R.id.TVShoppingCartRowItemSpeecialsAmount)
+        val increaseButton = itemView.findViewById<Button>(R.id.btnShoppingCartIncrease)
+        val decreaseButton = itemView.findViewById<Button>(R.id.btnShoppingCartDecrease)
 
         var cartDisplayPosition = 0
 
