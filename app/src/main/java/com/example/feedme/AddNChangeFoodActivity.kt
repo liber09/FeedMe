@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 const val DISH_POSTION_KEY = "DISH_POSITION"
 const val DiSH_POSITION_NOT_SET = -1
@@ -46,10 +43,6 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_nchange_food)
 
 
-
-
-
-
         dishNameET = findViewById(R.id.AddDishAdminFoodTitleEditText)
         descriptionET = findViewById(R.id.AddDishAdminFoodDescriptionLayoutEditText)
         foodCategorySpinner = findViewById(R.id.spinner_AddDishAdminTypeOfFood)
@@ -74,7 +67,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         veganExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegan)
         vegeterianExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegeterian)
 
-       // val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
+       val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
 
 
@@ -102,22 +95,23 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
-                categoryOfDishString = foodCategoryArray[0]
+
             }
 
         }
 
 
 
-        var saveDishBUTTON = findViewById<Button>(R.id.btn_AddDishToFirebase)
-       /* if (dishPosition != DiSH_POSITION_NOT_SET) {
+        val saveDishBUTTON = findViewById<Button>(R.id.btn_AddDishToFirebase)
+        if (dishPosition != DiSH_POSITION_NOT_SET) {
             displayDish(dishPosition)
             saveDishBUTTON.setOnClickListener{EditDish(dishPosition)}
-        } else {*/
+        } else {
         saveDishBUTTON.setOnClickListener {
         AddDish() }
-//}
 
+
+   }
     }
 
     //TODO rule only if  youre logged in as a restaurount - but works
@@ -132,61 +126,62 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         //nedan funkar inte fullt ut det är inte inbockat
 
         if (dish.isGlutenFree == true) {
-            isGlutenFreeCB.isChecked
+            isGlutenFreeCB.isChecked = true
         }
         if (dish.isLaktoseFree == true) {
-            isLaktoseFreeCB.isChecked
+
+            isLaktoseFreeCB.isChecked =true
         }
         if (dish.isVegan == true) {
-            isVeganCB.isChecked
+            isVeganCB.isChecked = true
         }
         if (dish.isVegetarian == true) {
-            isVegeterianCB.isChecked
+            isVegeterianCB.isChecked = true
         }
         if (dish.isEggFree == true) {
-            isEggFreeCB.isChecked
+            isEggFreeCB.isChecked = true
         }
         if (dish.isSoyfree == true) {
-            isSoyFreeCB.isChecked
+            isSoyFreeCB.isChecked = true
         }
         if (dish.isFreeFromSeeFood == true) {
-            isSeaFoodFreeCB.isChecked
+            isSeaFoodFreeCB.isChecked = true
         }
         if (dish.isLCHF == true) {
-            isLCHFCB.isChecked
+            isLCHFCB.isChecked = true
         }
         if (dish.canBeMadeVegan == true) {
-            canBeMadeVeganCB.isChecked
+            canBeMadeVeganCB.isChecked = true
         }
         if (dish.canBeMadeVegeterian == true) {
-            canBeMadeVegeterianCB.isChecked
+            canBeMadeVegeterianCB.isChecked = true
         }
         if (dish.canBeMadeLaktosFree == true) {
-            canBeMadeLaktoseFreeCB.isChecked
+            canBeMadeLaktoseFreeCB.isChecked =true
         }
         if (dish.canBeMadeGlutenFree == true) {
-            canBeMadeGlutenFreeCB.isChecked
+            canBeMadeGlutenFreeCB.isChecked = true
         }
 
-        if (laktosExtraCostET.text.toString() != null) {
+        if (dish.extraCostLaktose != null) {
             laktosExtraCostET.setText(dish.extraCostLaktose.toString())
         }
-        if (glutenExtraCostET.text.toString() != null) {
+        if (dish.extraCostGluten != null) {
             glutenExtraCostET.setText(dish.extraCostGluten.toString())
         }
-        if (veganExtraCostET.text.toString() != null) {
+        if (dish.extraCostVegan != null) {
             laktosExtraCostET.setText(dish.extraCostVegan.toString())
         }
-        if (vegeterianExtraCostET.text.toString() != null) {
+        if (dish.extraCostVegeterian != null) {
             vegeterianExtraCostET.setText(dish.extraCostVegeterian.toString())
         }
-        if (smalPriceET.text.toString() != null) {
+        if (dish.priceSmallPortion!= null) {
             smalPriceET.setText(dish.priceSmallPortion.toString())
         }
-        if (normalPriceET.text.toString() != null) {
+        if (dish.priceNormalPortion!= null) {
             normalPriceET.setText(dish.priceNormalPortion.toString())
         }
-        if (largePriceET.text.toString() != null) {
+        if (dish.priceLargePortion != null) {
             largePriceET.setText(dish.priceLargePortion.toString())
         }
 
@@ -254,50 +249,39 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         if(canBeMadeLaktoseFreeCB.isChecked){
             DataManagerDishes.dishes[position].canBeMadeLaktosFree = true
         }
-        DataManagerDishes.dishes[position].extraCostVegan == 0.0
-        if (veganExtraCostET.text.toString() != "0" && veganExtraCostET.text.toString() != "null"&& veganExtraCostET.text.toString() != "0.0") {
+        DataManagerDishes.dishes[position].extraCostVegan = 0.0
+        if (veganExtraCostET.text.toString().toDouble() <= 0.0 && veganExtraCostET.text.isNotEmpty()) {
             DataManagerDishes.dishes[position].extraCostVegan =veganExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].extraCostVegeterian ==  0.0
-        if (vegeterianExtraCostET.text.toString() != "0" && vegeterianExtraCostET.text.toString() != "null" &&vegeterianExtraCostET.text.toString() != "0.0" ) {
+        DataManagerDishes.dishes[position].extraCostVegeterian =  0.0
+        if (vegeterianExtraCostET.text.toString().toDouble() <= 0.0 && vegeterianExtraCostET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostVegeterian = vegeterianExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].extraCostGluten ==  0.0
-        if (glutenExtraCostET.text.toString() != "0"
-            && glutenExtraCostET.text.toString() != "null" &&glutenExtraCostET.text.toString() != "0.0") {
-         if(glutenExtraCostET.text.toString().contains(",")){
-             // ToDo right syntax to change to .
-         }
-
-            try { DataManagerDishes.dishes[position].extraCostGluten = glutenExtraCostET.text.toString().toDouble()}
-         catch (e: java.lang.NumberFormatException) {
-             Toast.makeText( applicationContext,"Only numbers allowed", Toast.LENGTH_SHORT).show()
-             DataManagerDishes.dishes[position].extraCostGluten ==0.0
-
-         }
-
+        DataManagerDishes.dishes[position].extraCostGluten =  0.0
+        if (glutenExtraCostET.text.toString().toDouble() <= 0.0 && glutenExtraCostET.text.isNotEmpty()) {
+            DataManagerDishes.dishes[position].extraCostVegeterian = glutenExtraCostET.text.toString().toDouble()
 
         }
 
-        DataManagerDishes.dishes[position].extraCostLaktose ==  0.0
-        if (laktosExtraCostET.text.toString() != "0" && laktosExtraCostET.text.toString() != "null" && laktosExtraCostET.text.toString() != "0.0" ) {
+        DataManagerDishes.dishes[position].extraCostLaktose =  0.0
+        if (laktosExtraCostET.text.toString().toDouble() <= 0.0 && laktosExtraCostET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostLaktose =laktosExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].priceSmallPortion ==  0.0
-        if (smalPriceET.text.toString() != "-" && smalPriceET.text.toString() != "null" && smalPriceET.text.toString() != "0.0" ) {
+        DataManagerDishes.dishes[position].priceSmallPortion =  0.0
+        if (smalPriceET.text.toString().toDouble() <= 0.0 && smalPriceET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].priceSmallPortion = smalPriceET.text.toString().toDouble()
         }
-        DataManagerDishes.dishes[position].priceLargePortion ==  0.0
-        if (largePriceET.text.toString() != "-"&&largePriceET.text.toString() != "0.0" && largePriceET.text.toString() != "null") {
+        DataManagerDishes.dishes[position].priceLargePortion =  0.0
+        if (largePriceET.text.toString().toDouble() <= 0.0 &&largePriceET.text.isNotEmpty()) {
             DataManagerDishes.dishes[position].priceLargePortion = largePriceET.text.toString().toDouble()
         }
         DataManagerDishes.dishes[position].priceNormalPortion = 0.0
 
-        if (normalPriceET.text.toString() != "-"&& normalPriceET.text.toString() !="null"&& normalPriceET.text.toString() !="0.0") {
-            DataManagerDishes.dishes[position].priceSmallPortion == normalPriceET.text.toString().toDouble()
+        if (normalPriceET.text.toString().toDouble() <= 0.0 && normalPriceET.text.isNotEmpty() ) {
+            DataManagerDishes.dishes[position].priceNormalPortion = normalPriceET.text.toString().toDouble()
         }
         finish()
 
@@ -367,7 +351,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
 
         var extraCostGluten: Double? = null
-        if (glutenExtraCostET.text.toString() != "0" || glutenExtraCostET.text.toString() != "null") {
+        if (glutenExtraCostET.text.isNotEmpty()) {
             extraCostGluten = glutenExtraCostET.text.toString().toDouble()
         }
         var canBeMadeLaktosefree = false
@@ -376,7 +360,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
 
         var extraCostLaktose: Double? = null
-        if (laktosExtraCostET.text.toString() != "0" || laktosExtraCostET.text.toString() != null ) {
+        if ( laktosExtraCostET.text.isNotEmpty() ) {
             extraCostLaktose = laktosExtraCostET.text.toString().toDouble()
         }
         var canBeMadeVegeterian = false
@@ -385,7 +369,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
 
         var extraCostVegeterian: Double? = null
-        if (vegeterianExtraCostET.text.toString() != "0" || laktosExtraCostET.text.toString() != "null") {
+        if ( laktosExtraCostET.text.isNotEmpty()) {
             extraCostVegeterian = vegeterianExtraCostET.text.toString().toDouble()
         }
 
@@ -394,22 +378,22 @@ class AddNChangeFoodActivity : AppCompatActivity() {
             canBeMadeVegan = true
         }
 
-        var extraCostVegan: Double? = null
-        if (veganExtraCostET.text.toString() != "0") {
+        var extraCostVegan: Double? =null
+        if ( veganExtraCostET.text.isNotEmpty() ) {
             extraCostVegan = veganExtraCostET.text.toString().toDouble()
         }
 
         var priceNormalPortion: Double? = null
-        if (normalPriceET.text.toString() != "-") {
+        if ( normalPriceET.text.isNotEmpty()) {
             priceNormalPortion = normalPriceET.text.toString().toDouble()
         }
         var priceSmalPortion: Double? = null
-        if (smalPriceET.text.toString() != "-") {
+        if ( smalPriceET.text.isNotEmpty()) {
             priceSmalPortion = smalPriceET.text.toString().toDouble()
         }
 
         var priceLargePortion: Double? = null
-        if (largePriceET.text.toString() != "-") {
+        if (largePriceET.text.isNotEmpty()) {
             priceLargePortion = largePriceET.text.toString().toDouble()
         }
 
@@ -425,15 +409,15 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
         //TODO rule that you cannot add if you write something in a field which is for numbers
 
-        if ((priceLargePortion == null || priceLargePortion == 0.0) && (priceSmalPortion == null ||priceSmalPortion == 0.0)
-            && (priceNormalPortion == null || priceNormalPortion == 0.0)
-        ) {
+        if (priceLargePortion == null && priceSmalPortion == null
+            &&  priceNormalPortion == null)
+         {
             Toast.makeText(
                 applicationContext,
                 "Minst 1 pris för 1 storlek måste vara angiven",
                 Toast.LENGTH_LONG
             ).show()
-            priceChosen == false
+            priceChosen = false
         }
         if (dishName.isNotEmpty() && priceChosen == true) {
             val newDish = Dishes(

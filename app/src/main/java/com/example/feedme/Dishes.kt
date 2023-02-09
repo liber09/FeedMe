@@ -1,5 +1,7 @@
 package com.example.feedme
 
+import com.google.firebase.firestore.DocumentId
+
 data class Dishes(
     var title: String? = null,
     var description: String? = null,
@@ -26,6 +28,6 @@ data class Dishes(
     var extraCostVegeterian: Double? = null,
 
     var dishImagePath :String = "",
-  //  @DocumentId var documentId : String? = null,
+    @DocumentId var documentId : String? = null,
 
-)
+    )

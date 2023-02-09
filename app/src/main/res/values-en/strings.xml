@@ -31,4 +31,25 @@
     <string name="extraInfoToRestaurant">Please make the Diavolo extra strong!</string>
     <string name="checkout">Checkout</string>
     <string name="waitingTime">45 min</string>
+    <string name="dishName">Dish name</string>
+    <string name="description">Description</string>
+    <string name="type_of_food">Type of food</string>
+    <string name="food_contains_naturally">Food contains naturally</string>
+
+    <string name="soy_free">free from soy </string>
+
+    <string name="nut_free">free from nuts</string>
+    <string name="free_from_sea_food">free from sea food</string>
+    <string name="egg_free">egg free</string>
+
+    <string name="lchf">LCHF</string>
+    <string name="can_be_made_as">Can be made</string>
+    <string name="extra_cost">extra cost</string>
+    <string name="kr">kr</string>
+    <string name="price">Price</string>
+    <string name="only_if_relevant">Only if relevant</string>
+    <string name="normal">normal</string>
+    <string name="smal">smal</string>
+    <string name="big">big</string>
+    <string name="add">Add</string>
 </resources>

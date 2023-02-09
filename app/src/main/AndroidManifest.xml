@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeedMe"
         tools:targetApi="31">
+
         <activity
 
             android:name=".ShoppingCart"
@@ -22,6 +23,13 @@
         </activity>
         <activity
 
+            android:name=".DeliveryPersonViewActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddNChangeFoodActivity"
             android:exported="false">
             <meta-data
@@ -29,14 +37,19 @@
                 android:value="" />
         </activity>
         <activity
-
             android:name=".RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
+        <activity
+            android:name=".LoginAndRegisterActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".RegisterCustomerInfo"
             android:exported="false">

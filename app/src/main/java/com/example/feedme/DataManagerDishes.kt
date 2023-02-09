@@ -1,7 +1,5 @@
 package com.example.feedme
 
-import com.google.firebase.firestore.SetOptions
-
 object DataManagerDishes {
 
     val dishes = mutableListOf<Dishes>()
