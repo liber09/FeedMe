@@ -22,12 +22,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         //Create mock data
         mockCustomerData()
         mockRestaurantData()
 
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
+        val check = findViewById<Button>(R.id.button7)
+
+        check.setOnClickListener{
+            val intent = Intent(this,LoginAndRegisterActivity::class.java)
+            startActivity(intent)
+        }
 
         val ra = findViewById<Button>(R.id.buttonRegister)
         val bv = findViewById<Button>(R.id.btn_budView)
