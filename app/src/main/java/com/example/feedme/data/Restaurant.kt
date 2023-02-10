@@ -16,5 +16,6 @@ data class Restaurant (
     val deliveryTypeHome: Boolean = false,
     val deliveryTypeAtRestaurant: Boolean = true,
     val tableBooking: Boolean = false,
+    @DocumentId var documentId : String? = null,
 
 )

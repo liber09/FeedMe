@@ -94,4 +94,5 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         return toReturn.trim()
     }
+
 }

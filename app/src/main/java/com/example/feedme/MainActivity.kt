@@ -11,6 +11,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.feedme.data.Customer
+import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 
@@ -78,6 +79,11 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+        findViewById<Button>(R.id.btnShowCart).setOnClickListener{
+            val intent= Intent(this,ShoppingCart::class.java)
+            startActivity(intent)
+        }
+
         // TODO THIS below
         //  here we need to get the intent from the restaurant
         //  RecyclerView for the documentpath as soon as that is
@@ -95,6 +101,8 @@ class MainActivity : AppCompatActivity() {
             if (snapshot != null) {
                 for (document in snapshot.documents)
                 { val item = document.toObject<Dishes>()
+                    //Get parent documentId - restaurant in this case
+                    item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
                     if (item != null) {
                         DataManagerDishes.dishes.add(item)
                     }
@@ -103,6 +111,20 @@ class MainActivity : AppCompatActivity() {
                 printDishes()
             }
         }
+        val restaurantRef = db.collection("restaurants")
+        restaurantRef.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                for (document in snapshot.documents)
+                { val item = document.toObject<Restaurant>()
+                    if (item != null) {
+                        DataManagerRestaurants.restaurants.add(item)
+                    }
+                }
+
+                printDishes()
+            }
+        }
+
 
 
 

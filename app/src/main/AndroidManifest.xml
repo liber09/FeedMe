@@ -45,6 +45,15 @@
             android:exported="false"
             android:label="@string/title_activity_delivery_maps" />
         <activity
+
+            android:name=".ShoppingCart"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+
             android:name=".DeliveryPersonViewActivity"
             android:exported="false">
             <meta-data
