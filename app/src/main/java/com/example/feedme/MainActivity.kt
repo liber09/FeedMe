@@ -22,25 +22,42 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //Create mock data
         mockCustomerData()
         mockRestaurantData()
 
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
-        val check = findViewById<Button>(R.id.button7)
-
-        check.setOnClickListener{
-            val intent = Intent(this,LoginAndRegisterActivity::class.java)
+        val sc = findViewById<Button>(R.id.btn_Shopping)
+        val rr = findViewById<Button>(R.id.btn_RegREst)
+        val ru = findViewById<Button>(R.id.btn_Marlon)
+        val ra = findViewById<Button>(R.id.buttonRegister)
+        val bv = findViewById<Button>(R.id.btn_budView)
+        val mv = findViewById<Button>(R.id.btn_toMapsDel)
+        val ci = findViewById<Button>(R.id.btn_customerInfo)
+        ci.setOnClickListener{
+            val intent= Intent(this,RegisterCustomerInfo::class.java)
             startActivity(intent)
         }
 
-        val ra = findViewById<Button>(R.id.buttonRegister)
-        val bv = findViewById<Button>(R.id.btn_budView)
+        sc.setOnClickListener{
+            val intent= Intent(this,ShoppingCart::class.java)
+            startActivity(intent)
+        }
+        ru.setOnClickListener {    val intent= Intent(this,RegisterActivity::class.java)
+            startActivity(intent) }
+
+        rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
+            startActivity(intent) }
+
 
         bv.setOnClickListener{
             val intent= Intent(this,DeliveryPersonViewActivity::class.java)
+            startActivity(intent)
+
+        }
+        mv.setOnClickListener{
+            val intent= Intent(this,DeliveryMapsActivity::class.java)
             startActivity(intent)
 
         }
@@ -51,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val infoRes = findViewById<Button>(R.id.btn_infoRes)
+        //val infoRes = findViewById<Button>(R.id.btn_infoRes)
 
         add.setOnClickListener {
             val intent = Intent(this, AddNChangeFoodActivity::class.java)
@@ -62,21 +79,18 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
-        findViewById<Button>(R.id.btnShowCart).setOnClickListener{
-            val intent= Intent(this,ShoppingCart::class.java)
-            startActivity(intent)
-        }
+
 
         // TODO THIS below
         //  here we need to get the intent from the restaurant
         //  RecyclerView for the documentpath as soon as that is
         //  fixed så we can put the extra in the documentPaht
 
-        infoRes.setOnClickListener {
+       /* infoRes.setOnClickListener {
             val intent = Intent(this, InfoRestaurantActivity::class.java)
 
             startActivity(intent)
-        }
+        } */
 
 
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")

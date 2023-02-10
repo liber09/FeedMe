@@ -71,6 +71,9 @@ class AddNChangeFoodActivity : AppCompatActivity() {
        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
 
+        //val deleteBtn =
+
+
 
         val foodCategoryArray = arrayOf(
             "Huvudrätt", "Dessert", "Efterrätt"
