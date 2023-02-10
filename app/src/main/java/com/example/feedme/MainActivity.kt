@@ -27,10 +27,27 @@ class MainActivity : AppCompatActivity() {
 
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
-
+        val sc = findViewById<Button>(R.id.btn_Shopping)
+        val rr = findViewById<Button>(R.id.btn_RegREst)
+        val ru = findViewById<Button>(R.id.btn_Marlon)
         val ra = findViewById<Button>(R.id.buttonRegister)
         val bv = findViewById<Button>(R.id.btn_budView)
         val mv = findViewById<Button>(R.id.btn_toMapsDel)
+        val ci = findViewById<Button>(R.id.btn_customerInfo)
+        ci.setOnClickListener{
+            val intent= Intent(this,RegisterCustomerInfo::class.java)
+            startActivity(intent)
+        }
+
+        sc.setOnClickListener{
+            val intent= Intent(this,ShoppingCart::class.java)
+            startActivity(intent)
+        }
+        ru.setOnClickListener {    val intent= Intent(this,RegisterActivity::class.java)
+            startActivity(intent) }
+
+        rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
+            startActivity(intent) }
 
 
         bv.setOnClickListener{
@@ -66,11 +83,11 @@ class MainActivity : AppCompatActivity() {
         //  RecyclerView for the documentpath as soon as that is
         //  fixed så we can put the extra in the documentPaht
 
-        infoRes.setOnClickListener {
+       /* infoRes.setOnClickListener {
             val intent = Intent(this, InfoRestaurantActivity::class.java)
 
             startActivity(intent)
-        }
+        } */
 
 
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")

@@ -32,6 +32,15 @@
             android:value="AIzaSyBAYnujt3mZxNSpQsrhsG3kOwWu59GThAE" />
 
         <activity
+            android:name=".ShoppingCart"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+
+        <activity
             android:name=".DeliveryMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_delivery_maps" />
@@ -46,6 +55,7 @@
         <activity
             android:name=".InfoRestaurantActivity"
             android:exported="false" />
+
 
         <activity
             android:name=".AddNChangeFoodActivity"

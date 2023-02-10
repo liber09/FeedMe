@@ -13,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.feedme.databinding.ActivityDeliveryMapsBinding
+import com.google.android.gms.maps.model.LatLngBounds
 
 class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -49,11 +50,34 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in the location and move the camera
         val address = "Gamla vägen 12, 282 67 Vittsjö, SWEDEN"
+        val location = getLocationFromAddress(address)
+        if (location != null) {
+            val latLng = LatLng(location.latitude, location.longitude)
+            mMap.addMarker(MarkerOptions().position(latLng).title(address))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+
+            if (latLng != null) {
+                val boundBuilder = LatLngBounds.Builder().include(latLng)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundBuilder.build(), 1000, 1000, 0))
+            }
+        }
 
     }
 
+    //TODO Get this righ
 
-//
+
+    private fun getLocationFromAddress(address: String): LatLng? {
+        val geocoder = Geocoder(this)
+        val addresses = geocoder.getFromLocationName(address, 1)
+        if (addresses!!.isNotEmpty()) {
+            val location = addresses[0]
+            return LatLng(location.latitude, location.longitude)
+
+
+        }
+        return null
+}
 
 
 }
