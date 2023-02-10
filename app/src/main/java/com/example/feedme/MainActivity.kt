@@ -4,13 +4,16 @@ package com.example.feedme
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.feedme.data.Customer
+import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
+import com.google.firebase.firestore.ktx.toObject
 
 val db = Firebase.firestore
 
@@ -33,6 +36,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val ra = findViewById<Button>(R.id.buttonRegister)
+        val bv = findViewById<Button>(R.id.btn_budView)
+
+        bv.setOnClickListener{
+            val intent= Intent(this,DeliveryPersonViewActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
+        ra.setOnClickListener{
+            val intent= Intent(this,LoginAndRegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        val infoRes = findViewById<Button>(R.id.btn_infoRes)
+
         add.setOnClickListener {
             val intent = Intent(this, AddNChangeFoodActivity::class.java)
             startActivity(intent)
@@ -42,6 +62,58 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+        findViewById<Button>(R.id.btnShowCart).setOnClickListener{
+            val intent= Intent(this,ShoppingCart::class.java)
+            startActivity(intent)
+        }
+
+        // TODO THIS below
+        //  here we need to get the intent from the restaurant
+        //  RecyclerView for the documentpath as soon as that is
+        //  fixed så we can put the extra in the documentPaht
+
+        infoRes.setOnClickListener {
+            val intent = Intent(this, InfoRestaurantActivity::class.java)
+
+            startActivity(intent)
+        }
+
+
+        val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
+        docRef.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                for (document in snapshot.documents)
+                { val item = document.toObject<Dishes>()
+                    //Get parent documentId - restaurant in this case
+                    item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
+                    if (item != null) {
+                        DataManagerDishes.dishes.add(item)
+                    }
+                }
+
+                printDishes()
+            }
+        }
+        val restaurantRef = db.collection("restaurants")
+        restaurantRef.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                for (document in snapshot.documents)
+                { val item = document.toObject<Restaurant>()
+                    if (item != null) {
+                        DataManagerRestaurants.restaurants.add(item)
+                    }
+                }
+
+                printDishes()
+            }
+        }
+
+
+
+
+
+
+
     }
 
     //Mock restaurant data, create 4 restaurants and push to DB
@@ -98,6 +170,16 @@ class MainActivity : AppCompatActivity() {
         db.collection("customers").document("customer2").set(customer2, SetOptions.merge())
         db.collection("customers").document("customer3").set(customer3, SetOptions.merge())
         db.collection("customers").document("customer4").set(customer4, SetOptions.merge())
+
+    }
+    fun  printDishes(){
+
+        for (item in DataManagerDishes.dishes)
+        {
+            Log.d("HHH", "${item.title}")
+
+        }
+
 
     }
 }

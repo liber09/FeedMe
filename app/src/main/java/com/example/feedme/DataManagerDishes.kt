@@ -1,10 +1,13 @@
 package com.example.feedme
 
+import com.example.feedme.data.Dishes
+
 object DataManagerDishes {
 
     val dishes = mutableListOf<Dishes>()
 
-    init {
+
+  /*  init {
 
         createMockData()
 
@@ -12,39 +15,36 @@ object DataManagerDishes {
 
 
     fun createMockData () {
-        dishes.add(
-            Dishes(
-                "Pizza Margaritha", "Mozzarella, tomat, basilika", 85.0, 65.0,
+
+        val dish1 = Dishes(
+                "Chateau Briand", "med nypotatis", 85.0, 65.0,
                 null, false, false, true, true, true,
                 true,false,
                 true, false, "Huvudrätt", true, true, false, true,
                 5.0, null, null, null, ""
             )
-        )
-
-
-        dishes.add(
+        val dish2 =
             Dishes(
-                "Pizza Prosciutto", "Mozzarella, tomat, prosciutto", 95.0, 75.0,
+                "Steak", "serveras med pommes frittes och vitlökssmmör", 95.0, 75.0,
                 null, false, false, true, true,
                 true, true,false,
                 false, false, "Huvudrätt", true, true, false, false,
                 5.0, null, null, null, ""
             )
-        )
-        dishes.add(
+        val dish3 =
+
             Dishes(
-                "Pizza Vesuvio", "Mozzrella, tomat, skinka", 85.0, 65.0,
+                "Kycklinggryta", "serveras med ris", 85.0, 65.0,
                 null, false, false,
                 true, true, true, false, false,
                 false, false, "Huvudrätt", true, true, false, false,
                 5.0, null, null, null, ""
             )
-        )
-        dishes.add(
+        val dish4 =
+
             Dishes(
-                "Pizza Verduro",
-                "Mozzrella, tomat, zucchini, färska tomater, paprika, basilika",
+                "Coq au vin",
+                "serveras med potatisklyftor",
                 85.0,
                 65.0,
                 null,
@@ -69,51 +69,61 @@ object DataManagerDishes {
                 null,
                 ""
             )
-        )
-        dishes.add(
+        val dish5 =
+
             Dishes(
-                "Pizza Salami", "Mozzrella, tomat, salami, basilika",
+                "Escargouts", "sniglar med vitlökssmör",
                 85.0, 65.0,
                 null, false, false,true, true,
                  true, true,false,
                 false, false, "Huvudrätt", true, true, false, false,
                 5.0, null, null, null, ""
             )
-        )
-        dishes.add(
+        val dish6 =
+
             Dishes(
-                "Pizza Tonno", " Mozzrella, tomat, tonfisk, lök, basilika", 85.0, 65.0,
+                "Fiskgryta", "serveras med baguette", 85.0, 65.0,
                 null,false, false, true, true,
                 false, true,false,
                 false, false, "Huvudrätt", true, true, false, false,
                 5.0, null, null, null, ""
             )
-        )
-        dishes.add(
+
+    val dish7 =
             Dishes(
-                "Tiramisu", "En klassiker", 55.0, null,
+                "Creme bûlée", "En klassiker", 55.0, null,
                 null, false, false, false,true, true, true, false,
                 false, false, "Efterrätt", false, false, false, false,
                 null, null, null, null, ""
             )
-        )
-        dishes.add(
+        val dish8 =
+
             Dishes(
-                "Pana Cotta", "En klassiker", 55.0, null,
+                "Croissant", "En klassiker", 55.0, null,
                 null,false, false, false, true, true, true, false,
                 false, false, "Efterrätt", false, false, false, false,
                 null, null, null, null, ""
             )
-        )
-        dishes.add(
+        val dish9 =
+
             Dishes(
-                "Minestrone", "En klassiker", 55.0, null,
+                "Franskt löksoppa", "En klassiker", 55.0, null,
                 null, false, false, false,true, true, true, false,
                 false, false, "Förrätt", false, false, false, false,
                 null, null, null, null, ""
             )
-        )
 
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish1)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish2)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish3)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish4)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish5)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish6)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish7)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish8)
+        db.collection("restaurants").document("restaurant2").collection("dishes").add(dish9)
 
-    }
+        //db.collection("customers").document("customer1").set(customer1, SetOptions.merge())
+
+    } */
 }

@@ -17,5 +17,44 @@
     <string name="save">Spara</string>
     <string name="wrongInput">Felaktig inmatning, kontrollera att du fyllt i korrekta uppgifter</string>
     <string name="saveSuccess">Sparat</string>
+    <string name="yourOrder">Din beställning:</string>
+    <string name="deliveryPrice">Pris för utkörning</string>
+    <string name="deliveryArea">område</string>
+    <string name="deliveryPriceAmount">0 Kr</string>
+    <string name="leftTofreeDelivery">Bara 0 Kr fattas för fri leverans</string>
+    <string name="totalPrice">Total :</string>
+    <string name="glutenFree">Glutenfri</string>
+    <string name="lactoseFree">Laktos fri</string>
+    <string name="vegan">Vegansk</string>
+    <string name="vegetarian">Vegetarisk</string>
+    <string name="preliminaryWaitTime">Preliminär väntetid</string>
+    <string name="messageToRestaurant">Meddelande till restaurangen</string>
+    <string name="characters">33/350 tecken</string>
+    <string name="extraInfoToRestaurant">Snälla gör diavolon extra stark!!</string>
+    <string name="checkout">Slutför</string>
+    <string name="waitingTime">45 min</string>
+
+    <string name="dishName">Matens namn</string>
+    <string name="description">Beskrivning</string>
+    <string name="type_of_food">Typ av Mat</string>
+    <string name="food_contains_naturally">Maten är i sin vanlig form</string>
+
+    <string name="soy_free">Sojafri</string>
+
+    <string name="nut_free">Nötfri</string>
+    <string name="free_from_sea_food">Fri från fisk/skaldjur</string>
+    <string name="egg_free">Äggfri</string>
+
+    <string name="lchf">LCHF</string>
+    <string name="can_be_made_as">Rätten kan även göras</string>
+    <string name="extra_cost">till en extrakostnad av</string>
+    <string name="kr">kr</string>
+    <string name="price">Pris</string>
+    <string name="only_if_relevant">Fyll bara i om relevant</string>
+    <string name="normal">Normal</string>
+    <string name="smal">Liten</string>
+    <string name="big">Stor</string>
+    <string name="add">Lägg till</string>
+    <string name="specials">Special</string>
 
 </resources>

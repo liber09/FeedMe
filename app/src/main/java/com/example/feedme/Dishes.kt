@@ -1,4 +1,6 @@
-package com.example.feedme
+package com.example.feedme.data
+
+import com.google.firebase.firestore.DocumentId
 
 data class Dishes(
     var title: String? = null,
@@ -24,8 +26,10 @@ data class Dishes(
     var extraCostLaktose: Double? = null,
     var extraCostVegan: Double? = null,
     var extraCostVegeterian: Double? = null,
-
+    var selectedFoodSize : String = "",
     var dishImagePath :String = "",
-  //  @DocumentId var documentId : String? = null,
+    var count: Int = 0,
+    @DocumentId var documentId : String? = null,
+    @DocumentId var restaurantDocumentId : String? = null,
 
-)
+    )
