@@ -79,10 +79,7 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
-        findViewById<Button>(R.id.btnShowCart).setOnClickListener{
-            val intent= Intent(this,ShoppingCart::class.java)
-            startActivity(intent)
-        }
+
 
         // TODO THIS below
         //  here we need to get the intent from the restaurant
