@@ -20,17 +20,15 @@ class FoodViewActivity : AppCompatActivity() {
         foodRecyclerView.adapter = adapter
 
 
-
-
-
-
-
     }
+
+
 
     override fun onResume() {
         super.onResume()
 
         foodRecyclerView.adapter?.notifyDataSetChanged()
+
 
 
     }

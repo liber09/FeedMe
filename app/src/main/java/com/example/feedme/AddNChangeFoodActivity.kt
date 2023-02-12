@@ -71,7 +71,8 @@ class AddNChangeFoodActivity : AppCompatActivity() {
        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
 
-        //val deleteBtn =
+        val cancelBtn = findViewById<Button>(R.id.btn_Cancel_addFood)
+        cancelBtn.setOnClickListener { finish() }
 
 
 

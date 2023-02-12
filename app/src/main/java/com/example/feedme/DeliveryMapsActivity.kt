@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.feedme.databinding.ActivityDeliveryMapsBinding
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.PolylineOptions
 
 class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -49,7 +50,16 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //find out hou googleMapsguidning works
 
         // Add a marker in the location and move the camera
-        val address = "Gamla vägen 12, 282 67 Vittsjö, SWEDEN"
+
+
+    }
+}
+
+       // https://www.youtube.com/watch?v=GHIyf7oXT1w&list=PLCf5IsO6cvqGi6ddt5zt-HOirgQwSbJx6&index=1
+
+
+
+   /*     val address = "Gamla vägen 12, 282 67 Vittsjö, SWEDEN"
         val location = getLocationFromAddress(address)
         if (location != null) {
             val latLng = LatLng(location.latitude, location.longitude)
@@ -82,3 +92,4 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 }
 
+*/
