@@ -24,14 +24,22 @@ class FoodViewActivity : AppCompatActivity() {
 
 
 
+
+
+
     override fun onResume() {
         super.onResume()
+
+
 
         foodRecyclerView.adapter?.notifyDataSetChanged()
 
 
 
+
     }
+
+
 
 
 

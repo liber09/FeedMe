@@ -1,12 +1,15 @@
 package com.example.feedme
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isInvisible
@@ -15,7 +18,8 @@ import com.example.feedme.data.Dishes
 
 lateinit var dishes: Dishes
 
-class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishes>): RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
+class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishes>)
+    : RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
 
@@ -72,11 +76,30 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
 
         }
 
+        holder.foodDisplayPosition = position
+        //TODO change this as soon as it is klickable from a restaurant
+        holder.delete_btn.setOnClickListener {
+            dishes.documentId?.let { it1 ->
+                db.collection("restaurants")
+                    .document("restaurant2")
+                    .collection("dishes")
+                    .document(it1).delete()
+                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot sucessfully deleted!") }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+
+            }
+
+
+        }
+
+
         // TODO for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
 
-        holder.foodDisplayPosition = position
 
-        !holder.isRecyclable
+
+
+
+        //!holder.isRecyclable
     }
 
     override fun getItemCount(): Int {
@@ -104,6 +127,7 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
         var tv_priceVegetarian = itemView.findViewById<TextView>(R.id.tv_RV_priceVegeterian)
         var iv_foodImage = itemView.findViewById<ImageView>(R.id.iV_foodDisplay_RV)
         var foodDisplayPosition = 0
+        var delete_btn = itemView.findViewById<ImageButton>(R.id.btn_delete_RV_food)
 
 
         //TODO init block för Addfunktions, and an only admin delete and change funktion

@@ -96,7 +96,10 @@ class MainActivity : AppCompatActivity() {
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
+
+                DataManagerDishes.dishes.clear()
                 for (document in snapshot.documents)
+
                 { val item = document.toObject<Dishes>()
                     //Get parent documentId - restaurant in this case
                     item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
@@ -108,9 +111,10 @@ class MainActivity : AppCompatActivity() {
                 printDishes()
             }
         }
-        val restaurantRef = db.collection("restaurants")
+        /*val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
+
                 for (document in snapshot.documents)
                 { val item = document.toObject<Restaurant>()
                     if (item != null) {
@@ -120,7 +124,7 @@ class MainActivity : AppCompatActivity() {
 
                 printDishes()
             }
-        }
+        }*/
 
 
 

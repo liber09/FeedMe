@@ -455,6 +455,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
            // DataManagerDishes.dishes.add(newDish) only local
             db.collection("restaurants").document("restaurant2").collection("dishes").add(newDish)
 
+
             finish()
 
         }
