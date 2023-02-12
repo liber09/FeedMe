@@ -1,6 +1,7 @@
 package com.example.feedme
 
 
+import Drink
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,8 +13,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.feedme.data.Customer
 import com.example.feedme.data.Dishes
+import com.example.feedme.data.Order
 import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 val db = Firebase.firestore
 
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         //Create mock data
         mockCustomerData()
         mockRestaurantData()
+        //createMockDataOrders()
 
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
@@ -138,7 +143,6 @@ class MainActivity : AppCompatActivity() {
             "London","45213658","info@buckingham.co.uk","Ala carté",
             100,true,true,true,
             false)
-
         //Add restaurants to collection restaurants, SetOptions.merge() = do not overwrite if exists
         db.collection("restaurants").document("restaurant1").set(restaurant1, SetOptions.merge())
         db.collection("restaurants").document("restaurant2").set(restaurant2, SetOptions.merge())
@@ -181,5 +185,33 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+    private fun createMockDataOrders() {
+        var orderDishes = mutableListOf<Dishes>()
+        var orderDrinks = mutableListOf<Drink>()
+
+        val orderDrink2 = Drink(
+            "",
+            "Coca Cola light",
+            "33cl",
+            16.0,
+            "Soda",
+        )
+        val orderDish1 = Dishes(
+            "Spagetti Bolonese","Smakrik köttfärssås",88.0,75.0,95.0,false,
+            false,false,false,true,false,false,false,false,"Huvudrätt",true,
+            false,false,true,10.0,10.0,10.0,10.0,"N",
+            "",0, "","Restaurant2"
+        )
+        orderDishes.add(orderDish1)
+        orderDrinks.add(orderDrink2)
+        val localDate = LocalDate.parse("2023-01-06", DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
+        val order1 = Order(
+            "restaurant2","Customer1","Order1",orderDishes, orderDrinks,localDate,1,100.0,"Home"
+        )
+        db.collection("orders").add(order1)
+        db.collection("orders").document("order1").collection("orderDrinks").add(orderDrink2)
+        db.collection("orders").document("order1").collection("orderDishes").add(orderDish1)
     }
 }

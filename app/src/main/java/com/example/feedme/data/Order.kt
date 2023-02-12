@@ -3,6 +3,7 @@ package com.example.feedme.data
 import Drink
 import com.google.firebase.firestore.DocumentId
 import com.google.type.DateTime
+import java.time.LocalDate
 
 data class Order (
     @DocumentId var restaurantDocumentId : String? = null,
@@ -10,7 +11,7 @@ data class Order (
     @DocumentId var orderId: String? = null,
     var orderedDishes: MutableList<Dishes>?,
     var orderedDrinks:MutableList<Drink>,
-    var orderDate:DateTime?,
+    var orderDate: LocalDate,
     var orderNr:Int? = null,
     var totalAmount:Double? = null,
     var typeOfDelivery:String? = null
