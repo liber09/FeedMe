@@ -60,6 +60,6 @@
     <string name="sendMessage">Send message</string>
     <string name="cutomerNr">Customer Nr:</string>
     <string name="orderViewPhoneNumber">Phone number:</string>
-    <string name="chosenDelivery">Chosen delivery</string>
+    <string name="chosenDelivery">Chosen delivery:</string>
     <string name="customerInfo">Cusomer info</string>
 </resources>

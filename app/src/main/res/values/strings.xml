@@ -63,7 +63,7 @@
     <string name="sendMessage">Skicka meddelande</string>
     <string name="cutomerNr">Kundnr:</string>
     <string name="orderViewPhoneNumber">Telefonnummer:</string>
-    <string name="chosenDelivery">Valt leveranssätt</string>
+    <string name="chosenDelivery">Valt leveranssätt:</string>
     <string name="customerInfo">Kund info</string>
 
 </resources>
