@@ -97,4 +97,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
+    <Button
+        android:id="@+id/btn_RestRV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="34dp"
+        android:text="RestRV"
+        app:layout_constraintStart_toEndOf="@+id/btn_customerInfo"
+        app:layout_constraintTop_toBottomOf="@+id/btn_RV_act" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         val bv = findViewById<Button>(R.id.btn_budView)
         val mv = findViewById<Button>(R.id.btn_toMapsDel)
         val ci = findViewById<Button>(R.id.btn_customerInfo)
+        val rrv = findViewById<Button>(R.id.btn_RestRV)
+
+        rrv.setOnClickListener{
+            val intent= Intent(this,RestaurantViewActiviity::class.java)
+            startActivity(intent)
+        }
+
         ci.setOnClickListener{
             val intent= Intent(this,RegisterCustomerInfo::class.java)
             startActivity(intent)
@@ -117,9 +124,11 @@ class MainActivity : AppCompatActivity() {
                 printDishes()
             }
         }
-        /*val restaurantRef = db.collection("restaurants")
+
+        val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
+                DataManagerRestaurants.restaurants.clear()
 
                 for (document in snapshot.documents)
                 { val item = document.toObject<Restaurant>()
@@ -128,9 +137,9 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                printDishes()
+                printRestaurants()
             }
-        }*/
+        }
 
 
 
@@ -431,22 +440,22 @@ class MainActivity : AppCompatActivity() {
             "Karlbergs Krog","5454-5454","Västanvindsgatan 1","44454",
             "Stenungsund","030323654","info@karlbergs.se","Husmanskost",
             50,true,true,true,
-            false)
+            false,"Vi bjuder på typisk svenskt husmanskost och fin ambiente",3.4,"")
         val restaurant2 = Restaurant(
             "Restaurant 2012","5580-5465","Storgatan 12","56234",
             "Göteborg","0315648958","info@restaurant2012.se","Italienskt",
             45,true,false,true,
-            true)
+            true,"Åt din mat med style, experimental cuisine möter hip-style",4.2,"")
         val restaurant3 = Restaurant(
             "Jamie Oliver's gardens","5555-5454","Fancy Pancy street 15","12345",
             "Posh city","254685478","info@jamieoliver.com","Ala carté",
             150,true,true,true,
-            true)
+            true,"Smaka på de härliga rätter som Jamie har lagat på tv",3.8,"")
         val restaurant4 = Restaurant(
             "King Charles III","6555-5454","Buckingham palace 1","56458",
             "London","45213658","info@buckingham.co.uk","Ala carté",
             100,true,true,true,
-            false)
+            false,"Tradion möter innovation, hjärtligt välkommen",2.4,"")
         //Add restaurants to collection restaurants, SetOptions.merge() = do not overwrite if exists
         db.collection("restaurants").document("restaurant1").set(restaurant1, SetOptions.merge())
         db.collection("restaurants").document("restaurant2").set(restaurant2, SetOptions.merge())
@@ -490,6 +499,14 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    fun  printRestaurants(){
+
+        for (item in DataManagerRestaurants.restaurants)
+        {
+            Log.d("HHH", "${item.name}")
+
+        }}
     private fun createMockDataOrders() {
         var orderDishes = mutableListOf<Dishes>()
         var orderDrinks = mutableListOf<Drink>()

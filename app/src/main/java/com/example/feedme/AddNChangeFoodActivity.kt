@@ -1,10 +1,15 @@
 package com.example.feedme
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Dishes
+import com.example.feedme.data.Restaurant
 
 const val DISH_POSTION_KEY = "DISH_POSITION"
 const val DiSH_POSITION_NOT_SET = -1
