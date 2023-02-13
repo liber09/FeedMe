@@ -701,7 +701,7 @@
                     android:text="@string/add" />
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/imBtn_deleteAdNChange"
                     android:layout_width="57dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="200dp"
