@@ -25,28 +25,16 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-
-        val registerButton = findViewById<Button>(R.id.registerButton1)
-        registerButton.setOnClickListener {
-            // Create user with email + password
-            createUser()
-
             val saveButton = findViewById<Button>(R.id.saveButton)
+            val intent = Intent(this,LoginAndRegisterActivity::class.java)
             saveButton.setOnClickListener {
                 saveUserDataBase()
+                startActivity(intent)
 
             }
 
-
         }
-    }
 
-
-    fun goToActivity() {
-
-        val intent1 = Intent(this, LoginAndRegisterActivity::class.java)
-        startActivity(intent1)
-    }
 
         fun saveUserDataBase() {
             val firstName = findViewById<EditText>(R.id.namnTextView).text.toString()
@@ -67,26 +55,9 @@ class RegisterActivity : AppCompatActivity() {
 
 
         }
-             fun createUser() {
-                val email = emailView.text.toString()
-                val password = passwordView.text.toString()
 
+}
 
-                if (email.isEmpty() || password.isEmpty()) {
-                    return
-                }
-
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d("!!!", "Created user succeeded")
-                            goToActivity()
-                        } else {
-                            Log.d("!!!", "user not created")
-                        }
-                    }
-            }
-        }
 
 
 

@@ -27,20 +27,6 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="104dp"
-                android:layout_marginEnd="11dp"
-                android:text="@string/deliveryPriceAmount"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-            <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,7 +88,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/TVShoppingCartDeliveryFee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
@@ -113,7 +99,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/rvShoppingCart" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -125,7 +111,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/rvShoppingCart" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -137,10 +123,10 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/rvShoppingCart" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/rvShoppingCart"
                 android:layout_width="356dp"
                 android:layout_height="376dp"
                 android:layout_marginTop="32dp"
@@ -224,6 +210,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="#000000"
                 app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            <TextView
+                android:id="@+id/TVShoppingCartTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="205dp"
+                android:layout_marginTop="38dp"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                app:layout_constraintStart_toEndOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/TVShoppingCartDeliveryFee" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
