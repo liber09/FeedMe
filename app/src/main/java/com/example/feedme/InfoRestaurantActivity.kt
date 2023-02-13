@@ -28,8 +28,6 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
-        val monSta = findViewById<EditText>(R.id.textInputMondayStart)
-        val editName = findViewById<EditText>(R.id.textInputName)
 
         btnAddImage.setOnClickListener {
 
