@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
         val bv = findViewById<Button>(R.id.btn_budView)
         val mv = findViewById<Button>(R.id.btn_toMapsDel)
         val ci = findViewById<Button>(R.id.btn_customerInfo)
+        val rov = findViewById<Button>(R.id.btnOrderView)
+        rov.setOnClickListener{
+            val intent= Intent(this,OrderViewForRestaurants::class.java)
+            startActivity(intent)
+        }
         ci.setOnClickListener{
             val intent= Intent(this,RegisterCustomerInfo::class.java)
             startActivity(intent)

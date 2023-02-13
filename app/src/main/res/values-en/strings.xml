@@ -57,4 +57,7 @@
     <string name="orderTime">Order time</string>
     <string name="readyForPickup">Ready for pickup</string>
     <string name="delayed">Delayed</string>
+    <string name="sendMessage">Send message</string>
+    <string name="cutomerNr">Customer Nr:</string>
+    <string name="orderViewPhoneNumber">Phone number:</string>
 </resources>
