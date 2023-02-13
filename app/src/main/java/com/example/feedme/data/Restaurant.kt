@@ -1,6 +1,8 @@
 package com.example.feedme.data
 
 import com.google.firebase.firestore.DocumentId
+import java.util.*
+import kotlin.collections.HashMap
 
 data class Restaurant (
     val name: String = "",
@@ -17,5 +19,6 @@ data class Restaurant (
     val deliveryTypeAtRestaurant: Boolean = true,
     val tableBooking: Boolean = false,
     @DocumentId var documentId : String? = null,
-
+    val openingHours: HashMap<String, Calendar> = hashMapOf<String, Calendar>(),
+    val description: String = ""
 )
