@@ -56,6 +56,9 @@
     <string name="big">Stor</string>
     <string name="add">Lägg till</string>
     <string name="specials">Special</string>
-
+    <string name="ordersHeader">- ORDRAR</string>
+    <string name="orderTime">Ordern lagd:</string>
+    <string name="readyForPickup">Redo att hämtas</string>
+    <string name="delayed">Försenad</string>
 
 </resources>

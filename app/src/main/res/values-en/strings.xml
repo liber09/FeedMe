@@ -53,4 +53,8 @@
     <string name="big">big</string>
     <string name="add">Add</string>
     <string name="specials">Specials</string>
+    <string name="ordersHeader">" - ORDERS"</string>
+    <string name="orderTime">Order time</string>
+    <string name="readyForPickup">Ready for pickup</string>
+    <string name="delayed">Delayed</string>
 </resources>
