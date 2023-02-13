@@ -1,10 +1,8 @@
 package com.example.feedme
+import android.graphics.Color
 
-import android.location.Address
-import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.feedme.data.Restaurant
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -12,20 +10,17 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.feedme.databinding.ActivityDeliveryMapsBinding
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.maps.android.PolyUtil
 
 class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var binding: ActivityDeliveryMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityDeliveryMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_delivery_maps)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -45,14 +40,63 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        //TODO get the address from the chosen restaurant Class
-        //get the current location of the driver
-        //find out hou googleMapsguidning works
+        // Define the origin and destination points
+        val origin = LatLng(56.332639461378015, 13.671913141231613)
+        val destination = LatLng(56.155231527347276, 13.756392685407457)
 
         // Add a marker in the location and move the camera
+        mMap.addMarker(MarkerOptions().position(origin).title("Origin"))
+        mMap.addMarker(MarkerOptions().position(destination).title("Destination"))
+
+        // Get the driving directions between the two points
+        DirectionsApi.getDrivingDirections(origin, destination) { latLngs ->
+            // Draw the polyline on the map
+            val polylineOptions = PolylineOptions()
+                .color(Color.RED)
+                .width(5f)
+                .addAll(latLngs)
+            mMap.addPolyline(polylineOptions)
+
+            // Move the camera to fit the bounds of the polyline
+            val builder = LatLngBounds.Builder()
+            latLngs.forEach { builder.include(it) }
+            val bounds = builder.build()
+            val padding = 100
+            val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
+            mMap.moveCamera(cameraUpdate)
+        }
 
 
+    /*private fun getDirections(origin: LatLng, destination: LatLng) {
+        val directions = DirectionsApi.newRequest(geoApiContext)
+            .mode(TravelMode.DRIVING)
+            .origin(Point.fromLngLat(origin.longitude, origin.latitude))
+            .destination(Point.fromLngLat(destination.longitude, destination.latitude))
+            .await()
+
+        if (directions.routes.isNotEmpty()) {
+            val route = directions.routes[0].overviewPolyline
+
+            val decodedPath = PolyUtil.decode(route.encodedPath)
+            val polyline = PolylineOptions()
+                .addAll(decodedPath)
+                .width(10f)
+                .color(Color.RED)
+
+            mMap.addPolyline(polyline)
+
+            val bounds = LatLngBounds.Builder()
+                .include(origin)
+                .include(destination)
+                .build()
+
+            val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 100)
+            mMap.moveCamera(cameraUpdate)
+        }*/
     }
+
+
+
 }
 
        // https://www.youtube.com/watch?v=GHIyf7oXT1w&list=PLCf5IsO6cvqGi6ddt5zt-HOirgQwSbJx6&index=1
