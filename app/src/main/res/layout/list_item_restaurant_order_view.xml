@@ -38,7 +38,8 @@
         android:layout_height="177dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TVRestaurantOrder_OrderTime" />
+        app:layout_constraintTop_toBottomOf="@+id/TVRestaurantOrder_OrderTime"
+        tools:listitem="@layout/list_item_ordered_dishes" />
 
     <Button
         android:id="@+id/btnReadyForPickup"
