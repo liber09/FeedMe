@@ -1,8 +1,10 @@
 package com.example.feedme
+import DirectionsApi
 import android.graphics.Color
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -48,14 +50,36 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(origin).title("Origin"))
         mMap.addMarker(MarkerOptions().position(destination).title("Destination"))
 
+
+       /* DirectionsApi.getRouteDetails(
+            DirectionsApi.origin,
+            DirectionsApi.destination
+        ) { route -> */
+
+        //DirectionsApi.getDrivingDirections()
+
         // Get the driving directions between the two points
-        DirectionsApi.getDrivingDirections(origin, destination) { latLngs ->
+        DirectionsApi.getDrivingDirections(
+            origin,
+            destination
+        ) { latLngs, totalDistance, totalDuration ->
             // Draw the polyline on the map
-            val polylineOptions = PolylineOptions()
-                .color(Color.RED)
-                .width(5f)
-                .addAll(latLngs)
-            mMap.addPolyline(polylineOptions)
+            val polyline = mMap.addPolyline(PolylineOptions()
+                .addAll(latLngs).color(Color.RED))
+            val distance = totalDistance
+            val duration = totalDuration
+
+
+
+            val txtDis = findViewById<TextView>(R.id.textViewDistance)
+            val txtDur = findViewById<TextView>(R.id.textViewDurationt)
+            txtDis.text = "Distance: $distance "
+            txtDur.text = "Duration: $duration"
+
+            //TODO change to
+
+
+
 
             // Move the camera to fit the bounds of the polyline
             val builder = LatLngBounds.Builder()
