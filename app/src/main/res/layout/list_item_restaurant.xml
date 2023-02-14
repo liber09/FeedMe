@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_RV_restaurant"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_star1" />
 
     <ImageView
         android:id="@+id/iv_RV_restaurant"
@@ -47,63 +47,58 @@
         app:srcCompat="@drawable/logo" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/iv_star1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/iv_RV_restaurant"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title"
-        app:srcCompat="@drawable/ic_baseline_stars_24" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/iv_star2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_rvRest_Description"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title"
-        app:srcCompat="@drawable/ic_baseline_stars_24" />
+        app:layout_constraintStart_toEndOf="@+id/iv_star1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/iv_star3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_rvRest_Description"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/iv_star2"
         app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_stars_24" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/iv_star4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_rvRest_Description"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toEndOf="@+id/iv_star3"
         app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_stars_24" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/iv_star5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_rvRest_Description"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/iv_star4"
         app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_stars_24" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
