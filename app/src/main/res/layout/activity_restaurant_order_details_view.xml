@@ -180,6 +180,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TVOrderDetailsOrderTime" />
+        app:layout_constraintTop_toBottomOf="@+id/TVOrderDetailsOrderTime"
+        tools:listitem="@layout/list_item_order_detail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
