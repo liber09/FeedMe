@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         val rov = findViewById<Button>(R.id.btnOrderView)
         val rrv = findViewById<Button>(R.id.btnRestview)
 
-        rrv.setOnClickListener {     val intent= Intent(this,RestaurantViewActiviity::class.java)
+        rrv.setOnClickListener {     val intent= Intent(this,DrinksViewActivity::class.java)
             startActivity(intent) }
 
         rov.setOnClickListener{
