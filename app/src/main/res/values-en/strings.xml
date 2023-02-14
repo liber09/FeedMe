@@ -53,4 +53,21 @@
     <string name="big">big</string>
     <string name="add">Add</string>
     <string name="specials">Specials</string>
+    <string name="ordersHeader">" - ORDERS"</string>
+    <string name="orderTime">Order time</string>
+    <string name="readyForPickup">Ready for pickup</string>
+    <string name="delayed">Delayed</string>
+    <string name="sendMessage">Send message</string>
+    <string name="cutomerNr">Customer Nr:</string>
+    <string name="orderViewPhoneNumber">Phone number:</string>
+    <string name="chosenDelivery">Chosen delivery:</string>
+    <string name="customerInfo">Cusomer info</string>
+    <string name="edit">Edit</string>
+    <string name="ongoingDeliveries">Ongoing deliveries</string>
+    <string name="favouriteRestaurants">Favourite restaurants</string>
+    <string name="favouriteMeals">Favourite meals</string>
+    <string name="orderHistory">Order history</string>
+    <string name="seeMore">See more</string>
+    <string name="noDeliveries">No ongoing deliveries</string>
+    <string name="noOrderHistory">You have not made any orders yet</string>
 </resources>
