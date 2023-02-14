@@ -98,13 +98,15 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
     <Button
-        android:id="@+id/btn_RestRV"
+        android:id="@+id/btnOrderView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="34dp"
-        android:text="RestRV"
-        app:layout_constraintStart_toEndOf="@+id/btn_customerInfo"
-        app:layout_constraintTop_toBottomOf="@+id/btn_RV_act" />
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="170dp"
+        android:text="Orderview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_RegREst" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
