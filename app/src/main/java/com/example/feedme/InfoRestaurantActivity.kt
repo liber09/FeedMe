@@ -15,19 +15,23 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
     val registerNew = false
-    val openingHours = hashMapOf<String, Calendar>()
+    private var openingHours = hashMapOf<String, Calendar>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
+        //val loadRestaurant = intent.getStringExtra("restaurantToLoad")
+        loadRestaurant("asdf")
 
         btnAddImage.setOnClickListener {
 
@@ -36,6 +40,30 @@ class InfoRestaurantActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             saveInfo()
         }
+    }
+
+    fun loadRestaurant(name: String) {
+        //val restaurant = DataManagerRestaurants.getByDocumentId(name)
+        val docRef = db.collection("restaurantTibTest").document(name)
+        var restaurant : Restaurant?  = Restaurant()
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            restaurant = documentSnapshot.toObject(Restaurant::class.java)
+        }
+
+        findViewById<EditText>(R.id.textInputName).setText(restaurant?.name)
+        findViewById<EditText>(R.id.textInputAddress).setText(restaurant?.address)
+        findViewById<EditText>(R.id.textInputPostalCode).setText(restaurant?.postalCode)
+        findViewById<EditText>(R.id.textInputCity).setText(restaurant?.city)
+        findViewById<EditText>(R.id.textInputPhone).setText(restaurant?.phoneNumber)
+        findViewById<EditText>(R.id.textInputEmail).setText(restaurant?.eMail)
+        setType(restaurant?.type ?: "")
+        findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant?.deliveryFee ?: 0)
+        findViewById<CheckBox>(R.id.cb_takeaway).isChecked = restaurant?.deliveryTypePickup ?: false
+        findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant?.deliveryTypeHome ?: false
+        findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant?.deliveryTypeAtRestaurant ?: false
+        findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant?.tableBooking ?: false
+        openingHours = restaurant?.openingHours ?: openingHours
+        findViewById<EditText>(R.id.textInputDescription).setText("")
     }
 
     fun setTime(view: View) {
@@ -48,8 +76,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
                 cal.set(Calendar.MINUTE, minute)
 
                 view.setText(SimpleDateFormat("HH:mm").format(cal.time))
-                openingHours.put(view.tag.toString(), cal);
-                Log.v("!!!", openingHours.size.toString() + " " + view.tag.toString() + " " + view.text.toString())
+                openingHours.put(view.tag.toString(), cal)
             }
 
             TimePickerDialog(
@@ -84,8 +111,33 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.textInputDescription).text.toString()
         )
 
-        /*db.collection("restaurant").document(name)
-            .set(rest)*/
+        db.collection("restaurantTibTest").document(name)
+            .set(rest)
+    }
+
+    //not optimized version
+    fun setType(types: String) {
+        var listOfTypes = types.split(" ")
+
+        val mView = findViewById<ConstraintLayout>(R.id.mainView)
+
+        mView.forEach { cb ->
+            if(cb is CheckBox && cb.tag?.toString() == "type" && listOfTypes.contains(cb.text.toString())) {
+                cb.isChecked = true
+            }
+        }
+
+    }
+
+    fun loadOpeningHours() {
+        val mView = findViewById<ConstraintLayout>(R.id.mainView)
+
+        mView.forEach { et ->
+            if(et is EditText && openingHours.containsKey(et.tag?.toString())) {
+                val cal = openingHours.get(et.tag.toString())
+                et.setText(SimpleDateFormat("HH:mm").format(cal?.time))
+            }
+        }
     }
 
     fun getType() : String {
