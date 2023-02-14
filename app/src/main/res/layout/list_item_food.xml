@@ -206,7 +206,7 @@
         android:layout_margin="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="#2C2E5F"
+        android:background="@drawable/rounded_edge_wo_border"
         android:paddingStart="4dp"
         android:paddingLeft="4dp"
         android:paddingTop="4dp"

@@ -18,7 +18,8 @@ import com.example.feedme.data.Dishes
 
 lateinit var dishes: Dishes
 
-class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishes>)
+class FoodViewRecyclerAdapter(val context: Context,
+                              val courses : List<Dishes>)
     : RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
@@ -30,7 +31,7 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val dishes = mainCourses[position]
+        val dishes = courses[position]
 
         holder.nameDishTextView.text = dishes.title
         holder.descriptionDishTextView.text = dishes.description
@@ -71,6 +72,8 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
             holder.tv_priceVegetarian.isInvisible = true
         }
 
+        //TODO implement Glide for images
+
         if (dishes.dishImagePath.isEmpty()){
             holder.iv_foodImage.setImageResource(R.drawable.logo)
 
@@ -103,7 +106,7 @@ class FoodViewRecyclerAdapter(val context: Context, val mainCourses : List<Dishe
     }
 
     override fun getItemCount(): Int {
-        return mainCourses.size
+        return courses.size
 
     }
 
