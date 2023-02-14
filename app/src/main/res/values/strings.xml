@@ -65,5 +65,13 @@
     <string name="orderViewPhoneNumber">Telefonnummer:</string>
     <string name="chosenDelivery">Valt leveranssätt:</string>
     <string name="customerInfo">Kund info</string>
+    <string name="edit">Ändra</string>
+    <string name="ongoingDeliveries">Pågående leveranser</string>
+    <string name="favouriteRestaurants">Favorit restauranger</string>
+    <string name="favouriteMeals">Favoritmaträtter</string>
+    <string name="orderHistory">Order historik</string>
+    <string name="seeMore">Se fler</string>
+    <string name="noDeliveries">Inga pågående leveranser</string>
+    <string name="noOrderHistory">Du har inte gjort någon beställning ännu</string>
 
 </resources>
