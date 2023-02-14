@@ -1,10 +1,15 @@
 package com.example.feedme
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Dishes
+import com.example.feedme.data.Restaurant
 
 const val DISH_POSTION_KEY = "DISH_POSITION"
 const val DiSH_POSITION_NOT_SET = -1
@@ -71,7 +76,8 @@ class AddNChangeFoodActivity : AppCompatActivity() {
        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
 
-        //val deleteBtn =
+        val cancelBtn = findViewById<Button>(R.id.btn_Cancel_addFood)
+        cancelBtn.setOnClickListener { finish() }
 
 
 
@@ -453,6 +459,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
            // DataManagerDishes.dishes.add(newDish) only local
             db.collection("restaurants").document("restaurant2").collection("dishes").add(newDish)
+
 
             finish()
 

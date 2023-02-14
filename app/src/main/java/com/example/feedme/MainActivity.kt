@@ -5,6 +5,7 @@ import Drink
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.widget.Button
 
@@ -29,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         //Create mock data
         mockCustomerData()
         mockRestaurantData()
-        mockDataDrinks()
-        //createMockDataOrders()
+        //mockDataDrinks()
+       //createMockDataOrders()
 
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
@@ -41,6 +42,16 @@ class MainActivity : AppCompatActivity() {
         val bv = findViewById<Button>(R.id.btn_budView)
         val mv = findViewById<Button>(R.id.btn_toMapsDel)
         val ci = findViewById<Button>(R.id.btn_customerInfo)
+        val rov = findViewById<Button>(R.id.btnOrderView)
+        val rrv = findViewById<Button>(R.id.btnRestview)
+
+        rrv.setOnClickListener {     val intent= Intent(this,DrinksViewActivity::class.java)
+            startActivity(intent) }
+
+        rov.setOnClickListener{
+            val intent= Intent(this,OrderViewForRestaurants::class.java)
+            startActivity(intent)
+        }
         ci.setOnClickListener{
             val intent= Intent(this,RegisterCustomerInfo::class.java)
             startActivity(intent)
@@ -92,17 +103,16 @@ class MainActivity : AppCompatActivity() {
         //  RecyclerView for the documentpath as soon as that is
         //  fixed så we can put the extra in the documentPaht
 
-       /* infoRes.setOnClickListener {
-            val intent = Intent(this, InfoRestaurantActivity::class.java)
 
-            startActivity(intent)
-        } */
 
 
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
+
+                DataManagerDishes.dishes.clear()
                 for (document in snapshot.documents)
+
                 { val item = document.toObject<Dishes>()
                     //Get parent documentId - restaurant in this case
                     item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
@@ -114,9 +124,13 @@ class MainActivity : AppCompatActivity() {
                 printDishes()
             }
         }
+
+
         val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
+                DataManagerRestaurants.restaurants.clear()
+
                 for (document in snapshot.documents)
                 { val item = document.toObject<Restaurant>()
                     if (item != null) {
@@ -124,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                printDishes()
+                printRestaurants()
             }
         }
 
@@ -136,290 +150,291 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun mockDataDrinks() {
-        val drinkList = mutableListOf<Drink>()
+   /*private fun mockDataDrinks() {
+       val drinkList = mutableListOf<Drink>()
 
-        val drink1 = Drink(
-            "",
-            "Coca Cola",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink2 = Drink(
-            "",
-            "Coca Cola light",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink3 = Drink(
-            "",
-            "Coca Cola Zero",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink4 = Drink(
-            "",
-            "Pepsi",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink5 = Drink(
-            "",
-            "Pepsi Max",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink6 = Drink(
-            "",
-            "Fanta",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink7 = Drink(
-            "",
-            "Fanta light",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink8 = Drink(
-            "",
-            "Sprite",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink9 = Drink(
-            "",
-            "Sprite Zero",
-            "33cl",
-            16.0,
-            "Soda",
-        )
-        val drink10 = Drink(
-            "",
-            "Coca Cola",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink11 = Drink(
-            "",
-            "Coca Cola light",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink12 = Drink(
-            "",
-            "Coca Cola Zero",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink13 = Drink(
-            "",
-            "Pepsi",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink14 = Drink(
-            "",
-            "Pepsi Max",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink15 = Drink(
-            "",
-            "Fanta",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink16 = Drink(
-            "",
-            "Fanta light",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink17 = Drink(
-            "",
-            "Sprite",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink18 = Drink(
-            "",
-            "Sprite Zero",
-            "50cl",
-            16.0,
-            "Soda",
-        )
-        val drink19 = Drink(
-            "",
-            "Santa Helena chardonnay",
-            "75cl",
-            125.0,
-            "White wine",
-        )
-        val drink20 = Drink(
-            "",
-            "Byron bay sauvignon blanc",
-            "75cl",
-            225.0,
-            "White wine",
-        )
-        val drink21 = Drink(
-            "",
-            "Gran Reserva rioja anciano",
-            "75cl",
-            121.0,
-            "Red wine",
-        )
-        val drink22 = Drink(
-            "",
-            "Barolo massimo rivetti",
-            "75cl",
-            175.0,
-            "Red wine",
-        )
-        val drink23 = Drink(
-            "",
-            "Heinekken",
-            "33cl",
-            65.0,
-            "Beer",
-        )
-        val drink24 = Drink(
-            "",
-            "Norrlands Guld",
-            "33cl",
-            48.0,
-            "Beer",
-        )
-        val drink25 = Drink(
-            "",
-            "Heinekken",
-            "50cl",
-            78.0,
-            "Beer",
-        )
-        val drink26 = Drink(
-            "",
-            "Norrlands Guld",
-            "50cl",
-            60.0,
-            "Beer",
-        )
-        val drink27 = Drink(
-            "",
-            "Ramlösa",
-            "33cl",
-            18.0,
-            "Soda water",
-        )
-        val drink28 = Drink(
-            "",
-            "Imsdal",
-            "50cl",
-            27.0,
-            "Water",
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink1
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink2
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink3
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink4
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink5
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink6
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink7
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink8
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink9
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink10
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink11
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink12
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink13
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink14
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink15
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink16
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink17
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink18
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink19
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink20
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink21
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink22
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink23
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink24
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink25
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink26
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink27
-        )
-        db.collection("restaurants").document("restaurant2").collection("drinks").add(
-            drink28
-        )
-    }
+       val drink1 = Drink(
+           "",
+           "Coca Cola",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink2 = Drink(
+           "",
+           "Coca Cola light",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink3 = Drink(
+           "",
+           "Coca Cola Zero",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink4 = Drink(
+           "",
+           "Pepsi",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink5 = Drink(
+           "",
+           "Pepsi Max",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink6 = Drink(
+           "",
+           "Fanta",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink7 = Drink(
+           "",
+           "Fanta light",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink8 = Drink(
+           "",
+           "Sprite",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink9 = Drink(
+           "",
+           "Sprite Zero",
+           "33cl",
+           16.0,
+           "Soda",
+       )
+       val drink10 = Drink(
+           "",
+           "Coca Cola",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink11 = Drink(
+           "",
+           "Coca Cola light",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink12 = Drink(
+           "",
+           "Coca Cola Zero",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink13 = Drink(
+           "",
+           "Pepsi",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink14 = Drink(
+           "",
+           "Pepsi Max",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink15 = Drink(
+           "",
+           "Fanta",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink16 = Drink(
+           "",
+           "Fanta light",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink17 = Drink(
+           "",
+           "Sprite",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink18 = Drink(
+           "",
+           "Sprite Zero",
+           "50cl",
+           16.0,
+           "Soda",
+       )
+       val drink19 = Drink(
+           "",
+           "Santa Helena chardonnay",
+           "75cl",
+           125.0,
+           "White wine",
+       )
+       val drink20 = Drink(
+           "",
+           "Byron bay sauvignon blanc",
+           "75cl",
+           225.0,
+           "White wine",
+       )
+       val drink21 = Drink(
+           "",
+           "Gran Reserva rioja anciano",
+           "75cl",
+           121.0,
+           "Red wine",
+       )
+       val drink22 = Drink(
+           "",
+           "Barolo massimo rivetti",
+           "75cl",
+           175.0,
+           "Red wine",
+       )
+       val drink23 = Drink(
+           "",
+           "Heinekken",
+           "33cl",
+           65.0,
+           "Beer",
+       )
+       val drink24 = Drink(
+           "",
+           "Norrlands Guld",
+           "33cl",
+           48.0,
+           "Beer",
+       )
+       val drink25 = Drink(
+           "",
+           "Heinekken",
+           "50cl",
+           78.0,
+           "Beer",
+       )
+       val drink26 = Drink(
+           "",
+           "Norrlands Guld",
+           "50cl",
+           60.0,
+           "Beer",
+       )
+       val drink27 = Drink(
+           "",
+           "Ramlösa",
+           "33cl",
+           18.0,
+           "Soda water",
+       )
+       val drink28 = Drink(
+           "",
+           "Imsdal",
+           "50cl",
+           27.0,
+           "Water",
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink1
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink2
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink3
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink4
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink5
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink6
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink7
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink8
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink9
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink10
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink11
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink12
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink13
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink14
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink15
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink16
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink17
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink18
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink19
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink20
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink21
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink22
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink23
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink24
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink25
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink26
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink27
+       )
+       db.collection("restaurants").document("restaurant2").collection("drinks").add(
+           drink28
+       )
+   }*/
+
 
     //Mock restaurant data, create 4 restaurants and push to DB
     private fun mockRestaurantData() {
@@ -427,22 +442,23 @@ class MainActivity : AppCompatActivity() {
             "Karlbergs Krog","5454-5454","Västanvindsgatan 1","44454",
             "Stenungsund","030323654","info@karlbergs.se","Husmanskost",
             50,true,true,true,
-            false)
+            false,
+            "Traditionell svenskt husmanskost och mysig miljö väntar våra gäster hos oss",5.0)
         val restaurant2 = Restaurant(
             "Restaurant 2012","5580-5465","Storgatan 12","56234",
             "Göteborg","0315648958","info@restaurant2012.se","Italienskt",
             45,true,false,true,
-            true)
+            true,"Trevlig ambiente möter hip matlagning. Du har manbun och skägg - varmt välkommen",4.4)
         val restaurant3 = Restaurant(
             "Jamie Oliver's gardens","5555-5454","Fancy Pancy street 15","12345",
             "Posh city","254685478","info@jamieoliver.com","Ala carté",
             150,true,true,true,
-            true)
+            true,"Smaka på Jamies favoritrecepter",3.8)
         val restaurant4 = Restaurant(
             "King Charles III","6555-5454","Buckingham palace 1","56458",
             "London","45213658","info@buckingham.co.uk","Ala carté",
             100,true,true,true,
-            false)
+            false,"Vårt motto: Posh, posh, posh men så mumsig med",4.2)
         //Add restaurants to collection restaurants, SetOptions.merge() = do not overwrite if exists
         db.collection("restaurants").document("restaurant1").set(restaurant1, SetOptions.merge())
         db.collection("restaurants").document("restaurant2").set(restaurant2, SetOptions.merge())
@@ -486,6 +502,17 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun printRestaurants() {
+        for (item in DataManagerRestaurants.restaurants)
+        {
+            Log.d("HHH", "${item.name}")
+
+        }
+
+
+    }
+
     private fun createMockDataOrders() {
         var orderDishes = mutableListOf<Dishes>()
         var orderDrinks = mutableListOf<Drink>()

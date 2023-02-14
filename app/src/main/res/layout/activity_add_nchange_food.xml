@@ -9,7 +9,6 @@
     tools:context=".AddNChangeFoodActivity">
 
 
-
     <ScrollView
         android:layout_width="409dp"
         android:layout_height="0dp"
@@ -113,11 +112,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:backgroundTint="#F29D38"
+                    android:background="@drawable/border"
                     android:entries="@array/food_type_array"
                     android:minHeight="48dp"
-                    android:outlineAmbientShadowColor="#F29D38"
-                    android:outlineSpotShadowColor="#F29D38"
+                    android:outlineAmbientShadowColor="#000000"
+                    android:outlineSpotShadowColor="#000000"
+                    android:popupBackground="@drawable/border"
                     android:textColor="#F29D38" />
             </TableRow>
 
@@ -277,7 +277,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:buttonTint="#F29D38"
-                        android:text= "@string/vegetarian"
+                        android:text="@string/vegetarian"
                         android:textColor="#F29D38" />
 
                     <TextView
@@ -690,7 +690,7 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <Button
                     android:id="@+id/btn_AddDishToFirebase"
@@ -700,16 +700,14 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/add" />
 
-                <ImageButton
-                    android:id="@+id/imBtn_deleteAdNChange"
-                    android:layout_width="57dp"
+                <Button
+                    android:id="@+id/btn_Cancel_addFood"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="200dp"
+                    android:layout_marginLeft="164dp"
                     android:layout_marginTop="8dp"
-                    android:background="?android:attr/fastScrollTrackDrawable"
-                    android:minHeight="48dp"
-                    app:srcCompat="@drawable/ic_baseline_delete_24"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:text="Cancel" />
+
             </TableRow>
 
         </LinearLayout>

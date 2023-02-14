@@ -18,6 +18,9 @@ data class Restaurant (
     val deliveryTypeHome: Boolean = false,
     val deliveryTypeAtRestaurant: Boolean = true,
     val tableBooking: Boolean = false,
+    val description:String = "",
+    val rating:Double?= null,
+    val imagePath:String ="",
     @DocumentId var documentId : String? = null,
     val openingHours: HashMap<String, Calendar> = hashMapOf<String, Calendar>(),
     val description: String = ""

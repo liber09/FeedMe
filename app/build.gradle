@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+
 }
 
 android {
@@ -29,9 +29,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
     buildFeatures {
         viewBinding true
     }
@@ -46,6 +43,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-common-ktx:20.2.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.2'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation"com.android.volley:volley:1.2.1"
+    implementation 'org.jetbrains.kotlin:kotlin-ksp:1.4.0-rc-dev-experimental-20200828'
+
 
 
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
@@ -54,9 +54,11 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.6.2'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
+    implementation 'com.google.code.gson:gson:2.10.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
-
 
 }
