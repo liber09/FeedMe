@@ -28,7 +28,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#000000"
+        android:backgroundTint="@color/black"
         app:icon="@drawable/menu"
         app:iconTint="#F29D38"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_Footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
@@ -56,7 +56,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/tv_Footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
         app:srcCompat="@drawable/ic_baseline_home_24" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/LogoText"
         android:layout_width="140dp"
         android:layout_height="51dp"
         android:layout_marginStart="8dp"
