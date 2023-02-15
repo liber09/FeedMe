@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -102,6 +103,13 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         db.collection("restaurantTibTest").document(name)
             .set(rest)
+
+        //On successful save redirect to restaurant details
+        val intent= Intent(this,RestaurantDetailsActivity::class.java)
+        //Send extra information over to the detailsView with restaurant number
+        val resNumber = DataManagerRestaurants.restaurants.count()
+        intent.putExtra("RESTAURANT_KEY",resNumber)
+        startActivity(intent)
     }
 
     fun loadRestaurant(restaurant: Restaurant) {
