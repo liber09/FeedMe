@@ -3,6 +3,7 @@ package com.example.feedme
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,7 +12,8 @@ import com.example.feedme.data.Restaurant
 
 class RestaurantViewRVAdapter(
     val context: Context,
-    val restaurants: List<Restaurant>
+    val restaurants: List<Restaurant>,
+    val listener : OnClickListener
 ) :
 
     RecyclerView.Adapter<RestaurantViewRVAdapter.ViewHolder>() {
@@ -95,8 +97,19 @@ class RestaurantViewRVAdapter(
         val fourstars = itemView.findViewById<ImageView>(R.id.iv_star4)
         val fivestars = itemView.findViewById<ImageView>(R.id.iv_star5)
 
+        init {
+            itemView.setOnClickListener {
+                val postion = adapterPosition
+                listener.OnClick(postion)
 
+            }
+
+
+        }
     }
+        interface OnClickListener {
+            fun OnClick(position: Int)
 
 
+        }
 }

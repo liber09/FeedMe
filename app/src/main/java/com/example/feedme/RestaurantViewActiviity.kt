@@ -1,11 +1,12 @@
 package com.example.feedme
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class RestaurantViewActiviity : AppCompatActivity() {
+class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnClickListener {
 
     lateinit var restaurantRecyclerView: RecyclerView
 
@@ -15,7 +16,7 @@ class RestaurantViewActiviity : AppCompatActivity() {
 
         restaurantRecyclerView = findViewById(R.id.rv_Restaurant)
         restaurantRecyclerView.layoutManager = LinearLayoutManager(this)
-        restaurantRecyclerView.adapter = RestaurantViewRVAdapter(this,DataManagerRestaurants.restaurants)
+        restaurantRecyclerView.adapter = RestaurantViewRVAdapter(this,DataManagerRestaurants.restaurants, this)
 
 
 
@@ -32,6 +33,15 @@ class RestaurantViewActiviity : AppCompatActivity() {
         restaurantRecyclerView.adapter?.notifyDataSetChanged()
 
 
+
+
+    }
+
+        override fun OnClick(position: Int) {
+        val intent = Intent(this, RestaurantDetailsActivity::class.java)
+
+        intent.putExtra("id", DataManagerRestaurants.restaurants[position].documentId.toString())
+        startActivity(intent)
 
 
     }
