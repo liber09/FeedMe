@@ -63,7 +63,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         val rest = Restaurant(
             name,
-            "",
+            findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
             findViewById<EditText>(R.id.textInputAddress).text.toString(),
             findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
             findViewById<EditText>(R.id.textInputCity).text.toString(),
