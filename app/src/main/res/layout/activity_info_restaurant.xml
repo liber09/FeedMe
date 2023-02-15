@@ -483,7 +483,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputMondayEnd"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="monday_start"
                 android:focusable="false"/>
 
@@ -500,7 +500,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputMondayStart"
                 app:layout_constraintEnd_toStartOf="@+id/textInputTuesdayStart"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="monday_end"
                 android:focusable="false"/>
 
@@ -517,7 +517,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputMondayEnd"
                 app:layout_constraintEnd_toStartOf="@+id/textInputTuesdayEnd"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="tuesday_start"
                 android:focusable="false"/>
 
@@ -534,7 +534,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textInputTuesdayStart"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="tuesday_end"
                 android:focusable="false"/>
 
@@ -581,7 +581,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputWednesdayEnd"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="wednesday_start"
                 android:focusable="false"/>
 
@@ -598,7 +598,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputWednesdayStart"
                 app:layout_constraintEnd_toStartOf="@+id/textInputThursdayStart"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="wednesday_end"
                 android:focusable="false"/>
 
@@ -615,7 +615,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputWednesdayEnd"
                 app:layout_constraintEnd_toStartOf="@+id/textInputThursdayEnd"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="thursday_start"
                 android:focusable="false"/>
 
@@ -632,7 +632,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textInputThursdayStart"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="thursday_end"
                 android:focusable="false"/>
 
@@ -679,7 +679,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputFridayEnd"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="friday_start"
                 android:focusable="false"/>
 
@@ -696,7 +696,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputFridayStart"
                 app:layout_constraintEnd_toStartOf="@+id/textInputSaturdayStart"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="friday_end"
                 android:focusable="false"/>
 
@@ -713,7 +713,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputFridayEnd"
                 app:layout_constraintEnd_toStartOf="@+id/textInputSaturdayEnd"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="saturday_start"
                 android:focusable="false"/>
 
@@ -730,7 +730,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textInputSaturdayStart"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="saturday_end"
                 android:focusable="false"/>
 
@@ -762,7 +762,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputSundayEnd"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSunday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="sunday_start"
                 android:focusable="false"/>
 
@@ -779,7 +779,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputSundayStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSunday"
-                android:onClick="setTime"
+                android:onClick="setOpeningHours"
                 android:tag="sunday_end"
                 android:focusable="false"/>
 
