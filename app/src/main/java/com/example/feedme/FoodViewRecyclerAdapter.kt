@@ -112,12 +112,12 @@ class FoodViewRecyclerAdapter(val context: Context,
 
 
     inner class  ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var nameDishTextView = itemView.findViewById<TextView>(R.id.drinksNameTextView)
+        var nameDishTextView = itemView.findViewById<TextView>(R.id.tv_RV_DishName)
         var descriptionDishTextView = itemView.findViewById<TextView>(R.id.tv_RV_dishDescription)
         var normalPriceTextView = itemView.findViewById<TextView>(R.id.tv_RV_NormalPrice)
-        var smalPriceTextView = itemView.findViewById<TextView>(R.id.smallTextView)
+        var smalPriceTextView = itemView.findViewById<TextView>(R.id.tv_RV_SmalpPrice)
         var largePriceTextView = itemView.findViewById<TextView>(R.id.tv_RV_LargePrice)
-        var addButtonSmallPrice = itemView.findViewById<Button>(R.id.smallAddButton)
+        var addButtonSmallPrice = itemView.findViewById<Button>(R.id.btn_AddSmallPrice)
         var addButtonLargePrice = itemView.findViewById<Button>(R.id.btn_AddLarge)
         var addButtonNormalPrice = itemView.findViewById<Button>(R.id.btn_AddNormalPrice)
         var checkBoxGluten = itemView.findViewById<CheckBox>(R.id.cB_glutenFree)
@@ -128,7 +128,7 @@ class FoodViewRecyclerAdapter(val context: Context,
         var tv_priceLaktose = itemView.findViewById<TextView>(R.id.tv_priceLaktosFree)
         var tv_priceVegan = itemView.findViewById<TextView>(R.id.tv_priceVegan)
         var tv_priceVegetarian = itemView.findViewById<TextView>(R.id.tv_RV_priceVegeterian)
-        var iv_foodImage = itemView.findViewById<ImageView>(R.id.iV_drinkDisplay_RV)
+        var iv_foodImage = itemView.findViewById<ImageView>(R.id.iV_foodDisplay_RV)
         var foodDisplayPosition = 0
         var delete_btn = itemView.findViewById<ImageButton>(R.id.btn_delete_RV_food)
 
