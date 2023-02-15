@@ -40,6 +40,7 @@
         android:layout_height="49dp"
         android:layout_marginBottom="24dp"
         android:background="#000000"
+        android:contentDescription="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
@@ -47,7 +48,7 @@
         app:srcCompat="@drawable/ic_baseline_home_24" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/LogoText"
         android:layout_width="140dp"
         android:layout_height="51dp"
         android:layout_marginStart="8dp"
@@ -57,7 +58,7 @@
         app:srcCompat="@drawable/text1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_Footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
@@ -75,7 +76,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/tv_Footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileButton">
@@ -91,7 +92,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="TextView"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TableRow
                 android:layout_width="match_parent"
@@ -104,11 +107,12 @@
                     app:srcCompat="@drawable/logo" />
 
                 <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_Rest_Descript_RestDetails"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
             </TableRow>
 
@@ -119,10 +123,94 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Till menyn"
+                    app:cornerRadius="10dp" />
+
+                <Button
+                    android:id="@+id/btn_table_bocking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="46dp"
+                    android:text="Boka bord"
+                    app:cornerRadius="10dp" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Åtit här förut? Lämna gärna ett kommentar"
+                android:textColor="#FFFFFF" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:srcCompat="@drawable/ic_baseline_star_24" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_star_24" />
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_star_24" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_star_24" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_star_24" />
+            </TableRow>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="32dp"
+                android:textAlignment="textStart"
+                android:textColorHint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded_edge_wo_border"
+                    android:gravity="start|top"
+                    android:hint="Skriv ditt kommentar här"
+                    android:textAlignment="textStart"
+                    android:textColor="#FFFFFF"
+                    android:textDirection="firstStrongLtr" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
     </ScrollView>

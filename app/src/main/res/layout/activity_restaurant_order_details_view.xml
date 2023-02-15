@@ -18,10 +18,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/RVOrderDetails" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/TVCustomerPostalAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -30,11 +30,11 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintStart_toEndOf="@+id/TVCustomerPostalCode"
+        app:layout_constraintTop_toBottomOf="@+id/TVCustomerAddress" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/TVCustomerPostalCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -44,7 +44,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/TVCustomerAddress" />
 
     <TextView
         android:id="@+id/textView25"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/TVCustomerPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -70,10 +70,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        app:layout_constraintTop_toBottomOf="@+id/TVCustomerPostalCode" />
 
     <TextView
-        android:id="@+id/TVOrderDetailsOrderTime3"
+        android:id="@+id/TVChosenDeliveryMethod2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -82,10 +82,10 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toBottomOf="@+id/TVOrderDetailsOrderTime2" />
+        app:layout_constraintTop_toBottomOf="@+id/TVChosenDeliveryMethod" />
 
     <TextView
-        android:id="@+id/TVOrderDetailsOrderTime2"
+        android:id="@+id/TVChosenDeliveryMethod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -94,10 +94,10 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/RVOrderDetails" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/TVCustomerAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -107,10 +107,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintTop_toBottomOf="@+id/TVCustomerName" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/TVCustomerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -173,7 +173,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TVORderDetailsCustomerNr" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/RVOrderDetails"
         android:layout_width="410dp"
         android:layout_height="338dp"
         android:layout_marginStart="2dp"
