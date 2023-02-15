@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -33,7 +33,7 @@ android {
         viewBinding true
     }
 }
-
+//konstig
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -44,10 +44,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.2'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation"com.android.volley:volley:1.2.1"
-    implementation 'org.jetbrains.kotlin:kotlin-ksp:1.4.0-rc-dev-experimental-20200828'
-
-
-
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
 
     implementation "com.google.android.material:material:1.8.0"
