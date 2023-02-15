@@ -13,7 +13,7 @@
     >
 
     <Button
-        android:id="@+id/btn_AddSmallPrice"
+        android:id="@+id/smallAddButton"
         android:layout_width="80dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
@@ -26,7 +26,7 @@
         app:cornerRadius="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/frameLayout"
-        app:layout_constraintTop_toBottomOf="@+id/tv_RV_SmalpPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/smallTextView" />
 
     <Button
         android:id="@+id/btn_AddNormalPrice"
@@ -82,7 +82,7 @@
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_AddSmallPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/smallAddButton" />
 
     <TextView
         android:id="@+id/tv_RV_priceVegeterian"
@@ -162,7 +162,7 @@
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <TextView
-        android:id="@+id/tv_RV_SmalpPrice"
+        android:id="@+id/smallTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -215,7 +215,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iV_foodDisplay_RV"
+            android:id="@+id/iV_drinkDisplay_RV"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginStart="8dp"
@@ -239,11 +239,11 @@
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iV_foodDisplay_RV"
-            app:layout_constraintTop_toBottomOf="@+id/tv_RV_DishName" />
+            app:layout_constraintStart_toEndOf="@+id/iV_drinkDisplay_RV"
+            app:layout_constraintTop_toBottomOf="@+id/drinksNameTextView" />
 
         <TextView
-            android:id="@+id/tv_RV_DishName"
+            android:id="@+id/drinksNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -252,7 +252,7 @@
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iV_foodDisplay_RV"
+            app:layout_constraintStart_toEndOf="@+id/iV_drinkDisplay_RV"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
