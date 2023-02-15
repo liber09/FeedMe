@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             getOrdersForRestaurant(restaurantId)
         }
 
-        rrv.setOnClickListener {     val intent= Intent(this,RestaurantViewActiviity::class.java)
+        rrv.setOnClickListener {     val intent= Intent(this,DrinksViewActivity::class.java)
             startActivity(intent) }
 
         rov.setOnClickListener{
