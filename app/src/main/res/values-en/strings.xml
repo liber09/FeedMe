@@ -71,4 +71,5 @@
     <string name="noDeliveries">No ongoing deliveries</string>
     <string name="noOrderHistory">You have not made any orders yet</string>
     <string name="content_description_media">MediaDescription</string>
+    <string name="OrgNr">OrgNr</string>
 </resources>
