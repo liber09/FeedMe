@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TVResOrderTime"
+        android:id="@+id/TVRestaurantOrder_OrderTime3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@+id/RVOrderedItems" />
 
     <TextView
-        android:id="@+id/TVOrderCustomerPhone"
+        android:id="@+id/TVOrderCustomerNumber2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <ImageView
-        android:id="@+id/IVOrderWarning"
+        android:id="@+id/iv_star1"
         android:layout_width="65dp"
         android:layout_height="71dp"
         android:layout_marginStart="10dp"
