@@ -90,7 +90,7 @@ class RestaurantViewRVAdapter(
         val restaurantDescription = itemView.findViewById<TextView>(R.id.tv_rvRest_Description)
         val restaurantImage = itemView.findViewById<ImageView>(R.id.iv_RV_restaurant)
         val onestar = itemView.findViewById<ImageView>(R.id.IVOrderWarning)
-        val twostars = itemView.findViewById<ImageView>(R.id.iv_star2)
+        val twostars = itemView.findViewById<ImageView>(R.id.IVOrderDatailWOrWarning)
         val threestars = itemView.findViewById<ImageView>(R.id.iv_star3)
         val fourstars = itemView.findViewById<ImageView>(R.id.iv_star4)
         val fivestars = itemView.findViewById<ImageView>(R.id.iv_star5)
