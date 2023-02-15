@@ -117,26 +117,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_RV_act" />
 
-    <TextView
-        android:id="@+id/TVOrdersResId"
-        android:layout_width="62dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toEndOf="@+id/btn_budView"
-        app:layout_constraintTop_toBottomOf="@+id/btnOrderView" />
-
     <Button
         android:id="@+id/btnGetOrders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:text="Button"
         app:layout_constraintStart_toEndOf="@+id/btn_budView"
-        app:layout_constraintTop_toBottomOf="@+id/TVOrdersResId"
+        app:layout_constraintTop_toBottomOf="@+id/resNrEdtTxt"
         tools:text="getOrders" />
+
+    <EditText
+        android:id="@+id/resNrEdtTxt"
+        android:layout_width="112dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toEndOf="@+id/btn_Shopping"
+        app:layout_constraintTop_toBottomOf="@+id/btnOrderView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

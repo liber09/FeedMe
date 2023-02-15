@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 
 import com.google.firebase.firestore.SetOptions
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val rov = findViewById<Button>(R.id.btnOrderView)
         val rrv = findViewById<Button>(R.id.btnRestview)
         val getOrders = findViewById<Button>(R.id.btnGetOrders)
-        val tvresId = findViewById<TextView>(R.id.TVOrdersResId)
+        val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
 
         getOrders.setOnClickListener{
             val restaurantId = tvresId.text.toString()
