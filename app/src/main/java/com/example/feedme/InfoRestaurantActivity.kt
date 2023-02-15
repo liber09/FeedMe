@@ -30,10 +30,6 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val monSta = findViewById<EditText>(R.id.textInputMondayStart)
         val editName = findViewById<EditText>(R.id.textInputName)
 
-        /*editName.onFocusChangeListener {
-
-        }*/
-
         monSta.setOnClickListener {
             Log.v("!!!","clicked")
 
@@ -53,16 +49,16 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         }
 
+        //SaveButton clickListner
         btnSave.setOnClickListener {
             saveInfo()
         }
     }
-
-    fun saveInfo() {
-        val name = findViewById<EditText>(R.id.textInputName).text.toString()
+    //Saves restaurant info to database
+    private fun saveInfo() {
 
         val rest = Restaurant(
-            name,
+            findViewById<EditText>(R.id.textInputName).text.toString(),
             findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
             findViewById<EditText>(R.id.textInputAddress).text.toString(),
             findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
@@ -77,10 +73,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
         )
 
-        db.collection("restaurantTibTest").document(name)
+        db.collection("restaurants").document()
             .set(rest)
     }
 
+    //Checks all the type checkboxes and adds the values from the ones checked to a string and returns it
     fun getType() : String {
         var toReturn = ""
         val mView = findViewById<ConstraintLayout>(R.id.mainView)
