@@ -6,7 +6,6 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //Create mock data
         mockCustomerData()
-        mockRestaurantData()
+        //mockRestaurantData()
         //mockDataDrinks()
        //createMockDataOrders()
 
