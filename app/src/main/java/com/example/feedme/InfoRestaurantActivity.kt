@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -75,6 +76,12 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         db.collection("restaurants").document()
             .set(rest)
+        //On successful save redirect to restaurant details
+        val intent= Intent(this,RestaurantDetailsActivity::class.java)
+        //Send extra information over to the detailsView with restaurant number
+        val resNumber = DataManagerRestaurants.restaurants.count()
+        intent.putExtra("RESTAURANT_KEY",resNumber)
+        startActivity(intent)
     }
 
     //Checks all the type checkboxes and adds the values from the ones checked to a string and returns it
