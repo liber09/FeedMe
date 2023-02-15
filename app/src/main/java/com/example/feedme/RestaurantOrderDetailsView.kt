@@ -14,7 +14,12 @@ class RestaurantOrderDetailsView : AppCompatActivity() {
 
         recyclerViewOrderDetails = findViewById<RecyclerView>(R.id.RVOrderDetails)
         recyclerViewOrderDetails.layoutManager= LinearLayoutManager(this)
-        val adapter = ShoppingCartReyclerAdapter(this,DataManagerShoppingCart.shoppingCartItems)
-        recyclerViewShoppingCart.adapter = adapter
+        val adapter = RestaurantOrderDetailsRVAdapter(this,DataManagerOrders.OrderRows)
+        recyclerViewOrderDetails.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        recyclerViewOrderDetails.adapter?.notifyDataSetChanged()
     }
 }

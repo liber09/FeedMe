@@ -28,15 +28,12 @@ class RestaurantOrderDetailsRVAdapter(
         return ViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
 
     override fun getItemCount(): Int {
         return OrderRows.count()
     }
 
-    override fun onBindViewHolder(holder: RestaurantOrdersRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RestaurantOrderDetailsRVAdapter.ViewHolder, position: Int) {
         val orderRow = OrderRows[position]
     }
 
