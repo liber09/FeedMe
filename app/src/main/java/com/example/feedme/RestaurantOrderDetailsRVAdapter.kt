@@ -40,7 +40,7 @@ class RestaurantOrderDetailsRVAdapter(
     //Bind components
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val TVORderDetailsDishName = itemView.findViewById<TextView>(R.id.TVORderDetailsDishName)
-        //val IVOrderDatailWOrWarning = itemView.findViewById<ImageView>(R.id.IVrderDatailWOrWarning)
+        val IVOrderDatailWOrWarning = itemView.findViewById<ImageView>(R.id.IVOrderDatailWOrWarning)
         val imgOrderViewRowDone = itemView.findViewById<ImageView>(R.id.imgOrderViewRowDone)
         val imgOrderViewDeleteRow = itemView.findViewById<ImageView>(R.id.imgOrderViewDeleteRow)
     }}
