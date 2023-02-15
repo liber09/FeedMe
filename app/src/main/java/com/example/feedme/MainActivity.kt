@@ -2,12 +2,14 @@ package com.example.feedme
 
 
 import Drink
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
@@ -44,6 +46,13 @@ class MainActivity : AppCompatActivity() {
         val ci = findViewById<Button>(R.id.btn_customerInfo)
         val rov = findViewById<Button>(R.id.btnOrderView)
         val rrv = findViewById<Button>(R.id.btnRestview)
+        val getOrders = findViewById<Button>(R.id.btnGetOrders)
+        val tvresId = findViewById<TextView>(R.id.TVOrdersResId)
+
+        getOrders.setOnClickListener{
+            val restaurantId = tvresId.text.toString()
+            getOrdersForRestaurant(restaurantId)
+        }
 
         rrv.setOnClickListener {     val intent= Intent(this,RestaurantViewActiviity::class.java)
             startActivity(intent) }
@@ -148,6 +157,25 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
+    }
+    //Get orders for restaurant with id restaurantId
+    //Clear ordersList and add the ones returned from the query.
+    fun getOrdersForRestaurant(restaurantId: String){
+        DataManagerOrders.orders.clear()
+        db.collection("orders")
+            .whereEqualTo("restaurantId", restaurantId)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    DataManagerOrders.orders.add(document.toObject<Order>())
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
     }
 
    /*private fun mockDataDrinks() {
