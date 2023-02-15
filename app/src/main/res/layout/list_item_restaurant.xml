@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title" />
 
     <ImageView
-        android:id="@+id/iv_star2"
+        android:id="@+id/IVOrderDatailWOrWarning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_rvRest_Description"
-        app:layout_constraintStart_toEndOf="@+id/iv_star2"
+        app:layout_constraintStart_toEndOf="@+id/IVOrderDatailWOrWarning"
         app:layout_constraintTop_toBottomOf="@+id/tv_rvRest_title"
         app:layout_constraintVertical_bias="0.0" />
 

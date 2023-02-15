@@ -31,9 +31,7 @@ class RestaurantOrdersRVAdapter(
     }
 
     override fun onBindViewHolder(holder: RestaurantOrdersRVAdapter.ViewHolder, position: Int) {
-
         val order = orders[position]
-
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
