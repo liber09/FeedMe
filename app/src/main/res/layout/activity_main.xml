@@ -140,4 +140,14 @@
         app:layout_constraintStart_toEndOf="@+id/btn_Shopping"
         app:layout_constraintTop_toBottomOf="@+id/btnOrderView" />
 
+    <Button
+        android:id="@+id/btnREST"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="77dp"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/btn_Marlon"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetOrders" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
