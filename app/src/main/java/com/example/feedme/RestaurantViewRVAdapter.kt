@@ -1,11 +1,13 @@
 package com.example.feedme
 
 import android.content.Context
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Restaurant
 
@@ -89,7 +91,7 @@ class RestaurantViewRVAdapter(
         val restaurantTitle = itemView.findViewById<TextView>(R.id.tv_rvRest_title)
         val restaurantDescription = itemView.findViewById<TextView>(R.id.tv_rvRest_Description)
         val restaurantImage = itemView.findViewById<ImageView>(R.id.iv_RV_restaurant)
-        val onestar = itemView.findViewById<ImageView>(R.id.IVOrderWarning)
+        val onestar = itemView.findViewById<ImageView>(R.id.iv_star1)
         val twostars = itemView.findViewById<ImageView>(R.id.iv_star2)
         val threestars = itemView.findViewById<ImageView>(R.id.iv_star3)
         val fourstars = itemView.findViewById<ImageView>(R.id.iv_star4)
