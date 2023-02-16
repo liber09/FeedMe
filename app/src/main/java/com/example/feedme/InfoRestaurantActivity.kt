@@ -35,7 +35,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "0")
         }
 
-        //loadRestaurant(DataManagerRestaurants.restaurants.get(0))
+        loadRestaurant(DataManagerRestaurants.restaurants.get(0))
 
         btnAddImage.setOnClickListener {
 
@@ -46,7 +46,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         }
     }
 
-    //Need to be able to update values
+    //Saves restaurant info to database
     fun saveInfo() {
         val name = findViewById<EditText>(R.id.textInputName).text.toString()
 
@@ -73,14 +73,6 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         db.collection("restaurantTibTest").document(name)
             .set(rest, SetOptions.merge())
-
-        //From fixsaverestaurant
-        //On successful save redirect to restaurant details
-        val intent= Intent(this,RestaurantDetailsActivity::class.java)
-        //Send extra information over to the detailsView with restaurant number
-        val resNumber = DataManagerRestaurants.restaurants.count()
-        intent.putExtra("RESTAURANT_KEY",resNumber)
-        startActivity(intent)
     }
 
     fun loadRestaurant(restaurant: Restaurant) {
