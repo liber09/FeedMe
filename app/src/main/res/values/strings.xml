@@ -74,5 +74,6 @@
     <string name="noDeliveries">Inga pågående leveranser</string>
     <string name="noOrderHistory">Du har inte gjort någon beställning ännu</string>
     <string name="content_description_media">MediaDescription</string>
+    <string name="OrgNr">OrgNr</string>
 
 </resources>
