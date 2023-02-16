@@ -23,6 +23,7 @@ import kotlin.collections.HashMap
 class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
+    val registerNew = false
     private var openingHours = hashMapOf<String, Date>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +36,29 @@ class InfoRestaurantActivity : AppCompatActivity() {
             val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "1")
             loadRestaurant(rest ?: Restaurant())
         }
+        val monSta = findViewById<EditText>(R.id.textInputMondayStart)
+        val editName = findViewById<EditText>(R.id.textInputName)
 
-        //loadRestaurant(DataManagerRestaurants.restaurants.get(0))
+        monSta.setOnClickListener {
+            Log.v("!!!","clicked")
+
+            val cal = Calendar.getInstance()
+
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+
+                monSta.setText(SimpleDateFormat("HH:mm").format(cal.time))
+            }
+
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
 
         btnAddImage.setOnClickListener {
 
         }
 
+        //SaveButton clickListner
         btnSave.setOnClickListener {
             saveInfo()
         }
@@ -49,32 +66,46 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
     //Saves restaurant info to database
     fun saveInfo() {
-        val name = findViewById<EditText>(R.id.textInputName).text.toString()
-
+        var documentRef = ""
         val rest = Restaurant(
-            name,
-            "",
+            findViewById<EditText>(R.id.textInputName).text.toString(),
+            findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
             findViewById<EditText>(R.id.textInputAddress).text.toString(),
             findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
             findViewById<EditText>(R.id.textInputCity).text.toString(),
             findViewById<EditText>(R.id.textInputPhone).text.toString(),
             findViewById<EditText>(R.id.textInputEmail).text.toString(),
             getType(),
-            try { findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt() } catch (e: Exception) {0} ,
+            findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
             findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
             findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-            findViewById<EditText>(R.id.textInputDescription).text.toString(),
+            "",
             0.0,
             "",
-            DataManagerRestaurants.restaurants.count().toString(),
+            "",
             openingHours
         )
-        /*
-        db.collection("restaurantTibTest").document(name)
-            .set(rest, SetOptions.merge())*/
+
+        db.collection("restaurants")
+            .add(rest)
+            .addOnSuccessListener { documentReference ->
+                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
+                 documentRef = documentReference.id
+            }
+            .addOnFailureListener { e ->
+                Log.w("ADD RESTAURANT", "Error adding document", e)
+            }
+        DataManagerRestaurants.update()
+
+        //On successful save redirect to restaurant details
+        val intent= Intent(this,RestaurantDetailsActivity::class.java)
+        //Send extra information over to the detailsView with restaurant number
+        intent.putExtra("id",documentRef.toString())
+        startActivity(intent)
     }
+
 
     fun loadRestaurant(restaurant: Restaurant) {
         findViewById<EditText>(R.id.textInputName).setText(restaurant.name)
@@ -143,6 +174,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         }
     }
 
+    //Checks all the type checkboxes and adds the values from the ones checked to a string and returns it
     fun getType() : String {
         var toReturn = ""
         val mView = findViewById<ConstraintLayout>(R.id.mainView)
@@ -155,5 +187,4 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         return toReturn.substring(0, toReturn.length - 1)
     }
-
 }

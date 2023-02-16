@@ -18,7 +18,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant_details)
-
+        val intent:Intent = getIntent()
         val id = intent.getStringExtra("id")
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
