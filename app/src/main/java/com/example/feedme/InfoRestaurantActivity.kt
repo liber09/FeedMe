@@ -3,6 +3,7 @@ package com.example.feedme
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
 import com.example.feedme.data.Restaurant
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
@@ -29,43 +31,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
-        //val loadRestaurant = intent.getStringExtra("restaurantToLoad")
-
-        val restaurantRef = db.collection("restaurantTibTest")
-        restaurantRef.addSnapshotListener{ snapshot, e ->
-            if (snapshot != null) {
-                DataManagerRestaurants.restaurants.clear()
-
-                for (document in snapshot.documents)
-                {
-                    val item = Restaurant(
-                        document.get("name").toString(),
-                        document.get("orgNr").toString(),
-                        document.get("address").toString(),
-                        document.get("postalCode").toString(),
-                        document.get("city").toString(),
-                        document.get("phoneNumber").toString(),
-                        document.get("email").toString(),
-                        document.get("type").toString(),
-                        document.get("deliveryFee").toString().toInt(),
-                        document.get("deliveryTypePickup").toString().toBoolean(),
-                        document.get("deliveryTypeHome").toString().toBoolean(),
-                        document.get("deliveryTypeAtRestaurant").toString().toBoolean(),
-                        document.get("tableBooking").toString().toBoolean(),
-                        document.get("description").toString(),
-                        document.get("rating").toString().toDouble(),
-                        document.get("imagePath").toString(),
-                        document.get("documentId").toString(),
-                        document.get("openingHours") as HashMap<String, Date>
-                    )
-
-                    if (item != null) {
-                        //DataManagerRestaurants.restaurants.add(item)
-                        loadRestaurant(item)
-                    }
-                }
-            }
+        if(intent.hasExtra("RESTAURANT_KEY")) {
+            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "0")
         }
+
+        //loadRestaurant(DataManagerRestaurants.restaurants.get(0))
 
         btnAddImage.setOnClickListener {
 
@@ -97,13 +67,14 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.textInputDescription).text.toString(),
             0.0,
             "",
-            null,
+            DataManagerRestaurants.restaurants.count().toString(),
             openingHours
         )
 
         db.collection("restaurantTibTest").document(name)
-            .set(rest)
+            .set(rest, SetOptions.merge())
 
+        //From fixsaverestaurant
         //On successful save redirect to restaurant details
         val intent= Intent(this,RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
@@ -119,22 +90,20 @@ class InfoRestaurantActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.textInputCity).setText(restaurant.city)
         findViewById<EditText>(R.id.textInputPhone).setText(restaurant.phoneNumber)
         findViewById<EditText>(R.id.textInputEmail).setText(restaurant.eMail)
-        setType(restaurant.type ?: "")
-        findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant.deliveryFee.toString() ?: "0")
-        findViewById<CheckBox>(R.id.cb_takeaway).isChecked = restaurant.deliveryTypePickup ?: false
-        findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant.deliveryTypeHome ?: false
-        findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant.deliveryTypeAtRestaurant ?: false
-        findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant.tableBooking ?: false
-        openingHours = restaurant.openingHours
+        setType(restaurant.type)
+        findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant.deliveryFee.toString())
+        findViewById<CheckBox>(R.id.cb_takeaway).isChecked = restaurant.deliveryTypePickup
+        findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant.deliveryTypeHome
+        findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant.deliveryTypeAtRestaurant
+        findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant.tableBooking
         loadOpeningHours(restaurant.openingHours)
-        findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description ?: "")
+        findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
     }
 
     fun setOpeningHours(view: View) {
 
         if(view is EditText) {
             val cal = Calendar.getInstance()
-            //cal.time = Date()
 
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
@@ -157,6 +126,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
     fun loadOpeningHours(oHours: HashMap<String, Date>) {
         val mView = findViewById<ConstraintLayout>(R.id.mainView)
         var cal = Calendar.getInstance()
+        openingHours = oHours
 
         mView.forEach { et ->
             if(et is EditText && oHours.containsKey(et.tag?.toString())) {
@@ -169,7 +139,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
     //not optimized version
     fun setType(types: String) {
-        var listOfTypes = types.split(" ")
+        var listOfTypes = types.split(",")
 
         val mView = findViewById<ConstraintLayout>(R.id.mainView)
 
@@ -186,11 +156,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         mView.forEach { cb ->
             if(cb is CheckBox && cb.tag?.toString() == "type" && cb.isChecked) {
-                toReturn += " " + cb.text.toString()
+                toReturn += cb.text.toString() + ","
             }
         }
 
-        return toReturn.trim()
+        return toReturn.substring(0, toReturn.length - 1)
     }
 
 }
