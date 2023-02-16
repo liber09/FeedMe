@@ -24,6 +24,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
     val registerNew = false
+    private var openingHours = hashMapOf<String, Date>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,29 +66,25 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
     //Saves restaurant info to database
     fun saveInfo() {
-        val name = findViewById<EditText>(R.id.textInputName).text.toString()
-
-    //Saves restaurant info to database
-    private fun saveInfo() {
         var documentRef = ""
         val rest = Restaurant(
-            name,
-            "",
+            findViewById<EditText>(R.id.textInputName).text.toString(),
+            findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
             findViewById<EditText>(R.id.textInputAddress).text.toString(),
             findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
             findViewById<EditText>(R.id.textInputCity).text.toString(),
             findViewById<EditText>(R.id.textInputPhone).text.toString(),
             findViewById<EditText>(R.id.textInputEmail).text.toString(),
             getType(),
-            try { findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt() } catch (e: Exception) {0} ,
+            findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
             findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
             findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-            findViewById<EditText>(R.id.textInputDescription).text.toString(),
+            "",
             0.0,
             "",
-            DataManagerRestaurants.restaurants.count().toString(),
+            "",
             openingHours
         )
 
@@ -95,8 +92,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             .add(rest)
             .addOnSuccessListener { documentReference ->
                 Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
-                documentRef = documentReference.id
-
+                 documentRef = documentReference.id
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
@@ -108,10 +104,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
         //Send extra information over to the detailsView with restaurant number
         intent.putExtra("id",documentRef.toString())
         startActivity(intent)
-        /*
-        db.collection("restaurantTibTest").document(name)
-            .set(rest, SetOptions.merge())*/
     }
+
 
     fun loadRestaurant(restaurant: Restaurant) {
         findViewById<EditText>(R.id.textInputName).setText(restaurant.name)
@@ -193,5 +187,4 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         return toReturn.substring(0, toReturn.length - 1)
     }
-
 }
