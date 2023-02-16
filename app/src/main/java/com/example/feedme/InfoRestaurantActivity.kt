@@ -57,7 +57,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
     }
     //Saves restaurant info to database
     private fun saveInfo() {
-
+        var documentRef = ""
         val rest = Restaurant(
             findViewById<EditText>(R.id.textInputName).text.toString(),
             findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
@@ -74,13 +74,22 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
         )
 
-        db.collection("restaurants").document()
-            .set(rest)
+        db.collection("restaurants")
+            .add(rest)
+            .addOnSuccessListener { documentReference ->
+                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
+                documentRef = documentReference.id
+
+            }
+            .addOnFailureListener { e ->
+                Log.w("ADD RESTAURANT", "Error adding document", e)
+            }
+        DataManagerRestaurants.update()
+
         //On successful save redirect to restaurant details
         val intent= Intent(this,RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
-        val resNumber = DataManagerRestaurants.restaurants.count()
-        intent.putExtra("RESTAURANT_KEY",resNumber)
+        intent.putExtra("id",documentRef.toString())
         startActivity(intent)
     }
 
