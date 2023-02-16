@@ -495,7 +495,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputMondayEnd"
-                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
+                android:onClick="setOpeningHours"
+                android:tag="monday_start"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputMondayEnd"
@@ -509,7 +512,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toEndOf="@+id/textInputMondayStart"
                 app:layout_constraintEnd_toStartOf="@+id/textInputTuesdayStart"
-                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
+                android:onClick="setOpeningHours"
+                android:tag="monday_end"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputTuesdayStart"
@@ -523,7 +529,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toEndOf="@+id/textInputMondayEnd"
                 app:layout_constraintEnd_toStartOf="@+id/textInputTuesdayEnd"
-                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
+                android:onClick="setOpeningHours"
+                android:tag="tuesday_start"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputTuesdayEnd"
@@ -537,7 +546,10 @@
                 android:hint="00:00"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textInputTuesdayStart"
-                app:layout_constraintTop_toBottomOf="@+id/textViewMonday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMonday"
+                android:onClick="setOpeningHours"
+                android:tag="tuesday_end"
+                android:focusable="false"/>
 
             <TextView
                 android:id="@+id/textViewWednesday"
@@ -552,7 +564,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@id/textViewThursday"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputMondayStart" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputMondayStart"/>
 
             <TextView
                 android:id="@+id/textViewThursday"
@@ -581,7 +593,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputWednesdayEnd"
-                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
+                android:onClick="setOpeningHours"
+                android:tag="wednesday_start"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputWednesdayEnd"
@@ -595,7 +610,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toEndOf="@+id/textInputWednesdayStart"
                 app:layout_constraintEnd_toStartOf="@+id/textInputThursdayStart"
-                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
+                android:onClick="setOpeningHours"
+                android:tag="wednesday_end"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputThursdayStart"
@@ -609,7 +627,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toEndOf="@+id/textInputWednesdayEnd"
                 app:layout_constraintEnd_toStartOf="@+id/textInputThursdayEnd"
-                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
+                android:onClick="setOpeningHours"
+                android:tag="thursday_start"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputThursdayEnd"
@@ -623,7 +644,10 @@
                 android:hint="00:00"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textInputThursdayStart"
-                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewWednesday"
+                android:onClick="setOpeningHours"
+                android:tag="thursday_end"
+                android:focusable="false"/>
 
             <TextView
                 android:id="@+id/textViewFriday"
@@ -667,7 +691,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputFridayEnd"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
+                android:onClick="setOpeningHours"
+                android:tag="friday_start"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputFridayEnd"
@@ -681,7 +708,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toEndOf="@+id/textInputFridayStart"
                 app:layout_constraintEnd_toStartOf="@+id/textInputSaturdayStart"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
+                android:onClick="setOpeningHours"
+                android:tag="friday_end"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputSaturdayStart"
@@ -695,7 +725,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toEndOf="@+id/textInputFridayEnd"
                 app:layout_constraintEnd_toStartOf="@+id/textInputSaturdayEnd"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
+                android:onClick="setOpeningHours"
+                android:tag="saturday_start"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputSaturdayEnd"
@@ -709,7 +742,10 @@
                 android:hint="00:00"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textInputSaturdayStart"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriday"
+                android:onClick="setOpeningHours"
+                android:tag="saturday_end"
+                android:focusable="false"/>
 
             <TextView
                 android:id="@+id/textViewSunday"
@@ -738,7 +774,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputSundayEnd"
-                app:layout_constraintTop_toBottomOf="@+id/textViewSunday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewSunday"
+                android:onClick="setOpeningHours"
+                android:tag="sunday_start"
+                android:focusable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputSundayEnd"
@@ -752,7 +791,10 @@
                 android:hint="00:00"
                 app:layout_constraintStart_toEndOf="@+id/textInputSundayStart"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewSunday" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewSunday"
+                android:onClick="setOpeningHours"
+                android:tag="sunday_end"
+                android:focusable="false"/>
 
             <TextView
                 android:id="@+id/textViewDeliveryOptions"

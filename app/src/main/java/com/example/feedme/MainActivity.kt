@@ -6,7 +6,6 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -22,6 +21,8 @@ import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.HashMap
 
 val db = Firebase.firestore
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //Create mock data
         mockCustomerData()
-        mockRestaurantData()
+        //mockRestaurantData()
         //mockDataDrinks()
        //createMockDataOrders()
 
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent) }
 
         rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
+            intent.putExtra("RESTAURANT_KEY",1)
             startActivity(intent) }
 
 
@@ -153,13 +155,32 @@ class MainActivity : AppCompatActivity() {
         }*/
 
 
-        val restaurantRef = db.collection("restaurants")
+        val restaurantRef = db.collection("restaurantTibTest")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
                 DataManagerRestaurants.restaurants.clear()
 
                 for (document in snapshot.documents)
-                { val item = document.toObject<Restaurant>()
+                { val item = Restaurant(
+                    document.get("name").toString(),
+                    document.get("orgNr").toString(),
+                    document.get("address").toString(),
+                    document.get("postalCode").toString(),
+                    document.get("city").toString(),
+                    document.get("phoneNumber").toString(),
+                    document.get("email").toString(),
+                    document.get("type").toString(),
+                    document.get("deliveryFee").toString().toInt(),
+                    document.get("deliveryTypePickup").toString().toBoolean(),
+                    document.get("deliveryTypeHome").toString().toBoolean(),
+                    document.get("deliveryTypeAtRestaurant").toString().toBoolean(),
+                    document.get("tableBooking").toString().toBoolean(),
+                    document.get("description").toString(),
+                    document.get("rating").toString().toDouble(), //?: 0.0,
+                    document.get("imagePath").toString(),
+                    document.get("documentId").toString(),
+                    document.get("openingHours") as HashMap<String, Date> //?: hashMapOf<String, Date>()
+                )
                     if (item != null) {
                         DataManagerRestaurants.restaurants.add(item)
                     }
@@ -168,16 +189,8 @@ class MainActivity : AppCompatActivity() {
                 printRestaurants()
             }
         }
-
-
-
-
-
-
-
-
-
     }
+
     //Get orders for restaurant with id restaurantId
     //Clear ordersList and add the ones returned from the query.
     fun getOrdersForRestaurant(restaurantId: String){
