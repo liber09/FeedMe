@@ -61,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
+        android:layout_marginTop="5dp"
         android:text="TextView"
         android:textColor="#F29D38"
         android:textSize="20sp"
@@ -125,6 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:text="TextView"
         android:textColor="#F29D38"
         android:textSize="20sp"
@@ -136,18 +138,22 @@
         android:id="@+id/btnMyPagesEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/edit"
-        tools:layout_editor_absoluteX="291dp"
-        tools:layout_editor_absoluteY="221dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesCIty" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutOngoingDeliveries"
         android:layout_width="380dp"
         android:layout_height="56dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:background="  #2C2E5F"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVOngoingDeliveries">
 
@@ -167,51 +173,102 @@
             android:id="@+id/btnDropDownDeliveries"
             android:layout_width="36dp"
             android:layout_height="41dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="7dp"
             android:src="@android:drawable/arrow_down_float"
-            tools:layout_editor_absoluteX="338dp"
-            tools:layout_editor_absoluteY="8dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+    <FrameLayout
+        android:layout_width="138dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="18dp"
+        android:background="  #2C2E5F"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVOngoingDeliveries2">
 
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <!-- Media -->
-            <ImageView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="194dp"
-                app:srcCompat="@drawable/male_user"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/content_description_media"
-                />
+                android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="124dp"
+                    android:layout_height="95dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_home_24" />
 
-                <!-- Title, secondary and supporting text -->
                 <TextView
+                    android:id="@+id/textView26"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="RestaurantName"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:layout_marginTop="18dp"
+                    android:text="TextView"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
-        </LinearLayout>
+    <FrameLayout
+        android:layout_width="138dp"
+        android:layout_height="173dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="38dp"
+        android:background="  #2C2E5F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutOngoingDeliveries">
 
-    </com.google.android.material.card.MaterialCardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="124dp"
+                android:layout_height="95dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_home_24" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
