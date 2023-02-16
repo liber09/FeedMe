@@ -32,10 +32,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
         if(intent.hasExtra("RESTAURANT_KEY")) {
-            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "0")
+            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "1")
+            loadRestaurant(rest ?: Restaurant())
         }
 
-        loadRestaurant(DataManagerRestaurants.restaurants.get(0))
+        //loadRestaurant(DataManagerRestaurants.restaurants.get(0))
 
         btnAddImage.setOnClickListener {
 
@@ -70,9 +71,9 @@ class InfoRestaurantActivity : AppCompatActivity() {
             DataManagerRestaurants.restaurants.count().toString(),
             openingHours
         )
-
+        /*
         db.collection("restaurantTibTest").document(name)
-            .set(rest, SetOptions.merge())
+            .set(rest, SetOptions.merge())*/
     }
 
     fun loadRestaurant(restaurant: Restaurant) {
