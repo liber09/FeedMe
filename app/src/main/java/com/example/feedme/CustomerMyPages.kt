@@ -16,6 +16,7 @@ class CustomerMyPages : AppCompatActivity() {
         setContentView(R.layout.activity_customer_my_pages)
         val id = intent.getStringExtra("CUSTOMER_DOCUMENTID")
         val customer = getCustomerByDocumentId(id.toString())
+        updateViewsWithInfo(customer)
     }
 
     fun getCustomerByDocumentId(customerId: String):Customer?{
@@ -36,10 +37,21 @@ class CustomerMyPages : AppCompatActivity() {
         return customer
     }
 
-    fun updateViewsWithInfo(customer:Customer){
+    fun updateViewsWithInfo(customer:Customer?){
         val TVMyPagesFirstName = findViewById<TextView>(R.id.TVMyPagesFirstName)
         val TVMyPagesLastName = findViewById<TextView>(R.id.TVMyPagesLastName)
         val TVMyPagesAddress = findViewById<TextView>(R.id.TVMyPagesAddress)
+        val TVMyPagesPostalCode = findViewById<TextView>(R.id.TVMyPagesPostalCode)
+        val TVMyPagesCIty = findViewById<TextView>(R.id.TVMyPagesCIty)
+        val TVMyPagesMobile = findViewById<TextView>(R.id.TVMyPagesMobile)
+        val TVMyPagesEmail = findViewById<TextView>(R.id.TVMyPagesEmail)
 
+        TVMyPagesFirstName.text = customer?.firstName
+        TVMyPagesLastName.text = customer?.lastName
+        TVMyPagesAddress.text = customer?.address
+        TVMyPagesPostalCode.text = customer?.postalCode
+        TVMyPagesCIty.text = customer?.city
+        TVMyPagesMobile.text = customer?.phoneNumber
+        TVMyPagesEmail.text = customer?.eMail
     }
 }
