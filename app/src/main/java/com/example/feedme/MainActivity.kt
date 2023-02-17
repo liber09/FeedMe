@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         val menu = findViewById<Button>(R.id.menuBtn)
 
-        val btnDrinks = findViewById<Button>(R.id.btnDrinks)
+        val btnDrinks = findViewById<Button>(R.id.btn_drink)
 
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
