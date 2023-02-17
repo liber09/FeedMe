@@ -12,19 +12,18 @@
         android:id="@+id/feedMeLogoImageView"
         android:layout_width="140dp"
         android:layout_height="139dp"
-        android:layout_marginBottom="46dp"
-        app:layout_constraintBottom_toTopOf="@+id/logoImageView"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-12dp"
         android:background="@drawable/border"
         android:ems="10"
         android:hint="  email"
@@ -33,65 +32,90 @@
         android:textColor="#000000"
         android:textColorHint="#959595"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedMeLogoImageView"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView" />
 
     <EditText
         android:id="@+id/passwordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/border"
         android:ems="10"
         android:hint="  password"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#A5A5A5"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextView"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="201dp"
         android:layout_height="49dp"
-        android:text="Register"
+        android:layout_marginTop="8dp"
+        android:text="Registrera mig"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
-        app:layout_constraintVertical_bias="0.195"
-      />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="201dp"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:text="Login"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextView" />
 
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="241dp"
         android:layout_height="147dp"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordTextView"
+        android:layout_marginTop="-20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918"
+        app:layout_constraintTop_toBottomOf="@+id/feedMeLogoImageView"
         app:srcCompat="@drawable/text1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Inte kund än?"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/loginButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrera som bud"
+        android:textColor="@color/Orange"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="563dp" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrera som restaurang"
+        android:textColor="@color/Orange"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="609dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
