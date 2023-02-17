@@ -128,7 +128,7 @@ class FoodViewRecyclerAdapter(val context: Context,
         var tv_priceLaktose = itemView.findViewById<TextView>(R.id.tv_priceLaktosFree)
         var tv_priceVegan = itemView.findViewById<TextView>(R.id.tv_priceVegan)
         var tv_priceVegetarian = itemView.findViewById<TextView>(R.id.tv_RV_priceVegeterian)
-        var iv_foodImage = itemView.findViewById<ImageView>(R.id.iV_drinkDisplay_RV)
+        var iv_foodImage = itemView.findViewById<ImageView>(R.id.iV_foodDisplay_RV)
         var foodDisplayPosition = 0
         var delete_btn = itemView.findViewById<ImageButton>(R.id.btn_delete_RV_food)
 

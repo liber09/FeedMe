@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/menuIcon"
+        android:layout_width="348dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="559dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068"
+        app:srcCompat="@drawable/menulogo" />
+
+    <Button
+        android:id="@+id/bt_1"
+        android:layout_width="238dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="112dp"
+        android:text="Förrätter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuIcon" />
+
+    <Button
+        android:id="@+id/bt_2"
+        android:layout_width="238dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="112dp"
+        android:text="Varmrätter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuIcon" />
+
+    <Button
+        android:id="@+id/bt_3"
+        android:layout_width="238dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="112dp"
+        android:text="Dessert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuIcon" />
+
+    <Button
+        android:id="@+id/bt_4"
+        android:layout_width="238dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="252dp"
+        android:layout_marginEnd="112dp"
+        android:text="Dricka"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuIcon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

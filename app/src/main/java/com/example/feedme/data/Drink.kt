@@ -9,4 +9,5 @@ data class Drink (
     var drinkSize:String = "", // ex: 33cl, 50cl, 1 bottle etc..
     var drinkPrice:Double = 0.0,
     var drinkType:String = "", // ex: wine, soda, beer etc..
+    var count: Int = 0,
 )
