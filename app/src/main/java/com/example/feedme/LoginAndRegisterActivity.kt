@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -32,10 +33,31 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         passwordView = findViewById(R.id.passwordTextView)
         imageView = findViewById(R.id.logoImageView)
         imageViewLogo = findViewById(R.id.feedMeLogoImageView)
+        val regestreraRestaurant = findViewById<TextView>(R.id.tv_RegisterAsRestaurant)
+        val registerDeliver = findViewById<TextView>(R.id.tv_registerDElivery)
+
+        registerDeliver.setOnClickListener{
+
+            val register = Intent(this,SignInDeliveryPerson::class.java)
+            createUser()
+            startActivity(register)
+
+        }
+
+        regestreraRestaurant.setOnClickListener{
+            val register = Intent(this,InfoRestaurantActivity::class.java)
+            createUser()
+            startActivity(register)
+
+        }
+
+
+
+
 
         val registerButton = findViewById<Button>(R.id.registerButton)
         registerButton.setOnClickListener {
-            val register = Intent(this,RegisterActivity::class.java)
+            val register = Intent(this,RegisterCustomerInfo::class.java)
             createUser()
             startActivity(register)
 
@@ -43,12 +65,23 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
             loginUser()
+            //Ifsats för olika former av users
+
+            val customerLog = Intent(this,RestaurantViewActiviity::class.java)
+            startActivity(customerLog)
+
+
         }
     }
+
+
+
+
 
     fun createUser() {
         val email = emailView.text.toString()
         val password = passwordView.text.toString()
+
 
 
         if (email.isEmpty() || password.isEmpty()) {
