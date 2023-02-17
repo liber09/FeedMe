@@ -461,70 +461,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="408dp"
-        android:layout_height="71dp"
-        android:background="  #2C2E5F"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="1036dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="408dp"
-            android:layout_height="71dp"
-            android:background="  #2C2E5F"
-            tools:layout_editor_absoluteX="9dp"
-            tools:layout_editor_absoluteY="1036dp">
-
-            <ImageView
-                android:id="@+id/btnDropDownDeliveries3"
-                android:layout_width="36dp"
-                android:layout_height="41dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="7dp"
-                android:src="@android:drawable/arrow_down_float"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="2022 - 11 - 30 Dominos, Majorna, Göteborg"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/btnDropDownDeliveries3"
-            android:layout_width="36dp"
-            android:layout_height="41dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="7dp"
-            android:src="@android:drawable/arrow_down_float"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView34"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="2022 - 11 - 30 Dominos, Majorna, Göteborg"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView19"
