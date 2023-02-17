@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         val rv = findViewById<Button>(R.id.btn_RV_act)
         val sc = findViewById<Button>(R.id.btn_Shopping)
         val rr = findViewById<Button>(R.id.btn_RegREst)
-        val ru = findViewById<Button>(R.id.btn_Marlon)
+
         val ra = findViewById<Button>(R.id.buttonRegister)
         val bv = findViewById<Button>(R.id.btn_budView)
         val mv = findViewById<Button>(R.id.btn_toMapsDel)
@@ -52,16 +52,16 @@ class MainActivity : AppCompatActivity() {
 
         val menu = findViewById<Button>(R.id.menuBtn)
 
-        val btnDrinks = findViewById<Button>(R.id.btn_drink)
+        //val btnDrinks = findViewById<Button>(R.id.btnDrinks)
 
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
         val restv = findViewById<TextView>(R.id.btnREST)
 
-        btnDrinks.setOnClickListener{
+        /*btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         restv.setOnClickListener{
             val intent= Intent(this,RestaurantViewActiviity::class.java)
@@ -98,8 +98,7 @@ class MainActivity : AppCompatActivity() {
             val intent= Intent(this,ShoppingCart::class.java)
             startActivity(intent)
         }
-        ru.setOnClickListener {    val intent= Intent(this,RegisterActivity::class.java)
-            startActivity(intent) }
+
 
         rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
             intent.putExtra("RESTAURANT_KEY",1)
