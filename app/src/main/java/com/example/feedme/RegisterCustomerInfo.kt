@@ -1,11 +1,13 @@
 package com.example.feedme
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.feedme.data.Customer
+
 
 class RegisterCustomerInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,9 +50,14 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 allergies
             )
             //Add user to users collection
-            db.collection("customers").add(customer) //Add restaurant to database
+            val newItemRef = db.collection("customers").document()
+            customer.documentId = newItemRef.toString()
+            db.collection("customers").document(newItemRef.toString()).set(customer) //Add customer to database
             //Tell user save was successful
             Toast.makeText(this, getString(R.string.saveSuccess), Toast.LENGTH_SHORT).show()
+            val intent= Intent(this,CustomerMyPages::class.java)
+            intent.putExtra("CUSTOMER_DOCUMENTID",newItemRef.toString())
+            startActivity(intent)
         }else {
             //Input was not correct, give user a ,message to correct and try again
             Toast.makeText(this, getString(R.string.wrongInput), Toast.LENGTH_SHORT).show()
