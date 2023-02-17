@@ -31,7 +31,7 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
         deliveryRestaurantRecyclerView.layoutManager = LinearLayoutManager(this)
         deliveryRestaurantRecyclerView.adapter =
             CollectOrderRecyclerAdapter(this,
-                DataManagerDishes.dishes
+                DataManagerRestaurants.restaurants
             )
 
         locationProvider = LocationServices.getFusedLocationProviderClient(this)
