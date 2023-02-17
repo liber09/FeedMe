@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Dishes
+import com.example.feedme.data.Restaurant
 
 //Todo byta dishes till restaurants när all data är ner
 
 class CollectOrderRecyclerAdapter(val context: Context,
-                                  val dishes: List<Dishes>) :
+                                  val restaurants: List<Restaurant>) :
 RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
 
     val layoutInflater = LayoutInflater.from(context)
@@ -25,17 +26,17 @@ RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val dish = dishes[position]
+        val restaurant = restaurants[position]
 
-        holder.tv_restaurantName.text = dish.title
-        holder.tv_restaurantAdress.text = dish.category
+        holder.tv_restaurantName.text = restaurant.name
+        holder.tv_restaurantAdress.text = restaurant.address + " "+restaurant.postalCode +" "+restaurant.city
         val customerAdapter = CustomerAdressDeliveryReceiyclerAdapter(context, DataManagerDishes.dishes)
         holder.rv_forCustomerAdress.layoutManager = LinearLayoutManager(context)
         holder.rv_forCustomerAdress.adapter = customerAdapter
 
     }
 
-    override fun getItemCount() = dishes.size
+    override fun getItemCount() = restaurants.size
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
