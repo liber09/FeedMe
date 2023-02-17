@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-      /*  val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
+        val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
 
@@ -144,12 +144,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                printDishes()
+                //printDishes()
             }
-        }*/
+        }/*
 
 
-        val restaurantRef = db.collection("restaurantTibTest")
+        val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
                 DataManagerRestaurants.restaurants.clear()
@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity() {
 
                 printRestaurants()
             }
-        }
+        }*/
     }
 
     //Get orders for restaurant with id restaurantId
