@@ -40,6 +40,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
             val register = Intent(this,SignInDeliveryPerson::class.java)
             createUser()
+            intent.putExtra("Email", "$emailView")
             startActivity(register)
 
         }

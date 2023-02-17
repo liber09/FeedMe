@@ -66,17 +66,18 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_saveDelivery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="124dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="Spara"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TInp_lay_telephone" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TInp_lay_firstName"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -93,7 +94,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/TInp_lay_lastName"
         android:layout_width="208dp"
         android:layout_height="68dp"
         android:layout_marginTop="32dp"
@@ -110,13 +111,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/TInp_lay_employe"
         android:layout_width="305dp"
         android:layout_height="66dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/TInp_lay_lastName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TInp_et_employe"
@@ -127,13 +128,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/TInp_lay_zipCode"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/TInp_lay_employe">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TInp_et_zipkode"
@@ -144,13 +145,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TInp_lay_City"
         android:layout_width="221dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/border"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+        app:layout_constraintStart_toEndOf="@+id/TInp_lay_zipCode"
+        app:layout_constraintTop_toBottomOf="@+id/TInp_lay_employe">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TInp_et_city"
@@ -161,14 +163,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/TInp_lay_Email"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/border"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/TInp_lay_zipCode">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TInp_et_email"
@@ -179,14 +181,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TInp_lay_telephone"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/TInp_lay_Email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TInp_et_telephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"

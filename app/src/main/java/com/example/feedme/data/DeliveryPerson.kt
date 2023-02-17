@@ -7,5 +7,6 @@ data class DeliveryPerson(
     val city: String = "",
     val postalCode: String = "",
     val phoneNumber: String = "",
+    val email: String="",
 
 )
