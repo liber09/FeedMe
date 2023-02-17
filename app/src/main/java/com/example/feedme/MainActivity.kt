@@ -49,7 +49,11 @@ class MainActivity : AppCompatActivity() {
         val rov = findViewById<Button>(R.id.btnOrderView)
         val rrv = findViewById<Button>(R.id.btnRestview)
         val getOrders = findViewById<Button>(R.id.btnGetOrders)
+
+        val menu = findViewById<Button>(R.id.menuBtn)
+
         val btnDrinks = findViewById<Button>(R.id.btnDrinks)
+
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
         val restv = findViewById<TextView>(R.id.btnREST)
@@ -65,6 +69,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        menu.setOnClickListener{
+            val intent= Intent(this,MenuActivity::class.java)
+            startActivity(intent)
+
+        }
 
 
 
@@ -135,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-      /*  val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
+        val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
 
@@ -150,12 +159,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                printDishes()
+                //printDishes()
             }
-        }*/
+        }/*
 
 
-        val restaurantRef = db.collection("restaurantTibTest")
+        val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
                 DataManagerRestaurants.restaurants.clear()
@@ -188,7 +197,7 @@ class MainActivity : AppCompatActivity() {
 
                 printRestaurants()
             }
-        }
+        }*/
     }
 
     //Get orders for restaurant with id restaurantId
