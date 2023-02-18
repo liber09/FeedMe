@@ -24,7 +24,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
     val registerNew = false
-    private var openingHours = hashMapOf<String, Date>()
+    //private var openingHours = hashMapOf<String, Date>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +85,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             0.0,
             "",
             "",
-            openingHours
+            //openingHours
         )
 
         db.collection("restaurants")
@@ -120,10 +120,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
         findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant.deliveryTypeHome
         findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant.deliveryTypeAtRestaurant
         findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant.tableBooking
-        loadOpeningHours(restaurant.openingHours)
+        //
+        // /*loadOpeningHours(restaurant.openingHours)
         findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
     }
-
+    /*
     fun setOpeningHours(view: View) {
 
         if(view is EditText) {
@@ -160,7 +161,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             }
         }
     }
-
+    */
     //not optimized version
     fun setType(types: String) {
         var listOfTypes = types.split(",")
