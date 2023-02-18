@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class RestaurantDetailsActivity : AppCompatActivity() {
 
@@ -22,14 +26,27 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
+
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
         val menueButton = findViewById<Button>(R.id.btn_menu)
 
         for (restaurant in DataManagerRestaurants.restaurants){
-
+            val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
             if(id == restaurant.documentId){
                 restaurantTitel.text = restaurant.name
                 restaurantdescripton.text = restaurant.description
+
+                //Get the image from firebase
+                if(restaurant.imagePath.isNotEmpty()) {
+                    val imageref = Firebase.storage.reference.child(restaurant.imagePath)
+                    imageref.downloadUrl.addOnSuccessListener { Uri ->
+                        val imageURL = Uri.toString() // get the URL for the image
+                        //Use third party product glide to load the image into the imageview
+                        Glide.with(this)
+                            .load(imageURL)
+                            .into(restaurantImage)
+                    }
+                }
 
 
                 val docRef =db.collection("restaurants").document(id!!).collection("dishes")

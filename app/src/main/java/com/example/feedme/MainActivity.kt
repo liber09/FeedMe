@@ -21,8 +21,6 @@ import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.collections.HashMap
 
 val db = Firebase.firestore
 
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
-        val restv = findViewById<TextView>(R.id.btnREST)
+        val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
         /*btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)

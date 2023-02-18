@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Restaurant
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class RestaurantViewRVAdapter(
     val context: Context,
@@ -63,6 +66,16 @@ class RestaurantViewRVAdapter(
 
 
         }
+        if(restaurant.imagePath.isNotEmpty()){
+            val imageref = Firebase.storage.reference.child(restaurant.imagePath)
+            imageref.downloadUrl.addOnSuccessListener {Uri->
+                val imageURL = Uri.toString()
+                Glide.with(context)
+                    .load(imageURL)
+                    .into(holder.restaurantImage)
+            }
+        }
+
         if ((restaurant.rating != null) && (restaurant.rating >= 3) && (restaurant.rating <= 4)) {
             holder.threestars.setImageResource(R.drawable.ic_baseline_stars_24)
             holder.twostars.setImageResource(R.drawable.ic_baseline_stars_24)
