@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/text1" />
 
     <ImageButton
-        android:id="@+id/ibtn_home_RestDetails"
+        android:id="@+id/ibtn_home_drinksView"
         android:layout_width="55dp"
         android:layout_height="49dp"
         android:layout_marginBottom="24dp"
@@ -56,6 +56,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="11dp"
+        android:background="#F29D38"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
+
     <TextView
         android:id="@+id/tv_MainCourse"
         android:layout_width="wrap_content"
@@ -66,7 +76,7 @@
         android:textColor="#F29D38"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/tv_Deserts"
@@ -80,7 +90,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/RV_Food"
         app:layout_constraintStart_toEndOf="@+id/tv_MainCourse"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/tv_Drinks"
@@ -94,7 +104,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/RV_Food"
         app:layout_constraintStart_toEndOf="@+id/tv_Deserts"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_Food"
@@ -119,7 +129,7 @@
         android:layout_marginBottom="16dp"
         android:text="FOOTER"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_RestDetails"
+        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_drinksView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RV_Food" />
@@ -136,7 +146,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/RV_Food"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <ImageView
         android:id="@+id/imageView9"
