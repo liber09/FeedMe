@@ -50,7 +50,7 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 allergies
             )
             //Add user to users collection
-            val newItemRef = db.collection("customers").document()
+            val newItemRef = db.collection("customers").document().id
             customer.documentId = newItemRef.toString()
             db.collection("customers").document(newItemRef.toString()).set(customer) //Add customer to database
             //Tell user save was successful
