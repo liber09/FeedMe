@@ -50,16 +50,16 @@ class MainActivity : AppCompatActivity() {
 
         val menu = findViewById<Button>(R.id.menuBtn)
 
-        //val btnDrinks = findViewById<Button>(R.id.btnDrinks)
+        val btnDrinks = findViewById<Button>(R.id.btn_drink)
 
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
         val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
-        /*btnDrinks.setOnClickListener{
+        btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)
             startActivity(intent)
-        }*/
+        }
 
         restv.setOnClickListener{
             val intent= Intent(this,RestaurantViewActiviity::class.java)
