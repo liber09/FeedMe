@@ -21,8 +21,6 @@ import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.collections.HashMap
 
 val db = Firebase.firestore
 
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
-        val restv = findViewById<TextView>(R.id.btnREST)
+        val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
         /*btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)
@@ -160,43 +158,23 @@ class MainActivity : AppCompatActivity() {
 
                 //printDishes()
             }
-        }/*
+        }
 
 
         val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
                 DataManagerRestaurants.restaurants.clear()
-
-                for (document in snapshot.documents)
-                { val item = Restaurant(
-                    document.get("name").toString(),
-                    document.get("orgNr").toString(),
-                    document.get("address").toString(),
-                    document.get("postalCode").toString(),
-                    document.get("city").toString(),
-                    document.get("phoneNumber").toString(),
-                    document.get("email").toString(),
-                    document.get("type").toString(),
-                    document.get("deliveryFee").toString().toInt(),
-                    document.get("deliveryTypePickup").toString().toBoolean(),
-                    document.get("deliveryTypeHome").toString().toBoolean(),
-                    document.get("deliveryTypeAtRestaurant").toString().toBoolean(),
-                    document.get("tableBooking").toString().toBoolean(),
-                    document.get("description").toString(),
-                    document.get("rating").toString().toDouble(), //?: 0.0,
-                    document.get("imagePath").toString(),
-                    document.get("documentId").toString(),
-                    document.get("openingHours") as HashMap<String, Date> //?: hashMapOf<String, Date>()
-                )
-                    if (item != null) {
-                        DataManagerRestaurants.restaurants.add(item)
+                for (document in snapshot.documents){
+                    if (document != null) {
+                        document.toObject<Restaurant>()
+                            ?.let { DataManagerRestaurants.restaurants.add(it) }
                     }
                 }
 
                 printRestaurants()
             }
-        }*/
+        }
     }
 
     //Get orders for restaurant with id restaurantId
