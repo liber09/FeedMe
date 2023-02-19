@@ -34,7 +34,6 @@
                     android:layout_width="136dp"
                     android:layout_height="140dp"
                     android:backgroundTint="#512DA8"
-                    android:foreground="@drawable/logo"
                     android:outlineProvider="none"
                     android:visibility="visible"
                     tools:srcCompat="@drawable/ic_outline_food_bank_24" />

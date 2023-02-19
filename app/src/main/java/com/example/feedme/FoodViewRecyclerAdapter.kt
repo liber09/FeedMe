@@ -14,7 +14,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 lateinit var dishes: Dishes
 
@@ -76,7 +79,15 @@ class FoodViewRecyclerAdapter(val context: Context,
 
         if (dishes.dishImagePath.isEmpty()){
             holder.iv_foodImage.setImageResource(R.drawable.logo)
-
+        }else{
+            val imageref = Firebase.storage.reference.child(dishes.dishImagePath)
+            imageref.downloadUrl.addOnSuccessListener { Uri ->
+                val imageURL = Uri.toString() // get the URL for the image
+                //Use third party product glide to load the image into the imageview
+                Glide.with(context)
+                    .load(imageURL)
+                    .into( holder.iv_foodImage)
+            }
         }
 
         holder.foodDisplayPosition = position
