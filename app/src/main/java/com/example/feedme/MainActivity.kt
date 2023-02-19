@@ -50,16 +50,16 @@ class MainActivity : AppCompatActivity() {
 
         val menu = findViewById<Button>(R.id.menuBtn)
 
-        //val btnDrinks = findViewById<Button>(R.id.btnDrinks)
+        val btnDrinks = findViewById<Button>(R.id.btn_drink)
 
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
         val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
-        /*btnDrinks.setOnClickListener{
+        btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)
             startActivity(intent)
-        }*/
+        }
 
         restv.setOnClickListener{
             val intent= Intent(this,RestaurantViewActiviity::class.java)
@@ -586,4 +586,28 @@ class MainActivity : AppCompatActivity() {
         db.collection("orders").document("order1").collection("orderDrinks").add(orderDrink2)
         db.collection("orders").document("order1").collection("orderDishes").add(orderDish1)
     }
+
+/*    fun getCustomerByDocumentId(customerId: String):Customer?{
+        var listOfCustomers = MutableList<Customer>()
+
+        var customer: Customer? = null
+        val documentref = db.collection("customers")
+        documentref.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                for (document in snapshot.documents)
+                { val item = document.toObject<Customer>()
+                    if (item != null) {
+                        listOfCustomers.add(item)
+                    }
+                }
+            }
+        }
+        for (cust in listOfCustomers){
+            if (cust.customerId== customerId){
+                customer = cust
+            }
+        }
+        return customer
+    }*/
+
 }
