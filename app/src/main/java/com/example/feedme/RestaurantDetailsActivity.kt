@@ -1,18 +1,29 @@
 package com.example.feedme
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
+import java.util.*
 
+private val pickImage = 100
+private var imageUri: Uri? = null
+object State{
+    var restaurantId: String = ""
+}
 class RestaurantDetailsActivity : AppCompatActivity() {
 
     lateinit var restaurantTitel :TextView
@@ -23,16 +34,19 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant_details)
         val intent:Intent = getIntent()
-        val id = intent.getStringExtra("id")
+        State.restaurantId = intent.getStringExtra("id").toString()
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
 
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
         val menueButton = findViewById<Button>(R.id.btn_menu)
-
+        val changeImageButton = findViewById<Button>(R.id.btnChangeImage)
+        changeImageButton.setOnClickListener{
+            changeImage()
+        }
         for (restaurant in DataManagerRestaurants.restaurants){
             val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
-            if(id == restaurant.documentId){
+            if(State.restaurantId == restaurant.documentId){
                 restaurantTitel.text = restaurant.name
                 restaurantdescripton.text = restaurant.description
 
@@ -49,7 +63,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 }
 
 
-                val docRef =db.collection("restaurants").document(id!!).collection("dishes")
+                val docRef =db.collection("restaurants").document(State.restaurantId!!).collection("dishes")
                 docRef.addSnapshotListener{ snapshot, e ->
                     if (snapshot != null) {
 
@@ -74,7 +88,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 menueButton.setOnClickListener {
 
                     val intent= Intent(this,FoodViewActivity::class.java)
-                    intent.putExtra("id", id)
+                    intent.putExtra("id", State.restaurantId)
 
 
                     startActivity(intent)
@@ -92,6 +106,52 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
 
     }
+
+    private fun changeImage() {
+        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, pickImage)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage) {
+            imageUri = data?.data
+            val addImageView = findViewById<ImageView>(R.id.imgRestaurant)
+            addImageView.setImageURI(imageUri)
+            imageUri?.let { uploadImageToFirebase(it) }
+            SaveImagePathToDb()
+        }
+    }
+
+    private fun SaveImagePathToDb(){
+        for (restaurant in DataManagerRestaurants.restaurants){
+            if(State.restaurantId == restaurant.documentId){
+                db.collection("restaurants").document(State.restaurantId).update(mapOf("imagePath" to "restaurants/$fileName") )
+            }
+        }
+    }
+
+    private fun uploadImageToFirebase(fileUri: Uri) {
+        if (fileUri != null) {
+            fileName = UUID.randomUUID().toString() +".jpg" //Set filename
+
+            val refStorage = Firebase.storage.reference.child("restaurants/$fileName")
+
+            //Upload the file
+            refStorage.putFile(fileUri)
+                .addOnSuccessListener(
+                    OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
+                        taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                            val imageUrl = it.toString()
+                        }
+                    })
+
+                ?.addOnFailureListener(OnFailureListener { e ->
+                    print(e.message)
+                })
+        }
+    }
+
     fun  printDishes(){
 
         for (item in DataManagerDishes.dishes)
