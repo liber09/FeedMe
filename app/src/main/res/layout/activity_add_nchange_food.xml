@@ -31,7 +31,7 @@
 
                 <ImageView
                     android:id="@+id/iV_AddDishAdminUploadFoodPic"
-                    android:layout_width="136dp"
+                    android:layout_width="137dp"
                     android:layout_height="140dp"
                     android:backgroundTint="#512DA8"
                     android:outlineProvider="none"
