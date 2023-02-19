@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 const val DISH_POSTION_KEY = "DISH_POSITION"
 const val DiSH_POSITION_NOT_SET = -1
@@ -41,6 +44,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
     lateinit var veganExtraCostET: EditText
     lateinit var vegeterianExtraCostET: EditText
     lateinit var categoryOfDishString: String
+    lateinit var dishImage: ImageView
 
 
 
@@ -72,6 +76,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         laktosExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostLaktosFree)
         veganExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegan)
         vegeterianExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegeterian)
+        dishImage = findViewById(R.id.iV_AddDishAdminUploadFoodPic)
 
        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
@@ -132,6 +137,15 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         dishNameET.setText(dish.title)
         descriptionET.setText(dish.description)
         foodCategorySpinner.setAutofillHints(dish.category)
+
+        val imageref = Firebase.storage.reference.child(dish.dishImagePath)
+        imageref.downloadUrl.addOnSuccessListener { Uri ->
+            val imageURL = Uri.toString() // get the URL for the image
+            //Use third party product glide to load the image into the imageview
+            Glide.with(this)
+                .load(imageURL)
+                .into( dishImage)
+        }
 
         //nedan funkar inte fullt ut det är inte inbockat
 
