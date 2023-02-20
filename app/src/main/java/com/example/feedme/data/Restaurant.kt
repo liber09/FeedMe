@@ -22,5 +22,5 @@ data class Restaurant(
     val rating:Double?= null,
     val imagePath:String ="",
     @DocumentId var documentId: String? = null,
-    //val openingHours: HashMap<String, Date> = hashMapOf<String, Date>()
+    val openingHours: HashMap<String, Date> = hashMapOf<String, Date>()
 )

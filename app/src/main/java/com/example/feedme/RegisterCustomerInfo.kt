@@ -17,15 +17,36 @@ class RegisterCustomerInfo : AppCompatActivity() {
         setContentView(R.layout.activity_register_customer_info)
         //Get save button
         val btnSaveCustomerInfo = findViewById<Button>(R.id.btnSaveCustomerInfo)
+
+        var update = false
+        if(intent.hasExtra("ID")) {
+            val documentId = intent.getStringExtra("ID") ?: ""
+            update = true
+            btnSaveCustomerInfo.setText("Update")
+
+            var customer: Customer? = null
+
+            db.collection("customers").document(documentId).get()
+                .addOnSuccessListener { document ->
+                    customer = document.toObject(Customer::class.java)
+                    loadCustomer(customer!!)
+
+            }
+
+        }
         //Set clickListener
         btnSaveCustomerInfo.setOnClickListener {
             //Call function to save customer info to database
-            saveCustomerInfoToDatabase()
+            if(!update) {
+                saveCustomerInfoToDatabase()
+            } else {
+                saveCustomerInfoToDatabase(intent.getStringExtra("ID") ?: "")
+            }
         }
     }
 
     //Function that saves the information the customer has entered as a new customer user in the database
-    private fun saveCustomerInfoToDatabase() {
+    private fun saveCustomerInfoToDatabase(documentId : String = "") {
         //First, validate if input is correct
         if (validateInput()){
             val firstName = findViewById<EditText>(R.id.textInputEditTextFirstname).text.toString()
@@ -52,7 +73,8 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 allergies
             )
             //Add user to users collection
-            val newItemRef = db.collection("customers").document().id
+            val newItemRef = if(documentId.isNotEmpty()) documentId else db.collection("customers").document().id
+
             customer.customerId = newItemRef.toString()
             NewCustomer.customerId = newItemRef.toString()
             MyPagesCustomer.customer = customer
@@ -66,6 +88,23 @@ class RegisterCustomerInfo : AppCompatActivity() {
             //Input was not correct, give user a ,message to correct and try again
             Toast.makeText(this, getString(R.string.wrongInput), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun loadCustomer(customer : Customer) {
+
+        if (customer != null) {
+            findViewById<EditText>(R.id.textInputEditTextFirstname).setText(customer!!.firstName)
+            findViewById<EditText>(R.id.textInputEditTextLastname).setText(customer!!.lastName)
+            findViewById<EditText>(R.id.textInputEditTextAddress).setText(customer!!.address)
+            findViewById<EditText>(R.id.textInputEditTextPostalCode).setText(customer!!.postalCode)
+            findViewById<EditText>(R.id.textInputEditTextCity).setText(customer!!.city)
+            findViewById<EditText>(R.id.textInputEditTextPhoneNumber).setText(customer!!.phoneNumber)
+            findViewById<EditText>(R.id.textInputEditTextEmail).setText(customer!!.eMail)
+            findViewById<EditText>(R.id.textInputEditTextUserName).isEnabled = false
+            findViewById<EditText>(R.id.textInputEditTextUserName).setText(customer!!.userName)
+            findViewById<EditText>(R.id.textInputEditTextALlergies).setText(customer!!.allergies)
+        }
+
     }
 
     //Check if any fields are empty except for allergies and userName which can be empty

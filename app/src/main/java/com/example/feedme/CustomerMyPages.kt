@@ -1,25 +1,33 @@
 package com.example.feedme
 
-import android.content.ContentValues
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import com.example.feedme.data.Customer
-import com.example.feedme.data.Dishes
-import com.example.feedme.data.Order
 import com.google.firebase.firestore.ktx.toObject
-import org.w3c.dom.Text
+
 object MyPagesCustomer{
     var customer: Customer = Customer()
 }
 class CustomerMyPages : AppCompatActivity() {
+
+    lateinit var btnMyPagesEdit : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_my_pages)
         val id = intent.getStringExtra("CUSTOMER_DOCUMENTID")
         //getCustomerByDocumentId(NewCustomer.customerId)
         updateViewsWithInfo(MyPagesCustomer.customer)
+
+        btnMyPagesEdit = findViewById<Button>(R.id.btnMyPagesEdit)
+        btnMyPagesEdit.setOnClickListener {
+            val intent = Intent(this, RegisterCustomerInfo::class.java)
+            intent.putExtra("ID", id)
+            startActivity(intent)
+        }
     }
 
     fun getCustomerByDocumentId(customerId: String){

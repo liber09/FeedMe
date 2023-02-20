@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val add = findViewById<Button>(R.id.btn_add_act)
         val rv = findViewById<Button>(R.id.btn_RV_act)
         val sc = findViewById<Button>(R.id.btn_Shopping)
-        val rr = findViewById<Button>(R.id.btn_RegREst)
+        val rr = findViewById<Button>(R.id.btn_Marlon)
 
         val ra = findViewById<Button>(R.id.buttonRegister)
         val bv = findViewById<Button>(R.id.btn_budView)
@@ -99,7 +99,6 @@ class MainActivity : AppCompatActivity() {
 
 
         rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
-            //intent.putExtra("RESTAURANT_KEY",1)
             startActivity(intent) }
 
 
@@ -123,8 +122,8 @@ class MainActivity : AppCompatActivity() {
         //val infoRes = findViewById<Button>(R.id.btn_infoRes)
 
         add.setOnClickListener {
-            val intent = Intent(this, AddNChangeFoodActivity::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, AddNChangeFoodActivity::class.java)
+            //startActivity(intent)
         }
         rv.setOnClickListener {
             val intent = Intent(this, FoodViewActivity::class.java)

@@ -14,6 +14,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Restaurant
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -32,35 +33,35 @@ class InfoRestaurantActivity : AppCompatActivity() {
     val db = Firebase.firestore
     private val pickImage = 100
     private var imageUri: Uri? = null
-    val registerNew = false
-    //private var openingHours = hashMapOf<String, Date>()
+    private var openingHours = hashMapOf<String, Date>(
+        "monday_start" to Date(),
+        "monday_end" to Date(),
+        "tuesday_start" to Date(),
+        "tuesday_end" to Date(),
+        "wednesday_start" to Date(),
+        "wednesday_end" to Date(),
+        "thursday_start" to Date(),
+        "thursday_end" to Date(),
+        "friday_start" to Date(),
+        "friday_end" to Date(),
+        "saturday_start" to Date(),
+        "saturday_end" to Date(),
+        "sunday_start" to Date(),
+        "sunday_end" to Date())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
+
+        val intent:Intent = getIntent()
+
+        loadOpeningHours(openingHours)
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
         if(intent.hasExtra("RESTAURANT_KEY")) {
             val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "1")
             loadRestaurant(rest ?: Restaurant())
-        }
-        val monSta = findViewById<EditText>(R.id.textInputMondayStart)
-        val editName = findViewById<EditText>(R.id.textInputName)
-
-        monSta.setOnClickListener {
-            Log.v("!!!","clicked")
-
-            val cal = Calendar.getInstance()
-
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                cal.set(Calendar.HOUR_OF_DAY, hour)
-                cal.set(Calendar.MINUTE, minute)
-
-                monSta.setText(SimpleDateFormat("HH:mm").format(cal.time))
-            }
-
-            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
 
         btnAddImage.setOnClickListener {
@@ -101,11 +102,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-            "",
+            findViewById<EditText>(R.id.textInputDescription).text.toString(),
             0.0,
             "/restaurants/$fileName",
             "",
-            //openingHours
+            openingHours
         )
 
         db.collection("restaurants")
@@ -120,10 +121,10 @@ class InfoRestaurantActivity : AppCompatActivity() {
         DataManagerRestaurants.update()
 
         //On successful save redirect to restaurant details
-        val intent= Intent(this,RestaurantDetailsActivity::class.java)
+        //val intent= Intent(this, RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
-        intent.putExtra("id",documentRef.toString())
-        startActivity(intent)
+        //intent.putExtra("id",documentRef.toString())
+        //startActivity(intent)
     }
 
     private fun uploadImageToFirebase(fileUri: Uri) {
@@ -160,11 +161,22 @@ class InfoRestaurantActivity : AppCompatActivity() {
         findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant.deliveryTypeHome
         findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant.deliveryTypeAtRestaurant
         findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant.tableBooking
-        //
-        // /*loadOpeningHours(restaurant.openingHours)
+        loadOpeningHours(restaurant.openingHours)
         findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
+        val imgRestaurant = findViewById<ImageView>(R.id.imageViewRestaurant)
+        //from customerMyPage
+        if(restaurant.imagePath.isNotEmpty()) {
+            val imageref = Firebase.storage.reference.child(restaurant.imagePath)
+            imageref.downloadUrl.addOnSuccessListener { Uri ->
+                val imageURL = Uri.toString() // get the URL for the image
+                //Use third party product glide to load the image into the imageview
+                Glide.with(this)
+                    .load(imageURL)
+                    .into(imgRestaurant)
+            }
+        }
     }
-    /*
+
     fun setOpeningHours(view: View) {
 
         if(view is EditText) {
@@ -191,17 +203,17 @@ class InfoRestaurantActivity : AppCompatActivity() {
     fun loadOpeningHours(oHours: HashMap<String, Date>) {
         val mView = findViewById<ConstraintLayout>(R.id.mainView)
         var cal = Calendar.getInstance()
-        openingHours = oHours
 
         mView.forEach { et ->
             if(et is EditText && oHours.containsKey(et.tag?.toString())) {
-                val date = oHours.get(et.tag.toString()) as com.google.firebase.Timestamp
-                cal.time = date.toDate()
+                val date = oHours.get(et.tag.toString()) as Date
+                cal.time = date
                 et.setText(SimpleDateFormat("HH:mm").format(cal?.time))
             }
         }
+        openingHours = oHours
     }
-    */
+
     //not optimized version
     fun setType(types: String) {
         var listOfTypes = types.split(",")
