@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.content.Context
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
+import java.util.*
 
 const val DISH_POSTION_KEY = "DISH_POSITION"
 const val DiSH_POSITION_NOT_SET = -1
@@ -87,7 +91,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
         val foodCategoryArray = arrayOf(
-            "Huvudrätt", "Dessert", "Efterrätt"
+            "Huvudrätt", "Dessert", "Förrätt"
         )
 
         val foodCategorySpinnerAdapter = ArrayAdapter<String>(
@@ -144,7 +148,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
             //Use third party product glide to load the image into the imageview
             Glide.with(this)
                 .load(imageURL)
-                .into( dishImage)
+                .into( dishImage)                                                                                                                                                                                                                               aaaaa   a
         }
 
         //nedan funkar inte fullt ut det är inte inbockat
@@ -478,7 +482,36 @@ class AddNChangeFoodActivity : AppCompatActivity() {
             finish()
 
         }
+    }
+    private fun uploadImageToFirebase(fileUri: Uri) {
+        var path = ""
+        if (fileUri != null) {
+            if(categoryOfDishString == "Huvudrätt"){//Huvudrätt", "Dessert", "Förrätt
+                fileName = UUID.randomUUID().toString() +".jpg" //Set filename
+                path = "main_course/"
+            }else if(categoryOfDishString == "Dessert"){
+                fileName = UUID.randomUUID().toString() +".jpg" //Set filename
+                path = "dessert/"
+            }else if(categoryOfDishString == "Förrätt"){
+                fileName = UUID.randomUUID().toString() +".jpg" //Set filename
+                path = "starter/"
+            }
 
 
+            val refStorage = Firebase.storage.reference.child("dishes/"+)                                                                                                       /$fileName")
+
+            //Upload the file
+            refStorage.putFile(fileUri)
+                .addOnSuccessListener(
+                    OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
+                        taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                            val imageUrl = it.toString()
+                        }
+                    })
+
+                ?.addOnFailureListener(OnFailureListener { e ->
+                    print(e.message)
+                })
+        }
     }
 }
