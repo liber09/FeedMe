@@ -41,7 +41,7 @@
         app:srcCompat="@drawable/text1" />
 
     <ImageButton
-        android:id="@+id/ibtn_home_RestDetails"
+        android:id="@+id/ibtn_home_drinksView"
         android:layout_width="55dp"
         android:layout_height="49dp"
         android:layout_marginBottom="24dp"
@@ -51,6 +51,27 @@
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_baseline_home_24" />
+
+    <TextView
+        android:id="@+id/tv_Footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="FOOTER"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_drinksView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_circle_left_24" />
 
     <Button
         android:id="@+id/profileButton"
