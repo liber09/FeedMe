@@ -10,16 +10,16 @@ import com.example.feedme.data.Dishes
 import com.example.feedme.data.Order
 import com.google.firebase.firestore.ktx.toObject
 import org.w3c.dom.Text
-
+object MyPagesCustomer{
+    var customer: Customer = Customer()
+}
 class CustomerMyPages : AppCompatActivity() {
-    var customer = Customer()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_my_pages)
         val id = intent.getStringExtra("CUSTOMER_DOCUMENTID")
-        Thread.sleep(5_000)
-        getCustomerByDocumentId(id.toString())
-        updateViewsWithInfo(customer)
+        //getCustomerByDocumentId(NewCustomer.customerId)
+        updateViewsWithInfo(MyPagesCustomer.customer)
     }
 
     fun getCustomerByDocumentId(customerId: String){
@@ -27,8 +27,8 @@ class CustomerMyPages : AppCompatActivity() {
             for(document in it.documents){
                 if(document != null){
                     val item = document.toObject<Customer>()
-                    if(item != null && item.documentId == customerId){
-                        customer = item
+                    if(item != null && document.id == customerId){
+                        MyPagesCustomer.customer = item
                     }
                 }
             }

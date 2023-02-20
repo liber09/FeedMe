@@ -7,7 +7,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.feedme.data.Customer
-
+object NewCustomer{
+    var customerId: String = ""
+}
 
 class RegisterCustomerInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +53,9 @@ class RegisterCustomerInfo : AppCompatActivity() {
             )
             //Add user to users collection
             val newItemRef = db.collection("customers").document().id
-            customer.documentId = newItemRef.toString()
+            customer.customerId = newItemRef.toString()
+            NewCustomer.customerId = newItemRef.toString()
+            MyPagesCustomer.customer = customer
             db.collection("customers").document(newItemRef.toString()).set(customer) //Add customer to database
             //Tell user save was successful
             Toast.makeText(this, getString(R.string.saveSuccess), Toast.LENGTH_SHORT).show()
