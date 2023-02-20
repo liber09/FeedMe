@@ -1,5 +1,7 @@
 package com.example.feedme.data
 
+import com.google.firebase.firestore.DocumentId
+
 data class  Customer (
     val firstName: String = "",
     val lastName: String = "",
@@ -10,6 +12,7 @@ data class  Customer (
     val eMail: String = "",
     val typeOfUser: String = "", //customer, administrator, delivery
     val allergies: String = "",
-    val userName: String = ""
+    val userName: String = "",
+@DocumentId var customerId:String? = null,
 )
 

@@ -8,16 +8,6 @@
     tools:context=".CustomerMyPages">
 
     <Button
-        android:id="@+id/btnMoreFavRestaurants2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
-        android:text="@string/seeMore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-    <Button
         android:id="@+id/btnMoreFavRestaurants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

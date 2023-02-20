@@ -3,6 +3,7 @@ package com.example.feedme
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ class DrinksViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drinks_view)
 
-        val home = findViewById<Button>(R.id.menuButton1)
+        val home = findViewById<ImageButton>(R.id.ibtn_home_drinksView)
         home.setOnClickListener{
             val intent= Intent(this,MainActivity::class.java)
             startActivity(intent) }

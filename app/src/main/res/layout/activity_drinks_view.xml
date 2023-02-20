@@ -10,145 +10,146 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_Drinks"
-        android:layout_width="413dp"
-        android:layout_height="497dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_Footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.539"
+        app:layout_constraintTop_toBottomOf="@+id/förrätterTextView"
         tools:listitem="@layout/list_item_drinks" />
-
-    <Button
-        android:id="@+id/menuButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="16dp"
-        android:text="Home"
-        app:layout_constraintBottom_toTopOf="@+id/förrätterTextView"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/förrätterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="29dp"
-        android:layout_marginBottom="17dp"
         android:text="Förrätter"
         android:textColor="@color/Orange"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/RV_Drinks"
         app:layout_constraintEnd_toStartOf="@+id/huvudrättTextView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/huvudrättTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="34dp"
-        android:layout_marginBottom="17dp"
         android:text="Huvudrätter"
         android:textColor="@color/Orange"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/RV_Drinks"
         app:layout_constraintEnd_toStartOf="@+id/dessertTextView"
-        app:layout_constraintStart_toEndOf="@+id/förrätterTextView" />
+        app:layout_constraintStart_toEndOf="@+id/förrätterTextView"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/dessertTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="17dp"
         android:text="Dessert"
         android:textColor="@color/Orange"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/RV_Drinks"
         app:layout_constraintEnd_toStartOf="@+id/dryckTextView"
-        app:layout_constraintStart_toEndOf="@+id/huvudrättTextView" />
+        app:layout_constraintStart_toEndOf="@+id/huvudrättTextView"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/dryckTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="42dp"
-        android:layout_marginBottom="17dp"
         android:text="Dryck"
         android:textColor="@color/Orange"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/RV_Drinks"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dessertTextView" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="11dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button11"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="11dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button12"
-        app:layout_constraintStart_toEndOf="@+id/button10" />
-
-    <Button
-        android:id="@+id/button12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="11dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button11" />
+        app:layout_constraintStart_toEndOf="@+id/dessertTextView"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="65dp"
         android:layout_height="57dp"
-        android:layout_marginStart="212dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="31dp"
-        android:layout_marginBottom="7dp"
         android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/dryckTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menuButton1"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/male_user" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="134dp"
-        android:layout_height="116dp"
+    <ImageButton
+        android:id="@+id/ibtn_home_drinksView"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="24dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_home_24" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="11dp"
+        android:background="#F29D38"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+    <Button
+        android:id="@+id/menuButton"
+        android:layout_width="79dp"
+        android:layout_height="60dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/RV_Drinks"
-        app:layout_constraintEnd_toStartOf="@+id/dryckTextView"
-        app:layout_constraintHorizontal_bias="0.632"
-        app:layout_constraintStart_toEndOf="@+id/huvudrättTextView"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#000000"
+        app:icon="@drawable/menu"
+        app:iconTint="#F29D38"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/iv_Logo"
+        android:layout_width="140dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="19dp"
+        app:layout_constraintStart_toEndOf="@+id/menuButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/text1" />
+
+    <TextView
+        android:id="@+id/tv_Footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="FOOTER"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_drinksView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_circle_left_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
