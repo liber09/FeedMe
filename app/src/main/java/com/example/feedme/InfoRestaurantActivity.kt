@@ -2,33 +2,60 @@ package com.example.feedme
 
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
 import com.example.feedme.data.Restaurant
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
+    var restImageUri : Uri = Uri.parse("/storage/emulated/0/Pictures/IMG_20230218_145720.jpg")//null
     val registerNew = false
-    private var openingHours = hashMapOf<String, Date>()
+    private var openingHours = hashMapOf<String, Date>(
+        "monday_start" to Date(),
+        "monday_end" to Date(),
+        "tuesday_start" to Date(),
+        "tuesday_end" to Date(),
+        "wednesday_start" to Date(),
+        "wednesday_end" to Date(),
+        "tuesday_start" to Date(),
+        "tuesday_end" to Date(),
+        "friday_start" to Date(),
+        "friday_end" to Date(),
+        "saturday_start" to Date(),
+        "saturday_end" to Date(),
+        "sunday_start" to Date(),
+        "sunday_end" to Date())
+
+    private val pickImage = 100
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
+
+        Log.v("!!!", openingHours.toString())
+
+        val imgFile = File(restImageUri.toString())
+        val imgBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+        findViewById<ImageView>(R.id.imageViewRestaurant).setImageBitmap(imgBitmap)
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
@@ -55,12 +82,20 @@ class InfoRestaurantActivity : AppCompatActivity() {
         }
 
         btnAddImage.setOnClickListener {
-
+            getContent.launch("image/*")
         }
 
         //SaveButton clickListner
         btnSave.setOnClickListener {
             saveInfo()
+        }
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let { imageUri ->
+            val imageView = findViewById<ImageView>(R.id.imageViewRestaurant)
+            imageView.setImageURI(imageUri)
+            restImageUri = imageUri
         }
     }
 
@@ -81,7 +116,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-            "",
+            findViewById<EditText>(R.id.textInputDescription).text.toString(),
             0.0,
             "",
             "",

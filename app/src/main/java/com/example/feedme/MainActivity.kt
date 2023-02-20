@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
 
         rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
-            intent.putExtra("RESTAURANT_KEY",1)
+            //intent.putExtra("RESTAURANT_KEY",1)
             startActivity(intent) }
 
 
