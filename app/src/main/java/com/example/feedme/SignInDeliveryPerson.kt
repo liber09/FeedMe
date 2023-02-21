@@ -8,10 +8,16 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.set
+import com.example.feedme.DataManagerDeliveryPerson.deliveryPersons
 import com.example.feedme.data.Customer
 import com.example.feedme.data.DeliveryPerson
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SignInDeliveryPerson : AppCompatActivity() {
+
+    lateinit var auth : FirebaseAuth
 
 
 
@@ -24,6 +30,8 @@ class SignInDeliveryPerson : AppCompatActivity() {
 
         var email = findViewById<EditText>(R.id.TInp_et_email)
        email.setText(emailFromSignUp)
+
+        auth = Firebase.auth
 
 
 
@@ -58,7 +66,13 @@ class SignInDeliveryPerson : AppCompatActivity() {
         val city = findViewById<EditText>(R.id.TInp_et_city).text.toString()
         val email = findViewById<EditText>(R.id.TInp_et_email).text.toString()
         val  telephone = findViewById<EditText>(R.id.TInp_et_telephone).text.toString()
+        val user = auth.currentUser
 
+        if (user == null) {
+            return
+
+        }
+        //val documentId= user.uid
 
 
         val deliveryPerson = DeliveryPerson(
@@ -69,8 +83,11 @@ class SignInDeliveryPerson : AppCompatActivity() {
             &&zipCode.isNotEmpty()&&city.isNotEmpty()&& telephone.isNotEmpty()
             &&email.isNotEmpty())
         {
+            //db.collection("deliveryPersons").add(deliveryPerson)
 
-            db.collection("deliveryPersons").add(deliveryPerson)
+           db.collection("users").document(user.uid)
+                .collection("deliveryPersons")
+                .add(deliveryPerson)
         }
         else {
             Toast.makeText(this, "fyll i alla fält", Toast.LENGTH_SHORT).show()

@@ -17,6 +17,8 @@ import androidx.core.view.forEach
 import com.example.feedme.data.Restaurant
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -33,11 +35,13 @@ class InfoRestaurantActivity : AppCompatActivity() {
     private val pickImage = 100
     private var imageUri: Uri? = null
     val registerNew = false
+    lateinit var auth: FirebaseAuth
     //private var openingHours = hashMapOf<String, Date>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
+        auth = Firebase.auth
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
@@ -108,6 +112,23 @@ class InfoRestaurantActivity : AppCompatActivity() {
             //openingHours
         )
 
+        val user = auth.currentUser
+
+        if (user != null){
+
+        db.collection("users").document(user.uid)
+            .collection("restaurants")
+            .add(rest)
+            .addOnSuccessListener { documentReference ->
+                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
+                documentRef = documentReference.id
+            }
+            .addOnFailureListener { e ->
+                Log.w("ADD RESTAURANT", "Error adding document", e)
+            }}
+
+        else{
+
         db.collection("restaurants")
             .add(rest)
             .addOnSuccessListener { documentReference ->
@@ -116,12 +137,13 @@ class InfoRestaurantActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
-            }
+            }}
         DataManagerRestaurants.update()
 
         //On successful save redirect to restaurant details
         val intent= Intent(this,RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
+        intent.putExtra("userid", user?.uid)
         intent.putExtra("id",documentRef.toString())
         startActivity(intent)
     }
