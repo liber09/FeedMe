@@ -35,6 +35,9 @@ class FoodViewRecyclerAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dishes = courses[position]
+        //val mainCourses =
+        //
+        //if (dishes.category =="Huvudrätt")
 
         holder.nameDishTextView.text = dishes.title
         holder.descriptionDishTextView.text = dishes.description
@@ -143,10 +146,19 @@ class FoodViewRecyclerAdapter(val context: Context,
         var foodDisplayPosition = 0
         var delete_btn = itemView.findViewById<ImageButton>(R.id.btn_delete_RV_food)
 
+        var mainCourse = itemView.findViewById<TextView>(R.id.tv_MainCourse)
+        var starterCourese = itemView.findViewById<TextView>(R.id.tv_starterMealView)
+        var dessertTextView = itemView.findViewById<TextView>(R.id.tv_Deserts)
+        var drink = itemView.findViewById<TextView>(R.id.tv_drinksFoodView)
+
 
         //TODO init block för Addfunktions, and an only admin delete and change funktion
 
   init {
+
+
+
+
 
     itemView.setOnClickListener(){
     val intent = Intent(context,AddNChangeFoodActivity::class.java)
@@ -179,6 +191,8 @@ class FoodViewRecyclerAdapter(val context: Context,
           handleExistsInCart(selectedDish)
       }
 
+
+
   }
     /*
     //
@@ -189,6 +203,7 @@ class FoodViewRecyclerAdapter(val context: Context,
 
     deleteButton.setOnClickListener {}
      } */
+
 
         fun handleExistsInCart(selectedDish: Dishes) {
             var alreadyInCart = false

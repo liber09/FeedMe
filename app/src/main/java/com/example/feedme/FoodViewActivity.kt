@@ -1,9 +1,13 @@
 package com.example.feedme
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 
 class FoodViewActivity : AppCompatActivity() {
@@ -18,6 +22,32 @@ class FoodViewActivity : AppCompatActivity() {
         foodRecyclerView.layoutManager= LinearLayoutManager(this)
         val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes)
         foodRecyclerView.adapter = adapter
+
+        val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
+
+        drinks.setOnClickListener {
+
+
+            val intent = Intent(this,DrinksViewActivity::class.java)
+
+            this.startActivity(intent)
+        }
+
+
+        val dessertText = findViewById<TextView>(R.id.tv_Deserts)
+
+        dessertText.setOnClickListener {
+
+            val desserts = dishes.category.equals("Dessert")
+
+
+
+        }
+
+
+
+
+
 
 
     }
@@ -38,6 +68,7 @@ class FoodViewActivity : AppCompatActivity() {
 
 
     }
+
 
 
 
