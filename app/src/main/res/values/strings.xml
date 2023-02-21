@@ -76,5 +76,6 @@
     <string name="content_description_media">MediaDescription</string>
     <string name="favouriteDishes">Favoritmaträtter</string>
     <string name="OrgNr">OrgNr</string>
+    <string name="default_notification_channel_id">notification</string>
 
 </resources>
