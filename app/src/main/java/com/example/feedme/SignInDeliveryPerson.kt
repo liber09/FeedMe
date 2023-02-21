@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.set
 import com.example.feedme.data.Customer
@@ -14,10 +15,15 @@ class SignInDeliveryPerson : AppCompatActivity() {
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in_delivery_person)
-        intent.getStringExtra("email")
+        var emailFromSignUp = intent.getStringExtra("mail").toString()
+
+        var email = findViewById<EditText>(R.id.TInp_et_email)
+       email.setText(emailFromSignUp)
 
 
 
@@ -30,8 +36,6 @@ class SignInDeliveryPerson : AppCompatActivity() {
 
 
             startActivity(goToDeliveryPView)
-
-
 
 
 
@@ -54,6 +58,7 @@ class SignInDeliveryPerson : AppCompatActivity() {
         val city = findViewById<EditText>(R.id.TInp_et_city).text.toString()
         val email = findViewById<EditText>(R.id.TInp_et_email).text.toString()
         val  telephone = findViewById<EditText>(R.id.TInp_et_telephone).text.toString()
+
 
 
         val deliveryPerson = DeliveryPerson(

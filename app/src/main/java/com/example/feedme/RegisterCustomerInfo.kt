@@ -15,6 +15,10 @@ class RegisterCustomerInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_customer_info)
+        var emailFromSignUp = intent.getStringExtra("mail").toString()
+        var eMail = findViewById<EditText>(R.id.textInputEditTextEmail)
+        eMail.setText(emailFromSignUp)
+
         //Get save button
         val btnSaveCustomerInfo = findViewById<Button>(R.id.btnSaveCustomerInfo)
         //Set clickListener

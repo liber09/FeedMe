@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
@@ -21,6 +23,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
     lateinit var passwordView: EditText
     lateinit var imageView: ImageView
     lateinit var imageViewLogo: ImageView
+    lateinit var email : String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,43 +31,42 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login_and_register)
 
 
+
+
         auth = Firebase.auth
-        emailView = findViewById(R.id.emailTextView)
-        passwordView = findViewById(R.id.passwordTextView)
+        emailView = findViewById(R.id.textInputEditTextEmailLogReg)
+        passwordView = findViewById(R.id.textInputEditTextPasswordLogReg)
         imageView = findViewById(R.id.logoImageView)
         imageViewLogo = findViewById(R.id.feedMeLogoImageView)
         val regestreraRestaurant = findViewById<TextView>(R.id.tv_RegisterAsRestaurant)
         val registerDeliver = findViewById<TextView>(R.id.tv_registerDElivery)
+        passwordView.doOnTextChanged { text, start, before, count ->
+            if (text!!.length < 6){
+           passwordView.error = "minst 6 siffror"
+        }}
+
 
         registerDeliver.setOnClickListener{
-
-            val register = Intent(this,SignInDeliveryPerson::class.java)
-            createUser()
-            intent.putExtra("Email", "$emailView")
-            startActivity(register)
+            createDeliveryperson()
 
         }
 
         regestreraRestaurant.setOnClickListener{
-            val register = Intent(this,InfoRestaurantActivity::class.java)
-            createUser()
-            startActivity(register)
-
+            createRestaurant()
         }
-
-
-
 
 
         val registerButton = findViewById<Button>(R.id.registerButton)
         registerButton.setOnClickListener {
-            val register = Intent(this,RegisterCustomerInfo::class.java)
-            createUser()
-            startActivity(register)
+
+            createCustomer()
+
 
         }
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
+            val user = auth.currentUser
+
             loginUser()
             //Ifsats för olika former av users
 
@@ -76,14 +78,9 @@ class LoginAndRegisterActivity : AppCompatActivity() {
     }
 
 
-
-
-
-    fun createUser() {
-        val email = emailView.text.toString()
+    fun createRestaurant() {
+        email = emailView.text.toString()
         val password = passwordView.text.toString()
-
-
 
         if (email.isEmpty() || password.isEmpty()) {
             return
@@ -93,32 +90,91 @@ class LoginAndRegisterActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Register Complete", Toast.LENGTH_SHORT).show()
+                    val register = Intent(this,InfoRestaurantActivity::class.java)
+
+                    register.putExtra("mail", email)
+                    startActivity(register)
+
+
 
                 } else {
                     Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
+
+
+                }
+            }
+    }
+    fun createCustomer() {
+        email = emailView.text.toString()
+        val password = passwordView.text.toString()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Register Complete", Toast.LENGTH_SHORT).show()
+                    val register = Intent(this,RegisterCustomerInfo::class.java)
+
+                    register.putExtra("mail", email)
+                    startActivity(register)
+                } else {
+                    Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
+
+
+                }
+            }
+    }
+
+
+    fun createDeliveryperson() {
+        email = emailView.text.toString()
+        val password = passwordView.text.toString()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Register Complete", Toast.LENGTH_SHORT).show()
+                    val register = Intent(this,SignInDeliveryPerson::class.java)
+
+                    register.putExtra("mail", email)
+                    startActivity(register)
+
+                } else {
+                    Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
+
+
                 }
             }
     }
 
     fun loginUser() {
-        val email = emailView.text.toString()
+         email = emailView.text.toString()
         val password = passwordView.text.toString()
 
-        if (email.isEmpty() || password.isEmpty())
-            return
+        if (email.isEmpty() || password.isEmpty()) {
+            return}
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("!!!", "Sign in succeeded")
-                    /*goToActivity()*/ // Kommer att länkas till första sidan när den är skapad efter att man loggat in
-                } else {
-                    Log.d("!!!", "user not signed in ${task.exception}")
-
-
+                    Log.d("!!!", "Sign in succeeded")}
+                else {
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
 
                 }
+
+
+
             }
-        }
+
+}
 }
 
 
