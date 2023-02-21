@@ -74,8 +74,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
             loginUser()
             //Ifsats för olika former av users
 
-            val customerLog = Intent(this, RestaurantViewActiviity::class.java)
-            startActivity(customerLog)
+
 
 
         }
