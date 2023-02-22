@@ -14,7 +14,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 lateinit var dishes: Dishes
 
@@ -32,6 +35,9 @@ class FoodViewRecyclerAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dishes = courses[position]
+        //val mainCourses =
+        //
+        //if (dishes.category =="Huvudrätt")
 
         holder.nameDishTextView.text = dishes.title
         holder.descriptionDishTextView.text = dishes.description
@@ -76,7 +82,15 @@ class FoodViewRecyclerAdapter(val context: Context,
 
         if (dishes.dishImagePath.isEmpty()){
             holder.iv_foodImage.setImageResource(R.drawable.logo)
-
+        }else{
+            val imageref = Firebase.storage.reference.child(dishes.dishImagePath)
+            imageref.downloadUrl.addOnSuccessListener { Uri ->
+                val imageURL = Uri.toString() // get the URL for the image
+                //Use third party product glide to load the image into the imageview
+                Glide.with(context)
+                    .load(imageURL)
+                    .into( holder.iv_foodImage)
+            }
         }
 
         holder.foodDisplayPosition = position
@@ -132,10 +146,19 @@ class FoodViewRecyclerAdapter(val context: Context,
         var foodDisplayPosition = 0
         var delete_btn = itemView.findViewById<ImageButton>(R.id.btn_delete_RV_food)
 
+        var mainCourse = itemView.findViewById<TextView>(R.id.tv_MainCourse)
+        var starterCourese = itemView.findViewById<TextView>(R.id.tv_starterMealView)
+        var dessertTextView = itemView.findViewById<TextView>(R.id.tv_Deserts)
+        var drink = itemView.findViewById<TextView>(R.id.tv_drinksFoodView)
+
 
         //TODO init block för Addfunktions, and an only admin delete and change funktion
 
   init {
+
+
+
+
 
     itemView.setOnClickListener(){
     val intent = Intent(context,AddNChangeFoodActivity::class.java)
@@ -168,6 +191,8 @@ class FoodViewRecyclerAdapter(val context: Context,
           handleExistsInCart(selectedDish)
       }
 
+
+
   }
     /*
     //
@@ -178,6 +203,7 @@ class FoodViewRecyclerAdapter(val context: Context,
 
     deleteButton.setOnClickListener {}
      } */
+
 
         fun handleExistsInCart(selectedDish: Dishes) {
             var alreadyInCart = false

@@ -1,16 +1,32 @@
 package com.example.feedme
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.feedme.MyPagesCustomer.customer
 import com.example.feedme.data.Customer
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+
+object NewCustomer{
+    var customerId: String = ""
+}
 
 class RegisterCustomerInfo : AppCompatActivity() {
+
+    lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_customer_info)
+        var emailFromSignUp = intent.getStringExtra("mail").toString()
+        var eMail = findViewById<EditText>(R.id.textInputEditTextEmail)
+        eMail.setText(emailFromSignUp)
+        auth = Firebase.auth
+
         //Get save button
         val btnSaveCustomerInfo = findViewById<Button>(R.id.btnSaveCustomerInfo)
         //Set clickListener
@@ -22,6 +38,12 @@ class RegisterCustomerInfo : AppCompatActivity() {
 
     //Function that saves the information the customer has entered as a new customer user in the database
     private fun saveCustomerInfoToDatabase() {
+
+        val user = auth.currentUser
+        /*if(user == null ){
+            return
+        }*/
+
         //First, validate if input is correct
         if (validateInput()){
             val firstName = findViewById<EditText>(R.id.textInputEditTextFirstname).text.toString()
@@ -48,9 +70,29 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 allergies
             )
             //Add user to users collection
-            db.collection("customers").add(customer) //Add restaurant to database
+            val newItemRef = db.collection("customers").document().id
+            customer.customerId = newItemRef.toString()
+            NewCustomer.customerId = newItemRef.toString()
+            MyPagesCustomer.customer = customer
+
+            if (user != null){
+                db.collection("users")
+                    .document(user.uid)
+                    .collection("customers").document(newItemRef.toString()).set(customer) //Add customer to database
+                Toast.makeText(this, getString(R.string.saveSuccess), Toast.LENGTH_SHORT).show()
+                val intent= Intent(this,CustomerMyPages::class.java)
+                intent.putExtra("CUSTOMER_DOCUMENTID",newItemRef.toString())
+                startActivity(intent)
+
+            }
+            else{
+
+            db.collection("customers").document(newItemRef.toString()).set(customer) //Add customer to database
             //Tell user save was successful
             Toast.makeText(this, getString(R.string.saveSuccess), Toast.LENGTH_SHORT).show()
+            val intent= Intent(this,CustomerMyPages::class.java)
+            intent.putExtra("CUSTOMER_DOCUMENTID",newItemRef.toString())
+            startActivity(intent)}
         }else {
             //Input was not correct, give user a ,message to correct and try again
             Toast.makeText(this, getString(R.string.wrongInput), Toast.LENGTH_SHORT).show()

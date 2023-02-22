@@ -2,14 +2,19 @@ package com.example.feedme
 
 
 import Drink
+import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
@@ -21,8 +26,6 @@ import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.collections.HashMap
 
 val db = Firebase.firestore
 
@@ -41,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val rv = findViewById<Button>(R.id.btn_RV_act)
         val sc = findViewById<Button>(R.id.btn_Shopping)
         val rr = findViewById<Button>(R.id.btn_RegREst)
-        val ru = findViewById<Button>(R.id.btn_Marlon)
+
         val ra = findViewById<Button>(R.id.buttonRegister)
         val bv = findViewById<Button>(R.id.btn_budView)
         val mv = findViewById<Button>(R.id.btn_toMapsDel)
@@ -52,12 +55,18 @@ class MainActivity : AppCompatActivity() {
 
         val menu = findViewById<Button>(R.id.menuBtn)
 
-        val btnDrinks = findViewById<Button>(R.id.btnDrinks)
+        val btnDrinks = findViewById<Button>(R.id.btn_drink)
+
+        val checkout = findViewById<Button>(R.id.btnCheckout)
 
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
-        val restv = findViewById<TextView>(R.id.btnREST)
+        val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
+        checkout.setOnClickListener{
+            val intent = Intent(this,CheckoutActivity::class.java)
+            startActivity(intent)
+        }
         btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)
             startActivity(intent)
@@ -98,8 +107,7 @@ class MainActivity : AppCompatActivity() {
             val intent= Intent(this,ShoppingCart::class.java)
             startActivity(intent)
         }
-        ru.setOnClickListener {    val intent= Intent(this,RegisterActivity::class.java)
-            startActivity(intent) }
+
 
         rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
             intent.putExtra("RESTAURANT_KEY",1)
@@ -136,6 +144,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         // TODO THIS below
         //  here we need to get the intent from the restaurant
         //  RecyclerView for the documentpath as soon as that is
@@ -144,7 +153,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-      /*  val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
+        val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
 
@@ -159,43 +168,53 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                printDishes()
+                //printDishes()
             }
-        }*/
+        }
 
 
-        val restaurantRef = db.collection("restaurantTibTest")
+        val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
                 DataManagerRestaurants.restaurants.clear()
-
-                for (document in snapshot.documents)
-                { val item = Restaurant(
-                    document.get("name").toString(),
-                    document.get("orgNr").toString(),
-                    document.get("address").toString(),
-                    document.get("postalCode").toString(),
-                    document.get("city").toString(),
-                    document.get("phoneNumber").toString(),
-                    document.get("email").toString(),
-                    document.get("type").toString(),
-                    document.get("deliveryFee").toString().toInt(),
-                    document.get("deliveryTypePickup").toString().toBoolean(),
-                    document.get("deliveryTypeHome").toString().toBoolean(),
-                    document.get("deliveryTypeAtRestaurant").toString().toBoolean(),
-                    document.get("tableBooking").toString().toBoolean(),
-                    document.get("description").toString(),
-                    document.get("rating").toString().toDouble(), //?: 0.0,
-                    document.get("imagePath").toString(),
-                    document.get("documentId").toString(),
-                    document.get("openingHours") as HashMap<String, Date> //?: hashMapOf<String, Date>()
-                )
-                    if (item != null) {
-                        DataManagerRestaurants.restaurants.add(item)
+                for (document in snapshot.documents){
+                    if (document != null) {
+                        document.toObject<Restaurant>()
+                            ?.let { DataManagerRestaurants.restaurants.add(it) }
                     }
                 }
 
                 printRestaurants()
+            }
+        }
+    }
+
+    // Declare the launcher at the top of your Activity/Fragment:
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // FCM SDK (and your app) can post notifications.
+        } else {
+            // TODO: Inform user that that your app will not show notifications.
+        }
+    }
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                // FCM SDK (and your app) can post notifications.
+            } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+                // TODO: display an educational UI explaining to the user the features that will be enabled
+                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+                //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+                //       If the user selects "No thanks," allow the user to continue without notifications.
+            } else {
+                // Directly ask for the permission
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_NOTIFICATION_POLICY)
             }
         }
     }
@@ -609,4 +628,28 @@ class MainActivity : AppCompatActivity() {
         db.collection("orders").document("order1").collection("orderDrinks").add(orderDrink2)
         db.collection("orders").document("order1").collection("orderDishes").add(orderDish1)
     }
+
+/*    fun getCustomerByDocumentId(customerId: String):Customer?{
+        var listOfCustomers = MutableList<Customer>()
+
+        var customer: Customer? = null
+        val documentref = db.collection("customers")
+        documentref.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                for (document in snapshot.documents)
+                { val item = document.toObject<Customer>()
+                    if (item != null) {
+                        listOfCustomers.add(item)
+                    }
+                }
+            }
+        }
+        for (cust in listOfCustomers){
+            if (cust.customerId== customerId){
+                customer = cust
+            }
+        }
+        return customer
+    }*/
+
 }

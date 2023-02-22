@@ -2,33 +2,46 @@ package com.example.feedme
 
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
 import com.example.feedme.data.Restaurant
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.UploadTask
+import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
-
+var fileName: String = ""
 class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
+    private val pickImage = 100
+    private var imageUri: Uri? = null
     val registerNew = false
-    private var openingHours = hashMapOf<String, Date>()
+    lateinit var auth: FirebaseAuth
+    //private var openingHours = hashMapOf<String, Date>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
+        auth = Firebase.auth
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
@@ -55,7 +68,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
         }
 
         btnAddImage.setOnClickListener {
-
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
         }
 
         //SaveButton clickListner
@@ -64,29 +78,56 @@ class InfoRestaurantActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage) {
+            imageUri = data?.data
+            val addImageView = findViewById<ImageView>(R.id.imageViewRestaurant)
+            addImageView.setImageURI(imageUri)
+        }
+    }
+
     //Saves restaurant info to database
-    fun saveInfo() {
-        var documentRef = ""
-        val rest = Restaurant(
-            findViewById<EditText>(R.id.textInputName).text.toString(),
-            findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
-            findViewById<EditText>(R.id.textInputAddress).text.toString(),
-            findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
-            findViewById<EditText>(R.id.textInputCity).text.toString(),
-            findViewById<EditText>(R.id.textInputPhone).text.toString(),
-            findViewById<EditText>(R.id.textInputEmail).text.toString(),
-            getType(),
-            findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
-            findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
-            findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
-            findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
-            findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-            "",
-            0.0,
-            "",
-            "",
-            openingHours
-        )
+        fun saveInfo() {
+            var documentRef = ""
+            imageUri?.let { uploadImageToFirebase(it) }
+            val rest = Restaurant(
+                findViewById<EditText>(R.id.textInputName).text.toString(),
+                findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
+                findViewById<EditText>(R.id.textInputAddress).text.toString(),
+                findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
+                findViewById<EditText>(R.id.textInputCity).text.toString(),
+                findViewById<EditText>(R.id.textInputPhone).text.toString(),
+                findViewById<EditText>(R.id.textInputEmail).text.toString(),
+                getType(),
+                findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
+                findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
+                findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
+                findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
+                findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
+                "",
+                0.0,
+                "/restaurants/$fileName",
+                "",
+                //openingHours
+            )
+
+        val user = auth.currentUser
+
+        if (user != null){
+
+        db.collection("users").document(user.uid)
+            .collection("restaurants")
+            .add(rest)
+            .addOnSuccessListener { documentReference ->
+                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
+                documentRef = documentReference.id
+            }
+            .addOnFailureListener { e ->
+                Log.w("ADD RESTAURANT", "Error adding document", e)
+            }}
+
+        else{
 
         db.collection("restaurants")
             .add(rest)
@@ -96,16 +137,37 @@ class InfoRestaurantActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
-            }
+            }}
         DataManagerRestaurants.update()
 
         //On successful save redirect to restaurant details
         val intent= Intent(this,RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
+        intent.putExtra("userid", user?.uid)
         intent.putExtra("id",documentRef.toString())
         startActivity(intent)
     }
 
+    private fun uploadImageToFirebase(fileUri: Uri) {
+        if (fileUri != null) {
+            fileName = UUID.randomUUID().toString() +".jpg" //Set filename
+
+            val refStorage = Firebase.storage.reference.child("restaurants/$fileName")
+
+            //Upload the file
+            refStorage.putFile(fileUri)
+                .addOnSuccessListener(
+                    OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
+                        taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                            val imageUrl = it.toString()
+                        }
+                    })
+
+                ?.addOnFailureListener(OnFailureListener { e ->
+                    print(e.message)
+                })
+        }
+    }
 
     fun loadRestaurant(restaurant: Restaurant) {
         findViewById<EditText>(R.id.textInputName).setText(restaurant.name)
@@ -120,10 +182,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
         findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant.deliveryTypeHome
         findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant.deliveryTypeAtRestaurant
         findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant.tableBooking
-        loadOpeningHours(restaurant.openingHours)
+        //
+        // /*loadOpeningHours(restaurant.openingHours)
         findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
     }
-
+    /*
     fun setOpeningHours(view: View) {
 
         if(view is EditText) {
@@ -160,7 +223,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             }
         }
     }
-
+    */
     //not optimized version
     fun setType(types: String) {
         var listOfTypes = types.split(",")
