@@ -57,10 +57,16 @@ class MainActivity : AppCompatActivity() {
 
         val btnDrinks = findViewById<Button>(R.id.btn_drink)
 
+        val checkout = findViewById<Button>(R.id.btnCheckout)
+
 
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
         val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
+        checkout.setOnClickListener{
+            val intent = Intent(this,CheckoutActivity::class.java)
+            startActivity(intent)
+        }
         btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)
             startActivity(intent)
@@ -136,6 +142,7 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+
 
 
         // TODO THIS below
