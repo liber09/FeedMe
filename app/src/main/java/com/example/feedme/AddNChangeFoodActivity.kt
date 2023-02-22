@@ -1,15 +1,16 @@
 package com.example.feedme
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.feedme.State.restaurantId
 import com.example.feedme.data.Dishes
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+import com.example.feedme.data.Restaurant
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -44,19 +45,12 @@ class AddNChangeFoodActivity : AppCompatActivity() {
     lateinit var vegeterianExtraCostET: EditText
     lateinit var categoryOfDishString: String
     lateinit var dishImage: ImageView
-    lateinit var restaurantIdent :String
-    lateinit var auth: FirebaseAuth
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_nchange_food)
-
-
-        auth = Firebase.auth
-
-
 
 
         dishNameET = findViewById(R.id.AddDishAdminFoodTitleEditText)
@@ -85,8 +79,6 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         dishImage = findViewById(R.id.iV_AddDishAdminUploadFoodPic)
 
        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
-        restaurantIdent = intent.getStringExtra("resid").toString()
-        Log.d("JJJ",restaurantId)
 
 
         val cancelBtn = findViewById<Button>(R.id.btn_Cancel_addFood)
@@ -146,20 +138,16 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         descriptionET.setText(dish.description)
         foodCategorySpinner.setAutofillHints(dish.category)
 
-        if (dish.dishImagePath.isNotEmpty()) {
-
-            val imageref = Firebase.storage.reference.child(dish.dishImagePath)
-
-            imageref.downloadUrl.addOnSuccessListener { Uri ->
-                val imageURL = Uri.toString() // get the URL for the image
-                //Use third party product glide to load the image into the imageview
-                Glide.with(this)
-                    .load(imageURL)
-                    .into(dishImage)
-            }
+        val imageref = Firebase.storage.reference.child(dish.dishImagePath)
+        imageref.downloadUrl.addOnSuccessListener { Uri ->
+            val imageURL = Uri.toString() // get the URL for the image
+            //Use third party product glide to load the image into the imageview
+            Glide.with(this)
+                .load(imageURL)
+                .into( dishImage)
         }
 
-
+        //nedan funkar inte fullt ut det är inte inbockat
 
         if (dish.isGlutenFree == true) {
             isGlutenFreeCB.isChecked = true
@@ -223,12 +211,14 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
     }
-
+// TODO - edit through firebase - only possible local
     fun EditDish(position: Int){
 
+       // val restaurant = auth.currentUser
+
+
+
         DataManagerDishes.dishes[position].title =dishNameET.text.toString()
-
-
         DataManagerDishes.dishes[position].description = descriptionET.text.toString()
         DataManagerDishes.dishes[position].isGlutenFree = false
         if(isGlutenFreeCB.isChecked){
@@ -283,64 +273,40 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         if(canBeMadeLaktoseFreeCB.isChecked){
             DataManagerDishes.dishes[position].canBeMadeLaktosFree = true
         }
-
-        if (veganExtraCostET.text.toString().isNotEmpty() ) {
+        DataManagerDishes.dishes[position].extraCostVegan = 0.0
+        if (veganExtraCostET.text.toString().toDouble() <= 0.0 && veganExtraCostET.text.isNotEmpty()) {
             DataManagerDishes.dishes[position].extraCostVegan =veganExtraCostET.text.toString().toDouble()
-        } else {DataManagerDishes.dishes[position].extraCostVegan = null}
+        }
 
-        if (vegeterianExtraCostET.text.toString().isNotEmpty() ) {
+        DataManagerDishes.dishes[position].extraCostVegeterian =  0.0
+        if (vegeterianExtraCostET.text.toString().toDouble() <= 0.0 && vegeterianExtraCostET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostVegeterian = vegeterianExtraCostET.text.toString().toDouble()
         }
 
-        if (glutenExtraCostET.text.toString().isNotEmpty()) {
+        DataManagerDishes.dishes[position].extraCostGluten =  0.0
+        if (glutenExtraCostET.text.toString().toDouble() <= 0.0 && glutenExtraCostET.text.isNotEmpty()) {
             DataManagerDishes.dishes[position].extraCostVegeterian = glutenExtraCostET.text.toString().toDouble()
 
         }
 
-        if (laktosExtraCostET.text.toString().isNotEmpty() ) {
+        DataManagerDishes.dishes[position].extraCostLaktose =  0.0
+        if (laktosExtraCostET.text.toString().toDouble() <= 0.0 && laktosExtraCostET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostLaktose =laktosExtraCostET.text.toString().toDouble()
         }
 
-
-        if (smalPriceET.text.toString().isNotEmpty() ) {
+        DataManagerDishes.dishes[position].priceSmallPortion =  0.0
+        if (smalPriceET.text.toString().toDouble() <= 0.0 && smalPriceET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].priceSmallPortion = smalPriceET.text.toString().toDouble()
         }
-
-        if (largePriceET.text.toString().isNotEmpty()) {
+        DataManagerDishes.dishes[position].priceLargePortion =  0.0
+        if (largePriceET.text.toString().toDouble() <= 0.0 &&largePriceET.text.isNotEmpty()) {
             DataManagerDishes.dishes[position].priceLargePortion = largePriceET.text.toString().toDouble()
         }
+        DataManagerDishes.dishes[position].priceNormalPortion = 0.0
 
-        if (normalPriceET.text.toString().isNotEmpty() ) {
+        if (normalPriceET.text.toString().toDouble() <= 0.0 && normalPriceET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].priceNormalPortion = normalPriceET.text.toString().toDouble()
         }
-
-    //TODO ta bort när det går bara när man är inloggad
-
-        val user = auth.currentUser
-
-        if (user != null){
-
-            db.collection("users")
-                .document(user.uid)
-                .collection("restaurants")
-                .document(restaurantIdent)
-                .collection("dishes")
-                .document(DataManagerDishes.dishes[position].documentId!!)
-                .set(DataManagerDishes.dishes[position])
-                .addOnSuccessListener { documentReference ->
-                    Log.d("editDish", "DocumentSnapshot written with ID: ${restaurantIdent}")
-
-                }
-                .addOnFailureListener { e ->
-                    Log.w("ADD RESTAURANT", "Error adding document", e)
-                }}
-
-        else{ db.collection("restaurants")
-        .document(restaurantIdent)
-        .collection("dishes")
-        .document(DataManagerDishes.dishes[position].documentId!!)
-        .set(DataManagerDishes.dishes[position])}
-
         finish()
 
 
