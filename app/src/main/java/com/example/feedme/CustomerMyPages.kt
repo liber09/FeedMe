@@ -17,22 +17,7 @@ class CustomerMyPages : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_my_pages)
-        val id = intent.getStringExtra("CUSTOMER_DOCUMENTID")
-        //getCustomerByDocumentId(NewCustomer.customerId)
         updateViewsWithInfo(MyPagesCustomer.customer)
-    }
-
-    fun getCustomerByDocumentId(customerId: String){
-        db.collection("customers").get().addOnSuccessListener {
-            for(document in it.documents){
-                if(document != null){
-                    val item = document.toObject<Customer>()
-                    if(item != null && document.id == customerId){
-                        MyPagesCustomer.customer = item
-                    }
-                }
-            }
-        }
     }
 
     fun updateViewsWithInfo(customer:Customer?){

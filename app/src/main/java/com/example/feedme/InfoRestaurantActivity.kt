@@ -88,29 +88,29 @@ class InfoRestaurantActivity : AppCompatActivity() {
     }
 
     //Saves restaurant info to database
-    fun saveInfo() {
-        var documentRef = ""
-        imageUri?.let { uploadImageToFirebase(it) }
-        val rest = Restaurant(
-            findViewById<EditText>(R.id.textInputName).text.toString(),
-            findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
-            findViewById<EditText>(R.id.textInputAddress).text.toString(),
-            findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
-            findViewById<EditText>(R.id.textInputCity).text.toString(),
-            findViewById<EditText>(R.id.textInputPhone).text.toString(),
-            findViewById<EditText>(R.id.textInputEmail).text.toString(),
-            getType(),
-            findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
-            findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
-            findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
-            findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
-            findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-            "",
-            0.0,
-            "/restaurants/$fileName",
-            "",
-            //openingHours
-        )
+        fun saveInfo() {
+            var documentRef = ""
+            imageUri?.let { uploadImageToFirebase(it) }
+            val rest = Restaurant(
+                findViewById<EditText>(R.id.textInputName).text.toString(),
+                findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
+                findViewById<EditText>(R.id.textInputAddress).text.toString(),
+                findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
+                findViewById<EditText>(R.id.textInputCity).text.toString(),
+                findViewById<EditText>(R.id.textInputPhone).text.toString(),
+                findViewById<EditText>(R.id.textInputEmail).text.toString(),
+                getType(),
+                findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
+                findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
+                findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
+                findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
+                findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
+                "",
+                0.0,
+                "/restaurants/$fileName",
+                "",
+                //openingHours
+            )
 
         val user = auth.currentUser
 

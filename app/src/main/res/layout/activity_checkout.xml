@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".CheckoutActivity">
+
+    <CheckBox
+        android:id="@+id/paymentVisa"
+        android:layout_width="37dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="96dp"
+        android:textColor="#F29D38"
+        app:buttonIcon="@drawable/pngwing_com__2_"
+        app:layout_constraintStart_toEndOf="@+id/cbKlarna"
+        app:layout_constraintTop_toBottomOf="@+id/paymentKlarna" />
+
+    <CheckBox
+        android:id="@+id/paymentMasterCard"
+        android:layout_width="92dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
+        android:text="@string/bankCard"
+        android:textColor="#F29D38"
+        app:buttonIcon="@drawable/mastercard_symbol"
+        app:layout_constraintStart_toEndOf="@+id/cbKlarna"
+        app:layout_constraintTop_toBottomOf="@+id/paymentKlarna" />
+
+    <CheckBox
+        android:id="@+id/cbBankCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbKlarna" />
+
+    <CheckBox
+        android:id="@+id/paymentPayPal"
+        style="@android:style/Widget.Material.CompoundButton.CheckBox"
+        android:layout_width="97dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="48dp"
+        android:clickable="false"
+        android:text="@string/paypal"
+        android:textColor="#F29D38"
+        app:buttonIcon="@drawable/_a3559b6b1a966_2399139715134458147277"
+        app:layout_constraintStart_toEndOf="@+id/cbKlarna"
+        app:layout_constraintTop_toBottomOf="@+id/paymentKlarna" />
+
+    <CheckBox
+        android:id="@+id/cbPayPal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbKlarna" />
+
+    <CheckBox
+        android:id="@+id/cbSwish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbKlarna" />
+
+    <CheckBox
+        android:id="@+id/paymentSwish"
+        android:layout_width="97dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="1dp"
+        android:clickable="false"
+        android:text="@string/swish"
+        android:textColor="#F29D38"
+        app:buttonIcon="@drawable/swish_logo_primary_dark"
+        app:layout_constraintStart_toEndOf="@+id/cbKlarna"
+        app:layout_constraintTop_toBottomOf="@+id/paymentKlarna" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/yourInfo"
+        android:textColor="#F29D38"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="29dp"
+        android:text="@string/paymentMethod"
+        android:textColor="#F29D38"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine2"
+        android:layout_width="293dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:background="  #2C2E5F"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:lineHeight="24sp"
+        android:paddingStart="10sp"
+        android:paddingTop="10sp"
+        android:text="Arne Arnesson                                   Storgatan 79                                                     45689 Arnestad"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/anotherAddress"
+        android:textColor="#F29D38"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+
+    <CheckBox
+        android:id="@+id/paymentKlarna"
+        android:layout_width="97dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/klarna"
+        android:textColor="#F29D38"
+        app:buttonIcon="@drawable/klarna_logo"
+        app:layout_constraintStart_toEndOf="@+id/cbKlarna"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <CheckBox
+        android:id="@+id/cbKlarna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/btnFinishOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/finishOrder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentMasterCard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

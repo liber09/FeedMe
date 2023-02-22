@@ -72,4 +72,13 @@
     <string name="noOrderHistory">You have not made any orders yet</string>
     <string name="content_description_media">MediaDescription</string>
     <string name="OrgNr">OrgNr</string>
+    <string name="default_notification_channel_id">Notification</string>
+    <string name="yourInfo">Your information</string>
+    <string name="anotherAddress">To another address</string>
+    <string name="paymentMethod">Select paymentmethod</string>
+    <string name="klarna">Klarna</string>
+    <string name="swish">Swish</string>
+    <string name="bankCard">Bankcard</string>
+    <string name="finishOrder">Finish order</string>
+    <string name="paypal">PayPal</string>
 </resources>
