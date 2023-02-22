@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
+import com.example.feedme.data.Restaurant
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.ktx.toObject
@@ -24,6 +25,7 @@ private var imageUri: Uri? = null
 object State{
     var restaurantId: String = ""
 }
+
 class RestaurantDetailsActivity : AppCompatActivity() {
 
     lateinit var restaurantTitel :TextView
@@ -35,8 +37,13 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_restaurant_details)
         val intent:Intent = getIntent()
         State.restaurantId = intent.getStringExtra("id").toString()
+        Log.d("MMM","$State.restaurantId")
+
+        val restID = intent.getStringExtra("id")
+        Log.d("MMM","$restID")
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
+
 
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
         val menueButton = findViewById<Button>(R.id.btn_menu)
@@ -89,6 +96,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
                     val intent= Intent(this,FoodViewActivity::class.java)
                     intent.putExtra("id", State.restaurantId)
+                    intent.putExtra("restid",restID)
+
 
 
                     startActivity(intent)

@@ -21,8 +21,11 @@ import com.google.firebase.storage.ktx.storage
 
 lateinit var dishes: Dishes
 
-class FoodViewRecyclerAdapter(val context: Context,
-                              val courses : List<Dishes>)
+class FoodViewRecyclerAdapter(
+    val context: Context,
+    val courses: List<Dishes>,
+    val listener: FoodViewActivity
+)
     : RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
@@ -157,14 +160,18 @@ class FoodViewRecyclerAdapter(val context: Context,
   init {
 
 
+      itemView.setOnClickListener {
+          val position = adapterPosition
+          listener.OnClick(position)
+
+      }
 
 
-
-    itemView.setOnClickListener(){
+   /* itemView.setOnClickListener(){
     val intent = Intent(context,AddNChangeFoodActivity::class.java)
     intent.putExtra(DISH_POSTION_KEY, foodDisplayPosition)
     context.startActivity(intent)
-     }
+     }*/
 
 
       //Add dish with size small to cart
@@ -218,5 +225,10 @@ class FoodViewRecyclerAdapter(val context: Context,
                 DataManagerShoppingCart.shoppingCartItems.add(selectedDish)
             }
         }
+    }
+    interface OnClickListener {
+        fun OnClick(position: Int)
+
+
     }
 }
