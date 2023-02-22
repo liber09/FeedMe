@@ -67,7 +67,9 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 phoneNumber,
                 "customer", //Hardcoded usertype
                 userName,
-                allergies
+                allergies,
+                customerNumber = (DataManagerCustomers.customers.count()+1).toString()
+
             )
             //Add user to users collection
             val newItemRef = db.collection("customers").document().id
