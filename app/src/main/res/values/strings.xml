@@ -76,6 +76,14 @@
     <string name="content_description_media">MediaDescription</string>
     <string name="favouriteDishes">Favoritmaträtter</string>
     <string name="OrgNr">OrgNr</string>
-    <string name="default_notification_channel_id">notification</string>
+    <string name="default_notification_channel_id">Notis</string>
+    <string name="yourInfo">Dina uppgifter</string>
+    <string name="anotherAddress">Till en annan adress</string>
+    <string name="paymentMethod">Välj betalningsmetod</string>
+    <string name="klarna">Klarna</string>
+    <string name="swish">Swish</string>
+    <string name="bankCard">Bankkort</string>
+    <string name="finishOrder">Slutför beställning</string>
+    <string name="paypal">PayPal</string>
 
 </resources>

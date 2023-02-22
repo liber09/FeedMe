@@ -1,7 +1,9 @@
 package com.example.feedme
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,11 @@ class ShoppingCart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
 
+        val btnShoppingCartCheckout = findViewById<Button>(R.id.btnShoppingCartCheckout)
+        btnShoppingCartCheckout.setOnClickListener{
+            val intent = Intent(this,CheckoutActivity::class.java)
+            startActivity(intent)
+        }
         recyclerViewShoppingCart = findViewById<RecyclerView>(R.id.rvShoppingCart)
         recyclerViewShoppingCart.layoutManager= LinearLayoutManager(this)
         val adapter = ShoppingCartReyclerAdapter(this,DataManagerShoppingCart.shoppingCartItems)
