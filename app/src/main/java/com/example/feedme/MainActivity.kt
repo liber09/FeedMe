@@ -187,7 +187,24 @@ class MainActivity : AppCompatActivity() {
                 printRestaurants()
             }
         }
+
+        /*
+        val ordersRef = db.collection("orders")
+        ordersRef.addSnapshotListener{ snapshot, e ->
+            if (snapshot != null) {
+                DataManagerOrders.orders.clear()
+                for (document in snapshot.documents){
+                    if (document != null) {
+                        document.toObject<Order>()
+                            ?.let { DataManagerOrders.orders.add(it) }
+                    }
+                }
+            }
+        }
+        */
     }
+
+
 
     // Declare the launcher at the top of your Activity/Fragment:
     private val requestPermissionLauncher = registerForActivityResult(
