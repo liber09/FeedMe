@@ -81,4 +81,6 @@
     <string name="bankCard">Bankcard</string>
     <string name="finishOrder">Finish order</string>
     <string name="paypal">PayPal</string>
+    <string name="orderConfirmation">Order confirmation</string>
+    <string name="deliveryAddress">Delivery address</string>
 </resources>

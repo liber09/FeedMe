@@ -85,5 +85,7 @@
     <string name="bankCard">Bankkort</string>
     <string name="finishOrder">Slutför beställning</string>
     <string name="paypal">PayPal</string>
+    <string name="orderConfirmation">Orderbekräftelse</string>
+    <string name="deliveryAddress">Leveransadress</string>
 
 </resources>
