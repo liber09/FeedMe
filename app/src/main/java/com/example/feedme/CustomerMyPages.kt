@@ -18,8 +18,6 @@ class CustomerMyPages : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_my_pages)
-        val id = intent.getStringExtra("CUSTOMER_DOCUMENTID")
-        //getCustomerByDocumentId(NewCustomer.customerId)
         updateViewsWithInfo(MyPagesCustomer.customer)
 
         btnMyPagesEdit = findViewById<Button>(R.id.btnMyPagesEdit)
@@ -27,19 +25,6 @@ class CustomerMyPages : AppCompatActivity() {
             val intent = Intent(this, RegisterCustomerInfo::class.java)
             intent.putExtra("ID", id)
             startActivity(intent)
-        }
-    }
-
-    fun getCustomerByDocumentId(customerId: String){
-        db.collection("customers").get().addOnSuccessListener {
-            for(document in it.documents){
-                if(document != null){
-                    val item = document.toObject<Customer>()
-                    if(item != null && document.id == customerId){
-                        MyPagesCustomer.customer = item
-                    }
-                }
-            }
         }
     }
 

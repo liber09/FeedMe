@@ -21,8 +21,11 @@ import com.google.firebase.storage.ktx.storage
 
 lateinit var dishes: Dishes
 
-class FoodViewRecyclerAdapter(val context: Context,
-                              val courses : List<Dishes>)
+class FoodViewRecyclerAdapter(
+    val context: Context,
+    val courses: List<Dishes>,
+    val listener: FoodViewActivity
+)
     : RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
@@ -35,6 +38,9 @@ class FoodViewRecyclerAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dishes = courses[position]
+        //val mainCourses =
+        //
+        //if (dishes.category =="Huvudrätt")
 
         holder.nameDishTextView.text = dishes.title
         holder.descriptionDishTextView.text = dishes.description
@@ -143,16 +149,29 @@ class FoodViewRecyclerAdapter(val context: Context,
         var foodDisplayPosition = 0
         var delete_btn = itemView.findViewById<ImageButton>(R.id.btn_delete_RV_food)
 
+        var mainCourse = itemView.findViewById<TextView>(R.id.tv_MainCourse)
+        var starterCourese = itemView.findViewById<TextView>(R.id.tv_starterMealView)
+        var dessertTextView = itemView.findViewById<TextView>(R.id.tv_Deserts)
+        var drink = itemView.findViewById<TextView>(R.id.tv_drinksFoodView)
+
 
         //TODO init block för Addfunktions, and an only admin delete and change funktion
 
   init {
 
-    itemView.setOnClickListener(){
+
+      itemView.setOnClickListener {
+          val position = adapterPosition
+          listener.OnClick(position)
+
+      }
+
+
+   /* itemView.setOnClickListener(){
     val intent = Intent(context,AddNChangeFoodActivity::class.java)
     intent.putExtra(DISH_POSTION_KEY, foodDisplayPosition)
     context.startActivity(intent)
-     }
+     }*/
 
 
       //Add dish with size small to cart
@@ -179,6 +198,8 @@ class FoodViewRecyclerAdapter(val context: Context,
           handleExistsInCart(selectedDish)
       }
 
+
+
   }
     /*
     //
@@ -189,6 +210,7 @@ class FoodViewRecyclerAdapter(val context: Context,
 
     deleteButton.setOnClickListener {}
      } */
+
 
         fun handleExistsInCart(selectedDish: Dishes) {
             var alreadyInCart = false
@@ -203,5 +225,10 @@ class FoodViewRecyclerAdapter(val context: Context,
                 DataManagerShoppingCart.shoppingCartItems.add(selectedDish)
             }
         }
+    }
+    interface OnClickListener {
+        fun OnClick(position: Int)
+
+
     }
 }

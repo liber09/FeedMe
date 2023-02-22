@@ -3,6 +3,7 @@ package com.example.feedme
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -39,8 +40,10 @@ class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnC
 
         override fun OnClick(position: Int) {
         val intent = Intent(this, RestaurantDetailsActivity::class.java)
+            val restId =DataManagerRestaurants.restaurants[position].documentId.toString()
 
-        intent.putExtra("id", DataManagerRestaurants.restaurants[position].documentId.toString())
+        intent.putExtra("id", restId)
+            Log.d("TTT","$restId")
         startActivity(intent)
 
 

@@ -75,7 +75,7 @@
         android:text="Huvudrätter"
         android:textColor="#F29D38"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/tv_starterMealView"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/tv_Drinks"
+        android:id="@+id/tv_drinksFoodView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/RV_Food" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_starterMealView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -144,6 +144,7 @@
         android:text="Förrätter"
         android:textColor="#F29D38"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/RV_Food"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />

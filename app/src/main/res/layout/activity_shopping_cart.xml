@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="356dp"
-        android:layout_height="951dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
@@ -204,12 +204,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:clickable="true"
-                app:tint="#000000"
                 app:backgroundTint="#F29D38"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="#000000"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
+                app:srcCompat="@android:drawable/ic_menu_edit"
+                app:tint="#000000" />
 
             <TextView
                 android:id="@+id/TVShoppingCartTotal"
