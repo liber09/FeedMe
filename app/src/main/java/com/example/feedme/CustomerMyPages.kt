@@ -23,7 +23,7 @@ class CustomerMyPages : AppCompatActivity() {
         btnMyPagesEdit = findViewById<Button>(R.id.btnMyPagesEdit)
         btnMyPagesEdit.setOnClickListener {
             val intent = Intent(this, RegisterCustomerInfo::class.java)
-            intent.putExtra("ID", id)
+            intent.putExtra("ID", MyPagesCustomer.customer.customerId)
             startActivity(intent)
         }
     }

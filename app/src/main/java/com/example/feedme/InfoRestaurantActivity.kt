@@ -135,10 +135,10 @@ class InfoRestaurantActivity : AppCompatActivity() {
         DataManagerRestaurants.update()
 
         //On successful save redirect to restaurant details
-        val intent= Intent(this, RestaurantDetailsActivity::class.java)
+        //val intent= Intent(this, RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
-        intent.putExtra("id",documentRef.toString())
-        startActivity(intent)
+        //intent.putExtra("id",documentRef.toString())
+        //startActivity(intent)
     }
 
     private fun uploadImageToFirebase(fileUri: Uri) {
@@ -193,7 +193,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             }
         }
         docIdent = restaurant.documentId!!
-        docRating = restaurant.rating
+        docRating = restaurant.rating!!
     }
 
     fun setOpeningHours(view: View) {
