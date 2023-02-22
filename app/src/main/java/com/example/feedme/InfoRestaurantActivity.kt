@@ -33,6 +33,9 @@ class InfoRestaurantActivity : AppCompatActivity() {
     val db = Firebase.firestore
     private val pickImage = 100
     private var imageUri: Uri? = null
+    private var imgPath = ""
+    private var docIdent = ""
+    private var docRating = 0.0
     private var openingHours = hashMapOf<String, Date>(
         "monday_start" to Date(),
         "monday_end" to Date(),
@@ -56,13 +59,14 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val intent:Intent = getIntent()
 
         loadOpeningHours(openingHours)
+        loadRestaurant(DataManagerRestaurants.restaurants.get(5))
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
-        if(intent.hasExtra("RESTAURANT_KEY")) {
+        /*if(intent.hasExtra("RESTAURANT_KEY")) {
             val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "1")
             loadRestaurant(rest ?: Restaurant())
-        }
+        }*/
 
         btnAddImage.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -87,6 +91,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
     //Saves restaurant info to database
     fun saveInfo() {
         var documentRef = ""
+
         imageUri?.let { uploadImageToFirebase(it) }
         val rest = Restaurant(
             findViewById<EditText>(R.id.textInputName).text.toString(),
@@ -103,21 +108,30 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
             findViewById<EditText>(R.id.textInputDescription).text.toString(),
-            0.0,
-            "/restaurants/$fileName",
+            docRating,
+            if(imageUri != null) "/restaurants/$fileName" else imgPath,
             "",
             openingHours
         )
 
-        db.collection("restaurants")
-            .add(rest)
-            .addOnSuccessListener { documentReference ->
-                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
-                 documentRef = documentReference.id
-            }
-            .addOnFailureListener { e ->
-                Log.w("ADD RESTAURANT", "Error adding document", e)
-            }
+
+        if(docIdent.isEmpty()) {
+            db.collection("restaurants")
+                .add(rest)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(
+                        "ADD RESTAURANT",
+                        "DocumentSnapshot written with ID: ${documentReference.id}"
+                    )
+                    documentRef = documentReference.id
+                }
+                .addOnFailureListener { e ->
+                    Log.w("ADD RESTAURANT", "Error adding document", e)
+                }
+        }
+        else {
+            db.collection("restaurants").document(docIdent).set(rest)
+        }
         DataManagerRestaurants.update()
 
         //On successful save redirect to restaurant details
@@ -149,12 +163,15 @@ class InfoRestaurantActivity : AppCompatActivity() {
     }
 
     fun loadRestaurant(restaurant: Restaurant) {
+        imgPath = restaurant.imagePath
+
         findViewById<EditText>(R.id.textInputName).setText(restaurant.name)
         findViewById<EditText>(R.id.textInputAddress).setText(restaurant.address)
         findViewById<EditText>(R.id.textInputPostalCode).setText(restaurant.postalCode)
         findViewById<EditText>(R.id.textInputCity).setText(restaurant.city)
         findViewById<EditText>(R.id.textInputPhone).setText(restaurant.phoneNumber)
         findViewById<EditText>(R.id.textInputEmail).setText(restaurant.eMail)
+        findViewById<EditText>(R.id.textInputOrgNr).setText(restaurant.orgNr)
         setType(restaurant.type)
         findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant.deliveryFee.toString())
         findViewById<CheckBox>(R.id.cb_takeaway).isChecked = restaurant.deliveryTypePickup
@@ -175,6 +192,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
                     .into(imgRestaurant)
             }
         }
+        docIdent = restaurant.documentId!!
+        docRating = restaurant.rating
     }
 
     fun setOpeningHours(view: View) {
