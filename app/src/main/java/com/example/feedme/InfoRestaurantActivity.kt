@@ -96,7 +96,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
             return
 
            }
-        val documentIternal = "${user.uid}_${System.currentTimeMillis().toString()}"
+        val documentIternal = "${user.uid}"
+        val documentId = "${user.uid}+1"
 
 
         imageUri?.let { uploadImageToFirebase(it) }
@@ -117,16 +118,18 @@ class InfoRestaurantActivity : AppCompatActivity() {
                 "",
                 0.0,
                 "/restaurants/$fileName",
-                documentIternal
+                documentIternal,
                 //openingHours
+            documentId
+
             )
 
         db.collection("restaurants")
-            .document(rest.documentId)
+            .document(documentId)
             .set(rest)
             .addOnSuccessListener { documentReference ->
                 Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${rest.documentId}")
-                 documentRef = rest.documentId
+                 documentRef = documentId
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
@@ -137,7 +140,10 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val intent= Intent(this,RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
         intent.putExtra("userid", user.uid)
-        intent.putExtra("id",rest.documentId)
+        intent.putExtra("id",documentId)
+       intent.putExtra("restid",documentId)
+
+        Log.d("KKK",documentId)
         startActivity(intent)
     }
 
@@ -178,6 +184,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         //
         // /*loadOpeningHours(restaurant.openingHours)
         findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
+
     }
     /*
     fun setOpeningHours(view: View) {

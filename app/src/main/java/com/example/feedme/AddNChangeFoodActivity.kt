@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -45,13 +47,15 @@ class AddNChangeFoodActivity : AppCompatActivity() {
     lateinit var vegeterianExtraCostET: EditText
     lateinit var categoryOfDishString: String
     lateinit var dishImage: ImageView
-
+    lateinit var restaurantIdent :String
+    lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_nchange_food)
 
+        auth = Firebase.auth
 
         dishNameET = findViewById(R.id.AddDishAdminFoodTitleEditText)
         descriptionET = findViewById(R.id.AddDishAdminFoodDescriptionLayoutEditText)
@@ -77,6 +81,8 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         veganExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegan)
         vegeterianExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegeterian)
         dishImage = findViewById(R.id.iV_AddDishAdminUploadFoodPic)
+
+        restaurantIdent = intent.getStringExtra("resid").toString()
 
        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
@@ -300,11 +306,12 @@ class AddNChangeFoodActivity : AppCompatActivity() {
             DataManagerDishes.dishes[position].priceNormalPortion = normalPriceET.text.toString().toDouble()
         }
 
-   /* db.collection("restaurants")
-        .document("restaurantIdent")
+         db.collection("restaurants")
+        .document(restaurantIdent)
         .collection("dishes")
         .document(DataManagerDishes.dishes[position].documentId!!)
-        .set(DataManagerDishes.dishes[position])}*/
+        .set(DataManagerDishes.dishes[position])
+
         finish()
 
 

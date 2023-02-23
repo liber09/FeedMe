@@ -3,6 +3,7 @@ package com.example.feedme
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,17 +12,18 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 
-class FoodViewActivity : AppCompatActivity() {
+class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickListener {
 
      lateinit var foodRecyclerView : RecyclerView
+    lateinit var restaurantid: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_view)
-
+        restaurantid = intent.getStringExtra("restId").toString()
 
         foodRecyclerView = findViewById<RecyclerView>(R.id.RV_Food)
         foodRecyclerView.layoutManager= LinearLayoutManager(this)
-        val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes)
+        val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes,this)
         foodRecyclerView.adapter = adapter
 
         val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
@@ -75,9 +77,20 @@ class FoodViewActivity : AppCompatActivity() {
 
     }
 
+    override fun OnClick(position: Int) {
+        val intent = Intent(this, AddNChangeFoodActivity::class.java)
+
+
+        intent.putExtra("resid", restaurantid)
+        intent.putExtra(DISH_POSTION_KEY, position)
 
 
 
+    Log.d("LLL",restaurantid)
+
+    startActivity(intent)
+
+}
 
 
 }
