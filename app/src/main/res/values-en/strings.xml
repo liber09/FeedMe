@@ -71,6 +71,7 @@
     <string name="noDeliveries">No ongoing deliveries</string>
     <string name="noOrderHistory">You have not made any orders yet</string>
     <string name="content_description_media">MediaDescription</string>
+    <string name="favouriteDishes">Favourite dishes</string>
     <string name="OrgNr">OrgNr</string>
     <string name="default_notification_channel_id">Notification</string>
     <string name="yourInfo">Your information</string>
@@ -83,4 +84,5 @@
     <string name="paypal">PayPal</string>
     <string name="orderConfirmation">Order confirmation</string>
     <string name="deliveryAddress">Delivery address</string>
+    <string name="paidWith">"Paid with "</string>
 </resources>

@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -43,5 +44,12 @@ class CustomerOrderConfirmationActivity : AppCompatActivity() {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         val current = LocalDateTime.now().format(formatter)
         orderDateTime.text = current.toString()
+        val paymentMethod = findViewById<TextView>(R.id.TVOrderConfirmationPaymentMethod)
+        sb.clear()
+        sb.append(getString(R.string.paidWith)).append(ar1?.get(1).toString())
+        paymentMethod.text = sb.toString()
+        val EstimatedDelivery = findViewById<TextView>(R.id.TVOrderConfirmationCustomerPreliminaryArrival)
+        val oneHourLater = LocalDateTime.now().plusHours(1).format(formatter)
+        EstimatedDelivery.text = oneHourLater.toString()
     }
 }

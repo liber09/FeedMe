@@ -18,16 +18,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_RV_act"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="55dp"
-        android:text="recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/btn_customerInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,21 +102,10 @@
         android:id="@+id/btnOrderView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
         android:text="Orderview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRestview" />
-
-    <Button
-        android:id="@+id/btnRestview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="44dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_RV_act" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnGetOrders"
@@ -173,17 +152,8 @@
         android:text="Menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Shopping" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Shopping" /><![CDATA[
 
-    <Button
-        android:id="@+id/btnCheckout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="11dp"
-        android:text="checkout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menuBtn" />
     android:id="@+id/btnDrinks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -193,4 +163,5 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonRegister"
         app:layout_constraintTop_toBottomOf="@+id/btn_add_act" />
 
+]]>
 </androidx.constraintlayout.widget.ConstraintLayout>

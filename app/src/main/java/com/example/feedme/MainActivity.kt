@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
        //createMockDataOrders()
 
         val add = findViewById<Button>(R.id.btn_add_act)
-        val rv = findViewById<Button>(R.id.btn_RV_act)
         val sc = findViewById<Button>(R.id.btn_Shopping)
         val rr = findViewById<Button>(R.id.btn_RegREst)
 
@@ -50,23 +49,15 @@ class MainActivity : AppCompatActivity() {
         val mv = findViewById<Button>(R.id.btn_toMapsDel)
         val ci = findViewById<Button>(R.id.btn_customerInfo)
         val rov = findViewById<Button>(R.id.btnOrderView)
-        val rrv = findViewById<Button>(R.id.btnRestview)
         val getOrders = findViewById<Button>(R.id.btnGetOrders)
 
         val menu = findViewById<Button>(R.id.menuBtn)
 
         val btnDrinks = findViewById<Button>(R.id.btn_drink)
 
-        val checkout = findViewById<Button>(R.id.btnCheckout)
-
-
         val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
         val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
-        checkout.setOnClickListener{
-            val intent = Intent(this,CheckoutActivity::class.java)
-            startActivity(intent)
-        }
         btnDrinks.setOnClickListener{
             val intent = Intent(this,DrinksViewActivity::class.java)
             startActivity(intent)
@@ -90,9 +81,6 @@ class MainActivity : AppCompatActivity() {
             val restaurantId = tvresId.text.toString()
             getOrdersForRestaurant(restaurantId)
         }
-
-        rrv.setOnClickListener {     val intent= Intent(this,DrinksViewActivity::class.java)
-            startActivity(intent) }
 
         rov.setOnClickListener{
             val intent= Intent(this,OrderViewForRestaurants::class.java)
@@ -135,11 +123,6 @@ class MainActivity : AppCompatActivity() {
 
         add.setOnClickListener {
             val intent = Intent(this, AddNChangeFoodActivity::class.java)
-            startActivity(intent)
-        }
-        rv.setOnClickListener {
-            val intent = Intent(this, FoodViewActivity::class.java)
-
             startActivity(intent)
         }
 
