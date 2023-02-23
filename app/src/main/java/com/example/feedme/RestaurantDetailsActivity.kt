@@ -9,10 +9,14 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.UploadTask
@@ -31,12 +35,15 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     lateinit var restaurantTitel: TextView
     lateinit var restaurantdescripton: TextView
 
+    lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant_details)
         val intent: Intent = getIntent()
         State.restaurantId = intent.getStringExtra("id").toString()
+        auth = Firebase.auth
 
         val restId = intent.getStringExtra("restid").toString()
 
@@ -45,6 +52,9 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
         val menueButton = findViewById<Button>(R.id.btn_menu)
         val changeImageButton = findViewById<Button>(R.id.btnChangeImage)
+
+        changeImageButton.isInvisible = true
+
         changeImageButton.setOnClickListener {
             changeImage()
         }
@@ -60,6 +70,12 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
                 restaurantTitel.text = restaurant.name
                 restaurantdescripton.text = restaurant.description
+
+                val user = auth.currentUser
+                    if (user != null) {
+
+                if (user.uid.toString() == restaurant.documentInternal ){
+                changeImageButton.isVisible = true} }
 
                 //Get the image from firebase
                 if (restaurant.imagePath.isNotEmpty()) {

@@ -398,7 +398,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
 
         var extraCostVegeterian: Double? = null
-        if ( laktosExtraCostET.text.isNotEmpty()) {
+        if ( vegeterianExtraCostET.text.isNotEmpty()) {
             extraCostVegeterian = vegeterianExtraCostET.text.toString().toDouble()
         }
 

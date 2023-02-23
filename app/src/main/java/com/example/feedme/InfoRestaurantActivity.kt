@@ -98,6 +98,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
            }
         val documentIternal = "${user.uid}"
         val documentId = "${user.uid}+1"
+        // TODO gör det till i med increment när man väl kan lägga upp fler restauaranger
 
 
         imageUri?.let { uploadImageToFirebase(it) }
