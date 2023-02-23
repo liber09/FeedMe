@@ -10,143 +10,9 @@
 
     app:layout_constraintCircleRadius="20dp">
 
-    <Button
-        android:id="@+id/smallAddButton"
-        android:layout_width="74dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="280dp"
-        android:backgroundTint="#F29D38"
-        android:text="Add+"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:cornerRadius="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/smallTextView" />
-
-    <Button
-        android:id="@+id/mediumAddButton"
-        android:layout_width="74dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="172dp"
-        android:backgroundTint="#F29D38"
-        android:text="Add+"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:cornerRadius="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/smallAddButton"
-        app:layout_constraintTop_toBottomOf="@+id/mediumTextView" />
-
-    <Button
-        android:id="@+id/largeAddButton"
-        android:layout_width="74dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="68dp"
-        android:backgroundTint="#F29D38"
-        android:text="Add+"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:cornerRadius="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/mediumAddButton"
-        app:layout_constraintTop_toBottomOf="@+id/largeTextView" />
-
-    <TextView
-        android:id="@+id/smallTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="61dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/mediumTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
-
-    <TextView
-        android:id="@+id/smallPriceTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="61dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/mediumTextView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
-
-    <TextView
-        android:id="@+id/mediumTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/largeTextView"
-        app:layout_constraintStart_toEndOf="@+id/smallTextView"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
-
-    <TextView
-        android:id="@+id/mediumPriceTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/largeTextView"
-        app:layout_constraintHorizontal_bias="0.539"
-        app:layout_constraintStart_toEndOf="@+id/smallTextView"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
-
-    <TextView
-        android:id="@+id/largeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="80dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mediumTextView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/largePriceTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="80dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/mediumTextView"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
-        android:layout_width="407dp"
+        android:layout_width="380dp"
         android:layout_height="57dp"
         android:layout_margin="4dp"
         android:layout_marginStart="28dp"
@@ -177,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="38dp"
+            android:layout_marginEnd="160dp"
             android:text="TextView"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
@@ -203,6 +69,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/drinkslogo" />
+
+        <Button
+            android:id="@+id/cartAddButton"
+            android:layout_width="74dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="#F29D38"
+            android:text="Add+"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:cornerRadius="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sizeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/cartAddButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="11dp"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/cartAddButton"
+            app:layout_constraintTop_toBottomOf="@+id/sizeTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -23,6 +23,8 @@ class FoodViewActivity : AppCompatActivity() {
         val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes)
         foodRecyclerView.adapter = adapter
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
 
         drinks.setOnClickListener {
@@ -40,38 +42,18 @@ class FoodViewActivity : AppCompatActivity() {
 
             val desserts = dishes.category.equals("Dessert")
 
-
-
         }
 
-
-
-
-
-
-
     }
-
-
-
-
 
 
     override fun onResume() {
         super.onResume()
 
 
-
         foodRecyclerView.adapter?.notifyDataSetChanged()
 
-
-
-
     }
-
-
-
-
 
 
 }

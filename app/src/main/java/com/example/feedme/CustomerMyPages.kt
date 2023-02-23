@@ -18,6 +18,7 @@ class CustomerMyPages : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_my_pages)
         updateViewsWithInfo(MyPagesCustomer.customer)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     fun updateViewsWithInfo(customer:Customer?){

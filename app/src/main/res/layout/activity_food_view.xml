@@ -25,8 +25,8 @@
         android:id="@+id/iv_Logo"
         android:layout_width="140dp"
         android:layout_height="51dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="19dp"
+        app:layout_constraintEnd_toStartOf="@+id/profileButton"
         app:layout_constraintStart_toEndOf="@+id/menuButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/text1" />

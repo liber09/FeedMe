@@ -17,6 +17,7 @@ class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnC
         restaurantRecyclerView = findViewById(R.id.rv_Restaurant)
         restaurantRecyclerView.layoutManager = LinearLayoutManager(this)
         restaurantRecyclerView.adapter = RestaurantViewRVAdapter(this,DataManagerRestaurants.restaurants, this)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
 

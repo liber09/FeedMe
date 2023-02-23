@@ -16,10 +16,16 @@ class DrinksViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drinks_view)
 
-        val home = findViewById<ImageButton>(R.id.ibtn_home_drinksView)
-        home.setOnClickListener{
-            val intent= Intent(this,MainActivity::class.java)
-            startActivity(intent) }
+
+        val cart = findViewById<ImageButton>(R.id.cartButton)
+        cart.setOnClickListener{
+            val intent = Intent(this,ShoppingCart::class.java)
+            startActivity(intent)
+
+
+        }
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
         drinksRecyclerView = findViewById<RecyclerView>(RV_Drinks)

@@ -42,6 +42,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
         auth = Firebase.auth
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)

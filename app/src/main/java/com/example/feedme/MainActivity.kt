@@ -151,6 +151,23 @@ class MainActivity : AppCompatActivity() {
         //  fixed så we can put the extra in the documentPaht
 
 
+        val drinkRef =db.collection("restaurants").document("restaurant2").collection("drinks")    // Drink ref from database collection
+        drinkRef.addSnapshotListener { snapshot, e ->
+            if (snapshot != null) {
+
+                DataManagerDrinks.drinkList.clear()
+                for (document in snapshot.documents) {
+                    val item = document.toObject<Drink>()
+                    //Get parent documentId - restaurant in this case
+                    item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
+                    if (item != null) {
+                        DataManagerDrinks.drinkList.add(item)
+                    }
+                }
+
+                printDrinks()
+        }
+            }
 
 
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
@@ -579,16 +596,16 @@ class MainActivity : AppCompatActivity() {
         db.collection("customers").document("customer4").set(customer4, SetOptions.merge())
 
     }
-  /*  fun  printDishes(){
+    fun  printDrinks(){
 
-        for (item in DataManagerDishes.dishes)
+        for (item in DataManagerDrinks.drinkList)
         {
-            Log.d("HHH", "${item.title}")
+            Log.d("HHH", "${item.drinkName}")
 
         }
 
 
-    }*/
+    }
 
     private fun printRestaurants() {
         for (item in DataManagerRestaurants.restaurants)

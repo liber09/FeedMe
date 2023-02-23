@@ -48,10 +48,11 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_nchange_food)
-
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         dishNameET = findViewById(R.id.AddDishAdminFoodTitleEditText)
         descriptionET = findViewById(R.id.AddDishAdminFoodDescriptionLayoutEditText)
