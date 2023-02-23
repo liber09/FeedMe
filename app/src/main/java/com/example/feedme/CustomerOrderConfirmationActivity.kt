@@ -50,6 +50,56 @@ class CustomerOrderConfirmationActivity : AppCompatActivity() {
         paymentMethod.text = sb.toString()
         val EstimatedDelivery = findViewById<TextView>(R.id.TVOrderConfirmationCustomerPreliminaryArrival)
         val oneHourLater = LocalDateTime.now().plusHours(1).format(formatter)
-        EstimatedDelivery.text = oneHourLater.toString()
+        sb.clear()
+        sb.append(getString(R.string.estimatedDelivery)).append(oneHourLater)
+        EstimatedDelivery.text = sb.toString()
+        calculateShoppingCart()
+    }
+
+    private fun calculateShoppingCart() {
+        var sum = 0.0
+        var specialsSum = 0.0
+        var restaurantId = ""
+        for (item in DataManagerShoppingCart.shoppingCartItems) {
+            //if title prefixed "s " customer has chosen small portion
+            if (item.selectedFoodSize == "s") {
+                sum += (item.priceSmallPortion!!)*item.count
+                //if selectedFoodSize = "s" customer has chosen normal portion
+            } else if (item.selectedFoodSize == "n") {
+                sum += (item.priceNormalPortion!!)*item.count
+                //if selectedFoodSize = "l" customer has chosen large portion
+            } else if (item.selectedFoodSize == "l") {
+                sum += (item.priceLargePortion!!)*item.count
+            }
+            //add extraCost for vegan
+            if(item.isVegan) {
+                specialsSum+= (item.extraCostVegan!!)*item.count
+            }
+            //add extraCost for vegetarian
+            if(item.isVegetarian){
+                specialsSum += (item.extraCostVegeterian!!)*item.count
+            }
+            //add extraCost for glutenFree
+            if(item.isGlutenFree) {
+                specialsSum += (item.extraCostGluten!!)
+            }
+            //add extraCost for lactoseFree
+            if(item.isLaktoseFree) {
+                specialsSum += (item.extraCostLaktose!!)
+            }
+            restaurantId = item.restaurantDocumentId.toString()
+        }
+        val deliveryPrice = DataManagerRestaurants.getByDocumentId(restaurantId)?.deliveryFee
+        sum += specialsSum
+        val dishesTotal = findViewById<TextView>(R.id.TVOrderConfirmationCustomerOrderTotalValue)
+        dishesTotal.text = sum.toString()
+        if (deliveryPrice != null) {
+            sum += deliveryPrice
+        }
+        val deliveryFee = findViewById<TextView>(R.id.TVOrderConfirmationCustomerDeliveryPrice)
+        val totalPriceView = findViewById<TextView>(R.id.TVOrderConfirmationCustomerTotalCost)
+
+        totalPriceView.text = sum.toString()+ " Kr"
+        deliveryFee.text = deliveryPrice.toString() + " Kr"
     }
 }

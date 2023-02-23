@@ -3,6 +3,7 @@ package com.example.feedme
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,6 +19,10 @@ class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnC
         restaurantRecyclerView.layoutManager = LinearLayoutManager(this)
         restaurantRecyclerView.adapter = RestaurantViewRVAdapter(this,DataManagerRestaurants.restaurants, this)
 
+        val backButton = findViewById<ImageView>(R.id.foodViewBackButton)
+        backButton.setOnClickListener{
+            finish()
+        }
 
 
 

@@ -88,5 +88,6 @@
     <string name="deliveryAddress">Leveransadress</string>
     <string name="paidWith">"Betalat med "</string>
     <string name="favouriteDishes">Favoritmaträtter</string>
+    <string name="estimatedDelivery">"Beräknad leverans: "</string>
 
 </resources>
