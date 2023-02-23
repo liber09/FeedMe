@@ -3,10 +3,13 @@ package com.example.feedme
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
@@ -90,6 +93,23 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         val cancelBtn = findViewById<Button>(R.id.btn_Cancel_addFood)
         cancelBtn.setOnClickListener { finish() }
 
+        val deleteBtn = findViewById<ImageButton>(R.id.btn_deleteAddNchn)
+        deleteBtn.isInvisible = true
+
+        if (dishPosition != DiSH_POSITION_NOT_SET)   {
+            deleteBtn.isVisible = true
+
+
+        deleteBtn.setOnClickListener { db.collection("restaurants")
+            .document(restaurantIdent)
+            .collection("dishes")
+            .document(DataManagerDishes.dishes[dishPosition].documentId!!).delete()
+            .addOnSuccessListener { Log.d("ddd", "DocumentSnapshot sucessfully deleted!") }
+        finish()
+        }
+        }
+
+
 
 
         val foodCategoryArray = arrayOf(
@@ -135,7 +155,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
    }
     }
 
-    //TODO rule only if  youre logged in as a restaurount - but works
+
 
     fun displayDish(position: Int) {
 
@@ -312,6 +332,8 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         .document(DataManagerDishes.dishes[position].documentId!!)
         .set(DataManagerDishes.dishes[position])
 
+
+
         finish()
 
 
@@ -319,14 +341,6 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
     fun AddDish() {
-
-        // TODO when restaurants are logged in
-       /* var auth = Firebase.auth
-
-        val restaurant = auth.currentUser
-        if (restaurant == null){
-            return
-        } */
 
 
         val dishName = dishNameET.text.toString()
@@ -372,8 +386,9 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
         // TODO: add logic that only if it is not glutnfree etc
         //  from the beginning the checkbox appears
+        //TODO check the checkbox if price for extra glutenfree
 
-        //TODO: add logic to accept only numbers
+
         var canBeMadeGlutenfree = false
         if (canBeMadeGlutenFreeCB.isChecked) {
             canBeMadeGlutenfree = true

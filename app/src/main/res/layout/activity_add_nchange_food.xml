@@ -13,7 +13,6 @@
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:foregroundTintMode="add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -703,11 +702,18 @@
                     android:id="@+id/btn_Cancel_addFood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="164dp"
+                    android:layout_marginLeft="104dp"
                     android:layout_marginTop="8dp"
                     android:text="Cancel" />
 
             </TableRow>
+
+            <ImageButton
+                android:id="@+id/btn_deleteAddNchn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:srcCompat="@drawable/ic_baseline_delete_24" />
 
         </LinearLayout>
     </ScrollView>

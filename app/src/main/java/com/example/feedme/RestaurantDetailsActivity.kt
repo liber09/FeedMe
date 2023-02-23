@@ -1,5 +1,6 @@
 package com.example.feedme
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -38,13 +39,14 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant_details)
         val intent: Intent = getIntent()
         State.restaurantId = intent.getStringExtra("id").toString()
         auth = Firebase.auth
-
+        val user = auth.currentUser
         val restId = intent.getStringExtra("restid").toString()
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
@@ -52,6 +54,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
         val menueButton = findViewById<Button>(R.id.btn_menu)
         val changeImageButton = findViewById<Button>(R.id.btnChangeImage)
+        val bookButton = findViewById<Button>(R.id.btn_table_bocking)
 
         changeImageButton.isInvisible = true
 
@@ -71,11 +74,13 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 restaurantTitel.text = restaurant.name
                 restaurantdescripton.text = restaurant.description
 
-                val user = auth.currentUser
+
                     if (user != null) {
 
                 if (user.uid.toString() == restaurant.documentInternal ){
-                changeImageButton.isVisible = true} }
+                changeImageButton.isVisible = true
+                    bookButton.isInvisible = true
+                } }
 
                 //Get the image from firebase
                 if (restaurant.imagePath.isNotEmpty()) {
