@@ -115,12 +115,12 @@ class InfoRestaurantActivity : AppCompatActivity() {
                 findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
                 findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
                 findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-                "",
+                findViewById<EditText>(R.id.textInputDescription).text.toString(),
                 0.0,
                 "/restaurants/$fileName",
                 documentIternal,
                 //openingHours
-            documentId
+                documentId
 
             )
 
