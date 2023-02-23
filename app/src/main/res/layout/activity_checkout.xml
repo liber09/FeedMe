@@ -7,6 +7,27 @@
     android:background="#000000"
     tools:context=".CheckoutActivity">
 
+    <ImageButton
+        android:id="@+id/imgCheckoutHome"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="24dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_home_24" />
+
+    <ImageView
+        android:id="@+id/imgCheckoutBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_circle_left_24" />
+
     <CheckBox
         android:id="@+id/paymentVisa"
         android:layout_width="37dp"
