@@ -138,6 +138,9 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         descriptionET.setText(dish.description)
         foodCategorySpinner.setAutofillHints(dish.category)
 
+
+        if (dish.dishImagePath.isNotEmpty()){
+
         val imageref = Firebase.storage.reference.child(dish.dishImagePath)
         imageref.downloadUrl.addOnSuccessListener { Uri ->
             val imageURL = Uri.toString() // get the URL for the image
@@ -145,9 +148,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(imageURL)
                 .into( dishImage)
-        }
-
-        //nedan funkar inte fullt ut det är inte inbockat
+        }}
 
         if (dish.isGlutenFree == true) {
             isGlutenFreeCB.isChecked = true
@@ -214,13 +215,10 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 // TODO - edit through firebase - only possible local
     fun EditDish(position: Int){
 
-       // val restaurant = auth.currentUser
-
-
-
         DataManagerDishes.dishes[position].title =dishNameET.text.toString()
         DataManagerDishes.dishes[position].description = descriptionET.text.toString()
         DataManagerDishes.dishes[position].isGlutenFree = false
+
         if(isGlutenFreeCB.isChecked){
             DataManagerDishes.dishes[position].isGlutenFree = true
         }
@@ -273,40 +271,40 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         if(canBeMadeLaktoseFreeCB.isChecked){
             DataManagerDishes.dishes[position].canBeMadeLaktosFree = true
         }
-        DataManagerDishes.dishes[position].extraCostVegan = 0.0
-        if (veganExtraCostET.text.toString().toDouble() <= 0.0 && veganExtraCostET.text.isNotEmpty()) {
+
+        if (veganExtraCostET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].extraCostVegan =veganExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].extraCostVegeterian =  0.0
-        if (vegeterianExtraCostET.text.toString().toDouble() <= 0.0 && vegeterianExtraCostET.text.isNotEmpty() ) {
+        if (vegeterianExtraCostET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostVegeterian = vegeterianExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].extraCostGluten =  0.0
-        if (glutenExtraCostET.text.toString().toDouble() <= 0.0 && glutenExtraCostET.text.isNotEmpty()) {
+        if (glutenExtraCostET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].extraCostVegeterian = glutenExtraCostET.text.toString().toDouble()
-
         }
 
-        DataManagerDishes.dishes[position].extraCostLaktose =  0.0
-        if (laktosExtraCostET.text.toString().toDouble() <= 0.0 && laktosExtraCostET.text.isNotEmpty() ) {
+        if (laktosExtraCostET.text.toString().isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostLaktose =laktosExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].priceSmallPortion =  0.0
-        if (smalPriceET.text.toString().toDouble() <= 0.0 && smalPriceET.text.isNotEmpty() ) {
+        if (smalPriceET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].priceSmallPortion = smalPriceET.text.toString().toDouble()
         }
-        DataManagerDishes.dishes[position].priceLargePortion =  0.0
-        if (largePriceET.text.toString().toDouble() <= 0.0 &&largePriceET.text.isNotEmpty()) {
+
+        if (largePriceET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].priceLargePortion = largePriceET.text.toString().toDouble()
         }
-        DataManagerDishes.dishes[position].priceNormalPortion = 0.0
 
-        if (normalPriceET.text.toString().toDouble() <= 0.0 && normalPriceET.text.isNotEmpty() ) {
+        if (normalPriceET.text.toString().isNotEmpty() ) {
             DataManagerDishes.dishes[position].priceNormalPortion = normalPriceET.text.toString().toDouble()
         }
+
+   /* db.collection("restaurants")
+        .document("restaurantIdent")
+        .collection("dishes")
+        .document(DataManagerDishes.dishes[position].documentId!!)
+        .set(DataManagerDishes.dishes[position])}*/
         finish()
 
 

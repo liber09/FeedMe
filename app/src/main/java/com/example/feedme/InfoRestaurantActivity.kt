@@ -96,7 +96,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             return
 
            }
-        //val documentId = "${user.uid}_${System.currentTimeMillis().toString()}"
+        val documentIternal = "${user.uid}_${System.currentTimeMillis().toString()}"
 
 
         imageUri?.let { uploadImageToFirebase(it) }
@@ -117,7 +117,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
                 "",
                 0.0,
                 "/restaurants/$fileName",
-                null,
+                documentIternal
                 //openingHours
             )
 

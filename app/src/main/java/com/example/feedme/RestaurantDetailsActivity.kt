@@ -36,6 +36,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         val intent:Intent = getIntent()
         State.restaurantId = intent.getStringExtra("id").toString()
 
+        val restId = intent.getStringExtra("restid")
+
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
 
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
@@ -50,7 +52,10 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         }
         for (restaurant in DataManagerRestaurants.restaurants){
             val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
-            if(State.restaurantId == restaurant.documentId){
+
+            //if(State.restaurantId == restaurant.documentId){
+            if(restId == restaurant.documentId){
+
                 restaurantTitel.text = restaurant.name
                 restaurantdescripton.text = restaurant.description
 
@@ -67,7 +72,9 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 }
 
 
-                val docRef =db.collection("restaurants").document(State.restaurantId!!).collection("dishes")
+               // val docRef =db.collection("restaurants").document(State.restaurantId!!).collection("dishes")
+                val docRef =db.collection("restaurants").document(restId).collection("dishes")
+
                 docRef.addSnapshotListener{ snapshot, e ->
                     if (snapshot != null) {
 

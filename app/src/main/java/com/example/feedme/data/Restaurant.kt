@@ -24,10 +24,7 @@ data class Restaurant(
     val description:String = "",
     val rating:Double?= null,
     val imagePath:String ="",
-   //@DocumentId
     var documentInternal: String?=null,
+    @DocumentId val documentId: String
     //val openingHours: HashMap<String, Date> = hashMapOf<String, Date>()
-){
-    val documentId: String
-        get() = "${Firebase.auth.currentUser?.uid}_${System.currentTimeMillis()}"
-}
+)
