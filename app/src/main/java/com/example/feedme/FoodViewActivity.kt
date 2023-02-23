@@ -3,6 +3,7 @@ package com.example.feedme
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,11 @@ class FoodViewActivity : AppCompatActivity() {
             val intent = Intent(this,DrinksViewActivity::class.java)
 
             this.startActivity(intent)
+        }
+
+        val backButton = findViewById<ImageView>(R.id.foodViewBackButton)
+        backButton.setOnClickListener{
+            finish()
         }
 
 

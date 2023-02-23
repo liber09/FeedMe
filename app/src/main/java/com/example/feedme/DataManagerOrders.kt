@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter
 
 object DataManagerOrders{
     val orders = mutableListOf<Order>()
-    val OrderRows = mutableListOf<Dishes>()}
+    val OrderRows = mutableListOf<Dishes>()
+
+}
+
 
 

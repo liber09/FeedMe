@@ -9,9 +9,9 @@ data class Order (
     @DocumentId var restaurantDocumentId : String? = null,
     @DocumentId var customerId:String? = null,
     @DocumentId var orderId: String? = null,
-    var orderedDishes: MutableList<Dishes>?,
-    var orderedDrinks:MutableList<Drink>,
-    var orderDate: LocalDate,
+    //var orderedDishes: MutableList<Dishes>?,
+    //var orderedDrinks: MutableList<Drink>?,
+    var orderDate: LocalDate? = null,
     var orderNr:Int? = null,
     var totalAmount:Double? = null,
     var typeOfDelivery:String? = null

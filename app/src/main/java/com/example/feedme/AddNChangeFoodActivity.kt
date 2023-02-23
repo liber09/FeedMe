@@ -468,7 +468,8 @@ class AddNChangeFoodActivity : AppCompatActivity() {
                 extraCostLaktose,
                 extraCostVegan,
                 extraCostVegeterian,
-                ""
+                "",
+                "/dishes/default_food.jpg"
             )
 
            // DataManagerDishes.dishes.add(newDish) only local

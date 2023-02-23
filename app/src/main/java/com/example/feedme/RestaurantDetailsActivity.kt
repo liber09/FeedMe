@@ -44,6 +44,10 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         changeImageButton.setOnClickListener{
             changeImage()
         }
+        val btnBack = findViewById<ImageView>(R.id.ibtn_back_RestDetails)
+        btnBack.setOnClickListener{
+            finish()
+        }
         for (restaurant in DataManagerRestaurants.restaurants){
             val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
             if(State.restaurantId == restaurant.documentId){
