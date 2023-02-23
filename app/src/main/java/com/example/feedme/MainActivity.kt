@@ -613,7 +613,7 @@ for (item in DataManagerRestaurants.restaurants)
 
 
 }
-
+/*
 private fun createMockDataOrders() {
 var orderDishes = mutableListOf<Dishes>()
 var orderDrinks = mutableListOf<Drink>()
@@ -642,7 +642,7 @@ db.collection("orders").add(order1)
 db.collection("orders").document("order1").collection("orderDrinks").add(orderDrink2)
 db.collection("orders").document("order1").collection("orderDishes").add(orderDish1)
 }
-
+*/
 /*    fun getCustomerByDocumentId(customerId: String):Customer?{
 var listOfCustomers = MutableList<Customer>()
 

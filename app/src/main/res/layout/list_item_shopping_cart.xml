@@ -13,7 +13,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipCartRowAllergenGroup"
@@ -76,7 +76,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
         android:text="+"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgShoppingCart"
         app:layout_constraintTop_toBottomOf="@+id/textViewCartRowItemTitle" />
 
     <TextView
@@ -100,11 +100,11 @@
         android:text="Pizza Hawaii"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgShoppingCart"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgShoppingCart"
         android:layout_width="127dp"
         android:layout_height="123dp"
         android:layout_marginStart="16dp"
@@ -121,7 +121,7 @@
         android:layout_marginTop="2dp"
         android:text="@string/specials"
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgShoppingCart"
         app:layout_constraintTop_toBottomOf="@+id/textViewCartRowItemTitle" />
 
     <TextView

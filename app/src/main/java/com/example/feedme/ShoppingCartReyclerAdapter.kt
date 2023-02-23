@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: List<Dishes>): RecyclerView.Adapter<ShoppingCartReyclerAdapter.ViewHolder>() {
 
@@ -60,6 +64,15 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
             cartItems.count--
             holder.cartItemRowCount.text = cartItems.count.toString()
         }
+        if(cartItems.dishImagePath.isNotEmpty()){
+            val imageref = Firebase.storage.reference.child(cartItems.dishImagePath)
+            imageref.downloadUrl.addOnSuccessListener {Uri->
+                val imageURL = Uri.toString()
+                Glide.with(context)
+                    .load(imageURL)
+                    .into(holder.imgShoppingCart)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -73,6 +86,8 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         val cartItemRowSpecialsPrice = itemView.findViewById<TextView>(R.id.TVShoppingCartRowItemSpeecialsAmount)
         val increaseButton = itemView.findViewById<Button>(R.id.btnShoppingCartIncrease)
         val decreaseButton = itemView.findViewById<Button>(R.id.btnShoppingCartDecrease)
+        val imgShoppingCart = itemView.findViewById<ImageView>(R.id.imgShoppingCart)
+
 
         var cartDisplayPosition = 0
 
