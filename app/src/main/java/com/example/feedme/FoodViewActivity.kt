@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
@@ -27,6 +29,22 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         foodRecyclerView.adapter = adapter
 
         val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
+
+        val fab_add_dish = findViewById<FloatingActionButton>(R.id.FAB_ADD_Dish)
+
+        fab_add_dish.setOnClickListener{
+            val intent = Intent(this, AddNChangeFoodActivity::class.java)
+
+            intent.putExtra("resid", restaurantid)
+
+
+            startActivity(intent)
+
+
+        }
+
+
+
 
         drinks.setOnClickListener {
 
