@@ -7,6 +7,18 @@
     android:background="#000000"
     tools:context=".CustomerMyPages">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="157dp"
+        android:layout_height="144dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TVMyPagesCIty"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/male_user" />
+
     <Button
         android:id="@+id/btnMoreFavRestaurants"
         android:layout_width="wrap_content"
@@ -18,76 +30,95 @@
         app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
 
     <TextView
-        android:id="@+id/TVMyPagesFirstName"
+        android:id="@+id/TVMyPagesAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="TextView"
         android:textColor="#F29D38"
         android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="180dp" />
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesLastName" />
 
     <TextView
         android:id="@+id/TVMyPagesLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="TextView"
         android:textColor="#F29D38"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesFirstName"
-        tools:layout_editor_absoluteX="180dp" />
-
-    <TextView
-        android:id="@+id/TVMyPagesAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        android:textColor="#F29D38"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesLastName"
-        tools:layout_editor_absoluteX="180dp" />
-
-    <TextView
-        android:id="@+id/TVMyPagesPostalCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        android:textColor="#F29D38"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesAddress"
-        tools:layout_editor_absoluteX="180dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesFirstName" />
 
     <TextView
         android:id="@+id/TVMyPagesMobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#F29D38"
         android:textSize="20sp"
         android:textStyle="normal"
-        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesPostalCode"
-        tools:layout_editor_absoluteX="180dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesPostalCode" />
+
+    <TextView
+        android:id="@+id/TVMyPagesFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textColor="#F29D38"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVMyPagesCIty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#F29D38"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/TVMyPagesPostalCode"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesAddress" />
 
     <TextView
         android:id="@+id/TVMyPagesEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
         android:textColor="#F29D38"
         android:textSize="20sp"
         android:textStyle="normal"
-        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesPostalCode"
-        tools:layout_editor_absoluteX="180dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesPostalCode" />
+
+    <TextView
+        android:id="@+id/TVMyPagesPostalCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#F29D38"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesAddress" />
 
     <TextView
         android:id="@+id/TVOngoingDeliveries"
@@ -140,19 +171,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
-
-    <TextView
-        android:id="@+id/TVMyPagesCIty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        android:textColor="#F29D38"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/TVMyPagesPostalCode"
-        app:layout_constraintTop_toBottomOf="@+id/TVMyPagesAddress" />
 
     <Button
         android:id="@+id/btnMyPagesEdit"
@@ -436,18 +454,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="11dp"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="91dp" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
             <TextView
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="10dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="117dp" />
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar7" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
