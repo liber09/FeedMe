@@ -37,5 +37,10 @@ class CheckoutActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("list",arInfo)
             startActivity(intent)
         }
+        val chbOtherAddress = findViewById<CheckBox>(R.id.chbOtherAddress)
+        val addressField = findViewById<EditText>(R.id.editTextTextMultiLine2)
+        chbOtherAddress.setOnClickListener{
+            addressField.isFocusableInTouchMode = chbOtherAddress.isChecked
+        }
     }
 }
