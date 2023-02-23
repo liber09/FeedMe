@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         //mockDataDrinks()
        //createMockDataOrders()
 
-        val add = findViewById<Button>(R.id.btn_add_act)
+
         val sc = findViewById<Button>(R.id.btn_Shopping)
         val rr = findViewById<Button>(R.id.btn_RegREst)
 
@@ -121,10 +121,7 @@ class MainActivity : AppCompatActivity() {
 
         //val infoRes = findViewById<Button>(R.id.btn_infoRes)
 
-        add.setOnClickListener {
-            val intent = Intent(this, AddNChangeFoodActivity::class.java)
-            startActivity(intent)
-        }
+
 
 
 
