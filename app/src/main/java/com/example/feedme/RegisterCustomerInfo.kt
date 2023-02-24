@@ -1,9 +1,11 @@
 package com.example.feedme
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.feedme.MyPagesCustomer.customer
@@ -33,6 +35,20 @@ class RegisterCustomerInfo : AppCompatActivity() {
         btnSaveCustomerInfo.setOnClickListener {
             //Call function to save customer info to database
             saveCustomerInfoToDatabase()
+        }
+        val customerInfoBack = findViewById<ImageView>(R.id.customerInfoBack)
+        val customerInfoHome = findViewById<ImageView>(R.id.customerInfoHome)
+        val logo = findViewById<ImageView>(R.id.iv_Logo)
+        logo.setOnClickListener{
+            val intent= Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        customerInfoHome.setOnClickListener{
+            val intent= Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        customerInfoBack.setOnClickListener{
+            finish()
         }
     }
 
