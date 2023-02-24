@@ -1,12 +1,15 @@
 package com.example.feedme
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide.init
 import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
 
@@ -30,9 +33,10 @@ RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
 
         holder.tv_restaurantName.text = restaurant.name
         holder.tv_restaurantAdress.text = restaurant.address + " "+restaurant.postalCode +" "+restaurant.city
-        val customerAdapter = CustomerAdressDeliveryReceiyclerAdapter(context, DataManagerDishes.dishes)
+        val customerAdapter = CustomerAdressDeliveryReceiyclerAdapter(context, DataManagerCustomers.customers)
         holder.rv_forCustomerAdress.layoutManager = LinearLayoutManager(context)
         holder.rv_forCustomerAdress.adapter = customerAdapter
+        holder.restaurantDisplayPosition =position
 
     }
 
@@ -44,10 +48,26 @@ RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
         val tv_restaurantName = itemView.findViewById<TextView>(R.id.tv_RVDeliv_RestName)
         val tv_restaurantAdress = itemView.findViewById<TextView>(R.id.tv_RVDel_RestAdress)
         val rv_forCustomerAdress = itemView.findViewById<RecyclerView>(R.id.RV_customerInfo)
+        val btn_gps2restaurant = itemView.findViewById<Button>(R.id.btn_GPS2RestaurantRVDeliveryGuy)
+        var restaurantDisplayPosition = 0
+
+        init {
+            btn_gps2restaurant.setOnClickListener {
+                val target = DataManagerRestaurants.restaurants[restaurantDisplayPosition]
+                val intent = Intent(context,DeliveryMapsActivity::class.java)
+                intent.putExtra("target","$target")
+                context.startActivity(intent)
+
+
+            }
+        }
 
 
 
     }
+
+
+
 
 
 }

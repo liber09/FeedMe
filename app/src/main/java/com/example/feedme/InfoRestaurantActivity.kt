@@ -87,11 +87,22 @@ class InfoRestaurantActivity : AppCompatActivity() {
             addImageView.setImageURI(imageUri)
         }
     }
-
+    var documentRef = ""
     //Saves restaurant info to database
         fun saveInfo() {
-            var documentRef = ""
-            imageUri?.let { uploadImageToFirebase(it) }
+            val user = auth.currentUser
+
+
+        if (user == null){
+            return
+
+           }
+        val documentIternal = "${user.uid}"
+        val documentId = "${user.uid}+1"
+        // TODO gör det till i med increment när man väl kan lägga upp fler restauaranger
+
+
+        imageUri?.let { uploadImageToFirebase(it) }
             val rest = Restaurant(
                 findViewById<EditText>(R.id.textInputName).text.toString(),
                 findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
@@ -106,46 +117,35 @@ class InfoRestaurantActivity : AppCompatActivity() {
                 findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
                 findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
                 findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-                "",
+                findViewById<EditText>(R.id.textInputDescription).text.toString(),
                 0.0,
                 "/restaurants/$fileName",
-                "",
+                documentIternal,
                 //openingHours
+                documentId
+
             )
 
-        val user = auth.currentUser
-
-        if (user != null){
-
-        db.collection("users").document(user.uid)
-            .collection("restaurants")
-            .add(rest)
-            .addOnSuccessListener { documentReference ->
-                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
-                documentRef = documentReference.id
-            }
-            .addOnFailureListener { e ->
-                Log.w("ADD RESTAURANT", "Error adding document", e)
-            }}
-
-        else{
-
         db.collection("restaurants")
-            .add(rest)
+            .document(documentId)
+            .set(rest)
             .addOnSuccessListener { documentReference ->
-                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${documentReference.id}")
-                 documentRef = documentReference.id
+                Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${rest.documentId}")
+                 documentRef = documentId
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
-            }}
+            }
         DataManagerRestaurants.update()
 
         //On successful save redirect to restaurant details
         val intent= Intent(this,RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
-        intent.putExtra("userid", user?.uid)
-        intent.putExtra("id",documentRef.toString())
+        intent.putExtra("userid", user.uid)
+        intent.putExtra("id",documentId)
+       intent.putExtra("restid",documentId)
+
+        Log.d("KKK",documentId)
         startActivity(intent)
     }
 
@@ -186,6 +186,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         //
         // /*loadOpeningHours(restaurant.openingHours)
         findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
+
     }
     /*
     fun setOpeningHours(view: View) {

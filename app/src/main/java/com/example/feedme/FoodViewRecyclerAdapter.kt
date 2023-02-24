@@ -22,7 +22,8 @@ import com.google.firebase.storage.ktx.storage
 lateinit var dishes: Dishes
 
 class FoodViewRecyclerAdapter(val context: Context,
-                              val courses : List<Dishes>)
+                              val courses : List<Dishes>,
+                              val listener: OnClickListener)
     : RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
@@ -95,19 +96,7 @@ class FoodViewRecyclerAdapter(val context: Context,
 
         holder.foodDisplayPosition = position
         //TODO change this as soon as it is klickable from a restaurant
-        holder.delete_btn.setOnClickListener {
-            dishes.documentId?.let { it1 ->
-                db.collection("restaurants")
-                    .document("restaurant2")
-                    .collection("dishes")
-                    .document(it1).delete()
-                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot sucessfully deleted!") }
-                    .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
 
-            }
-
-
-        }
 
 
         // TODO for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
@@ -144,7 +133,7 @@ class FoodViewRecyclerAdapter(val context: Context,
         var tv_priceVegetarian = itemView.findViewById<TextView>(R.id.tv_RV_priceVegeterian)
         var iv_foodImage = itemView.findViewById<ImageView>(R.id.iV_foodDisplay_RV)
         var foodDisplayPosition = 0
-        var delete_btn = itemView.findViewById<ImageButton>(R.id.btn_delete_RV_food)
+
 
         var mainCourse = itemView.findViewById<TextView>(R.id.tv_MainCourse)
         var starterCourese = itemView.findViewById<TextView>(R.id.tv_starterMealView)
@@ -157,14 +146,18 @@ class FoodViewRecyclerAdapter(val context: Context,
   init {
 
 
+      itemView.setOnClickListener {
+          val position = adapterPosition
+          listener.OnClick(position)
+
+      }
 
 
-
-    itemView.setOnClickListener(){
+    /*itemView.setOnClickListener(){
     val intent = Intent(context,AddNChangeFoodActivity::class.java)
     intent.putExtra(DISH_POSTION_KEY, foodDisplayPosition)
     context.startActivity(intent)
-     }
+     }*/
 
 
       //Add dish with size small to cart
@@ -218,5 +211,13 @@ class FoodViewRecyclerAdapter(val context: Context,
                 DataManagerShoppingCart.shoppingCartItems.add(selectedDish)
             }
         }
+    }
+
+
+
+    interface OnClickListener {
+        fun OnClick(position: Int)
+
+
     }
 }

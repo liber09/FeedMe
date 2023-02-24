@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="  #2C2E5F">
+    android:background="#1A1B42">
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/orderedDish"
         android:layout_width="160dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
