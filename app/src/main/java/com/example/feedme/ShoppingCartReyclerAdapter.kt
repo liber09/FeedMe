@@ -86,8 +86,8 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
                 priceToAdd = cartItems.priceLargePortion!!
             }
             holder.cartItemRowPrice.text = (cartItems.count * priceToAdd).toString()+ " kr"
-
         }
+
         if(cartItems.dishImagePath.isNotEmpty()){
             val imageref = Firebase.storage.reference.child(cartItems.dishImagePath)
             imageref.downloadUrl.addOnSuccessListener {Uri->
