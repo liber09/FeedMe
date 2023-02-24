@@ -75,8 +75,6 @@ class LoginAndRegisterActivity : AppCompatActivity() {
             //Ifsats för olika former av users
 
 
-
-
         }
     }
 
@@ -193,20 +191,15 @@ class LoginAndRegisterActivity : AppCompatActivity() {
                                                 Intent(this, DeliveryPersonViewActivity::class.java)
                                             startActivity(intent)
                                             finish()
-                                        }
+                                        } else {
 
-                                    }
-
-
-
-                                db.collection("users").document(userId)
-                                    .collection("restaurants").get()
-                                    .addOnSuccessListener { result ->
-                                        if (!result.isEmpty) {
+                                            //uteslutsförfarande då jag inte fick till det annars
 
                                             val intent =
                                                 Intent(this, RestaurantDetailsActivity::class.java)
-                                            intent.putExtra("userId",userId)
+                                            intent.putExtra("userId", userId)
+                                            intent.putExtra("restid", "${user.uid}+1")
+
                                             startActivity(intent)
                                             finish()
                                         }
@@ -214,32 +207,21 @@ class LoginAndRegisterActivity : AppCompatActivity() {
                                     }
 
 
-                                /*  else {
-                        val intent = Intent(this, RestaurantDetailsActivity::class.java)
-                        startActivity(intent)
-                        finish()
-
-
-                    }*/
-
                             }
                     }
 
 
 
-        Log.d("!!!", "Sign in succeeded")
+                    Log.d("!!!", "Sign in succeeded")
+                } else {
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
+
+                }
+
+
+            }
+
     }
-
-else {
-    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
-
-}
-
-
-
-}
-
-}
 }
 
 
