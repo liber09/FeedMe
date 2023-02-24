@@ -40,7 +40,7 @@ class RegisterCustomerInfo : AppCompatActivity() {
         val customerInfoHome = findViewById<ImageView>(R.id.customerInfoHome)
         val logo = findViewById<ImageView>(R.id.iv_Logo)
         logo.setOnClickListener{
-            val intent= Intent(this,MainActivity::class.java)
+            val intent= Intent(this,RestaurantViewActiviity::class.java)
             startActivity(intent)
         }
         customerInfoHome.setOnClickListener{
