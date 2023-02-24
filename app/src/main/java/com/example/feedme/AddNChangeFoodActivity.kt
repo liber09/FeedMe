@@ -3,14 +3,19 @@ package com.example.feedme
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -45,14 +50,20 @@ class AddNChangeFoodActivity : AppCompatActivity() {
     lateinit var vegeterianExtraCostET: EditText
     lateinit var categoryOfDishString: String
     lateinit var dishImage: ImageView
-
+    lateinit var restaurantIdent :String
+    lateinit var auth: FirebaseAuth
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_nchange_food)
+
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
+        auth = Firebase.auth
+
 
         dishNameET = findViewById(R.id.AddDishAdminFoodTitleEditText)
         descriptionET = findViewById(R.id.AddDishAdminFoodDescriptionLayoutEditText)
@@ -79,11 +90,30 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         vegeterianExtraCostET = findViewById(R.id.ET_AddDishAdminExtrakostVegeterian)
         dishImage = findViewById(R.id.iV_AddDishAdminUploadFoodPic)
 
+        restaurantIdent = intent.getStringExtra("resid").toString()
+
        val dishPosition = intent.getIntExtra(DISH_POSTION_KEY, DiSH_POSITION_NOT_SET)
 
 
         val cancelBtn = findViewById<Button>(R.id.btn_Cancel_addFood)
         cancelBtn.setOnClickListener { finish() }
+
+        val deleteBtn = findViewById<ImageButton>(R.id.btn_deleteAddNchn)
+        deleteBtn.isInvisible = true
+
+        if (dishPosition != DiSH_POSITION_NOT_SET)   {
+            deleteBtn.isVisible = true
+
+
+        deleteBtn.setOnClickListener { db.collection("restaurants")
+            .document(restaurantIdent)
+            .collection("dishes")
+            .document(DataManagerDishes.dishes[dishPosition].documentId!!).delete()
+            .addOnSuccessListener { Log.d("ddd", "DocumentSnapshot sucessfully deleted!") }
+        finish()
+        }
+        }
+
 
 
 
@@ -130,7 +160,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
    }
     }
 
-    //TODO rule only if  youre logged in as a restaurount - but works
+
 
     fun displayDish(position: Int) {
 
@@ -139,6 +169,9 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         descriptionET.setText(dish.description)
         foodCategorySpinner.setAutofillHints(dish.category)
 
+
+        if (dish.dishImagePath.isNotEmpty()){
+
         val imageref = Firebase.storage.reference.child(dish.dishImagePath)
         imageref.downloadUrl.addOnSuccessListener { Uri ->
             val imageURL = Uri.toString() // get the URL for the image
@@ -146,9 +179,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(imageURL)
                 .into( dishImage)
-        }
-
-        //nedan funkar inte fullt ut det är inte inbockat
+        }}
 
         if (dish.isGlutenFree == true) {
             isGlutenFreeCB.isChecked = true
@@ -215,13 +246,10 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 // TODO - edit through firebase - only possible local
     fun EditDish(position: Int){
 
-       // val restaurant = auth.currentUser
-
-
-
         DataManagerDishes.dishes[position].title =dishNameET.text.toString()
         DataManagerDishes.dishes[position].description = descriptionET.text.toString()
         DataManagerDishes.dishes[position].isGlutenFree = false
+
         if(isGlutenFreeCB.isChecked){
             DataManagerDishes.dishes[position].isGlutenFree = true
         }
@@ -274,40 +302,43 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         if(canBeMadeLaktoseFreeCB.isChecked){
             DataManagerDishes.dishes[position].canBeMadeLaktosFree = true
         }
-        DataManagerDishes.dishes[position].extraCostVegan = 0.0
-        if (veganExtraCostET.text.toString().toDouble() <= 0.0 && veganExtraCostET.text.isNotEmpty()) {
+
+        if (veganExtraCostET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].extraCostVegan =veganExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].extraCostVegeterian =  0.0
-        if (vegeterianExtraCostET.text.toString().toDouble() <= 0.0 && vegeterianExtraCostET.text.isNotEmpty() ) {
+        if (vegeterianExtraCostET.text.isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostVegeterian = vegeterianExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].extraCostGluten =  0.0
-        if (glutenExtraCostET.text.toString().toDouble() <= 0.0 && glutenExtraCostET.text.isNotEmpty()) {
+        if (glutenExtraCostET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].extraCostVegeterian = glutenExtraCostET.text.toString().toDouble()
-
         }
 
-        DataManagerDishes.dishes[position].extraCostLaktose =  0.0
-        if (laktosExtraCostET.text.toString().toDouble() <= 0.0 && laktosExtraCostET.text.isNotEmpty() ) {
+        if (laktosExtraCostET.text.toString().isNotEmpty() ) {
             DataManagerDishes.dishes[position].extraCostLaktose =laktosExtraCostET.text.toString().toDouble()
         }
 
-        DataManagerDishes.dishes[position].priceSmallPortion =  0.0
-        if (smalPriceET.text.toString().toDouble() <= 0.0 && smalPriceET.text.isNotEmpty() ) {
+        if (smalPriceET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].priceSmallPortion = smalPriceET.text.toString().toDouble()
         }
-        DataManagerDishes.dishes[position].priceLargePortion =  0.0
-        if (largePriceET.text.toString().toDouble() <= 0.0 &&largePriceET.text.isNotEmpty()) {
+
+        if (largePriceET.text.toString().isNotEmpty()) {
             DataManagerDishes.dishes[position].priceLargePortion = largePriceET.text.toString().toDouble()
         }
-        DataManagerDishes.dishes[position].priceNormalPortion = 0.0
 
-        if (normalPriceET.text.toString().toDouble() <= 0.0 && normalPriceET.text.isNotEmpty() ) {
+        if (normalPriceET.text.toString().isNotEmpty() ) {
             DataManagerDishes.dishes[position].priceNormalPortion = normalPriceET.text.toString().toDouble()
         }
+
+         db.collection("restaurants")
+        .document(restaurantIdent)
+        .collection("dishes")
+        .document(DataManagerDishes.dishes[position].documentId!!)
+        .set(DataManagerDishes.dishes[position])
+
+
+
         finish()
 
 
@@ -315,14 +346,6 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
     fun AddDish() {
-
-        // TODO when restaurants are logged in
-       /* var auth = Firebase.auth
-
-        val restaurant = auth.currentUser
-        if (restaurant == null){
-            return
-        } */
 
 
         val dishName = dishNameET.text.toString()
@@ -368,8 +391,9 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
         // TODO: add logic that only if it is not glutnfree etc
         //  from the beginning the checkbox appears
+        //TODO check the checkbox if price for extra glutenfree
 
-        //TODO: add logic to accept only numbers
+
         var canBeMadeGlutenfree = false
         if (canBeMadeGlutenFreeCB.isChecked) {
             canBeMadeGlutenfree = true
@@ -394,7 +418,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
         }
 
         var extraCostVegeterian: Double? = null
-        if ( laktosExtraCostET.text.isNotEmpty()) {
+        if ( vegeterianExtraCostET.text.isNotEmpty()) {
             extraCostVegeterian = vegeterianExtraCostET.text.toString().toDouble()
         }
 
@@ -469,11 +493,12 @@ class AddNChangeFoodActivity : AppCompatActivity() {
                 extraCostLaktose,
                 extraCostVegan,
                 extraCostVegeterian,
-                ""
+                "",
+                "/dishes/default_food.jpg"
             )
 
            // DataManagerDishes.dishes.add(newDish) only local
-            db.collection("restaurants").document("restaurant2").collection("dishes").add(newDish)
+            db.collection("restaurants").document(restaurantIdent).collection("dishes").add(newDish)
 
 
             finish()

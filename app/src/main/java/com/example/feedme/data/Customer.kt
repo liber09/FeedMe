@@ -13,6 +13,7 @@ data class  Customer (
     val typeOfUser: String = "", //customer, administrator, delivery
     val allergies: String = "",
     val userName: String = "",
+    val customerNumber: String = "",
 @DocumentId var customerId:String? = null,
 )
 
