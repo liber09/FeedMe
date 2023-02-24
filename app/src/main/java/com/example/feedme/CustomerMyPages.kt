@@ -41,6 +41,7 @@ class CustomerMyPages : AppCompatActivity() {
         val TVMyPagesMobile = findViewById<TextView>(R.id.TVMyPagesMobile)
         val TVMyPagesEmail = findViewById<TextView>(R.id.TVMyPagesEmail)
 
+
         TVMyPagesFirstName.text = customer?.firstName
         TVMyPagesLastName.text = customer?.lastName
         TVMyPagesAddress.text = customer?.address

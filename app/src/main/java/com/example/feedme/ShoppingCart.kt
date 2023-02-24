@@ -30,6 +30,7 @@ class ShoppingCart : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         recyclerViewShoppingCart.adapter?.notifyDataSetChanged()
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     //Calculates shoppingCart total.

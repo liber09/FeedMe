@@ -38,11 +38,13 @@ class InfoRestaurantActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     //private var openingHours = hashMapOf<String, Date>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
         auth = Firebase.auth
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
         if(intent.hasExtra("RESTAURANT_KEY")) {

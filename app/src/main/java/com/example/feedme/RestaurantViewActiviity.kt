@@ -15,6 +15,7 @@ class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnC
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant_view_activiity)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         restaurantRecyclerView = findViewById(R.id.rv_Restaurant)
         restaurantRecyclerView.layoutManager = LinearLayoutManager(this)

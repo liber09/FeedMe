@@ -31,6 +31,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_and_register)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
 

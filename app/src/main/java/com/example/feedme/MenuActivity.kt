@@ -15,6 +15,7 @@ class MenuActivity  : AppCompatActivity() {
         val varmratt = findViewById<Button>(R.id.bt_2)
         val dessert = findViewById<Button>(R.id.bt_3)
         val drinks = findViewById<Button>(R.id.bt_4)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         forratt.setOnClickListener{
             val intent= Intent(this,FoodViewActivity::class.java)

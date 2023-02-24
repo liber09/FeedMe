@@ -39,6 +39,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         foodRecyclerView.layoutManager= LinearLayoutManager(this)
         val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes,this)
         foodRecyclerView.adapter = adapter
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
 

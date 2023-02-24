@@ -25,8 +25,8 @@
         android:id="@+id/iv_Logo"
         android:layout_width="140dp"
         android:layout_height="51dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="19dp"
+        app:layout_constraintEnd_toStartOf="@+id/profileButton"
         app:layout_constraintStart_toEndOf="@+id/menuButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/text1" />
@@ -37,6 +37,7 @@
         android:layout_height="49dp"
         android:layout_marginBottom="24dp"
         android:background="#000000"
+        android:contentDescription="@android:string/unknownName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
@@ -164,10 +165,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
+        android:contentDescription="@android:string/untitled"
         app:backgroundTint="@color/Orange"
-        app:layout_constraintBottom_toBottomOf="@+id/RV_Food"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_sharp_add_circle_24" />
 

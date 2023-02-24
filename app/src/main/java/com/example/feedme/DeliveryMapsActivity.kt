@@ -41,6 +41,7 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         // Define the origin and destination points
         val origin = LatLng(56.332639461378015, 13.671913141231613)

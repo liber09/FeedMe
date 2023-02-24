@@ -10,4 +10,5 @@ data class Drink (
     var drinkPrice:Double = 0.0,
     var drinkType:String = "", // ex: wine, soda, beer etc..
     var count: Int = 0,
+    @DocumentId var restaurantDocumentId : String? = null
 )
