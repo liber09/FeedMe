@@ -1,9 +1,11 @@
 package com.example.feedme
 
 import android.content.ContentValues
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.feedme.data.Customer
 import com.example.feedme.data.Dishes
@@ -18,6 +20,16 @@ class CustomerMyPages : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_my_pages)
         updateViewsWithInfo(MyPagesCustomer.customer)
+
+        val btnHome = findViewById<ImageView>(R.id.myPagesHome)
+        btnHome.setOnClickListener{
+            val intent= Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        val btnBack = findViewById<ImageView>(R.id.myPagesBack)
+        btnBack.setOnClickListener{
+            finish()
+        }
     }
 
     fun updateViewsWithInfo(customer:Customer?){
