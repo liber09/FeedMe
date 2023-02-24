@@ -124,20 +124,15 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     val intent = Intent(this, FoodViewActivity::class.java)
                     intent.putExtra("id", State.restaurantId)
                     intent.putExtra("restId", restId)
-
-
                     startActivity(intent)
-
-
                 }
-
-
+                val logo = findViewById<ImageView>(R.id.LogoText)
+                logo.setOnClickListener{
+                    val intent= Intent(this,RestaurantViewActiviity::class.java)
+                    startActivity(intent)
+                }
             }
-
-
         }
-
-
     }
 
     private fun changeImage() {

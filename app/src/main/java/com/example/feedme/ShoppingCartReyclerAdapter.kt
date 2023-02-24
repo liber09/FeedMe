@@ -59,11 +59,35 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         holder.increaseButton.setOnClickListener{
             cartItems.count++
             holder.cartItemRowCount.text = cartItems.count.toString()
+            var priceToAdd = 0.0
+            if(cartItems.selectedFoodSize == "s"){
+                priceToAdd = cartItems.priceSmallPortion!!
+            }
+            if(cartItems.selectedFoodSize == "n"){
+                priceToAdd = cartItems.priceNormalPortion!!
+            }
+            if(cartItems.selectedFoodSize == "l"){
+                priceToAdd = cartItems.priceLargePortion!!
+            }
+            holder.cartItemRowPrice.text = (cartItems.count * priceToAdd).toString()+ " kr"
+
         }
         holder.decreaseButton.setOnClickListener{
             cartItems.count--
             holder.cartItemRowCount.text = cartItems.count.toString()
+            var priceToAdd = 0.0
+            if(cartItems.selectedFoodSize == "s"){
+                priceToAdd = cartItems.priceSmallPortion!!
+            }
+            if(cartItems.selectedFoodSize == "n"){
+                priceToAdd = cartItems.priceNormalPortion!!
+            }
+            if(cartItems.selectedFoodSize == "l"){
+                priceToAdd = cartItems.priceLargePortion!!
+            }
+            holder.cartItemRowPrice.text = (cartItems.count * priceToAdd).toString()+ " kr"
         }
+
         if(cartItems.dishImagePath.isNotEmpty()){
             val imageref = Firebase.storage.reference.child(cartItems.dishImagePath)
             imageref.downloadUrl.addOnSuccessListener {Uri->

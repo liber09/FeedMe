@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
 
 class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,21 @@ class CheckoutActivity : AppCompatActivity() {
             val intent = Intent(this, CustomerOrderConfirmationActivity::class.java)
             intent.putStringArrayListExtra("list",arInfo)
             startActivity(intent)
+        }
+        val chbOtherAddress = findViewById<CheckBox>(R.id.chbOtherAddress)
+        val addressField = findViewById<EditText>(R.id.editTextTextMultiLine2)
+        chbOtherAddress.setOnClickListener{
+            addressField.isFocusableInTouchMode = chbOtherAddress.isChecked
+        }
+
+        val btnHome = findViewById<ImageView>(R.id.imgCheckoutHome)
+        btnHome.setOnClickListener{
+            val intent= Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        val btnBack = findViewById<ImageView>(R.id.imgCheckoutBack)
+        btnBack.setOnClickListener{
+            finish()
         }
     }
 }

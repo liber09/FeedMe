@@ -86,6 +86,17 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
             finish()
         }
 
+        val homeButton = findViewById<ImageView>(R.id.ibtn_home_drinksView)
+        homeButton.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            this.startActivity(intent)
+        }
+        val logo = findViewById<ImageView>(R.id.iv_Logo)
+        logo.setOnClickListener{
+            val intent= Intent(this,RestaurantViewActiviity::class.java)
+            startActivity(intent)
+        }
+
 
         val dessertText = findViewById<TextView>(R.id.tv_Deserts)
 
