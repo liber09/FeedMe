@@ -213,7 +213,7 @@ class FoodViewRecyclerAdapter(val context: Context,
         }
     }
 
-    interface OnClicklisterner
+
 
     interface OnClickListener {
         fun OnClick(position: Int)
