@@ -27,47 +27,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_customerInfo" />
 
     <Button
-        android:id="@+id/btn_budView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Bud View"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Shopping" />
-
-    <Button
-        android:id="@+id/btn_toMapsDel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="BudMAPS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_budView" />
-
-    <Button
-        android:id="@+id/btn_RegREst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="RegREST"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_drink" />
-
-    <Button
-        android:id="@+id/btn_drink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="DrinksView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_toMapsDel" />
-
-    <Button
         android:id="@+id/btn_Shopping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,32 +40,33 @@
         android:id="@+id/btnOrderView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:text="Orderview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetOrders" />
 
     <Button
         android:id="@+id/btnGetOrders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/btn_budView"
-        app:layout_constraintTop_toBottomOf="@+id/resNrEdtTxt"
+        android:layout_marginTop="8dp"
+        android:text="getOrders"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuBtn"
         tools:text="getOrders" />
 
     <EditText
         android:id="@+id/resNrEdtTxt"
         android:layout_width="112dp"
         android:layout_height="43dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintStart_toEndOf="@+id/btn_Shopping"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOrderView" />
 
     <Button
@@ -118,20 +78,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_RegREst" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Shopping" />
 
     <Button
 
         android:id="@+id/menuBtn"
         android:layout_width="128dp"
         android:layout_height="45dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="276dp"
+        android:layout_marginTop="8dp"
         android:text="Menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Shopping" /><![CDATA[
+        app:layout_constraintTop_toBottomOf="@+id/btnRestaurantList" /><![CDATA[
 
     android:id="@+id/btnDrinks"
         android:layout_width="wrap_content"
