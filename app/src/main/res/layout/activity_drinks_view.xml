@@ -82,6 +82,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="31dp"
         android:background="@drawable/border_yellow_bg"
+        android:contentDescription="@android:string/untitled"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_shopping_cart_24" />
@@ -104,6 +105,7 @@
         android:layout_height="49dp"
         android:layout_marginBottom="24dp"
         android:background="#000000"
+        android:contentDescription="@android:string/untitled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"

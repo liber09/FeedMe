@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,18 @@ class DrinksViewActivity : AppCompatActivity() {
         cart.setOnClickListener{
             val intent = Intent(this,ShoppingCart::class.java)
             startActivity(intent)
+
+            val huvudrätt = findViewById<TextView>(R.id.huvudrättTextView)
+            huvudrätt.setOnClickListener{
+                val intent = Intent(this,FoodViewActivity::class.java)
+                startActivity(intent)
+
+                val dessert = findViewById<TextView>(R.id.dessertTextView)
+                dessert.setOnClickListener{
+                    val desserts = dishes.category.equals("Dessert")
+                }
+            }
+
 
 
         }

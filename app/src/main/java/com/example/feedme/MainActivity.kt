@@ -624,9 +624,9 @@ class MainActivity : AppCompatActivity() {
         val orderDrink2 = Drink(
             "",
             "Coca Cola light",
+            "Coca Cola",
             "33cl",
             16.0,
-            "Soda",
         )
         val orderDish1 = Dishes(
             "Spagetti Bolonese","Smakrik köttfärssås",88.0,75.0,95.0,false,
