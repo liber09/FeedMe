@@ -24,6 +24,11 @@ class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnC
         backButton.setOnClickListener{
             finish()
         }
+        val logo = findViewById<ImageView>(R.id.LogoText)
+        logo.setOnClickListener{
+            val intent= Intent(this,RestaurantViewActiviity::class.java)
+            startActivity(intent)
+        }
 
 
 
