@@ -17,10 +17,28 @@ class DrinksViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drinks_view)
 
-        val home = findViewById<ImageButton>(R.id.ibtn_home_drinksView)
-        home.setOnClickListener{
-            val intent= Intent(this,MainActivity::class.java)
-            startActivity(intent) }
+
+        val cart = findViewById<ImageButton>(R.id.cartButton)
+        cart.setOnClickListener{
+            val intent = Intent(this,ShoppingCart::class.java)
+            startActivity(intent)
+
+            val huvudrätt = findViewById<TextView>(R.id.huvudrättTextView)
+            huvudrätt.setOnClickListener{
+                val intent = Intent(this,FoodViewActivity::class.java)
+                startActivity(intent)
+
+                val dessert = findViewById<TextView>(R.id.dessertTextView)
+                dessert.setOnClickListener{
+                    val desserts = dishes.category.equals("Dessert")
+                }
+            }
+
+
+
+        }
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val cart = findViewById<ImageButton>(R.id.cartButton)
         cart.setOnClickListener{

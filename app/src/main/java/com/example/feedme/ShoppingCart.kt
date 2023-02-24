@@ -25,6 +25,7 @@ class ShoppingCart : AppCompatActivity() {
         val adapter = ShoppingCartReyclerAdapter(this,DataManagerShoppingCart.shoppingCartItems)
         recyclerViewShoppingCart.adapter = adapter
         calculateShoppingCartTotal()
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onResume() {

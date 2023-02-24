@@ -50,6 +50,7 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in the location and move the camera
         mMap.addMarker(MarkerOptions().position(origin).title("Origin"))
         mMap.addMarker(MarkerOptions().position(destination).title("Destination"))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
        /* DirectionsApi.getRouteDetails(
