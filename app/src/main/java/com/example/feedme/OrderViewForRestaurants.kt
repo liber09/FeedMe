@@ -17,6 +17,8 @@ class OrderViewForRestaurants : AppCompatActivity() {
         recyclerViewRestaurantOrders.layoutManager = LinearLayoutManager(this)
         val adapter = RestaurantOrdersRVAdapter(this, DataManagerOrders.orders)
         recyclerViewRestaurantOrders.adapter = adapter
+
+
     }
     override fun onResume() {
         super.onResume()

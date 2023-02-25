@@ -32,6 +32,9 @@ class RestaurantOrdersRVAdapter(
 
     override fun onBindViewHolder(holder: RestaurantOrdersRVAdapter.ViewHolder, position: Int) {
         val order = orders[position]
+        holder.TVOrderCustomerNumber.text = order.orderNr.toString()
+        holder.TVOrderCustomerPhone.text = order.customerPhoneNumer
+        holder.tvOrderTime.text = order.orderDate
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +43,7 @@ class RestaurantOrdersRVAdapter(
         val btnSendMessage = itemView.findViewById<Button>(R.id.btnSendMessage)
         val btnDelayed = itemView.findViewById<Button>(R.id.btnDelayed)
         val btnSeeMore = itemView.findViewById<Button>(R.id.btnSeeMore)
-        val ivOrderWarning = itemView.findViewById<Button>(R.id.IVOrderWarning)
+        val ivOrderWarning = itemView.findViewById<ImageView>(R.id.IVOrderWarning)
         val TVOrderCustomerNumber = itemView.findViewById<TextView>(R.id.TVOrderCustomerNumber)
         val TVOrderCustomerPhone = itemView.findViewById<TextView>(R.id.TVOrderCustomerPhone)
 
