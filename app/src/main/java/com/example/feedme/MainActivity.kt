@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         mockCustomerData()
         //mockRestaurantData()
         //mockDataDrinks()
-       //createMockDataOrders()
 
 
         val sc = findViewById<Button>(R.id.btn_Shopping)
@@ -221,12 +220,23 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 //Clear ordersList and add the ones returned from the query.
 fun getOrdersForRestaurant(restaurantId: String){
 DataManagerOrders.orders.clear()
-db.collection("orders")
-    //.whereEqualTo("restaurantId", restaurantId)
+var index = 0
+db.collection("restaurants").document(restaurantId).collection("orders")
     .get()
     .addOnSuccessListener { documents ->
         for (document in documents) {
             DataManagerOrders.orders.add(document.toObject())
+            db.collection("restaurants").document(restaurantId).collection("orders").document(document.id).collection("orderedDishes")
+                .get()
+                .addOnSuccessListener { documents ->
+                    for(document in documents) {
+                        DataManagerOrders.orders.get(index).orderedDishes?.add(document.toObject())
+                        Log.d(TAG, "${document.id} => ${document.data}")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents: ", exception)
+                }
             Log.d(TAG, "${document.id} => ${document.data}")
         }
     }
@@ -312,8 +322,8 @@ for (item in DataManagerRestaurants.restaurants)
 
 
 }
-
-private fun createMockDataOrders() {
+/*
+private fun createMockDataOrders() {§
 var orderDishes = mutableListOf<Dishes>()
 var orderDrinks = mutableListOf<Drink>()
 
@@ -335,14 +345,13 @@ orderDrinks.add(orderDrink2)
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     val current = LocalDateTime.now().format(formatter)
 
-val order1 = Order(
-    "restaurant2","Customer1","Order1",current, 1, "345983533",150.0, "Home"
+val order1 = Order("restaurant2","Customer1","Order1",current, 1, "345983533",150.0, "Home"
 )
 db.collection("orders").add(order1)
 //dAb.collection("orders").document("order1").collection("orderDrinks").add(orderDrink2)
 //db.collection("orders").document("order1").collection("orderDishes").add(orderDish1)
 }
-
+*/
 /*    fun getCustomerByDocumentId(customerId: String):Customer?{
 var listOfCustomers = MutableList<Customer>()
 

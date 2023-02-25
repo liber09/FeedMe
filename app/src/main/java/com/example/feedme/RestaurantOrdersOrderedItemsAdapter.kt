@@ -32,6 +32,10 @@ class RestaurantOrdersOrderedItemsAdapter (
     }
 
     override fun onBindViewHolder(holder: RestaurantOrdersOrderedItemsAdapter.DataViewHolder, position: Int) {
-        val order = orders[position]
+        val orderRow = orders[position].orderedDishes
+        if (orderRow != null) {
+            for (row in orderRow)
+                holder.orderedDish.text = row.title
+        }
     }
 }
