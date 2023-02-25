@@ -70,7 +70,6 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
                 priceToAdd = cartItems.priceLargePortion!!
             }
             holder.cartItemRowPrice.text = (cartItems.count * priceToAdd).toString()+ " kr"
-
         }
         holder.decreaseButton.setOnClickListener{
             cartItems.count--
