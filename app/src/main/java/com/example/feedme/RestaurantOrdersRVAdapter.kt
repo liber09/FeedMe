@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.example.feedme.data.Order
 import com.example.feedme.data.Restaurant
 
@@ -39,9 +41,12 @@ class RestaurantOrdersRVAdapter(
 
     override fun onBindViewHolder(holder: RestaurantOrdersRVAdapter.ViewHolder, position: Int) {
         val order = orders[position]
-        holder.TVOrderCustomerNumber.text = order.orderNr.toString()
+        holder.TVOrderCustomerNumber.text = order.customerNumber.toString()
         holder.TVOrderCustomerPhone.text = order.customerPhoneNumber
         holder.tvOrderTime.text = order.orderDate
+        if (order.messageFromCustomer.isNullOrEmpty()){
+            holder.ivOrderWarning.isVisible = false
+        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

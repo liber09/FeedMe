@@ -16,5 +16,6 @@ data class Order (
     var customerPhoneNumber: String? = null,
     var totalAmount:Double? = null,
     var typeOfDelivery:String? = null,
-    var customerNumber: Int? = null
+    var customerNumber: Int? = null,
+    var messageFromCustomer:String? = null
     )
