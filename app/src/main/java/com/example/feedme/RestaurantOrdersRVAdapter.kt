@@ -46,6 +46,7 @@ class RestaurantOrdersRVAdapter(
         holder.tvOrderTime.text = order.orderDate
         if (order.messageFromCustomer.isNullOrEmpty()){
             holder.ivOrderWarning.isVisible = false
+
         }
     }
 
