@@ -15,14 +15,11 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.feedme.data.*
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.example.feedme.data.Customer
-import com.example.feedme.data.Dishes
-import com.example.feedme.data.Order
-import com.example.feedme.data.Restaurant
 import com.google.firebase.firestore.ktx.toObject
 import com.google.type.DateTime
 import java.time.LocalDate
@@ -228,10 +225,10 @@ db.collection("restaurants").document(restaurantId).collection("orders")
             DataManagerOrders.orders.add(document.toObject())
             db.collection("restaurants").document(restaurantId).collection("orders").document(document.id).collection("orderedDishes")
                 .get()
-                .addOnSuccessListener { documents ->
-                    for(document in documents) {
-                        DataManagerOrders.orders.get(index).orderedDishes?.add(document.toObject())
-                        Log.d(TAG, "${document.id} => ${document.data}")
+                .addOnSuccessListener { orderItems ->
+                    for(orderItem in orderItems) {
+                        DataManagerOrders.orders.get(index).orderedDishes.add(orderItem.toObject<OrderItem>())
+                        Log.d(TAG, "${orderItem.id} => ${orderItem.data}")
                     }
                 }
                 .addOnFailureListener { exception ->

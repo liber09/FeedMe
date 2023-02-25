@@ -15,7 +15,6 @@ class RestaurantOrdersOrderedItemsAdapter (
 ) :
 
     RecyclerView.Adapter<RestaurantOrdersOrderedItemsAdapter.DataViewHolder>() {
-    val layoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DataViewHolder(
         LayoutInflater.from(parent.context)

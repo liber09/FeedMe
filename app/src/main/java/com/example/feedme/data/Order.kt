@@ -9,7 +9,7 @@ data class Order (
     @DocumentId var restaurantDocumentId : String? = null,
     @DocumentId var customerId:String? = null,
     @DocumentId var orderId: String? = null,
-    var orderedDishes: MutableList<Dishes>? = null,
+    var orderedDishes: MutableList<OrderItem> = mutableListOf<OrderItem>(),
     //var orderedDrinks: MutableList<Drink>?,
     var orderDate: String? = null,
     var orderNr:Int? = null,
