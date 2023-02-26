@@ -55,7 +55,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         val menueButton = findViewById<Button>(R.id.btn_menu)
         val changeImageButton = findViewById<Button>(R.id.btnChangeImage)
         val bookButton = findViewById<Button>(R.id.btn_table_bocking)
-
+        val btnViewOrders = findViewById<Button>(R.id.btnViewOrders)
+        btnViewOrders.isInvisible = true
         changeImageButton.isInvisible = true
 
         changeImageButton.setOnClickListener {
@@ -65,6 +66,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
+
         for (restaurant in DataManagerRestaurants.restaurants) {
             val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
 
@@ -80,6 +82,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 if (user.uid.toString() == restaurant.documentInternal ){
                 changeImageButton.isVisible = true
                     bookButton.isInvisible = true
+                    btnViewOrders.isVisible = true
                 } }
 
                 //Get the image from firebase
@@ -124,6 +127,12 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     val intent = Intent(this, FoodViewActivity::class.java)
                     intent.putExtra("id", State.restaurantId)
                     intent.putExtra("restId", restId)
+                    startActivity(intent)
+                }
+
+                btnViewOrders.setOnClickListener{
+                    val intent = Intent(this, OrderViewForRestaurants::class.java)
+                    intent.putExtra("RESNAME", restaurant.name)
                     startActivity(intent)
                 }
                 val logo = findViewById<ImageView>(R.id.LogoText)

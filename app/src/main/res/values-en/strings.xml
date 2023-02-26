@@ -87,4 +87,6 @@
     <string name="paidWith">"Paid with "</string>
     <string name="estimatedDelivery">"Estimated delivery: "</string>
     <string name="updateChanges">Update changes</string>
+    <string name="orderType">"Order type: "</string>
+    <string name="toOrders">View orders</string>
 </resources>

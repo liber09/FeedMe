@@ -15,7 +15,6 @@ class RestaurantOrdersOrderedItemsAdapter (
 ) :
 
     RecyclerView.Adapter<RestaurantOrdersOrderedItemsAdapter.DataViewHolder>() {
-    val layoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DataViewHolder(
         LayoutInflater.from(parent.context)
@@ -32,6 +31,10 @@ class RestaurantOrdersOrderedItemsAdapter (
     }
 
     override fun onBindViewHolder(holder: RestaurantOrdersOrderedItemsAdapter.DataViewHolder, position: Int) {
-        val order = orders[position]
+        val orderRow = orders[position].orderedDishes
+        if (orderRow != null) {
+            for (row in orderRow)
+                holder.orderedDish.text = row.title
+        }
     }
 }
