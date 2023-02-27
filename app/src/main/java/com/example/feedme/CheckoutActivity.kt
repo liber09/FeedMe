@@ -14,6 +14,9 @@ class CheckoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
         val btnCompleteOrder = findViewById<Button>(R.id.btnFinishOrder)
         btnCompleteOrder.setOnClickListener{
             val arInfo: ArrayList<String> = ArrayList()
@@ -53,5 +56,6 @@ class CheckoutActivity : AppCompatActivity() {
         btnBack.setOnClickListener{
             finish()
         }
+
     }
 }

@@ -22,6 +22,7 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
     lateinit var locationCallback: LocationCallback
     private val REQUEST_LOCATION = 1
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery_person_view)
@@ -32,6 +33,7 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
         deliveryRestaurantRecyclerView.adapter =
             CollectOrderRecyclerAdapter(this,
                 DataManagerRestaurants.restaurants
+
             )
 
         locationProvider = LocationServices.getFusedLocationProviderClient(this)
@@ -40,6 +42,7 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
             override fun onLocationResult(locationResult: LocationResult) {
                 for (location in locationResult.locations){
                     Log.d("HHH","lat: ${location.latitude}")
+                    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
                 }
             }
         }
