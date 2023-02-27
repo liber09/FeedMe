@@ -89,5 +89,8 @@
     <string name="paidWith">"Betalat med "</string>
     <string name="favouriteDishes">Favoritmaträtter</string>
     <string name="estimatedDelivery">"Beräknad leverans: "</string>
+    <string name="updateChanges">Uppdatera mina val</string>
+    <string name="orderType">Typ av order:</string>
+    <string name="toOrders">Visa ordrar</string>
 
 </resources>

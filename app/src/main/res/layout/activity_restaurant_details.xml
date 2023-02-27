@@ -123,6 +123,12 @@
                 android:paddingLeft="16dp"
                 android:text="Byt bild" />
 
+            <Button
+                android:id="@+id/btnViewOrders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/toOrders"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

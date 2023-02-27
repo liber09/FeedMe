@@ -1,10 +1,10 @@
 package com.example.feedme
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,13 +25,16 @@ class ShoppingCart : AppCompatActivity() {
         val adapter = ShoppingCartReyclerAdapter(this,DataManagerShoppingCart.shoppingCartItems)
         recyclerViewShoppingCart.adapter = adapter
         calculateShoppingCartTotal()
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val btnUpdate = findViewById<Button>(R.id.btnUpdateChanges)
+        btnUpdate.setOnClickListener{
+            calculateShoppingCartTotal()
+        }
     }
 
     override fun onResume() {
         super.onResume()
         recyclerViewShoppingCart.adapter?.notifyDataSetChanged()
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     //Calculates shoppingCart total.
