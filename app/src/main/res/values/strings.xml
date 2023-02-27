@@ -94,5 +94,11 @@
     <string name="toOrders">Visa ordrar</string>
     <string name="messageNoNotifications">Appen kommer inte att visa några notifieringar</string>
     <string name="msg_token_fmt">FCM registration token recieved</string>
+    <string name="size">Storlek</string>
+    <string name="drinkName">Dryck</string>
+    <string name="maincourses">Huvudrätter</string>
+    <string name="desserts">Desserer</string>
+    <string name="drinks">Dryck</string>
+    <string name="starters">Förrätter</string>
 
 </resources>

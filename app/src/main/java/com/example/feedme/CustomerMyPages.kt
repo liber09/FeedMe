@@ -21,6 +21,9 @@ class CustomerMyPages : AppCompatActivity() {
         setContentView(R.layout.activity_customer_my_pages)
         updateViewsWithInfo(MyPagesCustomer.customer)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
         val btnHome = findViewById<ImageView>(R.id.myPagesHome)
         btnHome.setOnClickListener{
             val intent= Intent(this,MainActivity::class.java)
@@ -30,6 +33,7 @@ class CustomerMyPages : AppCompatActivity() {
         btnBack.setOnClickListener{
             finish()
         }
+
     }
 
     fun updateViewsWithInfo(customer:Customer?){
@@ -40,6 +44,7 @@ class CustomerMyPages : AppCompatActivity() {
         val TVMyPagesCIty = findViewById<TextView>(R.id.TVMyPagesCIty)
         val TVMyPagesMobile = findViewById<TextView>(R.id.TVMyPagesMobile)
         val TVMyPagesEmail = findViewById<TextView>(R.id.TVMyPagesEmail)
+
 
         TVMyPagesFirstName.text = customer?.firstName
         TVMyPagesLastName.text = customer?.lastName

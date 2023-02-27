@@ -124,10 +124,34 @@ class MainActivity : AppCompatActivity() {
 
         //val infoRes = findViewById<Button>(R.id.btn_infoRes)
 
+
+
+
+
         // TODO THIS below
         //  here we need to get the intent from the restaurant
         //  RecyclerView for the documentpath as soon as that is
         //  fixed så we can put the extra in the documentPaht
+
+
+        val drinkRef = db.collection("restaurants").document("restaurant2")
+            .collection("drinks")    // Drink ref from database collection
+        drinkRef.addSnapshotListener { snapshot, e ->
+            if (snapshot != null) {
+
+                DataManagerDrinks.drinkList.clear()
+                for (document in snapshot.documents) {
+                    val item = document.toObject<Drink>()
+                    //Get parent documentId - restaurant in this case
+                    item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
+                    if (item != null) {
+                        DataManagerDrinks.drinkList.add(item)
+                    }
+                }
+
+                printDrinks()
+            }
+        }
 
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
@@ -193,6 +217,37 @@ ordersRef.addSnapshotListener{ snapshot, e ->
 */
 }
 
+
+
+// Declare the launcher at the top of your Activity/Fragment:
+private val requestPermissionLauncher = registerForActivityResult(
+ActivityResultContracts.RequestPermission()
+) { isGranted: Boolean ->
+if (isGranted) {
+    // FCM SDK (and your app) can post notifications.
+} else {
+    // TODO: Inform user that that your app will not show notifications.
+}
+}
+
+private fun askNotificationPermission() {
+// This is only necessary for API level >= 33 (TIRAMISU)
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) ==
+        PackageManager.PERMISSION_GRANTED
+    ) {
+        // FCM SDK (and your app) can post notifications.
+    } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+        // TODO: display an educational UI explaining to the user the features that will be enabled
+        //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+        //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+        //       If the user selects "No thanks," allow the user to continue without notifications.
+    } else {
+        // Directly ask for the permission
+        requestPermissionLauncher.launch(Manifest.permission.ACCESS_NOTIFICATION_POLICY)
+    }
+}
+}
 
 //Get orders for restaurant with id restaurantId
 //Clear ordersList and add the ones returned from the query.

@@ -31,6 +31,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_and_register)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
 
@@ -72,7 +73,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
 
             loginUser()
-            //Ifsats för olika former av users
+
 
 
         }
@@ -81,7 +82,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
     fun createRestaurant() {
         email = emailView.text.toString()
-        val password = passwordView.text.toString()
+        val password = passwordView.text.toString()  // create restaurant function
 
         if (email.isEmpty() || password.isEmpty()) {
             return
@@ -106,7 +107,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
     }
 
     fun createCustomer() {
-        email = emailView.text.toString()
+        email = emailView.text.toString()   // Create customer function
         val password = passwordView.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -132,7 +133,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
     fun createDeliveryperson() {
         email = emailView.text.toString()
-        val password = passwordView.text.toString()
+        val password = passwordView.text.toString()     // Create delivery function
 
         if (email.isEmpty() || password.isEmpty()) {
             return
@@ -170,6 +171,13 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
                     if (user != null) {
                         val userId = user.uid
+                        db.collection("users")
+                            .get()
+                            .addOnSuccessListener { result ->
+                                for (document in result) {
+                                    Log.d("WWW", "${document.id} ")
+                                }
+                            }
 
                         db.collection("users").document(userId)
                             .collection("customers").get()
@@ -193,15 +201,29 @@ class LoginAndRegisterActivity : AppCompatActivity() {
                                             finish()
                                         } else {
 
+                                            db.collection("restaurants").get()
+                                                .addOnSuccessListener { documents ->
+                                                    for (document in documents) {
+                                                        if (document.id == "${user.uid}+1") {
+                                                            val intent =
+                                                                Intent(this, RestaurantDetailsActivity::class.java)
+                                                            intent.putExtra("userId", userId)
+                                                            intent.putExtra("restid", "${user.uid}+1")
+
+                                                            startActivity(intent)
+                                                            finish()
+                                                        }
+                                                    }
+                                                }
                                             //uteslutsförfarande då jag inte fick till det annars
 
-                                            val intent =
+                                            /*val intent =
                                                 Intent(this, RestaurantDetailsActivity::class.java)
                                             intent.putExtra("userId", userId)
                                             intent.putExtra("restid", "${user.uid}+1")
 
                                             startActivity(intent)
-                                            finish()
+                                            finish()*/
                                         }
 
                                     }

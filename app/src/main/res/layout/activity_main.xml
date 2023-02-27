@@ -60,7 +60,8 @@
     <EditText
         android:id="@+id/resNrEdtTxt"
         android:layout_width="112dp"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -84,21 +85,25 @@
 
         android:id="@+id/menuBtn"
         android:layout_width="128dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="276dp"
         android:text="Menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRestaurantList" /><![CDATA[
+        app:layout_constraintTop_toBottomOf="@+id/btnRestaurantList" />
 
-    android:id="@+id/btnDrinks"
+
+    <Button
+        android:id="@+id/btnCheckout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="56dp"
-        android:text="Drinks"
-        app:layout_constraintEnd_toStartOf="@+id/buttonRegister"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_act" />
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="11dp"
+        android:text="checkout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuBtn" />
 
-]]>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,6 +48,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         auth = Firebase.auth
         val user = auth.currentUser
         val restId = intent.getStringExtra("restid").toString()
+        Log.d("EEEF",restId)
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
 

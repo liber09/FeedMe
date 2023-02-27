@@ -54,11 +54,16 @@ class AddNChangeFoodActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_nchange_food)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
         auth = Firebase.auth
+
 
         dishNameET = findViewById(R.id.AddDishAdminFoodTitleEditText)
         descriptionET = findViewById(R.id.AddDishAdminFoodDescriptionLayoutEditText)

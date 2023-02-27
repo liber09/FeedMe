@@ -21,6 +21,7 @@ class CustomerOrderConfirmationActivity : AppCompatActivity() {
         val ar1 = intent.extras!!.getStringArrayList("list")
         val customerData = ar1?.get(0)?.split(" ")?.toMutableList()
         customerData?.removeAll(listOf("",null))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val sb = StringBuilder()
         sb.append(customerData?.get(0).toString()).append(" ").append(customerData?.get(1).toString())

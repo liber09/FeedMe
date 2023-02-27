@@ -15,10 +15,12 @@ class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnC
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant_view_activiity)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         restaurantRecyclerView = findViewById(R.id.rv_Restaurant)
         restaurantRecyclerView.layoutManager = LinearLayoutManager(this)
         restaurantRecyclerView.adapter = RestaurantViewRVAdapter(this,DataManagerRestaurants.restaurants, this)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val backButton = findViewById<ImageView>(R.id.foodViewBackButton)
         backButton.setOnClickListener{
