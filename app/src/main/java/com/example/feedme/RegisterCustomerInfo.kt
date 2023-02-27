@@ -40,15 +40,15 @@ class RegisterCustomerInfo : AppCompatActivity() {
             var cust: Customer? = null
 
             if(user != null)
-            db.collection("users")
-                .document(user.uid)
-                .collection("customers").document(documentId).get()
-                .addOnSuccessListener { document ->
-                    cust = document.toObject(Customer::class.java)
-                    btnSaveCustomerInfo.setText("Update")
-                    update = true
-                    loadCustomer(cust!!)
-                }
+                db.collection("users")
+                    .document(user.uid)
+                    .collection("customers").document(documentId).get()
+                    .addOnSuccessListener { document ->
+                        cust = document.toObject(Customer::class.java)
+                        btnSaveCustomerInfo.setText("Update")
+                        update = true
+                        loadCustomer(cust!!)
+                    }
 
         }
 
