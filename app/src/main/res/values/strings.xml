@@ -92,5 +92,11 @@
     <string name="updateChanges">Uppdatera mina val</string>
     <string name="orderType">Typ av order:</string>
     <string name="toOrders">Visa ordrar</string>
+    <string name="size">Storlek</string>
+    <string name="drinkName">Dryck</string>
+    <string name="maincourses">Huvudrätter</string>
+    <string name="desserts">Desserer</string>
+    <string name="drinks">Dryck</string>
+    <string name="starters">Förrätter</string>
 
 </resources>
