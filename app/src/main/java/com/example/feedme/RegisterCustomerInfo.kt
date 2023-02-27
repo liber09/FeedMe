@@ -31,10 +31,35 @@ class RegisterCustomerInfo : AppCompatActivity() {
 
         //Get save button
         val btnSaveCustomerInfo = findViewById<Button>(R.id.btnSaveCustomerInfo)
+
+        var update = false
+        if(intent.hasExtra("ID")) {
+            val documentId = intent.getStringExtra("ID") ?: ""
+
+            val user = auth.currentUser
+            var cust: Customer? = null
+
+            if(user != null)
+            db.collection("users")
+                .document(user.uid)
+                .collection("customers").document(documentId).get()
+                .addOnSuccessListener { document ->
+                    cust = document.toObject(Customer::class.java)
+                    btnSaveCustomerInfo.setText("Update")
+                    update = true
+                    loadCustomer(cust!!)
+                }
+
+        }
+
         //Set clickListener
         btnSaveCustomerInfo.setOnClickListener {
             //Call function to save customer info to database
-            saveCustomerInfoToDatabase()
+            if(!update) {
+                saveCustomerInfoToDatabase()
+            } else {
+                saveCustomerInfoToDatabase(intent.getStringExtra("ID") ?: "")
+            }
         }
         val customerInfoBack = findViewById<ImageView>(R.id.customerInfoBack)
         val customerInfoHome = findViewById<ImageView>(R.id.customerInfoHome)
@@ -53,13 +78,12 @@ class RegisterCustomerInfo : AppCompatActivity() {
     }
 
     //Function that saves the information the customer has entered as a new customer user in the database
-    private fun saveCustomerInfoToDatabase() {
+    private fun saveCustomerInfoToDatabase(docId : String = "") {
 
         val user = auth.currentUser
         /*if(user == null ){
             return
         }*/
-
         //First, validate if input is correct
         if (validateInput()){
             val firstName = findViewById<EditText>(R.id.textInputEditTextFirstname).text.toString()
@@ -77,18 +101,18 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 firstName,
                 lastName,
                 address,
-                postalCode,
                 city,
-                eMail,
+                postalCode,
                 phoneNumber,
+                eMail,
                 "customer", //Hardcoded usertype
-                userName,
                 allergies,
+                userName,
                 customerNumber = (DataManagerCustomers.customers.count()+1).toString()
 
             )
             //Add user to users collection
-            val newItemRef = db.collection("customers").document().id
+            val newItemRef = if(docId.isEmpty()) db.collection("customers").document().id else docId
             customer.customerId = newItemRef.toString()
             NewCustomer.customerId = newItemRef.toString()
             MyPagesCustomer.customer = customer
@@ -154,5 +178,22 @@ class RegisterCustomerInfo : AppCompatActivity() {
     //Function that checks if a string contains numbers only. Returns false if not numeric.
     private fun isNumericToX(toCheck: String): Boolean {
         return toCheck.toDoubleOrNull() != null
+    }
+
+    private fun loadCustomer(customer : Customer) {
+
+        if (customer != null) {
+            findViewById<EditText>(R.id.textInputEditTextFirstname).setText(customer!!.firstName)
+            findViewById<EditText>(R.id.textInputEditTextLastname).setText(customer!!.lastName)
+            findViewById<EditText>(R.id.textInputEditTextAddress).setText(customer!!.address)
+            findViewById<EditText>(R.id.textInputEditTextPostalCode).setText(customer!!.postalCode)
+            findViewById<EditText>(R.id.textInputEditTextCity).setText(customer!!.city)
+            findViewById<EditText>(R.id.textInputEditTextPhoneNumber).setText(customer!!.phoneNumber)
+            findViewById<EditText>(R.id.textInputEditTextEmail).setText(customer!!.eMail)
+            findViewById<EditText>(R.id.textInputEditTextUserName).isEnabled = false
+            findViewById<EditText>(R.id.textInputEditTextUserName).setText(customer!!.userName)
+            findViewById<EditText>(R.id.textInputEditTextALlergies).setText(customer!!.allergies)
+        }
+
     }
 }
