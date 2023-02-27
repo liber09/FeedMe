@@ -20,7 +20,6 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.UploadTask
@@ -64,9 +63,10 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
         if(intent.hasExtra("RESTAURANT_KEY")) {
-            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "1")
-            loadRestaurant(rest ?: Restaurant())
+            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "")
+            if(rest != null) loadRestaurant(rest)
         }
+
 
         btnAddImage.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -177,7 +177,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.textInputPostalCode).setText(restaurant.postalCode)
         findViewById<EditText>(R.id.textInputCity).setText(restaurant.city)
         findViewById<EditText>(R.id.textInputPhone).setText(restaurant.phoneNumber)
-        findViewById<EditText>(R.id.textInputEmail).setText(restaurant.eMail)
+        findViewById<EditText>(R.id.textInputEmail).setText(restaurant.email)
         findViewById<EditText>(R.id.textInputOrgNr).setText(restaurant.orgNr)
         setType(restaurant.type)
         findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant.deliveryFee.toString())
@@ -201,7 +201,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         }
         docIdent = restaurant.documentId!!
         docRating = restaurant.rating!!
-        docIt = restaurant.documentInternal!!
+        docIt = if(!restaurant.documentInternal.isNullOrEmpty()) restaurant.documentInternal!! else ""
     }
 
     fun setOpeningHours(view: View) {
@@ -234,8 +234,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         mView.forEach { et ->
             if(et is EditText && oHours.containsKey(et.tag?.toString())) {
-                val date = oHours.get(et.tag.toString()) as com.google.firebase.Timestamp
-                cal.time = date.toDate()
+                val date = oHours.get(et.tag.toString()) //as com.google.firebase.Timestamp
+                cal.time = date//.toDate()
                 et.setText(SimpleDateFormat("HH:mm").format(cal?.time))
             }
         }
