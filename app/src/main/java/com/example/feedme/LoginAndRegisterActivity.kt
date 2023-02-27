@@ -73,7 +73,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
 
             loginUser()
-            //Ifsats för olika former av users
+
 
 
         }
@@ -82,7 +82,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
     fun createRestaurant() {
         email = emailView.text.toString()
-        val password = passwordView.text.toString()
+        val password = passwordView.text.toString()  // create restaurant function
 
         if (email.isEmpty() || password.isEmpty()) {
             return
@@ -107,7 +107,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
     }
 
     fun createCustomer() {
-        email = emailView.text.toString()
+        email = emailView.text.toString()   // Create customer function
         val password = passwordView.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -133,7 +133,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
     fun createDeliveryperson() {
         email = emailView.text.toString()
-        val password = passwordView.text.toString()
+        val password = passwordView.text.toString()     // Create delivery function
 
         if (email.isEmpty() || password.isEmpty()) {
             return

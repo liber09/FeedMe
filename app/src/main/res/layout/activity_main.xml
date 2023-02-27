@@ -62,7 +62,6 @@
         android:layout_width="112dp"
         android:layout_height="48dp"
         android:layout_marginStart="4dp"
-        android:layout_height="43dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -90,12 +89,10 @@
         android:layout_marginStart="7dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="276dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
         android:text="Menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRestaurantList" /><![CDATA[
+        app:layout_constraintTop_toBottomOf="@+id/btnRestaurantList" />
 
 
     <Button
@@ -108,16 +105,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menuBtn" />
 
-    <Button
-        android:id="@+id/btnDrinks"
 
-    android:id="@+id/btnDrinks"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="56dp"
-        android:text="Drinks"
-        app:layout_constraintEnd_toStartOf="@+id/buttonRegister"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_act" />
 </androidx.constraintlayout.widget.ConstraintLayout>

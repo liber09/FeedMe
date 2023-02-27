@@ -16,7 +16,8 @@ import com.google.firebase.storage.ktx.storage
 
 lateinit var drink: Drink
 
-class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): RecyclerView.Adapter<DrinksViewRecyclerAdapter.ViewHolder>() {
+class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): RecyclerView.Adapter<DrinksViewRecyclerAdapter.ViewHolder>()
+{
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,8 +29,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
 
     override fun onBindViewHolder(
         holder: ViewHolder,
-        position: Int
-    ) {   //Visar position för drink list samt holders som är kopplat till alla items i dataclass
+        position: Int) {   //Visar position för drink i listan, kopplar samman varje current item(drink) med variabler från dataclass
         val currentItem = drink[position]
         holder.titleDisplay.text = currentItem.drinkName
         holder.drinkSize.text = " " + currentItem.drinkSize
@@ -37,15 +37,23 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
         holder.drinkType.text = currentItem.drinkType
         holder.imageDisplay
 
-        val imageref = Firebase.storage.reference.child(drink.toString())
-        imageref.downloadUrl.addOnSuccessListener { Uri ->
-            val imageURL = Uri.toString() // get the URL for the image
-            //Use third party product glide to load the image into the imageview
-            Glide.with(context)
-                .load(imageURL)
-                .into(holder.imageDisplay)
-        }
+
+
+      /*  // Glide implemented for images to show im menu
+        if (dishes.dishImagePath.isEmpty()){
+            holder.imageDisplay.setImageResource(R.drawable.drinkslogo)
+        }else{
+            val imageref = Firebase.storage.reference.child(dishes.dishImagePath)
+            imageref.downloadUrl.addOnSuccessListener { Uri ->
+                val imageURL = Uri.toString() // get the URL for the image
+                //Use third party product glide to load the image into the imageview
+                Glide.with(context)
+                    .load(imageURL)
+                    .into( holder.imageDisplay)
+            }
+        }*/
     }
+
 
 
     override fun getItemCount(): Int {
@@ -57,7 +65,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val imageDisplay: ImageView =
-            itemView.findViewById(R.id.drinkImage)       // Visar vilka vals som är kopplat till viewholder
+            itemView.findViewById(R.id.drinkImage)       // Visar vilka variabler som är kopplat till viewholder
         val titleDisplay: TextView = itemView.findViewById(R.id.drinksNameTextView)
         val drinkType: TextView = itemView.findViewById(R.id.drinkTypeTextView)
         val drinkSize: TextView = itemView.findViewById(R.id.sizeTextView)
@@ -76,7 +84,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
             }
         }
 
-        fun handleExistsInCart(selectedDrink: Drink) {
+        fun handleExistsInCart(selectedDrink: Drink) { // Funktion som hanterar dubletter i varukorg
             var alreadyInCart = false
             for (Drink in DataManagerShoppingCart.shoppingCartItems) {
                 if (selectedDrink.equals(Drink)) {
@@ -94,8 +102,6 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
         }
     }
 }
-
-
 
 
 
