@@ -18,25 +18,6 @@ class DrinksViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_drinks_view)
 
 
-        val cart = findViewById<ImageButton>(R.id.cartButton)
-        cart.setOnClickListener{
-            val intent = Intent(this,ShoppingCart::class.java)
-            startActivity(intent)
-
-            val huvudrätt = findViewById<TextView>(R.id.huvudrättTextView)
-            huvudrätt.setOnClickListener{
-                val intent = Intent(this,FoodViewActivity::class.java)
-                startActivity(intent)
-
-                val dessert = findViewById<TextView>(R.id.dessertTextView)
-                dessert.setOnClickListener{
-                    val desserts = dishes.category.equals("Dessert")
-                }
-            }
-
-
-
-        }
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -56,11 +37,8 @@ class DrinksViewActivity : AppCompatActivity() {
                 }
             }
 
-
-
         }
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
         drinksRecyclerView = findViewById<RecyclerView>(RV_Drinks)

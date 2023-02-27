@@ -16,7 +16,8 @@ import com.google.firebase.storage.ktx.storage
 
 lateinit var drink: Drink
 
-class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): RecyclerView.Adapter<DrinksViewRecyclerAdapter.ViewHolder>() {
+class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): RecyclerView.Adapter<DrinksViewRecyclerAdapter.ViewHolder>()
+{
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,14 +29,14 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
 
     override fun onBindViewHolder(
         holder: ViewHolder,
-        position: Int
-    ) {   //Visar position för drink list samt holders som är kopplat till alla items i dataclass
+        position: Int) {   //Visar position för drink list samt holders som är kopplat till alla items i dataclass
         val currentItem = drink[position]
         holder.titleDisplay.text = currentItem.drinkName
         holder.drinkSize.text = " " + currentItem.drinkSize
         holder.priceTV.text = currentItem.drinkPrice.toString() + " kr"
         holder.drinkType.text = currentItem.drinkType
         holder.imageDisplay
+
 
         val imageref = Firebase.storage.reference.child(drink.toString())
         imageref.downloadUrl.addOnSuccessListener { Uri ->
@@ -94,8 +95,6 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
         }
     }
 }
-
-
 
 
 
