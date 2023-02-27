@@ -34,9 +34,25 @@ class InfoRestaurantActivity : AppCompatActivity() {
     val db = Firebase.firestore
     private val pickImage = 100
     private var imageUri: Uri? = null
-    val registerNew = false
     lateinit var auth: FirebaseAuth
-    //private var openingHours = hashMapOf<String, Date>()
+    private var imgPath = ""
+    private var docIdent = ""
+    private var docRating = 0.0
+    private var openingHours = hashMapOf<String, Date>(
+        "monday_start" to Date(),
+        "monday_end" to Date(),
+        "tuesday_start" to Date(),
+        "tuesday_end" to Date(),
+        "wednesday_start" to Date(),
+        "wednesday_end" to Date(),
+        "thursday_start" to Date(),
+        "thursday_end" to Date(),
+        "friday_start" to Date(),
+        "friday_end" to Date(),
+        "saturday_start" to Date(),
+        "saturday_end" to Date(),
+        "sunday_start" to Date(),
+        "sunday_end" to Date())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
