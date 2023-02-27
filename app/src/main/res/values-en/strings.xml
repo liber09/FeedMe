@@ -89,4 +89,6 @@
     <string name="updateChanges">Update changes</string>
     <string name="orderType">"Order type: "</string>
     <string name="toOrders">View orders</string>
+    <string name="messageNoNotifications">The app will not show any notifications</string>
+    <string name="msg_token_fmt">FCM registration token recieved</string>
 </resources>

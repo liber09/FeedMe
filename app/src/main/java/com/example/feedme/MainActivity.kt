@@ -13,14 +13,19 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.feedme.data.*
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.analytics.FirebaseAnalytics
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.ktx.messaging
 import com.google.type.DateTime
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -33,10 +38,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //Create mock data
-        mockCustomerData()
-        //mockRestaurantData()
-        //mockDataDrinks()
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            val msg = getString(R.string.msg_token_fmt)+ " " + token
+            Log.d(TAG, msg)
+            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
+
+        Firebase.messaging.isAutoInitEnabled = true
+        FirebaseAnalytics.getInstance(this).setAnalyticsCollectionEnabled(true)
+
+
 
 
         val sc = findViewById<Button>(R.id.btn_Shopping)
@@ -103,17 +124,10 @@ class MainActivity : AppCompatActivity() {
 
         //val infoRes = findViewById<Button>(R.id.btn_infoRes)
 
-
-
-
-
         // TODO THIS below
         //  here we need to get the intent from the restaurant
         //  RecyclerView for the documentpath as soon as that is
         //  fixed så we can put the extra in the documentPaht
-
-
-
 
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
@@ -129,11 +143,9 @@ class MainActivity : AppCompatActivity() {
                         DataManagerDishes.dishes.add(item)
                     }
                 }
-
                 //printDishes()
             }
         }
-
 
         val restaurantRef = db.collection("restaurants")
         restaurantRef.addSnapshotListener{ snapshot, e ->
@@ -160,7 +172,7 @@ class MainActivity : AppCompatActivity() {
                             ?.let { DataManagerCustomers.customers.add(it) }
             }
         }
-                getOrdersForRestaurant("restaurant2")
+                //getOrdersForRestaurant("restaurant2")
     }
 }
 
@@ -181,37 +193,6 @@ ordersRef.addSnapshotListener{ snapshot, e ->
 */
 }
 
-
-
-// Declare the launcher at the top of your Activity/Fragment:
-private val requestPermissionLauncher = registerForActivityResult(
-ActivityResultContracts.RequestPermission()
-) { isGranted: Boolean ->
-if (isGranted) {
-    // FCM SDK (and your app) can post notifications.
-} else {
-    // TODO: Inform user that that your app will not show notifications.
-}
-}
-
-private fun askNotificationPermission() {
-// This is only necessary for API level >= 33 (TIRAMISU)
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) ==
-        PackageManager.PERMISSION_GRANTED
-    ) {
-        // FCM SDK (and your app) can post notifications.
-    } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
-        // TODO: display an educational UI explaining to the user the features that will be enabled
-        //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
-        //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
-        //       If the user selects "No thanks," allow the user to continue without notifications.
-    } else {
-        // Directly ask for the permission
-        requestPermissionLauncher.launch(Manifest.permission.ACCESS_NOTIFICATION_POLICY)
-    }
-}
-}
 
 //Get orders for restaurant with id restaurantId
 //Clear ordersList and add the ones returned from the query.

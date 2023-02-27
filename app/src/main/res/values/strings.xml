@@ -92,5 +92,7 @@
     <string name="updateChanges">Uppdatera mina val</string>
     <string name="orderType">Typ av order:</string>
     <string name="toOrders">Visa ordrar</string>
+    <string name="messageNoNotifications">Appen kommer inte att visa några notifieringar</string>
+    <string name="msg_token_fmt">FCM registration token recieved</string>
 
 </resources>
