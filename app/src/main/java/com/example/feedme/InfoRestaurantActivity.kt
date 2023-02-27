@@ -59,6 +59,9 @@ class InfoRestaurantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
         auth = Firebase.auth
+        var emailFromSignUp = intent.getStringExtra("mail").toString()
+        var eMail = findViewById<EditText>(R.id.textInputEmail)
+        eMail.setText(emailFromSignUp)
 
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
