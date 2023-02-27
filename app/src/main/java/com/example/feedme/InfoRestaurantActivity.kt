@@ -44,6 +44,10 @@ class InfoRestaurantActivity : AppCompatActivity() {
         setContentView(R.layout.activity_info_restaurant)
         auth = Firebase.auth
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        var emailFromSignUp = intent.getStringExtra("mail").toString()
+        var eMail = findViewById<EditText>(R.id.textInputEmail)
+        eMail.setText(emailFromSignUp)
+
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val btnSave = findViewById<Button>(R.id.btn_save)

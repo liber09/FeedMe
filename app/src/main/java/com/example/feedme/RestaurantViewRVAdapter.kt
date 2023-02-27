@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.feedme.DataManagerRestaurants.restaurants
 import com.example.feedme.data.Restaurant
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -66,7 +67,7 @@ class RestaurantViewRVAdapter(
 
 
         }
-        if(restaurant.imagePath.isNotEmpty()){
+        if(restaurant.imagePath.isNotEmpty()||restaurant.imagePath == "/restaurants/"){
             val imageref = Firebase.storage.reference.child(restaurant.imagePath)
             imageref.downloadUrl.addOnSuccessListener {Uri->
                 val imageURL = Uri.toString()
