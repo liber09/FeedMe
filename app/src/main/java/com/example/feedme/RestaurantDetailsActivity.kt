@@ -35,6 +35,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
     lateinit var restaurantTitel: TextView
     lateinit var restaurantdescripton: TextView
+    lateinit var deliveryPrice: TextView
 
     lateinit var auth: FirebaseAuth
 
@@ -51,12 +52,14 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         Log.d("EEEF",restId)
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
+        deliveryPrice = findViewById(R.id.tv_deliveryPrice)
 
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
         val menueButton = findViewById<Button>(R.id.btn_menu)
         val changeImageButton = findViewById<Button>(R.id.btnChangeImage)
         val bookButton = findViewById<Button>(R.id.btn_table_bocking)
         val btnViewOrders = findViewById<Button>(R.id.btnViewOrders)
+
         btnViewOrders.isInvisible = true
         changeImageButton.isInvisible = true
 
@@ -76,6 +79,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
                 restaurantTitel.text = restaurant.name
                 restaurantdescripton.text = restaurant.description
+                deliveryPrice.text = "Pris för utkörning: "+restaurant.deliveryFee.toString()+" kr"
+
 
 
                     if (user != null) {
