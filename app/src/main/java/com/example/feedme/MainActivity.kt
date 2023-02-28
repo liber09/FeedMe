@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                printDrinks()
+                //printDrinks()
             }
         }
 

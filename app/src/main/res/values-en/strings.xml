@@ -91,4 +91,6 @@
     <string name="toOrders">View orders</string>
     <string name="messageNoNotifications">The app will not show any notifications</string>
     <string name="msg_token_fmt">FCM registration token recieved</string>
+    <string name="title">An offer</string>
+    <string name="message">Message</string>
 </resources>

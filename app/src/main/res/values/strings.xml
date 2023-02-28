@@ -100,5 +100,7 @@
     <string name="desserts">Desserer</string>
     <string name="drinks">Dryck</string>
     <string name="starters">Förrätter</string>
+    <string name="title">Ett erbjudande</string>
+    <string name="message">Meddelande</string>
 
 </resources>

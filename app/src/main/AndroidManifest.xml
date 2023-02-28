@@ -178,7 +178,7 @@
         </activity>
 
         <service
-            android:name=".java.MyFirebaseMessagingService"
+            android:name=".java.FirebaseMessageReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
