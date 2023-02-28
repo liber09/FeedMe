@@ -17,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 class CheckoutActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var adressText:  EditText
+    lateinit var test: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
@@ -30,6 +31,8 @@ class CheckoutActivity : AppCompatActivity() {
                     adressText.setText(customer.firstName+" "+
                             customer.lastName+"\n"+customer.address+"\n"
                     +customer.postalCode+" "+customer.city)
+
+                    test=(customer.firstName+" "+customer.lastName+" "+customer.address+" "+customer.postalCode+" "+customer.city)
                 }
 
             }
@@ -41,7 +44,8 @@ class CheckoutActivity : AppCompatActivity() {
         val btnCompleteOrder = findViewById<Button>(R.id.btnFinishOrder)
         btnCompleteOrder.setOnClickListener{
             val arInfo: ArrayList<String> = ArrayList()
-            arInfo.add(findViewById<EditText>(R.id.editTextTextMultiLine2).text.toString())
+           // arInfo.add(findViewById<EditText>(R.id.editTextTextMultiLine2).text.toString())
+            arInfo.add(test)
             val payKlarna = findViewById<CheckBox>(R.id.cbKlarna).isChecked
             val paySwish = findViewById<CheckBox>(R.id.cbSwish).isChecked
             val payPayPal = findViewById<CheckBox>(R.id.cbPayPal).isChecked

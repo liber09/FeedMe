@@ -48,7 +48,7 @@ class AddNChangeDrinks : AppCompatActivity() {
         val drinkSize = drinkSizeET.text.toString()
 
         if(drinkName.isNotEmpty()&&drinkPrice != null &&drinkSize.isNotEmpty()){
-            val newDrink = Drink("",drinkName,drinkSize,drinkPrice,drinkCategory)
+            val newDrink = Drink("",drinkName,drinkSize,drinkCategory,drinkPrice,)
 
 
         db.collection("restaurants")
