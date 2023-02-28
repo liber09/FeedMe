@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
@@ -127,9 +124,24 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val documentId = "${user.uid}+1"
         var imagePath = ""
         // TODO gör det till i med increment när man väl kan lägga upp fler restauaranger
+        if (imageUri != null) {
+            imageUri?.let { uploadImageToFirebase(it) }
+            imagePath = "/restaurants/$fileName"
+        }
+        var deliveryPrice = 0
+        if (findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().isNotEmpty()) {
+            try {
+                deliveryPrice =
+                    findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt()
+            } catch (e: Exception) {
+
+                Toast.makeText(this, "Bara siffror godtas i Utkärningsavgiften", Toast.LENGTH_SHORT)
+                    .show()
+                return
+            }
+        }
 
 
-        imageUri?.let { uploadImageToFirebase(it) }
         val rest = Restaurant(
             findViewById<EditText>(R.id.textInputName).text.toString(),
             findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
@@ -139,18 +151,22 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.textInputPhone).text.toString(),
             findViewById<EditText>(R.id.textInputEmail).text.toString(),
             getType(),
-            findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
+            deliveryPrice,
             findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
             findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
             findViewById<EditText>(R.id.textInputDescription).text.toString(),
             docRating,
-            if(imageUri != null) "/restaurants/$fileName" else imgPath,
+            imagePath,
             documentIternal,
             documentId,
             openingHours
         )
+        if (findViewById<EditText>(R.id.textInputName).text.toString().isEmpty()) {
+            Toast.makeText(this, "Restaurant name cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         db.collection("restaurants")
             .document(documentId)
@@ -219,7 +235,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.textInputPostalCode).setText(restaurant.postalCode)
         findViewById<EditText>(R.id.textInputCity).setText(restaurant.city)
         findViewById<EditText>(R.id.textInputPhone).setText(restaurant.phoneNumber)
-        findViewById<EditText>(R.id.textInputEmail).setText(restaurant.eMail)
+        findViewById<EditText>(R.id.textInputEmail).setText(restaurant.email)
         setType(restaurant.type)
         findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant.deliveryFee.toString())
         findViewById<CheckBox>(R.id.cb_takeaway).isChecked = restaurant.deliveryTypePickup
@@ -282,7 +298,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             }
         }
     }
-    */
+
     //not optimized version
     fun setType(types: String) {
         var listOfTypes = types.split(",")
@@ -304,6 +320,10 @@ class InfoRestaurantActivity : AppCompatActivity() {
         mView.forEach { cb ->
             if(cb is CheckBox && cb.tag?.toString() == "type" && cb.isChecked) {
                 toReturn += cb.text.toString() + ","
+            }
+            else{
+                return toReturn.substring(0, toReturn.length) //kan anmäla sig utan att ha valt typ
+
             }
         }
 
