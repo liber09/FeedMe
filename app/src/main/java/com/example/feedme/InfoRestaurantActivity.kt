@@ -100,6 +100,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val user = auth.currentUser
 
 
+
         if (user == null){
             return
 
@@ -241,8 +242,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         mView.forEach { et ->
             if(et is EditText && oHours.containsKey(et.tag?.toString())) {
-                val date = oHours.get(et.tag.toString()) //as com.google.firebase.Timestamp
-                cal.time = date//.toDate()
+                val date = oHours.get(et.tag.toString())
+                cal.time = date
                 et.setText(SimpleDateFormat("HH:mm").format(cal?.time))
             }
         }
@@ -273,5 +274,15 @@ class InfoRestaurantActivity : AppCompatActivity() {
         }
 
         return toReturn.substring(0, toReturn.length - 1)
+    }
+
+    fun checkOrgNr(orgNr : String) : Boolean {
+        var passed = true
+
+        if(orgNr.length < 10 || orgNr.length > 11 || orgNr.get(2).digitToInt() < 2) passed = false
+
+        //orgNr = orgNr.replace("-", "")
+
+        return passed
     }
 }
