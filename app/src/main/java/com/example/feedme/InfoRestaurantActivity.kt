@@ -236,14 +236,14 @@ class InfoRestaurantActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.textInputCity).setText(restaurant.city)
         findViewById<EditText>(R.id.textInputPhone).setText(restaurant.phoneNumber)
         findViewById<EditText>(R.id.textInputEmail).setText(restaurant.email)
+        findViewById<EditText>(R.id.textInputOrgNr).setText(restaurant.orgNr)
         setType(restaurant.type)
         findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant.deliveryFee.toString())
         findViewById<CheckBox>(R.id.cb_takeaway).isChecked = restaurant.deliveryTypePickup
         findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant.deliveryTypeHome
         findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant.deliveryTypeAtRestaurant
         findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant.tableBooking
-        //
-        // /*loadOpeningHours(restaurant.openingHours)
+        loadOpeningHours(restaurant.openingHours)
         findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
         val imgRestaurant = findViewById<ImageView>(R.id.imageViewRestaurant)
         //from customerMyPage
