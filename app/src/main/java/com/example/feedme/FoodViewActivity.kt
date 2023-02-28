@@ -29,7 +29,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         val user = auth.currentUser
 
         if (user != null){
-        userUID = user!!.uid.toString()}
+        userUID = user.uid.toString()}
         restaurantid = intent.getStringExtra("restId").toString()
 
         foodRecyclerView = findViewById<RecyclerView>(R.id.RV_Food)
