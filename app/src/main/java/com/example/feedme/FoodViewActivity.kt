@@ -27,7 +27,10 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         setContentView(R.layout.activity_food_view)
         auth = Firebase.auth
         val user = auth.currentUser
-        userUID = user!!.uid.toString()
+
+        //TODO plocka bort när allt sitta
+       if(user != null) {
+        userUID = user.uid.toString()}
         restaurantid = intent.getStringExtra("restId").toString()
 
         foodRecyclerView = findViewById<RecyclerView>(R.id.RV_Food)
