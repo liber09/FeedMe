@@ -80,8 +80,8 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 address,
                 postalCode,
                 city,
-                eMail,
                 phoneNumber,
+                eMail,
                 "customer", //Hardcoded usertype
                 userName,
                 allergies,
