@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.content.Intent
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -42,6 +43,10 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
 
         val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
+        val starters = findViewById<TextView>(R.id.tv_starterMealView)
+        val mainCourses = findViewById<TextView>(R.id.tv_MainCourse)
+        val desserts= findViewById<TextView>(R.id.tv_Deserts)
+
         val fab_add_dish = findViewById<FloatingActionButton>(R.id.FAB_ADD_Drink)
         fab_add_dish.isInvisible = true
 
@@ -77,6 +82,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
 
         drinks.setOnClickListener {
+            drinks.setTypeface(null, Typeface.BOLD)
 
 
             val intent = Intent(this,DrinksViewActivity::class.java)
