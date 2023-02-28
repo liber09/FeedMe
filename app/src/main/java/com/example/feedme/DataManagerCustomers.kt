@@ -5,4 +5,8 @@ import com.example.feedme.data.Restaurant
 
 object DataManagerCustomers {
     val customers = mutableListOf<Customer>()
+
 }
+
+
+

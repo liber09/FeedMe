@@ -55,14 +55,18 @@ class InfoRestaurantActivity : AppCompatActivity() {
         "sunday_start" to Date(),
         "sunday_end" to Date())
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
         auth = Firebase.auth
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         var emailFromSignUp = intent.getStringExtra("mail").toString()
         var eMail = findViewById<EditText>(R.id.textInputEmail)
         eMail.setText(emailFromSignUp)
 
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
         if(intent.hasExtra("RESTAURANT_KEY")) {

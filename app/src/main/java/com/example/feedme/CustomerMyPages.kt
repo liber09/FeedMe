@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.feedme.data.Customer
@@ -22,6 +21,9 @@ class CustomerMyPages : AppCompatActivity() {
         setContentView(R.layout.activity_customer_my_pages)
         updateViewsWithInfo(MyPagesCustomer.customer)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
         val btnHome = findViewById<ImageView>(R.id.myPagesHome)
         btnHome.setOnClickListener{
             val intent= Intent(this,MainActivity::class.java)
@@ -31,12 +33,7 @@ class CustomerMyPages : AppCompatActivity() {
         btnBack.setOnClickListener{
             finish()
         }
-        val btnChange = findViewById<Button>(R.id.btnMyPagesEdit)
-        btnChange.setOnClickListener{
-            val intent = Intent(this, RegisterCustomerInfo::class.java)
-            intent.putExtra("ID", MyPagesCustomer.customer.customerId)
-            startActivity(intent)
-        }
+
     }
 
     fun updateViewsWithInfo(customer:Customer?){
@@ -47,6 +44,7 @@ class CustomerMyPages : AppCompatActivity() {
         val TVMyPagesCIty = findViewById<TextView>(R.id.TVMyPagesCIty)
         val TVMyPagesMobile = findViewById<TextView>(R.id.TVMyPagesMobile)
         val TVMyPagesEmail = findViewById<TextView>(R.id.TVMyPagesEmail)
+
 
         TVMyPagesFirstName.text = customer?.firstName
         TVMyPagesLastName.text = customer?.lastName

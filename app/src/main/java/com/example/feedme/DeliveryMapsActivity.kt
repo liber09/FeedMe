@@ -41,6 +41,7 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         // Define the origin and destination points
         val origin = LatLng(56.332639461378015, 13.671913141231613)
@@ -49,6 +50,7 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in the location and move the camera
         mMap.addMarker(MarkerOptions().position(origin).title("Origin"))
         mMap.addMarker(MarkerOptions().position(destination).title("Destination"))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
        /* DirectionsApi.getRouteDetails(
