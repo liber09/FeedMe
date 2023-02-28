@@ -78,15 +78,16 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 firstName,
                 lastName,
                 address,
-                postalCode,
                 city,
+                postalCode,
                 phoneNumber,
                 eMail,
                 "customer", //Hardcoded usertype
-                userName,
                 allergies,
+                userName,
                 customerNumber = (DataManagerCustomers.customers.count()+1).toString(),
                 customerId
+
 
 
             )
@@ -157,5 +158,22 @@ class RegisterCustomerInfo : AppCompatActivity() {
     //Function that checks if a string contains numbers only. Returns false if not numeric.
     private fun isNumericToX(toCheck: String): Boolean {
         return toCheck.toDoubleOrNull() != null
+    }
+
+    private fun loadCustomer(customer : Customer) {
+
+        if (customer != null) {
+            findViewById<EditText>(R.id.textInputEditTextFirstname).setText(customer!!.firstName)
+            findViewById<EditText>(R.id.textInputEditTextLastname).setText(customer!!.lastName)
+            findViewById<EditText>(R.id.textInputEditTextAddress).setText(customer!!.address)
+            findViewById<EditText>(R.id.textInputEditTextPostalCode).setText(customer!!.postalCode)
+            findViewById<EditText>(R.id.textInputEditTextCity).setText(customer!!.city)
+            findViewById<EditText>(R.id.textInputEditTextPhoneNumber).setText(customer!!.phoneNumber)
+            findViewById<EditText>(R.id.textInputEditTextEmail).setText(customer!!.eMail)
+            findViewById<EditText>(R.id.textInputEditTextUserName).isEnabled = false
+            findViewById<EditText>(R.id.textInputEditTextUserName).setText(customer!!.userName)
+            findViewById<EditText>(R.id.textInputEditTextALlergies).setText(customer!!.allergies)
+        }
+
     }
 }

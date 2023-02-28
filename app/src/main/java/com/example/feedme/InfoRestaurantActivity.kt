@@ -7,10 +7,14 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
+import com.bumptech.glide.Glide
 import com.example.feedme.data.Restaurant
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -27,7 +31,6 @@ import java.util.*
 import kotlin.collections.HashMap
 
 var fileName: String = ""
-
 class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
@@ -35,8 +38,25 @@ class InfoRestaurantActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
     val registerNew = false
     lateinit var auth: FirebaseAuth
-
-    //private var openingHours = hashMapOf<String, Date>()
+    private var imgPath = ""
+    private var docIdent = ""
+    private var docIt = ""
+    private var docRating = 0.0
+    private var openingHours = hashMapOf<String, Date>(
+        "monday_start" to Date(),
+        "monday_end" to Date(),
+        "tuesday_start" to Date(),
+        "tuesday_end" to Date(),
+        "wednesday_start" to Date(),
+        "wednesday_end" to Date(),
+        "thursday_start" to Date(),
+        "thursday_end" to Date(),
+        "friday_start" to Date(),
+        "friday_end" to Date(),
+        "saturday_start" to Date(),
+        "saturday_end" to Date(),
+        "sunday_start" to Date(),
+        "sunday_end" to Date())
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,17 +72,15 @@ class InfoRestaurantActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
-        if (intent.hasExtra("RESTAURANT_KEY")) {
-            val rest = DataManagerRestaurants.getByDocumentId(
-                intent.getStringExtra("RESTAURANT_KEY") ?: "1"
-            )
-            loadRestaurant(rest ?: Restaurant())
+        if(intent.hasExtra("RESTAURANT_KEY")) {
+            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "")
+            if(rest != null) loadRestaurant(rest)
         }
         val monSta = findViewById<EditText>(R.id.textInputMondayStart)
         val editName = findViewById<EditText>(R.id.textInputName)
 
         monSta.setOnClickListener {
-            Log.v("!!!", "clicked")
+            Log.v("!!!","clicked")
 
             val cal = Calendar.getInstance()
 
@@ -73,13 +91,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
                 monSta.setText(SimpleDateFormat("HH:mm").format(cal.time))
             }
 
-            TimePickerDialog(
-                this,
-                timeSetListener,
-                cal.get(Calendar.HOUR_OF_DAY),
-                cal.get(Calendar.MINUTE),
-                true
-            ).show()
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
 
         btnAddImage.setOnClickListener {
@@ -101,15 +113,13 @@ class InfoRestaurantActivity : AppCompatActivity() {
             addImageView.setImageURI(imageUri)
         }
     }
-
     var documentRef = ""
-
     //Saves restaurant info to database
-    fun saveInfo() {
-        val user = auth.currentUser
+        fun saveInfo() {
+            val user = auth.currentUser
 
 
-        if (user == null) {
+        if (user == null){
             return
 
         }
@@ -118,25 +128,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
         var imagePath = ""
         // TODO gör det till i med increment när man väl kan lägga upp fler restauaranger
 
-        if (imageUri != null) {
-            imageUri?.let { uploadImageToFirebase(it) }
-            imagePath = "/restaurants/$fileName"
-        }
 
-        var deliveryPrice = 0
-        if (findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().isNotEmpty()) {
-            try {
-                deliveryPrice =
-                    findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt()
-            } catch (e: Exception) {
-
-                Toast.makeText(this, "Bara siffror godtas i Utkärningsavgiften", Toast.LENGTH_SHORT)
-                    .show()
-                return
-            }
-        }
-
-
+        imageUri?.let { uploadImageToFirebase(it) }
         val rest = Restaurant(
             findViewById<EditText>(R.id.textInputName).text.toString(),
             findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
@@ -146,32 +139,25 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.textInputPhone).text.toString(),
             findViewById<EditText>(R.id.textInputEmail).text.toString(),
             getType(),
-            deliveryPrice,
+            findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
             findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
             findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
             findViewById<EditText>(R.id.textInputDescription).text.toString(),
-            0.0,
-            imagePath,
+            docRating,
+            if(imageUri != null) "/restaurants/$fileName" else imgPath,
             documentIternal,
-            //openingHours
-            documentId
-
+            documentId,
+            openingHours
         )
-
-        if (findViewById<EditText>(R.id.textInputName).text.toString().isEmpty()) {
-            Toast.makeText(this, "Restaurant name cannot be empty", Toast.LENGTH_SHORT).show()
-            return
-        }
-
 
         db.collection("restaurants")
             .document(documentId)
             .set(rest)
             .addOnSuccessListener { documentReference ->
                 Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${rest.documentId}")
-                documentRef = documentId
+                 documentRef = documentId
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
@@ -194,20 +180,19 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
 
         //On successful save redirect to restaurant details
-        val intent = Intent(this, RestaurantDetailsActivity::class.java)
+        val intent= Intent(this,RestaurantDetailsActivity::class.java)
         //Send extra information over to the detailsView with restaurant number
         intent.putExtra("userid", user.uid)
-        intent.putExtra("id", documentId)
-        intent.putExtra("restid", documentId)
-        DataManagerRestaurants.update()
-        Log.d("KKK", documentId)
-        startActivity(intent)
+        intent.putExtra("id",documentId)
+        intent.putExtra("restid",documentId)
 
+        Log.d("KKK",documentId)
+        startActivity(intent)
     }
 
     private fun uploadImageToFirebase(fileUri: Uri) {
         if (fileUri != null) {
-            fileName = UUID.randomUUID().toString() + ".jpg" //Set filename
+            fileName = UUID.randomUUID().toString() +".jpg" //Set filename
 
             val refStorage = Firebase.storage.reference.child("restaurants/$fileName")
 
@@ -227,6 +212,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
     }
 
     fun loadRestaurant(restaurant: Restaurant) {
+        imgPath = restaurant.imagePath
+
         findViewById<EditText>(R.id.textInputName).setText(restaurant.name)
         findViewById<EditText>(R.id.textInputAddress).setText(restaurant.address)
         findViewById<EditText>(R.id.textInputPostalCode).setText(restaurant.postalCode)
@@ -242,10 +229,23 @@ class InfoRestaurantActivity : AppCompatActivity() {
         //
         // /*loadOpeningHours(restaurant.openingHours)
         findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
-
+        val imgRestaurant = findViewById<ImageView>(R.id.imageViewRestaurant)
+        //from customerMyPage
+        if(restaurant.imagePath.isNotEmpty()) {
+            val imageref = Firebase.storage.reference.child(restaurant.imagePath)
+            imageref.downloadUrl.addOnSuccessListener { Uri ->
+                val imageURL = Uri.toString() // get the URL for the image
+                //Use third party product glide to load the image into the imageview
+                Glide.with(this)
+                    .load(imageURL)
+                    .into(imgRestaurant)
+            }
+        }
+        docIdent = restaurant.documentId!!
+        docRating = restaurant.rating!!
+        docIt = if(!restaurant.documentInternal.isNullOrEmpty()) restaurant.documentInternal!! else ""
     }
 
-    /*
     fun setOpeningHours(view: View) {
 
         if(view is EditText) {
@@ -290,27 +290,33 @@ class InfoRestaurantActivity : AppCompatActivity() {
         val mView = findViewById<ConstraintLayout>(R.id.mainView)
 
         mView.forEach { cb ->
-            if (cb is CheckBox && cb.tag?.toString() == "type" && listOfTypes.contains(cb.text.toString())) {
+            if(cb is CheckBox && cb.tag?.toString() == "type" && listOfTypes.contains(cb.text.toString())) {
                 cb.isChecked = true
             }
         }
     }
 
     //Checks all the type checkboxes and adds the values from the ones checked to a string and returns it
-    fun getType(): String {
+    fun getType() : String {
         var toReturn = ""
         val mView = findViewById<ConstraintLayout>(R.id.mainView)
 
         mView.forEach { cb ->
-            if (cb is CheckBox && cb.tag?.toString() == "type" && cb.isChecked) {
+            if(cb is CheckBox && cb.tag?.toString() == "type" && cb.isChecked) {
                 toReturn += cb.text.toString() + ","
-            } else {
-
-                return toReturn.substring(0, toReturn.length) //kan anmäla sig utan att ha valt typ
-
             }
         }
 
         return toReturn.substring(0, toReturn.length - 1)
+    }
+
+    fun checkOrgNr(orgNr : String) : Boolean {
+        var passed = true
+
+        if(orgNr.length < 10 || orgNr.length > 11 || orgNr.get(2).digitToInt() < 2) passed = false
+
+        //orgNr = orgNr.replace("-", "")
+
+        return passed
     }
 }
