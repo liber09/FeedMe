@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.feedme.data.Customer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -22,12 +24,14 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
     lateinit var restaurantid: String
     lateinit var auth: FirebaseAuth
     lateinit var userUID : String
+    lateinit var category: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_view)
         auth = Firebase.auth
         val user = auth.currentUser
+        category = "Förrätt"
 
         //TODO plocka bort när allt sitta
        if(user != null) {
@@ -36,7 +40,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
         foodRecyclerView = findViewById<RecyclerView>(R.id.RV_Food)
         foodRecyclerView.layoutManager= LinearLayoutManager(this)
-        val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes,this)
+        val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes,this, category )
         foodRecyclerView.adapter = adapter
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -49,6 +53,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
         val fab_add_dish = findViewById<FloatingActionButton>(R.id.FAB_ADD_Drink)
         fab_add_dish.isInvisible = true
+
 
 
 // when creating a restaurant we start with adding +1 at the end at the moment, and are planing to extend that
@@ -65,6 +70,45 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
             } }
 
 
+        starters.setOnClickListener {
+            starters.setTypeface(null,Typeface.BOLD)
+            drinks.setTypeface(null,Typeface.NORMAL)
+            mainCourses.setTypeface(null,Typeface.NORMAL)
+            desserts.setTypeface(null,Typeface.NORMAL)
+            category = "Förrätt"
+
+
+
+
+
+        }
+
+        mainCourses.setOnClickListener {
+            starters.setTypeface(null,Typeface.NORMAL)
+            drinks.setTypeface(null,Typeface.NORMAL)
+            mainCourses.setTypeface(null,Typeface.BOLD)
+            desserts.setTypeface(null,Typeface.NORMAL)
+            category == "Huvudrätt"
+
+        }
+
+        desserts.setOnClickListener {
+            starters.setTypeface(null,Typeface.NORMAL)
+            drinks.setTypeface(null,Typeface.NORMAL)
+            mainCourses.setTypeface(null,Typeface.NORMAL)
+            desserts.setTypeface(null,Typeface.BOLD)
+        }
+
+
+        drinks.setOnClickListener {
+            drinks.setTypeface(null, Typeface.BOLD)
+
+
+            val intent = Intent(this,DrinksViewActivity::class.java)
+            intent.putExtra("restId", restaurantid)
+            this.startActivity(intent)
+        }
+
 
 
         fab_add_dish.setOnClickListener{
@@ -80,15 +124,6 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
 
 
-
-        drinks.setOnClickListener {
-            drinks.setTypeface(null, Typeface.BOLD)
-
-
-            val intent = Intent(this,DrinksViewActivity::class.java)
-            intent.putExtra("restId", restaurantid)
-            this.startActivity(intent)
-        }
 
         val backButton = findViewById<ImageView>(R.id.foodViewBackButton)
         backButton.setOnClickListener{
@@ -107,15 +142,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         }
 
 
-        val dessertText = findViewById<TextView>(R.id.tv_Deserts)
 
-        dessertText.setOnClickListener {
-
-            val desserts = dishes.category.equals("Dessert")
-
-
-
-        }
 
 
 
