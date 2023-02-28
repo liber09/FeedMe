@@ -65,11 +65,11 @@ class FirebaseMessageReceiver : FirebaseMessagingService() {
         val remoteViews = RemoteViews(
             ApplicationProvider.getApplicationContext<Context>().getPackageName(),
             R.layout.notification)
-        remoteViews.setTextViewText(R.id.title, title)
-        remoteViews.setTextViewText(R.id.message, message)
-        //remoteViews.setImageViewResource(
-        //    R.id.icon,
-        //    R.drawable.gfg
+        remoteViews.setTextViewText(R.id.notificationTitle, title)
+        remoteViews.setTextViewText(R.id.notificationText, message)
+        remoteViews.setImageViewResource(
+            R.id.icon,
+            R.drawable.gfg
         )
         return remoteViews
     }
