@@ -28,7 +28,8 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         auth = Firebase.auth
         val user = auth.currentUser
 
-        if (user != null){
+        //TODO plocka bort när allt sitta
+       if(user != null) {
         userUID = user.uid.toString()}
         restaurantid = intent.getStringExtra("restId").toString()
 
