@@ -56,9 +56,10 @@ class RegisterCustomerInfo : AppCompatActivity() {
     private fun saveCustomerInfoToDatabase() {
 
         val user = auth.currentUser
-        /*if(user == null ){
+        if(user == null ){
             return
-        }*/
+        }
+        val customerId = user.uid.toString()
 
         //First, validate if input is correct
         if (validateInput()){
@@ -84,7 +85,9 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 "customer", //Hardcoded usertype
                 userName,
                 allergies,
-                customerNumber = (DataManagerCustomers.customers.count()+1).toString()
+                customerNumber = (DataManagerCustomers.customers.count()+1).toString(),
+                customerId
+
 
             )
             //Add user to users collection
@@ -94,9 +97,9 @@ class RegisterCustomerInfo : AppCompatActivity() {
             MyPagesCustomer.customer = customer
 
             if (user != null){
-                db.collection("users")
-                    .document(user.uid)
-                    .collection("customers").document(newItemRef.toString()).set(customer) //Add customer to database
+                db.collection("customers")
+                    .document(customerId)
+                    .set(customer) //Add customer to database
                 Toast.makeText(this, getString(R.string.saveSuccess), Toast.LENGTH_SHORT).show()
                 val intent= Intent(this,CustomerMyPages::class.java)
                 intent.putExtra("CUSTOMER_DOCUMENTID",newItemRef.toString())

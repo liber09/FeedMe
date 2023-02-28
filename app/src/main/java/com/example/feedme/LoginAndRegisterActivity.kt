@@ -170,23 +170,16 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
                     if (user != null) {
                         val userId = user.uid
-                        db.collection("users")
-                            .get()
-                            .addOnSuccessListener { result ->
-                                for (document in result) {
-                                    Log.d("WWW", "${document.id} ")
-                                }
-                            }
 
-                        db.collection("users").document(userId)
-                            .collection("customers").get()
-                            .addOnSuccessListener { result ->
-                                if (!result.isEmpty) {
 
-                                    val intent = Intent(this, RestaurantViewActiviity::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                }
+                        db.collection("customers").get()
+                            .addOnSuccessListener { documents ->
+                                for (document in documents) {
+                                    if (document.id == "${user.uid}") {
+                                        val intent = Intent(this, RestaurantViewActiviity::class.java)
+                                        startActivity(intent)
+                                        finish()}}}
+
 
 
                                 db.collection("users").document(userId)
@@ -214,21 +207,13 @@ class LoginAndRegisterActivity : AppCompatActivity() {
                                                         }
                                                     }
                                                 }
-                                            //uteslutsförfarande då jag inte fick till det annars
 
-                                            /*val intent =
-                                                Intent(this, RestaurantDetailsActivity::class.java)
-                                            intent.putExtra("userId", userId)
-                                            intent.putExtra("restid", "${user.uid}+1")
-
-                                            startActivity(intent)
-                                            finish()*/
                                         }
 
                                     }
 
 
-                            }
+
                     }
 
 
