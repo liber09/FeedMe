@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         restv.setOnClickListener{
             val intent= Intent(this,RestaurantViewActiviity::class.java)
             startActivity(intent)
-
         }
 
         menu.setOnClickListener{
