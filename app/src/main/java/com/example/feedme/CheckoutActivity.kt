@@ -75,6 +75,7 @@ class CheckoutActivity : AppCompatActivity() {
                 arInfo.add(getString(R.string.bankCard))
             }
             val orderedDishes = mutableListOf<OrderItem>()
+            val emptyList = mutableListOf<OrderItem>()
             for (item in DataManagerShoppingCart.shoppingCartItems){
                 val orderItem = OrderItem(
                     item.title

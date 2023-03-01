@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -60,7 +61,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         val bookButton = findViewById<Button>(R.id.btn_table_bocking)
         val btnViewOrders = findViewById<Button>(R.id.btnViewOrders)
 
-        //btnViewOrders.isInvisible = true
+        btnViewOrders.isInvisible = true
         changeImageButton.isInvisible = true
 
         changeImageButton.setOnClickListener {
@@ -102,7 +103,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                             .into(restaurantImage)
                     }
                 }
-
+                getOrdersForRestaurant(restId)
 
                 // val docRef =db.collection("restaurants").document(State.restaurantId!!).collection("dishes")
                 val docRef = db.collection("restaurants").document(restId).collection("dishes")
@@ -149,6 +150,22 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun getOrdersForRestaurant(restaurantId: String){
+        DataManagerOrders.orders.clear()
+        var index = 0
+        db.collection("restaurants").document(restaurantId).collection("orders")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    DataManagerOrders.orders.add(document.toObject())
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
 
     private fun changeImage() {
