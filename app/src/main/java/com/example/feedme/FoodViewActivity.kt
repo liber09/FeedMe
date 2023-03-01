@@ -4,10 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickListener {
@@ -32,7 +27,10 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         setContentView(R.layout.activity_food_view)
         auth = Firebase.auth
         val user = auth.currentUser
-        userUID = user!!.uid.toString()
+
+        //TODO plocka bort när allt sitta
+       if(user != null) {
+        userUID = user.uid.toString()}
         restaurantid = intent.getStringExtra("restId").toString()
 
         foodRecyclerView = findViewById<RecyclerView>(R.id.RV_Food)
@@ -44,9 +42,13 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
 
         val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
-        val fab_add_dish = findViewById<FloatingActionButton>(R.id.FAB_ADD_Dish)
+        val fab_add_dish = findViewById<FloatingActionButton>(R.id.FAB_ADD_Drink)
         fab_add_dish.isInvisible = true
 
+
+// when creating a restaurant we start with adding +1 at the end at the moment, and are planing to extend that
+// så that the same restaurantowner can be linked to all his restaurants - if we code in more restaurant
+        // of course this is not the best solution yet
 
         if (user != null) {
             val n =2
@@ -78,7 +80,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
 
             val intent = Intent(this,DrinksViewActivity::class.java)
-
+            intent.putExtra("restId", restaurantid)
             this.startActivity(intent)
         }
 

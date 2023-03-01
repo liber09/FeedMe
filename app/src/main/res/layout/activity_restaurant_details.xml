@@ -116,6 +116,13 @@
 
             </TableRow>
 
+            <TextView
+                android:id="@+id/tv_deliveryPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deliveryPrice"
+                android:textColor="@color/white" />
+
             <Button
                 android:id="@+id/btnChangeImage"
                 android:layout_width="185dp"
