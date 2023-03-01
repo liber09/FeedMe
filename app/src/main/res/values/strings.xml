@@ -75,7 +75,7 @@
     <string name="noOrderHistory">Du har inte gjort någon beställning ännu</string>
     <string name="content_description_media">MediaDescription</string>
     <string name="OrgNr">OrgNr</string>
-    <string name="default_notification_channel_id">Notis</string>
+    <string name="default_notification_channel_id">Notiser</string>
     <string name="yourInfo">Dina uppgifter</string>
     <string name="anotherAddress">Till en annan adress</string>
     <string name="paymentMethod">Välj betalningsmetod</string>
@@ -98,5 +98,9 @@
     <string name="desserts">Desserer</string>
     <string name="drinks">Dryck</string>
     <string name="starters">Förrätter</string>
+    <string name="selectDelivery">Välj leveranssätt</string>
+    <string name="homeDelivery">Hemleverans</string>
+    <string name="deliveryPickup">Hämta själv</string>
+    <string name="deliveryEatAtRest">Ät på restaurangen</string>
 
 </resources>
