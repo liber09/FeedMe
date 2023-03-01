@@ -25,6 +25,9 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+
+
         val cartItems = shoppingCartItems[position]
         holder.cartItemRowTitle.text = cartItems.title
         holder.cartItemRowCount.text = cartItems.count.toString()

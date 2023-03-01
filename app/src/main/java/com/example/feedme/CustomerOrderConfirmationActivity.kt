@@ -29,17 +29,17 @@ class CustomerOrderConfirmationActivity : AppCompatActivity() {
         nameView.text = sb.toString()
         val addressView = findViewById<TextView>(R.id.TVOrderConfirmationCustomerAddress)
         sb.clear()
-        sb.append(customerData?.get(2).toString()).append(" ").append(customerData?.get(3).toString())
+        sb.append(customerData?.get(2).toString())
         if (customerData != null) {
             addressView.text = sb.toString()
         }
         val postalCodeView = findViewById<TextView>(R.id.TVOrderConfirmationCustomerPostalCode)
         if (customerData != null) {
-            postalCodeView.text = customerData.get(4).toString()
+            postalCodeView.text = customerData.get(3).toString()
         }
         val cityView = findViewById<TextView>(R.id.TVOrderConfirmationCustomerCity)
         if (customerData != null) {
-            cityView.text = customerData.get(5).toString()
+            cityView.text = customerData.get(4).toString()
         }
         val orderDateTime = findViewById<TextView>(R.id.TVOrderConfirmationCustomerOrderDate)
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
