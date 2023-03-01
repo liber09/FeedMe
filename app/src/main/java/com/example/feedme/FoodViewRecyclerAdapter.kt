@@ -23,7 +23,9 @@ lateinit var dishes: Dishes
 
 class FoodViewRecyclerAdapter(val context: Context,
                               val courses : List<Dishes>,
-                              val listener: OnClickListener)
+                              val listener: OnClickListener,
+                              val category : String
+)
     : RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
@@ -36,76 +38,81 @@ class FoodViewRecyclerAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dishes = courses[position]
+
+
+
         //val mainCourses =
         //
-        //if (dishes.category =="Huvudrätt")
+        if (dishes.category == category) {
 
-        holder.nameDishTextView.text = dishes.title
-        holder.descriptionDishTextView.text = dishes.description
-        holder.normalPriceTextView.text = "R   "+dishes.priceNormalPortion.toString()+" kr"
-        holder.smalPriceTextView.text = "S   " + dishes.priceSmallPortion.toString()+" kr"
-        holder.largePriceTextView.text = "L   "+ dishes.priceLargePortion.toString()+" kr"
-        holder.tv_priceLaktose.text = dishes.extraCostLaktose.toString()+" kr"
-        holder.tv_priceGluten.text = dishes.extraCostGluten.toString()+" kr"
-        holder.tv_priceVegan.text = dishes.extraCostVegan.toString()+" kr"
-        holder.tv_priceVegetarian.text = dishes.extraCostVegeterian.toString()+ " kr"
+            holder.nameDishTextView.text = dishes.title
+            holder.descriptionDishTextView.text = dishes.description
+            holder.normalPriceTextView.text = "R   " + dishes.priceNormalPortion.toString() + " kr"
+            holder.smalPriceTextView.text = "S   " + dishes.priceSmallPortion.toString() + " kr"
+            holder.largePriceTextView.text = "L   " + dishes.priceLargePortion.toString() + " kr"
+            holder.tv_priceLaktose.text = dishes.extraCostLaktose.toString() + " kr"
+            holder.tv_priceGluten.text = dishes.extraCostGluten.toString() + " kr"
+            holder.tv_priceVegan.text = dishes.extraCostVegan.toString() + " kr"
+            holder.tv_priceVegetarian.text = dishes.extraCostVegeterian.toString() + " kr"
 
-        if (dishes.priceSmallPortion == null|| dishes.priceSmallPortion == 0.0){
-            holder.addButtonSmallPrice.isInvisible = true
-            holder.smalPriceTextView.isInvisible = true
-        }
-        if (dishes.priceLargePortion == null|| dishes.priceLargePortion == 0.0){
-            holder.addButtonLargePrice.isInvisible = true
-            holder.largePriceTextView.isInvisible = true
-        }
-        if (dishes.priceNormalPortion == null|| dishes.priceNormalPortion == 0.0){
-            holder.addButtonNormalPrice.isInvisible = true
-            holder.normalPriceTextView.isInvisible = true
-        }
-        if (dishes.canBeMadeGlutenFree == false){
-            holder.checkBoxGluten.isInvisible = true
-            holder.tv_priceGluten.isInvisible = true
-        }
-        if (dishes.canBeMadeLaktosFree== false){
-            holder.checkBoxLaktose .isInvisible = true
-            holder.tv_priceLaktose.isInvisible = true
-        }
-        if (dishes.canBeMadeVegan == false){
-            holder.checkBoxVegan.isInvisible = true
-            holder.tv_priceVegan.isInvisible = true
-        }
-        if (dishes.canBeMadeVegeterian == false){
-            holder.checkBoxVegeterian.isInvisible = true
-            holder.tv_priceVegetarian.isInvisible = true
-        }
-
-        //TODO implement Glide for images
-
-        if (dishes.dishImagePath.isEmpty()){
-            holder.iv_foodImage.setImageResource(R.drawable.logo)
-        }else{
-            val imageref = Firebase.storage.reference.child(dishes.dishImagePath)
-            imageref.downloadUrl.addOnSuccessListener { Uri ->
-                val imageURL = Uri.toString() // get the URL for the image
-                //Use third party product glide to load the image into the imageview
-                Glide.with(context)
-                    .load(imageURL)
-                    .into( holder.iv_foodImage)
+            if (dishes.priceSmallPortion == null || dishes.priceSmallPortion == 0.0) {
+                holder.addButtonSmallPrice.isInvisible = true
+                holder.smalPriceTextView.isInvisible = true
             }
+            if (dishes.priceLargePortion == null || dishes.priceLargePortion == 0.0) {
+                holder.addButtonLargePrice.isInvisible = true
+                holder.largePriceTextView.isInvisible = true
+            }
+            if (dishes.priceNormalPortion == null || dishes.priceNormalPortion == 0.0) {
+                holder.addButtonNormalPrice.isInvisible = true
+                holder.normalPriceTextView.isInvisible = true
+            }
+            if (dishes.canBeMadeGlutenFree == false) {
+                holder.checkBoxGluten.isInvisible = true
+                holder.tv_priceGluten.isInvisible = true
+            }
+            if (dishes.canBeMadeLaktosFree == false) {
+                holder.checkBoxLaktose.isInvisible = true
+                holder.tv_priceLaktose.isInvisible = true
+            }
+            if (dishes.canBeMadeVegan == false) {
+                holder.checkBoxVegan.isInvisible = true
+                holder.tv_priceVegan.isInvisible = true
+            }
+            if (dishes.canBeMadeVegeterian == false) {
+                holder.checkBoxVegeterian.isInvisible = true
+                holder.tv_priceVegetarian.isInvisible = true
+            }
+
+            //TODO implement Glide for images
+
+            if (dishes.dishImagePath.isEmpty()) {
+                holder.iv_foodImage.setImageResource(R.drawable.logo)
+            } else {
+                val imageref = Firebase.storage.reference.child(dishes.dishImagePath)
+                imageref.downloadUrl.addOnSuccessListener { Uri ->
+                    val imageURL = Uri.toString() // get the URL for the image
+                    //Use third party product glide to load the image into the imageview
+                    Glide.with(context)
+                        .load(imageURL)
+                        .into(holder.iv_foodImage)
+                }
+            }
+
+            holder.foodDisplayPosition = position
+            //TODO change this as soon as it is klickable from a restaurant
+
+
+            // TODO for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
+
+
+            //!holder.isRecyclable
+
         }
-
-        holder.foodDisplayPosition = position
-        //TODO change this as soon as it is klickable from a restaurant
-
-
-
-        // TODO for order food holder.checkBoxVegeterian.isChecked = food needs to be vegetrain
-
-
-
-
-
-        //!holder.isRecyclable
+        else {
+            holder.itemView.visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+        }
     }
 
     override fun getItemCount(): Int {
