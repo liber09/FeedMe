@@ -98,7 +98,7 @@ class CheckoutActivity : AppCompatActivity() {
                 messageToRest)
 
             order.restaurantDocumentId?.let { it1 -> db.collection("restaurants").document(it1)
-                .collection("orders").add(order) }
+                .collection("orders").add(order)}
 
             val intent = Intent(this, CustomerOrderConfirmationActivity::class.java)
             intent.putStringArrayListExtra("list",arInfo)

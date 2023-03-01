@@ -75,7 +75,7 @@
     <string name="noOrderHistory">Du har inte gjort någon beställning ännu</string>
     <string name="content_description_media">MediaDescription</string>
     <string name="OrgNr">OrgNr</string>
-    <string name="default_notification_channel_id">Notis</string>
+    <string name="default_notification_channel_id">Notiser</string>
     <string name="yourInfo">Dina uppgifter</string>
     <string name="anotherAddress">Till en annan adress</string>
     <string name="paymentMethod">Välj betalningsmetod</string>

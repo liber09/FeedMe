@@ -35,7 +35,7 @@ class ShoppingCart : AppCompatActivity() {
             val text = findViewById<EditText>(R.id.editTextTextMultiLine).text.toString()
             intent.putExtra("MESSAGETOREST",text)
             intent.putExtra("DELIVERYOPTION",selectedDeliveryOption)
-            intent.putExtra("TOTALAMOUNT",amount)
+            intent.putExtra("TOTALAMOUNT", amount)
             startActivity(intent)
         }
         recyclerViewShoppingCart = findViewById<RecyclerView>(R.id.rvShoppingCart)
