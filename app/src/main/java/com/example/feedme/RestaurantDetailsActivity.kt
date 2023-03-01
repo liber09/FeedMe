@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -37,6 +38,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     lateinit var restaurantTitel: TextView
     lateinit var restaurantdescripton: TextView
     lateinit var deliveryPrice: TextView
+    lateinit var restId :String
 
     lateinit var auth: FirebaseAuth
 
@@ -49,7 +51,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         State.restaurantId = intent.getStringExtra("id").toString()
         auth = Firebase.auth
         val user = auth.currentUser
-        val restId = intent.getStringExtra("restid").toString()
+        restId = intent.getStringExtra("restid").toString()
         Log.d("EEEF",restId)
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
@@ -60,6 +62,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         val changeImageButton = findViewById<Button>(R.id.btnChangeImage)
         val bookButton = findViewById<Button>(R.id.btn_table_bocking)
         val btnViewOrders = findViewById<Button>(R.id.btnViewOrders)
+        val homeButton = findViewById<ImageView>(R.id.ibtn_home_detailsview)
 
         btnViewOrders.isInvisible = true
         changeImageButton.isInvisible = true
@@ -90,6 +93,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 changeImageButton.isVisible = true
                     bookButton.isInvisible = true
                     btnViewOrders.isVisible = true
+                    homeButton.isInvisible = true
+
                 } }
 
                 //Get the image from firebase
@@ -143,9 +148,29 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     intent.putExtra("RESID", restaurant.documentId)
                     startActivity(intent)
                 }
+
+                val profilebutton = findViewById<Button>(R.id.profileButton)
+
+                profilebutton.setOnClickListener {
+                    val intent= Intent(this,CustomerMyPages::class.java)
+                    startActivity(intent)
+
+                }
+
+
+                homeButton.setOnClickListener{
+
+
+                            val intent = Intent(this,RestaurantViewActiviity::class.java)
+                            this.startActivity(intent)
+
+                }
+
+
+
                 val logo = findViewById<ImageView>(R.id.LogoText)
                 logo.setOnClickListener{
-                    val intent= Intent(this,RestaurantViewActiviity::class.java)
+                    val intent= Intent(this,CheatActivity::class.java)
                     startActivity(intent)
                 }
             }
@@ -225,4 +250,10 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     }
 
 
-}
+
+
+
+    }
+
+
+
