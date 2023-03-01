@@ -55,7 +55,7 @@ class OrderViewForRestaurants : AppCompatActivity() {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+                Log.w(ContentValues.TAG, "Error getting documents:", exception)
             }
     }
 
