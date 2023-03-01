@@ -93,4 +93,5 @@
     <string name="msg_token_fmt">FCM registration token recieved</string>
     <string name="title">An offer</string>
     <string name="message">Message</string>
+    <string name="servicedesc">A service for firebase notifications</string>
 </resources>

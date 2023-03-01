@@ -15,7 +15,6 @@ import com.example.feedme.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-
 class FirebaseMessageReceiver : FirebaseMessagingService() {
 
     // Override onNewToken to get new token

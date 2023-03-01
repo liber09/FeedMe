@@ -102,5 +102,6 @@
     <string name="starters">Förrätter</string>
     <string name="title">Ett erbjudande</string>
     <string name="message">Meddelande</string>
+    <string name="servicedesc">En tjänst för firebase notifications</string>
 
 </resources>
