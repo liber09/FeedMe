@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isInvisible
@@ -39,7 +40,14 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
         foodRecyclerView.adapter = adapter
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        val cart = findViewById<ImageButton>(R.id.cartButton)
+        cart.setOnClickListener{
+            val intent = Intent(this,ShoppingCart::class.java)
+            startActivity(intent)
 
+
+
+        }
 
         val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
         val fab_add_dish = findViewById<FloatingActionButton>(R.id.FAB_ADD_Drink)
@@ -91,12 +99,23 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
         val homeButton = findViewById<ImageView>(R.id.ibtn_home_drinksView)
         homeButton.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            this.startActivity(intent)
+
+            if (user != null) {
+                val n =2
+                val userId = restaurantid.dropLast(n)
+
+                if (userUID == userId){
+                    val intent = Intent(this,RestaurantDetailsActivity::class.java)
+                    intent.putExtra("restid", restaurantid)
+                    this.startActivity(intent)
+                }else{
+                val intent = Intent(this,RestaurantViewActiviity::class.java)
+                this.startActivity(intent)}}
+
         }
         val logo = findViewById<ImageView>(R.id.iv_Logo)
         logo.setOnClickListener{
-            val intent= Intent(this,RestaurantViewActiviity::class.java)
+            val intent= Intent(this,CheatActivity::class.java)
             startActivity(intent)
         }
 

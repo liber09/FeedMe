@@ -17,6 +17,20 @@
         android:theme="@style/Theme.FeedMe"
         tools:targetApi="31">
         <activity
+            android:name=".SplashScree"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CheatActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddNChangeDrinks"
             android:exported="false">
             <meta-data
@@ -29,7 +43,7 @@
         <activity
             android:name=".CheckoutActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SignInDeliveryPerson"
             android:exported="false">

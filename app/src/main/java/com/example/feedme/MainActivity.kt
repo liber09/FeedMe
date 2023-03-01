@@ -9,11 +9,14 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
 import com.example.feedme.data.*
 
@@ -37,70 +40,12 @@ class MainActivity : AppCompatActivity() {
         mockCustomerData()
         //mockRestaurantData()
         //mockDataDrinks()
-
-
-        val sc = findViewById<Button>(R.id.btn_Shopping)
-
-        val ra = findViewById<Button>(R.id.buttonRegister)
-
-
-        val ci = findViewById<Button>(R.id.btn_customerInfo)
-        val rov = findViewById<Button>(R.id.btnOrderView)
-        val getOrders = findViewById<Button>(R.id.btnGetOrders)
-
-        val menu = findViewById<Button>(R.id.menuBtn)
+        supportActionBar?.hide()
 
 
 
-        val tvresId = findViewById<EditText>(R.id.resNrEdtTxt )
-        val restv = findViewById<TextView>(R.id.btnRestaurantList)
 
 
-        restv.setOnClickListener{
-            val intent= Intent(this,RestaurantViewActiviity::class.java)
-            startActivity(intent)
-        }
-
-        menu.setOnClickListener{
-            val intent= Intent(this,MenuActivity::class.java)
-            startActivity(intent)
-
-        }
-
-
-
-        getOrders.setOnClickListener{
-            val restaurantId = tvresId.text.toString()
-            getOrdersForRestaurant(restaurantId)
-        }
-
-        rov.setOnClickListener{
-            val intent= Intent(this,OrderViewForRestaurants::class.java)
-            startActivity(intent)
-        }
-        ci.setOnClickListener{
-            val intent= Intent(this,RegisterCustomerInfo::class.java)
-            startActivity(intent)
-        }
-
-        sc.setOnClickListener{
-            val intent= Intent(this,ShoppingCart::class.java)
-            startActivity(intent)
-        }
-
-
-        /*rr.setOnClickListener {    val intent= Intent(this,InfoRestaurantActivity::class.java)
-            intent.putExtra("RESTAURANT_KEY",1)
-            startActivity(intent) }*/
-
-
-
-        ra.setOnClickListener{
-            val intent= Intent(this,LoginAndRegisterActivity::class.java)
-            startActivity(intent)
-        }
-
-        //val infoRes = findViewById<Button>(R.id.btn_infoRes)
 
 
 
@@ -195,7 +140,20 @@ ordersRef.addSnapshotListener{ snapshot, e ->
     }
 }
 */
-}
+
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            val intent = Intent( this, LoginAndRegisterActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        },3000
+
+        )
+
+
+
+    }
 
 
 

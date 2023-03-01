@@ -26,8 +26,8 @@
         android:layout_width="140dp"
         android:layout_height="51dp"
         android:layout_marginTop="19dp"
-        app:layout_constraintEnd_toStartOf="@+id/profileButton"
-        app:layout_constraintStart_toEndOf="@+id/menuButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/text1" />
 
@@ -44,28 +44,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_baseline_home_24" />
 
-    <Button
-        android:id="@+id/profileButton"
-        android:layout_width="81dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="#000000"
-        app:icon="@drawable/male_user"
-        app:iconTint="#F29D38"
+    <ImageButton
+        android:id="@+id/cartButton"
+        android:layout_width="50dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="31dp"
+        android:background="@drawable/border_yellow_bg"
+        android:contentDescription="@android:string/untitled"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:srcCompat="@drawable/baseline_shopping_cart_24" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="8dp"
         android:background="#F29D38"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
+        app:layout_constraintTop_toBottomOf="@+id/menuButton" />
 
     <TextView
         android:id="@+id/tv_MainCourse"

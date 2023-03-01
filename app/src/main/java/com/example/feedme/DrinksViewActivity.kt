@@ -36,16 +36,7 @@ class DrinksViewActivity : AppCompatActivity() {
             val intent = Intent(this,ShoppingCart::class.java)
             startActivity(intent)
 
-            val huvudrätt = findViewById<TextView>(R.id.huvudrättTextView)
-            huvudrätt.setOnClickListener{
-                val intent = Intent(this,FoodViewActivity::class.java)
-                startActivity(intent)
 
-                val dessert = findViewById<TextView>(R.id.dessertTextView)
-                dessert.setOnClickListener{
-                    val desserts = dishes.category.equals("Dessert")
-                }
-            }
 
         }
 

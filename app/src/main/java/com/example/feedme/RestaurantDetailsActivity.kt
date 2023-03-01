@@ -36,6 +36,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     lateinit var restaurantTitel: TextView
     lateinit var restaurantdescripton: TextView
     lateinit var deliveryPrice: TextView
+    lateinit var restId :String
 
     lateinit var auth: FirebaseAuth
 
@@ -48,7 +49,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         State.restaurantId = intent.getStringExtra("id").toString()
         auth = Firebase.auth
         val user = auth.currentUser
-        val restId = intent.getStringExtra("restid").toString()
+        restId = intent.getStringExtra("restid").toString()
         Log.d("EEEF",restId)
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
@@ -207,4 +208,10 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     }
 
 
-}
+
+
+
+    }
+
+
+
