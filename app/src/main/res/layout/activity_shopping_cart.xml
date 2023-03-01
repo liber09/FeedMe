@@ -79,25 +79,25 @@
                 android:id="@+id/TVShoppingCartDeliveryFee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="51dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="28dp"
                 android:text="@string/deliveryPriceAmount"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvShoppingCart" />
+                app:layout_constraintTop_toBottomOf="@+id/btnUpdateChanges" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="53dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/deliveryPrice"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvShoppingCart" />
+                app:layout_constraintTop_toBottomOf="@+id/btnUpdateChanges" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvShoppingCart"
@@ -115,13 +115,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/yourOrder"
                 android:textColor="#F29D38"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_backNShopMore" />
 
             <EditText
                 android:id="@+id/editTextTextMultiLine"
@@ -156,25 +156,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="32dp"
                 android:text="@string/checkout"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chbDeliveryEatAtRestaurant" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:clickable="true"
-                app:backgroundTint="#F29D38"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:rippleColor="#000000"
-                app:srcCompat="@android:drawable/ic_menu_edit"
-                app:tint="#000000" />
 
             <TextView
                 android:id="@+id/TVShoppingCartTotal"
@@ -242,6 +230,17 @@
                 android:textColor="#FFFFFF"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+            <Button
+                android:id="@+id/btn_backNShopMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:drawableLeft="@drawable/ic_baseline_local_grocery_store_24"
+                android:text="handla mer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
