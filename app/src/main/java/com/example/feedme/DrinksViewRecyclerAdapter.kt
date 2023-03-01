@@ -39,11 +39,11 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
 
 
 
-      /*  // Glide implemented for images to show im menu
-        if (dishes.dishImagePath.isEmpty()){
+       // Glide implemented for images to show im menu
+        if (currentItem.imagePath.isEmpty()){
             holder.imageDisplay.setImageResource(R.drawable.drinkslogo)
         }else{
-            val imageref = Firebase.storage.reference.child(dishes.dishImagePath)
+            val imageref = Firebase.storage.reference.child(currentItem.imagePath)
             imageref.downloadUrl.addOnSuccessListener { Uri ->
                 val imageURL = Uri.toString() // get the URL for the image
                 //Use third party product glide to load the image into the imageview
@@ -51,7 +51,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
                     .load(imageURL)
                     .into( holder.imageDisplay)
             }
-        }*/
+        }
     }
 
 
