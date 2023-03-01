@@ -13,9 +13,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedme.data.Customer
+import com.example.feedme.data.Dishes
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickListener {
@@ -26,12 +28,16 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
     lateinit var userUID : String
     lateinit var category: String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_view)
+
+
         auth = Firebase.auth
         val user = auth.currentUser
         category = "Förrätt"
+
 
         //TODO plocka bort när allt sitta
        if(user != null) {
@@ -40,11 +46,32 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
         foodRecyclerView = findViewById<RecyclerView>(R.id.RV_Food)
         foodRecyclerView.layoutManager= LinearLayoutManager(this)
-        val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes,this, category )
+        val adapter = FoodViewRecyclerAdapter(this,DataManagerDishes.dishes,this,)
         foodRecyclerView.adapter = adapter
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
+        val dishReference = db.collection("restaurants")
+            .document("${restaurantid}")
+            .collection("dishes")
+        dishReference.addSnapshotListener{ snapshot, exception ->
+            if (exception != null || snapshot ==null)
+            {
+                Log.d("lalaa", "Exception")
+                return@addSnapshotListener
+            }
+            val dishlist = snapshot.toObjects(Dishes::class.java)
+            for (dish in dishlist){
+                Log.d("Dish","$dish")
+               var förrätt = dish.category == "Förrätt"
+                Log.d("Starter", "$förrätt")
+            }
+          /*  for (document in snapshot.documents){
+                Log.d("yyy", "Document ${document.id}: ${document.data}")
+
+            }*/
+
+        }
 
         val drinks = findViewById<TextView>(R.id.tv_drinksFoodView)
         val starters = findViewById<TextView>(R.id.tv_starterMealView)

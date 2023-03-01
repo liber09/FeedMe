@@ -24,7 +24,7 @@ lateinit var dishes: Dishes
 class FoodViewRecyclerAdapter(val context: Context,
                               val courses : List<Dishes>,
                               val listener: OnClickListener,
-val category :String)
+)
     : RecyclerView.Adapter<FoodViewRecyclerAdapter.ViewHolder>() {
 
     var layoutInflater = LayoutInflater.from(context)
@@ -37,7 +37,7 @@ val category :String)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dishes = courses[position]
-        if (dishes.category == category){
+
 
 
         //val mainCourses =
@@ -110,11 +110,8 @@ val category :String)
 
 
         //!holder.isRecyclable
-    }
-        else {
-            holder.itemView.visibility = View.GONE
-            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
-        }
+
+
     }
 
     override fun getItemCount(): Int {
