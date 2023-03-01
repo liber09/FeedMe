@@ -21,10 +21,6 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.ktx.toObject
-import com.google.type.DateTime
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 val db = Firebase.firestore
 
@@ -176,7 +172,7 @@ class MainActivity : AppCompatActivity() {
                             ?.let { DataManagerCustomers.customers.add(it) }
             }
         }
-                getOrdersForRestaurant("restaurant2")
+                //getOrdersForRestaurant("restaurant2")
     }
 }
 

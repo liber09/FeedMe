@@ -98,5 +98,9 @@
     <string name="desserts">Desserer</string>
     <string name="drinks">Dryck</string>
     <string name="starters">Förrätter</string>
+    <string name="selectDelivery">Välj leveranssätt</string>
+    <string name="homeDelivery">Hemleverans</string>
+    <string name="deliveryPickup">Hämta själv</string>
+    <string name="deliveryEatAtRest">Ät på restaurangen</string>
 
 </resources>

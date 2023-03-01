@@ -3,6 +3,8 @@ package com.example.feedme
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,23 @@ class ShoppingCart : AppCompatActivity() {
 
         val btnShoppingCartCheckout = findViewById<Button>(R.id.btnShoppingCartCheckout)
         btnShoppingCartCheckout.setOnClickListener{
+            var selectedDeliveryOption = ""
+            if(findViewById<CheckBox>(R.id.chbHomeDelivery).isChecked){
+                selectedDeliveryOption = getString(R.string.homeDelivery)
+            }
+            if(findViewById<CheckBox>(R.id.chbDeliveryPickup).isChecked){
+                selectedDeliveryOption = getString(R.string.deliveryPickup)
+            }
+            if(findViewById<CheckBox>(R.id.chbDeliveryEatAtRestaurant).isChecked){
+                selectedDeliveryOption = getString(R.string.deliveryEatAtRest)
+            }
             val intent = Intent(this,CheckoutActivity::class.java)
+            var amount = findViewById<TextView>(R.id.TVShoppingCartTotal).text.toString()
+            amount = amount.substring(0,amount.length-3)
+            val text = findViewById<EditText>(R.id.editTextTextMultiLine).text.toString()
+            intent.putExtra("MESSAGETOREST",text)
+            intent.putExtra("DELIVERYOPTION",selectedDeliveryOption)
+            intent.putExtra("TOTALAMOUNT",amount)
             startActivity(intent)
         }
         recyclerViewShoppingCart = findViewById<RecyclerView>(R.id.rvShoppingCart)
