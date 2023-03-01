@@ -9,6 +9,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -66,16 +68,16 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val sc = findViewById<Button>(R.id.btn_Shopping)
+        //val sc = findViewById<Button>(R.id.btn_Shopping)
 
-        val ra = findViewById<Button>(R.id.buttonRegister)
+        //val ra = findViewById<Button>(R.id.buttonRegister)
 
 
-        val ci = findViewById<Button>(R.id.btn_customerInfo)
-        val rov = findViewById<Button>(R.id.btnOrderView)
-        val getOrders = findViewById<Button>(R.id.btnGetOrders)
+        //val ci = findViewById<Button>(R.id.btn_customerInfo)
+        //val rov = findViewById<Button>(R.id.btnOrderView)
+        //val getOrders = findViewById<Button>(R.id.btnGetOrders)
 
-        val menu = findViewById<Button>(R.id.menuBtn)
+        //val menu = findViewById<Button>(R.id.menuBtn)
 
 
 

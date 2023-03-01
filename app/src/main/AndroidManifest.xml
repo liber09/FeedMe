@@ -185,7 +185,7 @@
                 android:value="" />
         </activity>
         <service
-            android:name=".FirebaseMessageReceiver"
+            android:name="com.google.firebase.messaging.FirebaseMessagingService"
             android:description="@string/servicedesc"
             android:exported="false">
             <intent-filter>

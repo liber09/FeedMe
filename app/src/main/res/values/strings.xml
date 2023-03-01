@@ -105,5 +105,7 @@
     <string name="homeDelivery">Hemleverans</string>
     <string name="deliveryPickup">Hämta själv</string>
     <string name="deliveryEatAtRest">Ät på restaurangen</string>
+    <string name="msg_token_fmt">FCM registration token recieved</string>
+    <string name="messageNoNotifications">The app will not show any notifications</string>
 
 </resources>

@@ -68,7 +68,7 @@ class FirebaseMessageReceiver : FirebaseMessagingService() {
         remoteViews.setTextViewText(R.id.notificationText, message)
         remoteViews.setImageViewResource(
             R.id.icon,
-            R.drawable.bell_2_128
+            R.drawable.pngfind_com_bell_icon_png_50581
         )
         return remoteViews
     }
