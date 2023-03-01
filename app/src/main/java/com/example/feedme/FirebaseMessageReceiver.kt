@@ -69,7 +69,7 @@ class FirebaseMessageReceiver : FirebaseMessagingService() {
         remoteViews.setTextViewText(R.id.notificationText, message)
         remoteViews.setImageViewResource(
             R.id.icon,
-            R.drawable.gfg
+            R.drawable.bell_2_128
         )
         return remoteViews
     }
@@ -121,8 +121,7 @@ class FirebaseMessageReceiver : FirebaseMessagingService() {
         // notify the
         // user of events that happen in the background.
         val notificationManager = ContextCompat.getSystemService(
-            Context.NOTIFICATION_SERVICE
-        ) as NotificationManager?
+            this,builder.javaClass) as NotificationManager?
         // Check if the Android Version is greater than Oreo
         if (Build.VERSION.SDK_INT
             >= Build.VERSION_CODES.O
