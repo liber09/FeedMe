@@ -77,7 +77,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
         init {                                  // add to cart function
             addToCart.setOnClickListener {
                 val selectedDrink = DataManagerDrinks.drinkList[drinkDisplayPosition]
-                selectedDrink.drinkSize = "33cl"
+               // selectedDrink.drinkSize = "33cl"
                 selectedDrink.drinkName += "  33cl"
                 handleExistsInCart(selectedDrink)
 

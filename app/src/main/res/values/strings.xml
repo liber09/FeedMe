@@ -75,7 +75,7 @@
     <string name="noOrderHistory">Du har inte gjort någon beställning ännu</string>
     <string name="content_description_media">MediaDescription</string>
     <string name="OrgNr">OrgNr</string>
-    <string name="default_notification_channel_id">Notis</string>
+    <string name="default_notification_channel_id">Notiser</string>
     <string name="yourInfo">Dina uppgifter</string>
     <string name="anotherAddress">Till en annan adress</string>
     <string name="paymentMethod">Välj betalningsmetod</string>
@@ -92,8 +92,6 @@
     <string name="updateChanges">Uppdatera mina val</string>
     <string name="orderType">Typ av order:</string>
     <string name="toOrders">Visa ordrar</string>
-    <string name="messageNoNotifications">Appen kommer inte att visa några notifieringar</string>
-    <string name="msg_token_fmt">FCM registration token recieved</string>
     <string name="size">Storlek</string>
     <string name="drinkName">Dryck</string>
     <string name="maincourses">Huvudrätter</string>
@@ -103,5 +101,9 @@
     <string name="title">Ett erbjudande</string>
     <string name="message">Meddelande</string>
     <string name="servicedesc">En tjänst för firebase notifications</string>
+    <string name="selectDelivery">Välj leveranssätt</string>
+    <string name="homeDelivery">Hemleverans</string>
+    <string name="deliveryPickup">Hämta själv</string>
+    <string name="deliveryEatAtRest">Ät på restaurangen</string>
 
 </resources>

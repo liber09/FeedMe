@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
@@ -20,7 +17,9 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
@@ -34,6 +33,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
     val db = Firebase.firestore
     private val pickImage = 100
     private var imageUri: Uri? = null
+    val registerNew = false
     lateinit var auth: FirebaseAuth
     private var imgPath = ""
     private var docIdent = ""
@@ -73,7 +73,23 @@ class InfoRestaurantActivity : AppCompatActivity() {
             val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "")
             if(rest != null) loadRestaurant(rest)
         }
+        val monSta = findViewById<EditText>(R.id.textInputMondayStart)
+        val editName = findViewById<EditText>(R.id.textInputName)
 
+        monSta.setOnClickListener {
+            Log.v("!!!","clicked")
+
+            val cal = Calendar.getInstance()
+
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+
+                monSta.setText(SimpleDateFormat("HH:mm").format(cal.time))
+            }
+
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
 
         btnAddImage.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -96,21 +112,36 @@ class InfoRestaurantActivity : AppCompatActivity() {
     }
     var documentRef = ""
     //Saves restaurant info to database
-    fun saveInfo() {
-        val user = auth.currentUser
-
+        fun saveInfo() {
+            val user = auth.currentUser
 
 
         if (user == null){
             return
 
         }
-        val documentIternal = if(docIt.isEmpty()) "${user.uid}" else docIt
-        val documentId = if(docIdent.isEmpty()) "${user.uid}+1" else docIdent
+        val documentIternal = "${user.uid}"
+        val documentId = "${user.uid}+1"
+        var imagePath = ""
         // TODO gör det till i med increment när man väl kan lägga upp fler restauaranger
+        if (imageUri != null) {
+            imageUri?.let { uploadImageToFirebase(it) }
+            imagePath = "/restaurants/$fileName"
+        }
+        var deliveryPrice = 0
+        if (findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().isNotEmpty()) {
+            try {
+                deliveryPrice =
+                    findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt()
+            } catch (e: Exception) {
+
+                Toast.makeText(this, "Bara siffror godtas i Utkärningsavgiften", Toast.LENGTH_SHORT)
+                    .show()
+                return
+            }
+        }
 
 
-        imageUri?.let { uploadImageToFirebase(it) }
         val rest = Restaurant(
             findViewById<EditText>(R.id.textInputName).text.toString(),
             findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
@@ -120,30 +151,49 @@ class InfoRestaurantActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.textInputPhone).text.toString(),
             findViewById<EditText>(R.id.textInputEmail).text.toString(),
             getType(),
-            findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt(),
+            deliveryPrice,
             findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
             findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
             findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
             findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
             findViewById<EditText>(R.id.textInputDescription).text.toString(),
             docRating,
-            if(imageUri != null) "/restaurants/$fileName" else imgPath,
+            imagePath,
             documentIternal,
             documentId,
             openingHours
         )
+        if (findViewById<EditText>(R.id.textInputName).text.toString().isEmpty()) {
+            Toast.makeText(this, "Restaurant name cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         db.collection("restaurants")
             .document(documentId)
             .set(rest)
             .addOnSuccessListener { documentReference ->
                 Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${rest.documentId}")
-                documentRef = documentId
+                 documentRef = documentId
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
             }
-        DataManagerRestaurants.update()
+
+        //update
+
+        val restaurantssRef = db.collection("restaurants")
+        restaurantssRef.addSnapshotListener { snapshot, e ->
+            if (snapshot != null) {
+                DataManagerRestaurants.restaurants.clear()
+                for (document in snapshot.documents) {
+                    if (document != null) {
+                        document.toObject<Restaurant>()
+                            ?.let { DataManagerRestaurants.restaurants.add(it) }
+                    }
+                }
+            }
+        }
+
 
         //On successful save redirect to restaurant details
         val intent= Intent(this,RestaurantDetailsActivity::class.java)
@@ -242,8 +292,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         mView.forEach { et ->
             if(et is EditText && oHours.containsKey(et.tag?.toString())) {
-                val date = oHours.get(et.tag.toString())
-                cal.time = date
+                val date = oHours.get(et.tag.toString()) as com.google.firebase.Timestamp
+                cal.time = date.toDate()
                 et.setText(SimpleDateFormat("HH:mm").format(cal?.time))
             }
         }
@@ -270,6 +320,10 @@ class InfoRestaurantActivity : AppCompatActivity() {
         mView.forEach { cb ->
             if(cb is CheckBox && cb.tag?.toString() == "type" && cb.isChecked) {
                 toReturn += cb.text.toString() + ","
+            }
+            else{
+                return toReturn.substring(0, toReturn.length) //kan anmäla sig utan att ha valt typ
+
             }
         }
 

@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -28,8 +30,16 @@ class RestaurantViewActiviity : AppCompatActivity(), RestaurantViewRVAdapter.OnC
         }
         val logo = findViewById<ImageView>(R.id.LogoText)
         logo.setOnClickListener{
-            val intent= Intent(this,RestaurantViewActiviity::class.java)
+            val intent= Intent(this,CheatActivity::class.java)
             startActivity(intent)
+        }
+
+        val profilebutton = findViewById<Button>(R.id.profileButton)
+
+        profilebutton.setOnClickListener {
+            val intent= Intent(this,CustomerMyPages::class.java)
+            startActivity(intent)
+
         }
 
 

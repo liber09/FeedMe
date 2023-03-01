@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -35,6 +37,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
     lateinit var restaurantTitel: TextView
     lateinit var restaurantdescripton: TextView
+    lateinit var deliveryPrice: TextView
+    lateinit var restId :String
 
     lateinit var auth: FirebaseAuth
 
@@ -47,16 +51,19 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         State.restaurantId = intent.getStringExtra("id").toString()
         auth = Firebase.auth
         val user = auth.currentUser
-        val restId = intent.getStringExtra("restid").toString()
+        restId = intent.getStringExtra("restid").toString()
         Log.d("EEEF",restId)
 
         restaurantTitel = findViewById(R.id.tv_restTitle_details)
+        deliveryPrice = findViewById(R.id.tv_deliveryPrice)
 
         restaurantdescripton = findViewById(R.id.tv_Rest_Descript_RestDetails)
         val menueButton = findViewById<Button>(R.id.btn_menu)
         val changeImageButton = findViewById<Button>(R.id.btnChangeImage)
         val bookButton = findViewById<Button>(R.id.btn_table_bocking)
         val btnViewOrders = findViewById<Button>(R.id.btnViewOrders)
+        val homeButton = findViewById<ImageView>(R.id.ibtn_home_detailsview)
+
         btnViewOrders.isInvisible = true
         changeImageButton.isInvisible = true
 
@@ -76,6 +83,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
                 restaurantTitel.text = restaurant.name
                 restaurantdescripton.text = restaurant.description
+                deliveryPrice.text = "Pris för utkörning: "+restaurant.deliveryFee.toString()+" kr"
+
 
 
                     if (user != null) {
@@ -84,6 +93,8 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 changeImageButton.isVisible = true
                     bookButton.isInvisible = true
                     btnViewOrders.isVisible = true
+                    homeButton.isInvisible = true
+
                 } }
 
                 //Get the image from firebase
@@ -97,7 +108,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                             .into(restaurantImage)
                     }
                 }
-
+                getOrdersForRestaurant(restId)
 
                 // val docRef =db.collection("restaurants").document(State.restaurantId!!).collection("dishes")
                 val docRef = db.collection("restaurants").document(restId).collection("dishes")
@@ -134,15 +145,52 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 btnViewOrders.setOnClickListener{
                     val intent = Intent(this, OrderViewForRestaurants::class.java)
                     intent.putExtra("RESNAME", restaurant.name)
+                    intent.putExtra("RESID", restaurant.documentId)
                     startActivity(intent)
                 }
+
+                val profilebutton = findViewById<Button>(R.id.profileButton)
+
+                profilebutton.setOnClickListener {
+                    val intent= Intent(this,CustomerMyPages::class.java)
+                    startActivity(intent)
+
+                }
+
+
+                homeButton.setOnClickListener{
+
+
+                            val intent = Intent(this,RestaurantViewActiviity::class.java)
+                            this.startActivity(intent)
+
+                }
+
+
+
                 val logo = findViewById<ImageView>(R.id.LogoText)
                 logo.setOnClickListener{
-                    val intent= Intent(this,RestaurantViewActiviity::class.java)
+                    val intent= Intent(this,CheatActivity::class.java)
                     startActivity(intent)
                 }
             }
         }
+    }
+
+    fun getOrdersForRestaurant(restaurantId: String){
+        DataManagerOrders.orders.clear()
+        var index = 0
+        db.collection("restaurants").document(restaurantId).collection("orders")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    DataManagerOrders.orders.add(document.toObject())
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
 
     private fun changeImage() {
@@ -202,4 +250,10 @@ class RestaurantDetailsActivity : AppCompatActivity() {
     }
 
 
-}
+
+
+
+    }
+
+
+
