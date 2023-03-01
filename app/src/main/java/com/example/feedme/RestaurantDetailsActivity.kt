@@ -139,6 +139,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 btnViewOrders.setOnClickListener{
                     val intent = Intent(this, OrderViewForRestaurants::class.java)
                     intent.putExtra("RESNAME", restaurant.name)
+                    intent.putExtra("RESID", restaurant.documentId)
                     startActivity(intent)
                 }
                 val logo = findViewById<ImageView>(R.id.LogoText)
