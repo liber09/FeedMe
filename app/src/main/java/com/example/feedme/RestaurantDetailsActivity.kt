@@ -60,7 +60,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         val bookButton = findViewById<Button>(R.id.btn_table_bocking)
         val btnViewOrders = findViewById<Button>(R.id.btnViewOrders)
 
-        btnViewOrders.isInvisible = true
+        //btnViewOrders.isInvisible = true
         changeImageButton.isInvisible = true
 
         changeImageButton.setOnClickListener {

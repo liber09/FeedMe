@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
                             ?.let { DataManagerCustomers.customers.add(it) }
             }
         }
-                //getOrdersForRestaurant("restaurant2")
+                getOrdersForRestaurant("IDMaTpuYDSZKKO688AcNlshdggH2+1")
     }
 }
 
