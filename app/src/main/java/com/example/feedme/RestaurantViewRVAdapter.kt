@@ -67,7 +67,7 @@ class RestaurantViewRVAdapter(
 
 
         }
-        if(restaurant.imagePath.isNotEmpty()||restaurant.imagePath == "/restaurants/"){
+        if(restaurant.imagePath.isNotEmpty()){
             val imageref = Firebase.storage.reference.child(restaurant.imagePath)
             imageref.downloadUrl.addOnSuccessListener {Uri->
                 val imageURL = Uri.toString()

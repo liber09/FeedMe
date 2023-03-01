@@ -31,35 +31,10 @@ class RegisterCustomerInfo : AppCompatActivity() {
 
         //Get save button
         val btnSaveCustomerInfo = findViewById<Button>(R.id.btnSaveCustomerInfo)
-
-        var update = false
-        if(intent.hasExtra("ID")) {
-            val documentId = intent.getStringExtra("ID") ?: ""
-
-            val user = auth.currentUser
-            var cust: Customer? = null
-
-            if(user != null)
-                db.collection("users")
-                    .document(user.uid)
-                    .collection("customers").document(documentId).get()
-                    .addOnSuccessListener { document ->
-                        cust = document.toObject(Customer::class.java)
-                        btnSaveCustomerInfo.setText("Update")
-                        update = true
-                        loadCustomer(cust!!)
-                    }
-
-        }
-
         //Set clickListener
         btnSaveCustomerInfo.setOnClickListener {
             //Call function to save customer info to database
-            if(!update) {
-                saveCustomerInfoToDatabase()
-            } else {
-                saveCustomerInfoToDatabase(intent.getStringExtra("ID") ?: "")
-            }
+            saveCustomerInfoToDatabase()
         }
         val customerInfoBack = findViewById<ImageView>(R.id.customerInfoBack)
         val customerInfoHome = findViewById<ImageView>(R.id.customerInfoHome)
@@ -78,12 +53,14 @@ class RegisterCustomerInfo : AppCompatActivity() {
     }
 
     //Function that saves the information the customer has entered as a new customer user in the database
-    private fun saveCustomerInfoToDatabase(docId : String = "") {
+    private fun saveCustomerInfoToDatabase() {
 
         val user = auth.currentUser
-        /*if(user == null ){
+        if(user == null ){
             return
-        }*/
+        }
+        val customerId = user.uid.toString()
+
         //First, validate if input is correct
         if (validateInput()){
             val firstName = findViewById<EditText>(R.id.textInputEditTextFirstname).text.toString()
@@ -108,19 +85,22 @@ class RegisterCustomerInfo : AppCompatActivity() {
                 "customer", //Hardcoded usertype
                 allergies,
                 userName,
-                customerNumber = (DataManagerCustomers.customers.count()+1).toString()
+                customerNumber = (DataManagerCustomers.customers.count()+1).toString(),
+                customerId
+
+
 
             )
             //Add user to users collection
-            val newItemRef = if(docId.isEmpty()) db.collection("customers").document().id else docId
+            val newItemRef = db.collection("customers").document().id
             customer.customerId = newItemRef.toString()
             NewCustomer.customerId = newItemRef.toString()
             MyPagesCustomer.customer = customer
 
             if (user != null){
-                db.collection("users")
-                    .document(user.uid)
-                    .collection("customers").document(newItemRef.toString()).set(customer) //Add customer to database
+                db.collection("customers")
+                    .document(customerId)
+                    .set(customer) //Add customer to database
                 Toast.makeText(this, getString(R.string.saveSuccess), Toast.LENGTH_SHORT).show()
                 val intent= Intent(this,CustomerMyPages::class.java)
                 intent.putExtra("CUSTOMER_DOCUMENTID",newItemRef.toString())

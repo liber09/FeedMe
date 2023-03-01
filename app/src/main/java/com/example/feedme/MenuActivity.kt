@@ -29,6 +29,7 @@ class MenuActivity  : AppCompatActivity() {
         drinks.setOnClickListener{
             val intent= Intent(this,DrinksViewActivity::class.java)
             startActivity(intent) }
+        //bara för att kommitta
 
 
     }
