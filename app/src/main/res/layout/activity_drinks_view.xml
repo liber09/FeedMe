@@ -19,11 +19,11 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_Footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/förrätterTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tv_startersDrinkView"
         tools:listitem="@layout/list_item_drinks" />
 
     <TextView
-        android:id="@+id/förrätterTextView"
+        android:id="@+id/tv_startersDrinkView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
@@ -32,12 +32,12 @@
         android:text="Förrätter"
         android:textColor="@color/Orange"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/huvudrättTextView"
+        app:layout_constraintEnd_toStartOf="@+id/tv_maincoursesDrinkView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/huvudrättTextView"
+        android:id="@+id/tv_maincoursesDrinkView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -45,12 +45,12 @@
         android:text="Huvudrätter"
         android:textColor="@color/Orange"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/dessertTextView"
-        app:layout_constraintStart_toEndOf="@+id/förrätterTextView"
+        app:layout_constraintEnd_toStartOf="@+id/tv_dessertsDrinkView"
+        app:layout_constraintStart_toEndOf="@+id/tv_startersDrinkView"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/dessertTextView"
+        android:id="@+id/tv_dessertsDrinkView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -59,7 +59,7 @@
         android:textColor="@color/Orange"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/dryckTextView"
-        app:layout_constraintStart_toEndOf="@+id/huvudrättTextView"
+        app:layout_constraintStart_toEndOf="@+id/tv_maincoursesDrinkView"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
@@ -71,8 +71,9 @@
         android:text="Dryck"
         android:textColor="@color/Orange"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dessertTextView"
+        app:layout_constraintStart_toEndOf="@+id/tv_dessertsDrinkView"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <ImageButton
