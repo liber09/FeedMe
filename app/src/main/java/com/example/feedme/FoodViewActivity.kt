@@ -8,17 +8,14 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.feedme.data.Customer
 import com.example.feedme.data.Dishes
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickListener {
@@ -179,6 +176,9 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
 
         drinks.setOnClickListener {
             drinks.setTypeface(null, Typeface.BOLD)
+            val intent = Intent(this, DrinksViewActivity::class.java)
+            intent.putExtra("restId", restaurantid)
+            this.startActivity(intent)}
 
         val cart = findViewById<ImageButton>(R.id.cartButton)
         cart.setOnClickListener{
@@ -186,12 +186,10 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
             startActivity(intent)
 
 
-            val intent = Intent(this, DrinksViewActivity::class.java)
-            intent.putExtra("restId", restaurantid)
-            this.startActivity(intent)
-        }
 
         }
+
+
 
 
         val fab_add_dish = findViewById<FloatingActionButton>(R.id.FAB_ADD_Drink)
@@ -241,7 +239,7 @@ class FoodViewActivity : AppCompatActivity(), FoodViewRecyclerAdapter.OnClickLis
             finish()
         }
 
-        val homeButton = findViewById<ImageView>(R.id.ibtn_home_drinksView)
+        val homeButton = findViewById<ImageView>(R.id.ibtn_home_detailsview)
         homeButton.setOnClickListener{
 
             if (user != null) {

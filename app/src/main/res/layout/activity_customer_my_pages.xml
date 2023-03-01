@@ -5,44 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
+    android:backgroundTint="@color/black"
     tools:context=".CustomerMyPages">
 
     <ImageButton
         android:id="@+id/myPagesHome"
-        android:layout_width="74dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="139dp"
-        android:layout_marginEnd="139dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="24dp"
         android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/myPagesBack"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_baseline_home_24" />
 
     <ImageView
         android:id="@+id/myPagesBack"
-        android:layout_width="62dp"
-        android:layout_height="69dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_circle_left_24" />
 
-    <ScrollView
-        android:layout_width="390dp"
-        android:layout_height="621dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/myPagesHome"
+    <ImageView
+        android:id="@+id/iv_logout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:srcCompat="@drawable/ic_baseline_logout_24" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="390dp"
+        android:layout_height="521dp"
+        android:layout_margin="60dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
 
             <TextView
                 android:id="@+id/TVMyPagesMobile"
@@ -447,10 +457,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="28dp"
+                android:layout_marginBottom="24dp"
                 android:text="@string/orderHistory"
                 android:textColor="#F29D38"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />
 
@@ -503,6 +515,17 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="Logout"
+        android:textColor="#F29D38"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

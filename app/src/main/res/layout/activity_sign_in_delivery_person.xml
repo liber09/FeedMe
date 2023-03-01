@@ -41,7 +41,7 @@
         app:srcCompat="@drawable/text1" />
 
     <ImageButton
-        android:id="@+id/ibtn_home_drinksView"
+        android:id="@+id/ibtn_home_detailsview"
         android:layout_width="55dp"
         android:layout_height="49dp"
         android:layout_marginBottom="24dp"
@@ -59,7 +59,7 @@
         android:layout_marginBottom="16dp"
         android:text="FOOTER"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_drinksView"
+        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_detailsview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

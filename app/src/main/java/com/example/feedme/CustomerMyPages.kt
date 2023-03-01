@@ -43,6 +43,15 @@ class CustomerMyPages : AppCompatActivity() {
         auth =Firebase.auth
         val user = auth.currentUser
 
+        val logoutBtn = findViewById<ImageView>(R.id.iv_logout)
+        logoutBtn.setOnClickListener{
+            auth.signOut()
+            val intent= Intent(this,LoginAndRegisterActivity::class.java)
+            startActivity(intent)
+
+
+        }
+
         if (user != null) {
             val userId = user.uid
         for (customer in DataManagerCustomers.customers) {
