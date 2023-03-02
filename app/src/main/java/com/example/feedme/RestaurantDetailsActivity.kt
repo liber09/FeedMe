@@ -152,9 +152,9 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                 val profilebutton = findViewById<Button>(R.id.profileButton)
 
                 profilebutton.setOnClickListener {
-                    val intent= Intent(this,CustomerMyPages::class.java)
+                    val intent= Intent(this,InfoRestaurantActivity::class.java)
+                    intent.putExtra("RESTAURANT_KEY", restId)
                     startActivity(intent)
-
                 }
 
 

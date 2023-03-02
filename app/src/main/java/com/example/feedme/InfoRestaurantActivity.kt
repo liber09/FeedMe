@@ -33,13 +33,12 @@ class InfoRestaurantActivity : AppCompatActivity() {
     val db = Firebase.firestore
     private val pickImage = 100
     private var imageUri: Uri? = null
-    val registerNew = false
     lateinit var auth: FirebaseAuth
     private var imgPath = ""
     private var docIdent = ""
     private var docIt = ""
     private var docRating = 0.0
-    private var openingHours = hashMapOf<String, Date>(
+    private var openingHours = hashMapOf(
         "monday_start" to Date(),
         "monday_end" to Date(),
         "tuesday_start" to Date(),
@@ -55,6 +54,21 @@ class InfoRestaurantActivity : AppCompatActivity() {
         "sunday_start" to Date(),
         "sunday_end" to Date())
 
+    lateinit var textInputName : EditText
+    lateinit var textInputAddress : EditText
+    lateinit var textInputPostalCode : EditText
+    lateinit var textInputCity : EditText
+    lateinit var textInputPhone : EditText
+    lateinit var textInputEmail : EditText
+    lateinit var textInputOrgNr : EditText
+    lateinit var textInputDeliveryPrice : EditText
+    lateinit var cb_takeAway : CheckBox
+    lateinit var cb_homeDelivery : CheckBox
+    lateinit var cb_atRestaurant : CheckBox
+    lateinit var cb_tableBooking : CheckBox
+    lateinit var textInputDescription : EditText
+    lateinit var imageViewRestaurant : ImageView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +79,21 @@ class InfoRestaurantActivity : AppCompatActivity() {
         var eMail = findViewById<EditText>(R.id.textInputEmail)
         eMail.setText(emailFromSignUp)
 
+        textInputName = findViewById<EditText>(R.id.textInputName)
+        textInputAddress = findViewById<EditText>(R.id.textInputAddress)
+        textInputPostalCode = findViewById<EditText>(R.id.textInputPostalCode)
+        textInputCity = findViewById<EditText>(R.id.textInputCity)
+        textInputPhone = findViewById<EditText>(R.id.textInputPhone)
+        textInputEmail = findViewById<EditText>(R.id.textInputEmail)
+        textInputOrgNr = findViewById<EditText>(R.id.textInputOrgNr)
+        textInputDeliveryPrice = findViewById<EditText>(R.id.textInputDeliveryPrice)
+        cb_takeAway = findViewById<CheckBox>(R.id.cb_takeaway)
+        cb_homeDelivery = findViewById<CheckBox>(R.id.cb_homeDelivery)
+        cb_atRestaurant = findViewById<CheckBox>(R.id.cb_atRestaurant)
+        cb_tableBooking = findViewById<CheckBox>(R.id.cb_tableBooking)
+        textInputDescription = findViewById<EditText>(R.id.textInputDescription)
+        imageViewRestaurant = findViewById<ImageView>(R.id.imageViewRestaurant)
+
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val btnSave = findViewById<Button>(R.id.btn_save)
@@ -72,23 +101,6 @@ class InfoRestaurantActivity : AppCompatActivity() {
         if(intent.hasExtra("RESTAURANT_KEY")) {
             val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "")
             if(rest != null) loadRestaurant(rest)
-        }
-        val monSta = findViewById<EditText>(R.id.textInputMondayStart)
-        val editName = findViewById<EditText>(R.id.textInputName)
-
-        monSta.setOnClickListener {
-            Log.v("!!!","clicked")
-
-            val cal = Calendar.getInstance()
-
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                cal.set(Calendar.HOUR_OF_DAY, hour)
-                cal.set(Calendar.MINUTE, minute)
-
-                monSta.setText(SimpleDateFormat("HH:mm").format(cal.time))
-            }
-
-            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
 
         btnAddImage.setOnClickListener {
@@ -106,33 +118,32 @@ class InfoRestaurantActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             imageUri = data?.data
-            val addImageView = findViewById<ImageView>(R.id.imageViewRestaurant)
+            val addImageView = imageViewRestaurant
             addImageView.setImageURI(imageUri)
         }
     }
     var documentRef = ""
     //Saves restaurant info to database
-        fun saveInfo() {
-            val user = auth.currentUser
+    fun saveInfo() {
+        val user = auth.currentUser
 
 
         if (user == null){
             return
 
         }
-        val documentIternal = "${user.uid}"
-        val documentId = "${user.uid}+1"
-        var imagePath = ""
+        val documentIternal = if(docIt.isEmpty()) "${user.uid}" else docIt
+        val documentId = if(docIdent.isEmpty()) "${user.uid}+1" else docIdent
         // TODO gör det till i med increment när man väl kan lägga upp fler restauaranger
         if (imageUri != null) {
             imageUri?.let { uploadImageToFirebase(it) }
-            imagePath = "/restaurants/$fileName"
+            imgPath = "/restaurants/$fileName"
         }
         var deliveryPrice = 0
-        if (findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().isNotEmpty()) {
+        if (textInputDeliveryPrice.text.toString().isNotEmpty()) {
             try {
                 deliveryPrice =
-                    findViewById<EditText>(R.id.textInputDeliveryPrice).text.toString().toInt()
+                    textInputDeliveryPrice.text.toString().toInt()
             } catch (e: Exception) {
 
                 Toast.makeText(this, "Bara siffror godtas i Utkärningsavgiften", Toast.LENGTH_SHORT)
@@ -143,27 +154,27 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
 
         val rest = Restaurant(
-            findViewById<EditText>(R.id.textInputName).text.toString(),
-            findViewById<EditText>(R.id.textInputOrgNr).text.toString(),
-            findViewById<EditText>(R.id.textInputAddress).text.toString(),
-            findViewById<EditText>(R.id.textInputPostalCode).text.toString(),
-            findViewById<EditText>(R.id.textInputCity).text.toString(),
-            findViewById<EditText>(R.id.textInputPhone).text.toString(),
-            findViewById<EditText>(R.id.textInputEmail).text.toString(),
+            textInputName.text.toString(),
+            textInputOrgNr.text.toString(),
+            textInputAddress.text.toString(),
+            textInputPostalCode.text.toString(),
+            textInputCity.text.toString(),
+            textInputPhone.text.toString(),
+            textInputEmail.text.toString(),
             getType(),
             deliveryPrice,
-            findViewById<CheckBox>(R.id.cb_takeaway).isChecked,
-            findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked,
-            findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked,
-            findViewById<CheckBox>(R.id.cb_tableBooking).isChecked,
-            findViewById<EditText>(R.id.textInputDescription).text.toString(),
+            cb_takeAway.isChecked,
+            cb_homeDelivery.isChecked,
+            cb_atRestaurant.isChecked,
+            cb_tableBooking.isChecked,
+            textInputDescription.text.toString(),
             docRating,
-            imagePath,
+            imgPath,
             documentIternal,
             documentId,
             openingHours
         )
-        if (findViewById<EditText>(R.id.textInputName).text.toString().isEmpty()) {
+        if (textInputName.text.toString().isEmpty()) {
             Toast.makeText(this, "Restaurant name cannot be empty", Toast.LENGTH_SHORT).show()
             return
         }
@@ -173,7 +184,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
             .set(rest)
             .addOnSuccessListener { documentReference ->
                 Log.d("ADD RESTAURANT", "DocumentSnapshot written with ID: ${rest.documentId}")
-                 documentRef = documentId
+                documentRef = documentId
             }
             .addOnFailureListener { e ->
                 Log.w("ADD RESTAURANT", "Error adding document", e)
@@ -230,22 +241,22 @@ class InfoRestaurantActivity : AppCompatActivity() {
     fun loadRestaurant(restaurant: Restaurant) {
         imgPath = restaurant.imagePath
 
-        findViewById<EditText>(R.id.textInputName).setText(restaurant.name)
-        findViewById<EditText>(R.id.textInputAddress).setText(restaurant.address)
-        findViewById<EditText>(R.id.textInputPostalCode).setText(restaurant.postalCode)
-        findViewById<EditText>(R.id.textInputCity).setText(restaurant.city)
-        findViewById<EditText>(R.id.textInputPhone).setText(restaurant.phoneNumber)
-        findViewById<EditText>(R.id.textInputEmail).setText(restaurant.email)
-        findViewById<EditText>(R.id.textInputOrgNr).setText(restaurant.orgNr)
+        textInputName.setText(restaurant.name)
+        textInputAddress.setText(restaurant.address)
+        textInputPostalCode.setText(restaurant.postalCode)
+        textInputCity.setText(restaurant.city)
+        textInputPhone.setText(restaurant.phoneNumber)
+        textInputEmail.setText(restaurant.email)
+        textInputOrgNr.setText(restaurant.orgNr)
         setType(restaurant.type)
-        findViewById<EditText>(R.id.textInputDeliveryPrice).setText(restaurant.deliveryFee.toString())
-        findViewById<CheckBox>(R.id.cb_takeaway).isChecked = restaurant.deliveryTypePickup
-        findViewById<CheckBox>(R.id.cb_homeDelivery).isChecked = restaurant.deliveryTypeHome
-        findViewById<CheckBox>(R.id.cb_atRestaurant).isChecked = restaurant.deliveryTypeAtRestaurant
-        findViewById<CheckBox>(R.id.cb_tableBooking).isChecked = restaurant.tableBooking
+        textInputDeliveryPrice.setText(restaurant.deliveryFee.toString())
+        cb_takeAway.isChecked = restaurant.deliveryTypePickup
+        cb_homeDelivery.isChecked = restaurant.deliveryTypeHome
+        cb_atRestaurant.isChecked = restaurant.deliveryTypeAtRestaurant
+        cb_tableBooking.isChecked = restaurant.tableBooking
         loadOpeningHours(restaurant.openingHours)
-        findViewById<EditText>(R.id.textInputDescription).setText(restaurant.description)
-        val imgRestaurant = findViewById<ImageView>(R.id.imageViewRestaurant)
+        textInputDescription.setText(restaurant.description)
+
         //from customerMyPage
         if(restaurant.imagePath.isNotEmpty()) {
             val imageref = Firebase.storage.reference.child(restaurant.imagePath)
@@ -254,7 +265,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
                 //Use third party product glide to load the image into the imageview
                 Glide.with(this)
                     .load(imageURL)
-                    .into(imgRestaurant)
+                    .into(imageViewRestaurant)
             }
         }
         docIdent = restaurant.documentId!!
@@ -292,8 +303,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
 
         mView.forEach { et ->
             if(et is EditText && oHours.containsKey(et.tag?.toString())) {
-                val date = oHours.get(et.tag.toString()) as com.google.firebase.Timestamp
-                cal.time = date.toDate()
+                cal.time = oHours.get(et.tag.toString())
                 et.setText(SimpleDateFormat("HH:mm").format(cal?.time))
             }
         }
@@ -321,13 +331,9 @@ class InfoRestaurantActivity : AppCompatActivity() {
             if(cb is CheckBox && cb.tag?.toString() == "type" && cb.isChecked) {
                 toReturn += cb.text.toString() + ","
             }
-            else{
-                return toReturn.substring(0, toReturn.length) //kan anmäla sig utan att ha valt typ
-
-            }
         }
 
-        return toReturn.substring(0, toReturn.length - 1)
+        return if(toReturn.length > 0) toReturn.substring(0, toReturn.length - 1) else ""
     }
 
     fun checkOrgNr(orgNr : String) : Boolean {
