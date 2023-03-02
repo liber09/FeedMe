@@ -102,5 +102,7 @@
     <string name="homeDelivery">Hemleverans</string>
     <string name="deliveryPickup">Hämta själv</string>
     <string name="deliveryEatAtRest">Ät på restaurangen</string>
+    <string name="companyName">Företagsnamn</string>
+    <string name="add_image">Lägg till bild</string>
 
 </resources>
