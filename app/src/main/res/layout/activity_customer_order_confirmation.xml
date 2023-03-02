@@ -12,17 +12,15 @@
         android:layout_width="361dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="29dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="10dp"
         android:accessibilityHeading="false"
         android:background="  #2C2E5F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,7 +30,7 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/orderConfirmation"
                 android:textColor="#F29D38"
                 android:textSize="24sp"
@@ -210,6 +208,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TVOrderConfirmationCustomerPostalCode" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/FAB_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                app:backgroundTint="@color/Orange"
+                app:layout_constraintBottom_toBottomOf="@+id/RVCustomerOrderConfirmation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_baseline_home_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

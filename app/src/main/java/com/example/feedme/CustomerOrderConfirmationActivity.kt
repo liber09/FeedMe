@@ -1,15 +1,19 @@
 package com.example.feedme
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.w3c.dom.Text
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 lateinit var RVCustomerOrderConfirmation : RecyclerView
+
+
 class CustomerOrderConfirmationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +26,12 @@ class CustomerOrderConfirmationActivity : AppCompatActivity() {
         val customerData = ar1?.get(0)?.split(" ")?.toMutableList()
         customerData?.removeAll(listOf("",null))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        val FABHome = findViewById<FloatingActionButton>(R.id.FAB_Home)
+        FABHome.setOnClickListener{
+
+            val intent= Intent(this,RestaurantViewActiviity::class.java)
+            startActivity(intent)
+        }
 
         val sb = StringBuilder()
         sb.append(customerData?.get(0).toString()).append(" ").append(customerData?.get(1).toString())

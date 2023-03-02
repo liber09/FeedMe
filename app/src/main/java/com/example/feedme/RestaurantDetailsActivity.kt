@@ -74,6 +74,10 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
+        val profilebutton = findViewById<Button>(R.id.profileButton)
+
+
+
 
         for (restaurant in DataManagerRestaurants.restaurants) {
             val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
@@ -95,6 +99,16 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     btnViewOrders.isVisible = true
                     homeButton.isInvisible = true
 
+                    profilebutton.setOnClickListener {
+                        val intent= Intent(this,InfoRestaurantActivity::class.java)
+                        intent.putExtra("restId",restId)
+
+
+                        startActivity(intent)
+
+                    }
+
+
                 } }
 
                 //Get the image from firebase
@@ -109,6 +123,14 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     }
                 }
                 getOrdersForRestaurant(restId)
+
+                if (user?.uid.toString() != restaurant.documentInternal ){
+
+                profilebutton.setOnClickListener {
+                    val intent= Intent(this,CustomerMyPages::class.java)
+                    startActivity(intent)
+
+                }}
 
                 // val docRef =db.collection("restaurants").document(State.restaurantId!!).collection("dishes")
                 val docRef = db.collection("restaurants").document(restId).collection("dishes")
@@ -149,13 +171,6 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-                val profilebutton = findViewById<Button>(R.id.profileButton)
-
-                profilebutton.setOnClickListener {
-                    val intent= Intent(this,CustomerMyPages::class.java)
-                    startActivity(intent)
-
-                }
 
 
                 homeButton.setOnClickListener{
