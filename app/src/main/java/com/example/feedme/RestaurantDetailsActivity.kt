@@ -1,5 +1,6 @@
 package com.example.feedme
 
+import Drink
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
@@ -150,6 +151,25 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                         }
 
                         printDishes()
+                    }
+                }
+
+                val drinkRef = db.collection("restaurants").document(restId)
+                    .collection("drinks")    // Drink ref from database collection
+                drinkRef.addSnapshotListener { snapshot, e ->
+                    if (snapshot != null) {
+
+                        DataManagerDrinks.drinkList.clear()
+                        for (document in snapshot.documents) {
+                            val item = document.toObject<Drink>()
+                            //Get parent documentId - restaurant in this case
+                            item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
+                            if (item != null) {
+                                DataManagerDrinks.drinkList.add(item)
+                            }
+                        }
+
+
                     }
                 }
 
