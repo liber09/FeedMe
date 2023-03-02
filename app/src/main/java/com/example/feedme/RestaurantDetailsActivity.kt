@@ -79,7 +79,6 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
 
 
-
         for (restaurant in DataManagerRestaurants.restaurants) {
             val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
 

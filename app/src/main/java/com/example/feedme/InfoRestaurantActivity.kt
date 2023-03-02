@@ -102,8 +102,8 @@ class InfoRestaurantActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val btnSave = findViewById<Button>(R.id.btn_save)
         val btnAddImage = findViewById<Button>(R.id.btn_add_image)
-        if(intent.hasExtra("RESTAURANT_KEY")) {
-            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("RESTAURANT_KEY") ?: "")
+        if(intent.hasExtra("restId")) {
+            val rest = DataManagerRestaurants.getByDocumentId(intent.getStringExtra("restId") ?: "")
             if(rest != null) loadRestaurant(rest)
         }
 
