@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue.delete
 import com.google.firebase.ktx.Firebase
 
 class AddNChangeDrinks : AppCompatActivity() {
@@ -37,15 +38,17 @@ class AddNChangeDrinks : AppCompatActivity() {
        }
         val finishButton = findViewById<Button>(R.id.btn_finishAddDrinks)
         finishButton.setOnClickListener { finish() }
-        val deletButton = findViewById<ImageButton>(R.id.iB_deleteDrink)
+        val deleteButton = findViewById<ImageButton>(R.id.iB_deleteDrink)
+        deleteButton.setOnClickListener { delete() }
 
 
     }
     fun AddDrink() {
         val drinkName = drinkNameET.text.toString()
         val drinkCategory = drinkCategoryET.text.toString()
-        val drinkPrice = drinkPriceET.text.toString().toDouble()
         val drinkSize = drinkSizeET.text.toString()
+        val drinkPrice = drinkPriceET.text.toString().toDouble()
+
 
         if(drinkName.isNotEmpty()&&drinkPrice != null &&drinkSize.isNotEmpty()){
             val newDrink = Drink("",drinkName,drinkSize,drinkCategory,drinkPrice)

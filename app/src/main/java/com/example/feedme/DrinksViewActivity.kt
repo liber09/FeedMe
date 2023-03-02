@@ -21,15 +21,13 @@ class DrinksViewActivity : AppCompatActivity() {
     lateinit var drinksRecyclerView : RecyclerView
     lateinit var auth: FirebaseAuth
     lateinit var userUID : String
-    lateinit var restaurantid: String
+    lateinit var restaurantid: String   // variabler som ska initialiseras längre fram i koden
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drinks_view)
-
-
-
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 
         val cart = findViewById<ImageButton>(R.id.cartButton)
         cart.setOnClickListener{
@@ -57,16 +55,16 @@ class DrinksViewActivity : AppCompatActivity() {
         drinksRecyclerView.adapter = adapter
 
         val fab_add_drink = findViewById<FloatingActionButton>(R.id.FAB_ADD_Drink)
-        fab_add_drink.isInvisible = true
+        fab_add_drink.isInvisible = true  //Lägga till dricka som restaurant till deras meny
 
         auth = Firebase.auth
         val user = auth.currentUser
-        userUID = user!!.uid.toString()
+        userUID = user!!.uid
         restaurantid = intent.getStringExtra("restId").toString()
 
         if (user != null) {
             val n =2
-            val userId = restaurantid.dropLast(n)
+            val userId = restaurantid.dropLast(n)  // if sats om det är restaurant som är inloggad så dyker addDrink Button upp
 
             if (userUID == userId){
                 fab_add_drink.isVisible = true
@@ -82,16 +80,11 @@ class DrinksViewActivity : AppCompatActivity() {
 
             startActivity(intent)
 
-
         }
-
-
-
-
 
     }
 
-    override fun onResume() {
+    override fun onResume() {  // Startar igång recycleviewn så man kan interagera med listan
         super.onResume()
 
         drinksRecyclerView.adapter?.notifyDataSetChanged()
