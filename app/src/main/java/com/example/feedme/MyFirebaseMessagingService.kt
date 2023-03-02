@@ -41,10 +41,14 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
             // Since the notification is received directly from
             // FCM, the title and the body can be fetched
             // directly as below.
-            showNotification(
-                remoteMessage.getNotification().getTitle(),
-                remoteMessage.getNotification().getBody()
-            )
+            remoteMessage.getNotification()!!.getBody()?.let {
+                remoteMessage.getNotification()!!.getTitle()?.let { it1 ->
+                    showNotification(
+                        it1,
+                        it
+                    )
+                }
+            }
         }
     }
 
@@ -114,7 +118,7 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
         // notify the
         // user of events that happen in the background.
         val notificationManager = ContextCompat.getSystemService(
-            Context) as NotificationManager?
+            this,builder.javaClass) as NotificationManager?
         // Check if the Android Version is greater than Oreo
         if (Build.VERSION.SDK_INT
             >= Build.VERSION_CODES.O
