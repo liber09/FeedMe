@@ -28,6 +28,9 @@ import java.util.*
 import kotlin.collections.HashMap
 
 var fileName: String = ""
+
+const val RESTAURANT_POSTION_KEY = "RESTAURANT_POSITION"
+const val RESTAURANT_POSITION_NOT_SET = -1
 class InfoRestaurantActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
@@ -78,6 +81,7 @@ class InfoRestaurantActivity : AppCompatActivity() {
         var emailFromSignUp = intent.getStringExtra("mail").toString()
         var eMail = findViewById<EditText>(R.id.textInputEmail)
         eMail.setText(emailFromSignUp)
+        val restPosition = intent.getIntExtra(RESTAURANT_POSTION_KEY, RESTAURANT_POSITION_NOT_SET)
 
         textInputName = findViewById<EditText>(R.id.textInputName)
         textInputAddress = findViewById<EditText>(R.id.textInputAddress)

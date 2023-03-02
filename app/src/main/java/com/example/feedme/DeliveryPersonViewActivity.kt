@@ -1,13 +1,18 @@
 package com.example.feedme
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.feedme.data.Dishes
+import com.example.feedme.data.Order
 
 import com.example.feedme.data.Restaurant
 import com.google.android.gms.location.*
@@ -27,14 +32,64 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery_person_view)
 
+        val logo = findViewById<ImageView>(R.id.iv_Logo)
+        logo.setOnClickListener{
+
+            val intent= Intent(this,CheatActivity::class.java)
+            startActivity(intent)
+        }
+
+        val profileBtn = findViewById<ImageButton>(R.id.profileButton)
+
+        profileBtn.setOnClickListener {
+            val intent= Intent(this,SignInDeliveryPerson::class.java)
+            startActivity(intent)
+
+        }
+
         deliveryRestaurantRecyclerView = findViewById(R.id.RV_DeliveryViewRest)
 
         deliveryRestaurantRecyclerView.layoutManager = LinearLayoutManager(this)
-        deliveryRestaurantRecyclerView.adapter =
+        /*deliveryRestaurantRecyclerView.adapter =
             CollectOrderRecyclerAdapter(this,
                 DataManagerRestaurants.restaurants
 
-            )
+            )*/
+
+        val restaurantsWithOrders = mutableListOf<Restaurant>()
+
+        for (restaurant in DataManagerRestaurants.restaurants){
+
+            Log.d("tag", "$restaurant")
+
+        val orderReference = db.collection("restaurants")
+            .document(restaurant.documentId.toString())
+            .collection("orders")
+
+       orderReference.get().addOnSuccessListener { snapshot->
+            if ( snapshot.isEmpty) {
+                Log.d("lalaa", "tomt")
+                return@addOnSuccessListener
+            }
+           restaurantsWithOrders.add(restaurant)
+
+
+                deliveryRestaurantRecyclerView.adapter =
+                    CollectOrderRecyclerAdapter(
+                        this,
+                        restaurantsWithOrders
+
+                    )
+
+                //foodRecyclerView.adapter = adapter*/
+
+
+            }
+        }
+
+
+
+
 
         locationProvider = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = LocationRequest.Builder(2000).build()

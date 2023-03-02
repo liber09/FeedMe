@@ -1,5 +1,6 @@
 package com.example.feedme
 
+import Drink
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
@@ -74,6 +75,10 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
+        val profilebutton = findViewById<Button>(R.id.profileButton)
+
+
+
 
         for (restaurant in DataManagerRestaurants.restaurants) {
             val restaurantImage = findViewById<ImageView>(R.id.imgRestaurant)
@@ -95,6 +100,16 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     btnViewOrders.isVisible = true
                     homeButton.isInvisible = true
 
+                    profilebutton.setOnClickListener {
+                        val intent= Intent(this,InfoRestaurantActivity::class.java)
+                        intent.putExtra("restId",restId)
+
+
+                        startActivity(intent)
+
+                    }
+
+
                 } }
 
                 //Get the image from firebase
@@ -109,6 +124,14 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     }
                 }
                 getOrdersForRestaurant(restId)
+
+                if (user?.uid.toString() != restaurant.documentInternal ){
+
+                profilebutton.setOnClickListener {
+                    val intent= Intent(this,CustomerMyPages::class.java)
+                    startActivity(intent)
+
+                }}
 
                 // val docRef =db.collection("restaurants").document(State.restaurantId!!).collection("dishes")
                 val docRef = db.collection("restaurants").document(restId).collection("dishes")
@@ -131,6 +154,25 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     }
                 }
 
+                val drinkRef = db.collection("restaurants").document(restId)
+                    .collection("drinks")    // Drink ref from database collection
+                drinkRef.addSnapshotListener { snapshot, e ->
+                    if (snapshot != null) {
+
+                        DataManagerDrinks.drinkList.clear()
+                        for (document in snapshot.documents) {
+                            val item = document.toObject<Drink>()
+                            //Get parent documentId - restaurant in this case
+                            item?.restaurantDocumentId = document.reference.parent.parent?.id.toString()
+                            if (item != null) {
+                                DataManagerDrinks.drinkList.add(item)
+                            }
+                        }
+
+
+                    }
+                }
+
 
 
 
@@ -149,13 +191,6 @@ class RestaurantDetailsActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-                val profilebutton = findViewById<Button>(R.id.profileButton)
-
-                profilebutton.setOnClickListener {
-                    val intent= Intent(this,InfoRestaurantActivity::class.java)
-                    intent.putExtra("RESTAURANT_KEY", restId)
-                    startActivity(intent)
-                }
 
 
                 homeButton.setOnClickListener{
