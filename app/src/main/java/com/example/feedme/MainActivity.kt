@@ -62,6 +62,16 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         })
 
+        Firebase.messaging.subscribeToTopic("weather")
+            .addOnCompleteListener { task ->
+                var msg = "Subscribed"
+                if (!task.isSuccessful) {
+                    msg = "Subscribe failed"
+                }
+                Log.d(TAG, msg)
+                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            }
+
         Firebase.messaging.isAutoInitEnabled = true
         FirebaseAnalytics.getInstance(this).setAnalyticsCollectionEnabled(true)
 
