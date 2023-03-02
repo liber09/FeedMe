@@ -2,6 +2,7 @@ package com.example.feedme
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide.init
 import com.example.feedme.data.Dishes
+import com.example.feedme.data.Order
 import com.example.feedme.data.Restaurant
 
 //Todo byta dishes till restaurants när all data är ner
@@ -33,12 +35,32 @@ RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
 
         holder.tv_restaurantName.text = restaurant.name
         holder.tv_restaurantAdress.text = restaurant.address + " "+restaurant.postalCode +" "+restaurant.city
-        val customerAdapter = CustomerAdressDeliveryReceiyclerAdapter(context, DataManagerCustomers.customers)
-        holder.rv_forCustomerAdress.layoutManager = LinearLayoutManager(context)
-        holder.rv_forCustomerAdress.adapter = customerAdapter
-        holder.restaurantDisplayPosition =position
 
-    }
+
+        val orderReference = db.collection("restaurants")
+            .document(restaurant.documentId.toString())
+            .collection("orders")
+        orderReference.get().addOnSuccessListener { snapshot ->
+            if (snapshot.isEmpty) {
+                Log.d("lalaa", "tomt")
+                return@addOnSuccessListener
+            }
+            val orderList = snapshot.toObjects(Order::class.java)
+
+            // Get the customer number from each order and filter the customers list to get the relevant customer
+            val customerList = DataManagerCustomers.customers.filter { customer ->
+                orderList.any { order ->
+                    val customerNumberString = order.customerPhoneNumber.toString()
+                    customerNumberString.isNotBlank() && customerNumberString == customer.phoneNumber
+                }
+            }
+
+            val customerAdapter = CustomerAdressDeliveryReceiyclerAdapter(context, customerList)
+            holder.rv_forCustomerAdress.layoutManager = LinearLayoutManager(context)
+            holder.rv_forCustomerAdress.adapter = customerAdapter
+            holder.restaurantDisplayPosition = position
+
+    }}
 
     override fun getItemCount() = restaurants.size
 
