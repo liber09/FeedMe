@@ -76,12 +76,6 @@ class InfoRestaurantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_restaurant)
-        auth = Firebase.auth
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        var emailFromSignUp = intent.getStringExtra("mail").toString()
-        var eMail = findViewById<EditText>(R.id.textInputEmail)
-        eMail.setText(emailFromSignUp)
-        val restPosition = intent.getIntExtra(RESTAURANT_POSTION_KEY, RESTAURANT_POSITION_NOT_SET)
 
         textInputName = findViewById<EditText>(R.id.textInputName)
         textInputAddress = findViewById<EditText>(R.id.textInputAddress)
@@ -98,6 +92,11 @@ class InfoRestaurantActivity : AppCompatActivity() {
         textInputDescription = findViewById<EditText>(R.id.textInputDescription)
         imageViewRestaurant = findViewById<ImageView>(R.id.imageViewRestaurant)
 
+        auth = Firebase.auth
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        var emailFromSignUp = intent.getStringExtra("mail").toString()
+        textInputEmail.setText(emailFromSignUp)
+        val restPosition = intent.getIntExtra(RESTAURANT_POSTION_KEY, RESTAURANT_POSITION_NOT_SET)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val btnSave = findViewById<Button>(R.id.btn_save)
