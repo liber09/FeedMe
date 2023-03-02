@@ -23,32 +23,33 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
     // title and
     // body from the message passed in FCM
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        // First case when notifications are received via
-        // data event
-        // Here, 'title' and 'message' are the assumed names
-        // of JSON
-        // attributes. Since here we do not have any data
-        // payload, This section is commented out. It is
-        // here only for reference purposes.
-        /*if(remoteMessage.getData().size()>0){
-            showNotification(remoteMessage.getData().get("title"),
-                          remoteMessage.getData().get("message"));
-        }*/
-
-        // Second case when notification payload is
-        // received.
-        if (remoteMessage.getNotification() != null) {
-            // Since the notification is received directly from
-            // FCM, the title and the body can be fetched
-            // directly as below.
-            remoteMessage.getNotification()!!.getBody()?.let {
-                remoteMessage.getNotification()!!.getTitle()?.let { it1 ->
-                    showNotification(
-                        it1,
-                        it
-                    )
-                }
+        val notification = remoteMessage.notification
+        if (notification != null) {
+            // Create a notification channel (for Android 8.0 or higher)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    "default",
+                    "Channel name",
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+                val notificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
             }
+
+            // Create the notification
+            val intent = Intent(this, MainActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            val notificationBuilder = NotificationCompat.Builder(this, "default")
+                .setSmallIcon(R.drawable.pngfind_com_bell_icon_png_50581)
+                .setContentTitle(notification.title)
+                .setContentText(notification.body)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+
+            // Show the notification
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.notify(0, notificationBuilder.build())
         }
     }
 
@@ -94,7 +95,7 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
         // Create a Builder object using NotificationCompat
         // class. This will allow control over all the flags
         var builder: NotificationCompat.Builder = NotificationCompat.Builder(
-            ApplicationProvider.getApplicationContext<Context>(),
+            ApplicationProvider.getApplicationContext(),
             channel_id
         )
             .setSmallIcon(R.drawable.pngfind_com_bell_icon_png_50581)
