@@ -1,10 +1,13 @@
 package com.example.feedme
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +31,21 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery_person_view)
+
+        val logo = findViewById<ImageView>(R.id.iv_Logo)
+        logo.setOnClickListener{
+
+            val intent= Intent(this,CheatActivity::class.java)
+            startActivity(intent)
+        }
+
+        val profileBtn = findViewById<ImageButton>(R.id.profileButton)
+
+        profileBtn.setOnClickListener {
+            val intent= Intent(this,SignInDeliveryPerson::class.java)
+            startActivity(intent)
+
+        }
 
         deliveryRestaurantRecyclerView = findViewById(R.id.RV_DeliveryViewRest)
 

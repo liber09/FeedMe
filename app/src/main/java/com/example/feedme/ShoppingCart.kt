@@ -17,6 +17,11 @@ class ShoppingCart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
 
+        val btnShopMore = findViewById<Button>(R.id.btn_backNShopMore)
+        btnShopMore.setOnClickListener {
+            finish()
+        }
+
         val btnShoppingCartCheckout = findViewById<Button>(R.id.btnShoppingCartCheckout)
         btnShoppingCartCheckout.setOnClickListener{
             var selectedDeliveryOption = ""

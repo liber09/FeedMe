@@ -16,6 +16,7 @@ import com.example.feedme.data.Dishes
 import com.example.feedme.data.Restaurant
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -118,7 +119,7 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
 
         val foodCategoryArray = arrayOf(
-            "Huvudrätt", "Dessert", "Efterrätt"
+            "Huvudrätt", "Förrätt", "Efterrätt"
         )
 
         val foodCategorySpinnerAdapter = ArrayAdapter<String>(
@@ -499,7 +500,19 @@ class AddNChangeFoodActivity : AppCompatActivity() {
 
            // DataManagerDishes.dishes.add(newDish) only local
             db.collection("restaurants").document(restaurantIdent).collection("dishes").add(newDish)
-
+           //update
+            val foodsRef = db.collection("restaurants").document(restaurantIdent).collection("dishes")
+            foodsRef.addSnapshotListener { snapshot, e ->
+                if (snapshot != null) {
+                    DataManagerDishes.dishes.clear()
+                    for (document in snapshot.documents) {
+                        if (document != null) {
+                            document.toObject<Dishes>()
+                                ?.let { DataManagerDishes.dishes.add(it) }
+                        }
+                    }
+                }
+            }
 
             finish()
 

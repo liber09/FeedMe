@@ -82,7 +82,7 @@
     <string name="klarna">Klarna</string>
     <string name="swish">Swish</string>
     <string name="bankCard">Bankkort</string>
-    <string name="finishOrder">Slutför beställning</string>
+    <string name="finishOrder">Slutför</string>
     <string name="paypal">PayPal</string>
     <string name="orderConfirmation">Orderbekräftelse</string>
     <string name="deliveryAddress">Leveransadress</string>
