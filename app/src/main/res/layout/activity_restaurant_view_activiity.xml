@@ -15,9 +15,11 @@
         android:layout_height="74dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="11dp"
         android:backgroundTint="#000000"
         app:icon="@drawable/male_user"
         app:iconTint="#F29D38"
+        app:layout_constraintBottom_toTopOf="@+id/slider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -28,9 +30,11 @@
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="33dp"
         android:backgroundTint="@color/black"
         app:icon="@drawable/menu"
         app:iconTint="#F29D38"
+        app:layout_constraintBottom_toTopOf="@+id/slider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -39,39 +43,67 @@
         android:id="@+id/tv_Footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
+        android:layout_marginTop="10dp"
 
+        android:layout_marginBottom="9dp"
         android:text="FOOTER"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_drinksView"
+        app:layout_constraintBottom_toTopOf="@+id/ibtn_home_detailsview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_Restaurant" />
+
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/slider"
+        android:layout_width="407dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_Restaurant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileButton"
+        app:sliderAnimationDuration="600"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderIndicatorEnabled="true"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="3dp"
+        app:sliderIndicatorRadius="2dp"
+        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderIndicatorUnselectedColor="#FFF"
+        app:sliderScrollTimeInSec="1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_Restaurant"
-        android:layout_width="409dp"
-        android:layout_height="0dp"
+        android:layout_width="412dp"
+        android:layout_height="343dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_Footer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
+        app:layout_constraintTop_toBottomOf="@+id/slider"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/ibtn_home_drinksView"
+        android:id="@+id/ibtn_home_detailsview"
         android:layout_width="55dp"
         android:layout_height="49dp"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="24dp"
         android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Footer"
         app:srcCompat="@drawable/ic_baseline_home_24" />
 
     <ImageView
@@ -80,6 +112,8 @@
         android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="19dp"
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/slider"
         app:layout_constraintStart_toEndOf="@+id/menuButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/text1" />
@@ -89,9 +123,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="43dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_Restaurant"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_baseline_arrow_circle_left_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

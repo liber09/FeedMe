@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,18 +35,32 @@ class DrinksViewActivity : AppCompatActivity() {
             val intent = Intent(this,ShoppingCart::class.java)
             startActivity(intent)
 
-            val huvudrätt = findViewById<TextView>(R.id.huvudrättTextView)
-            huvudrätt.setOnClickListener{
-                val intent = Intent(this,FoodViewActivity::class.java)
-                startActivity(intent)
 
-                val dessert = findViewById<TextView>(R.id.dessertTextView)
-                dessert.setOnClickListener{
-                    val desserts = dishes.category.equals("Dessert")
                 }
-            }
+
+
+        //TODO - logic that the shoppingcard funktions while switching backnfort
+        // and that it actually refers to the one that is in
+
+
+        val mainCourseTV = findViewById<TextView>(R.id.tv_maincoursesDrinkView)
+        mainCourseTV.setOnClickListener {
+            finish()
+        }
+
+        val dessert = findViewById<TextView>(R.id.tv_dessertsDrinkView)
+
+
+        val starter = findViewById<TextView>(R.id.tv_startersDrinkView)
+        starter.setOnClickListener { finish() }
+        dessert.setOnClickListener {
+            finish()
 
         }
+
+
+
+
 
 
 
