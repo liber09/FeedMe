@@ -3,13 +3,16 @@ package com.example.feedme
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -17,11 +20,44 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
     // Override onNewToken to get new token
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        Log.d(TAG, "Refreshed token: $token")
+
+        /*
+        FirebaseMessaging.getInstance().getInitialMessage().addOnSuccessListener { remoteMessage ->
+            if (remoteMessage != null) {
+                val notification = remoteMessage.notification
+                if (notification != null) {
+                    // Create a notification channel (for Android 8.0 or higher)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val channel = NotificationChannel(
+                            "default",
+                            "Channel name",
+                            NotificationManager.IMPORTANCE_DEFAULT
+                        )
+                        val notificationManager =
+                            getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                        notificationManager.createNotificationChannel(channel)
+                      }
+
+                    // Create the notification
+                    val intent = Intent(this, MainActivity::class.java)
+                    val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+                    val notificationBuilder = NotificationCompat.Builder(this, "default")
+                        .setSmallIcon(R.drawable.pngfind_com_bell_icon_png_50581)
+                        .setContentTitle(notification.title)
+                        .setContentText(notification.body)
+                        .setAutoCancel(true)
+                        .setContentIntent(pendingIntent)
+
+                    // Show the notification
+                    val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                    notificationManager.notify(0, notificationBuilder.build())
+                }
+
+         */
     }
 
-    // Override onMessageReceived() method to extract the
-    // title and
-    // body from the message passed in FCM
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         val notification = remoteMessage.notification
         if (notification != null) {
@@ -33,7 +69,7 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
                     NotificationManager.IMPORTANCE_DEFAULT
                 )
                 val notificationManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.createNotificationChannel(channel)
             }
 
@@ -48,7 +84,7 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
                 .setContentIntent(pendingIntent)
 
             // Show the notification
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(0, notificationBuilder.build())
         }
     }
