@@ -3,6 +3,9 @@ package com.example.feedme
 
 import Drink
 import android.Manifest
+import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         //mockRestaurantData()
         //mockDataDrinks()
         supportActionBar?.hide()
+        requestNotificationPermission()
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -169,9 +173,33 @@ ordersRef.addSnapshotListener{ snapshot, e ->
 
     }
 
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                "channel_id",
+                "Channel Name",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            //NotificationManager.createNotificationChannel(notificationChannel)
+        }
+        val builder = AlertDialog.Builder(this)
+            .setTitle("Allow notifications?")
+            .setMessage("This app needs to send you notifications")
+            .setPositiveButton("Allow") { _, _ ->
+                FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val token = task.result
+                        // Save the token to your server
+                    }
+                }
+            }
+            .setNegativeButton("Don't Allow") { _, _ -> }
+        builder.create().show()
+    }
 
 
-// Declare the launcher at the top of your Activity/Fragment:
+
+    // Declare the launcher at the top of your Activity/Fragment:
 private val requestPermissionLauncher = registerForActivityResult(
 ActivityResultContracts.RequestPermission()
 ) { isGranted: Boolean ->

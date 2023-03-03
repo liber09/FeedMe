@@ -59,6 +59,7 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
 
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
         val notification = remoteMessage.notification
         if (notification != null) {
             // Create a notification channel (for Android 8.0 or higher)
