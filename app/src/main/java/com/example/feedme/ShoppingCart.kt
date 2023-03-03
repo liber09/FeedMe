@@ -17,6 +17,11 @@ class ShoppingCart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
 
+        val btnShopMore = findViewById<Button>(R.id.btn_backNShopMore)
+        btnShopMore.setOnClickListener {
+            finish()
+        }
+
         val btnShoppingCartCheckout = findViewById<Button>(R.id.btnShoppingCartCheckout)
         btnShoppingCartCheckout.setOnClickListener{
             var selectedDeliveryOption = ""
@@ -73,20 +78,26 @@ class ShoppingCart : AppCompatActivity() {
             }
             //add extraCost for vegan
             if(item.isVegan) {
+                if (item.extraCostVegan != null){
+
                 specialsSum+= (item.extraCostVegan!!)*item.count
-            }
+            }}
             //add extraCost for vegetarian
             if(item.isVegetarian){
+                if(item.extraCostVegeterian != null){
                 specialsSum += (item.extraCostVegeterian!!)*item.count
-            }
+            }}
             //add extraCost for glutenFree
             if(item.isGlutenFree) {
+                if (item.extraCostGluten != null){
                 specialsSum += (item.extraCostGluten!!)
-            }
+            }}
             //add extraCost for lactoseFree
             if(item.isLaktoseFree) {
+
+                if (item.extraCostLaktose != null){
                 specialsSum += (item.extraCostLaktose!!)
-            }
+            }}
             restaurantId = item.restaurantDocumentId.toString()
         }
         val deliveryPrice = DataManagerRestaurants.getByDocumentId(restaurantId)?.deliveryFee
