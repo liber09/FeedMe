@@ -3,6 +3,7 @@ package com.example.feedme
 import android.content.Intent
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -29,6 +30,14 @@ class RegisterCustomerInfo : AppCompatActivity() {
         eMail.setText(emailFromSignUp)
         auth = Firebase.auth
 
+        if(intent.hasExtra("id")) {
+            DataManagerCustomers.customers.forEach { customer ->
+                if(customer.customerId.equals(intent.getStringExtra("id"))) {
+                    loadCustomer(customer)
+                }
+            }
+
+        }
         //Get save button
         val btnSaveCustomerInfo = findViewById<Button>(R.id.btnSaveCustomerInfo)
         //Set clickListener
@@ -161,19 +170,15 @@ class RegisterCustomerInfo : AppCompatActivity() {
     }
 
     private fun loadCustomer(customer : Customer) {
-
-        if (customer != null) {
-            findViewById<EditText>(R.id.textInputEditTextFirstname).setText(customer!!.firstName)
-            findViewById<EditText>(R.id.textInputEditTextLastname).setText(customer!!.lastName)
-            findViewById<EditText>(R.id.textInputEditTextAddress).setText(customer!!.address)
-            findViewById<EditText>(R.id.textInputEditTextPostalCode).setText(customer!!.postalCode)
-            findViewById<EditText>(R.id.textInputEditTextCity).setText(customer!!.city)
-            findViewById<EditText>(R.id.textInputEditTextPhoneNumber).setText(customer!!.phoneNumber)
-            findViewById<EditText>(R.id.textInputEditTextEmail).setText(customer!!.eMail)
-            findViewById<EditText>(R.id.textInputEditTextUserName).isEnabled = false
-            findViewById<EditText>(R.id.textInputEditTextUserName).setText(customer!!.userName)
-            findViewById<EditText>(R.id.textInputEditTextALlergies).setText(customer!!.allergies)
-        }
-
+        findViewById<EditText>(R.id.textInputEditTextFirstname).setText(customer.firstName)
+        findViewById<EditText>(R.id.textInputEditTextLastname).setText(customer.lastName)
+        findViewById<EditText>(R.id.textInputEditTextAddress).setText(customer.address)
+        findViewById<EditText>(R.id.textInputEditTextPostalCode).setText(customer.postalCode)
+        findViewById<EditText>(R.id.textInputEditTextCity).setText(customer.city)
+        findViewById<EditText>(R.id.textInputEditTextPhoneNumber).setText(customer.phoneNumber)
+        findViewById<EditText>(R.id.textInputEditTextEmail).setText(customer.eMail)
+        findViewById<EditText>(R.id.textInputEditTextUserName).isEnabled = false
+        findViewById<EditText>(R.id.textInputEditTextUserName).setText(customer.userName)
+        findViewById<EditText>(R.id.textInputEditTextALlergies).setText(customer.allergies)
     }
 }

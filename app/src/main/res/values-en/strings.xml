@@ -100,4 +100,7 @@
     <string name="deliveryPickup">Pickup</string>
     <string name="deliveryEatAtRest">Eat at restaurant</string>
     <string name="msg_token_fmt">token</string>
+
+    <string name="companyName">Company name</string>
+    <string name="add_image">Add image</string>
 </resources>

@@ -104,4 +104,7 @@
     <string name="deliveryEatAtRest">Ät på restaurangen</string>
     <string name="msg_token_fmt">token</string>
 
+    <string name="companyName">Företagsnamn</string>
+    <string name="add_image">Lägg till bild</string>
+
 </resources>
