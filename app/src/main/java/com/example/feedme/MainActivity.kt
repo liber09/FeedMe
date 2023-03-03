@@ -165,7 +165,7 @@ ordersRef.addSnapshotListener{ snapshot, e ->
             startActivity(intent)
             finish()
 
-        },3000
+        },5000
 
         )
 
