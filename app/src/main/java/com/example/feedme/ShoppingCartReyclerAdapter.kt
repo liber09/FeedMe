@@ -43,20 +43,24 @@ class ShoppingCartReyclerAdapter(val context: Context, val shoppingCartItems: Li
         var specialsSum = 0.0
         //add extraCost for vegan
         if(cartItems.isVegan) {
-            specialsSum+= cartItems.extraCostVegan!!
+            if (cartItems.extraCostVegan != null)
+            {  specialsSum+= cartItems.extraCostVegan!!}
         }
         //add extraCost for vegetarian
         if(cartItems.isVegetarian){
-            specialsSum += cartItems.extraCostVegeterian!!
+            if (cartItems.extraCostVegeterian != null){
+            specialsSum += cartItems.extraCostVegeterian!!}
         }
         //add extraCost for glutenFree
         if(cartItems.isGlutenFree) {
+            if (cartItems.extraCostGluten != null){
             specialsSum += cartItems.extraCostGluten!!
-        }
+        }}
         //add extraCost for lactoseFree
         if(cartItems.isLaktoseFree) {
+            if (cartItems.extraCostLaktose != null){
             specialsSum += cartItems.extraCostLaktose!!
-        }
+        }}
         holder.cartItemRowSpecialsPrice.text = specialsSum.toString() + " Kr"
         holder.cartDisplayPosition = position
         holder.increaseButton.setOnClickListener{

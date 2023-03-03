@@ -16,16 +16,18 @@ import com.example.feedme.data.Order
 
 import com.example.feedme.data.Restaurant
 import com.google.android.gms.location.*
+import java.text.ParsePosition
 
 //Todo byta dishes till restaurants när all data är ner
 
-class DeliveryPersonViewActivity : AppCompatActivity() {
+class DeliveryPersonViewActivity : AppCompatActivity(), CollectOrderRecyclerAdapter.OnClickListener {
 
     lateinit var deliveryRestaurantRecyclerView: RecyclerView
     lateinit var locationProvider : FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
     lateinit var locationCallback: LocationCallback
     private val REQUEST_LOCATION = 1
+    lateinit var restaurantsWithOrders : List<Restaurant>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +58,7 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
 
             )*/
 
-        val restaurantsWithOrders = mutableListOf<Restaurant>()
+         restaurantsWithOrders = mutableListOf<Restaurant>()
 
         for (restaurant in DataManagerRestaurants.restaurants){
 
@@ -71,13 +73,14 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
                 Log.d("lalaa", "tomt")
                 return@addOnSuccessListener
             }
-           restaurantsWithOrders.add(restaurant)
+           (restaurantsWithOrders as MutableList<Restaurant>).add(restaurant)
+           Log.d("restaurants", "Name of restaurant at position  ${restaurantsWithOrders.indexOf(restaurant)}: ${restaurant.name}")
 
 
                 deliveryRestaurantRecyclerView.adapter =
                     CollectOrderRecyclerAdapter(
                         this,
-                        restaurantsWithOrders
+                        restaurantsWithOrders,this
 
                     )
 
@@ -146,6 +149,20 @@ class DeliveryPersonViewActivity : AppCompatActivity() {
 
 
         }
+    }
+
+    override fun OnClick(position: Int){
+      //val target = DataManagerRestaurants.restaurants[position]
+        val targetaddress = restaurantsWithOrders[position]
+            .address+", "+restaurantsWithOrders[position]
+            .postalCode+" "+restaurantsWithOrders[position].city
+
+
+                       val intent = Intent(this,DeliveryMapsActivity::class.java)
+                       intent.putExtra("target","$targetaddress")
+                       this.startActivity(intent)
+
+
     }
 
     override fun onResume() {
