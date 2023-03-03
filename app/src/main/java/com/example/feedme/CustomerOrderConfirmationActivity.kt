@@ -84,20 +84,24 @@ class CustomerOrderConfirmationActivity : AppCompatActivity() {
             }
             //add extraCost for vegan
             if(item.isVegan) {
+                if (item.extraCostVegan !=null){
                 specialsSum+= (item.extraCostVegan!!)*item.count
-            }
+            }}
             //add extraCost for vegetarian
             if(item.isVegetarian){
+                if (item.extraCostVegeterian !=null){
                 specialsSum += (item.extraCostVegeterian!!)*item.count
-            }
+            }}
             //add extraCost for glutenFree
             if(item.isGlutenFree) {
+                if (item.extraCostGluten !=null){
                 specialsSum += (item.extraCostGluten!!)
-            }
+            }}
             //add extraCost for lactoseFree
             if(item.isLaktoseFree) {
+                if (item.extraCostLaktose !=null){
                 specialsSum += (item.extraCostLaktose!!)
-            }
+            }}
             restaurantId = item.restaurantDocumentId.toString()
         }
         val deliveryPrice = DataManagerRestaurants.getByDocumentId(restaurantId)?.deliveryFee
