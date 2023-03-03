@@ -133,14 +133,16 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:paddingLeft="16dp"
-                    android:text="Byt bild" />
+                    android:text="Byt bild"
+                    app:cornerRadius="10dp"/>
 
                 <Button
                     android:id="@+id/btnViewOrders"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="@string/toOrders" />
+                    android:text="@string/toOrders"
+                    app:cornerRadius="10dp"/>
 
             </TableRow>
 
