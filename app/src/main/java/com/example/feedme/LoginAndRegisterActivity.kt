@@ -82,13 +82,13 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
     fun createRestaurant() {
         email = emailView.text.toString()
-        val password = passwordView.text.toString()  // create restaurant function
+        val password = passwordView.text.toString()  // Skapa restaurant konto
 
         if (email.isEmpty() || password.isEmpty()) {
             return
         }
 
-        auth.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)   // registrerar användaren med email + password, if sats om det är success eller inte
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Register Complete", Toast.LENGTH_SHORT).show()
@@ -107,7 +107,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
     }
 
     fun createCustomer() {
-        email = emailView.text.toString()   // Create customer function
+        email = emailView.text.toString()   // Skapa konto för kund
         val password = passwordView.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -133,7 +133,7 @@ class LoginAndRegisterActivity : AppCompatActivity() {
 
     fun createDeliveryperson() {
         email = emailView.text.toString()
-        val password = passwordView.text.toString()     // Create delivery function
+        val password = passwordView.text.toString()     // Skapar konto för bud
 
         if (email.isEmpty() || password.isEmpty()) {
             return
@@ -167,19 +167,21 @@ class LoginAndRegisterActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
+                    val user = auth.currentUser  // användaren man loggar in på
 
                     if (user != null) {
                         val userId = user.uid
 
-
                         db.collection("customers").get()
-                            .addOnSuccessListener { documents ->
+                            .addOnSuccessListener { documents ->     // function som läser av om man registrerat sig som kund kopplat till databasen
                                 for (document in documents) {
                                     if (document.id == "${user.uid}") {
                                         val intent = Intent(this, RestaurantViewActiviity::class.java)
                                         startActivity(intent)
-                                        finish()}}}
+                                        finish()
+                                    }
+                                }
+                            }
 
 
 

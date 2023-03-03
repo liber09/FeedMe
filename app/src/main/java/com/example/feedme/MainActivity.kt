@@ -74,12 +74,12 @@ class MainActivity : AppCompatActivity() {
         //  RecyclerView for the documentpath as soon as that is
         //  fixed så we can put the extra in the documentPaht
 
-
+        //1
         val drinkRef = db.collection("restaurants").document("restaurant2")
             .collection("drinks")    // Drink ref from database collection
         drinkRef.addSnapshotListener { snapshot, e ->
             if (snapshot != null) {
-
+        //2
                 DataManagerDrinks.drinkList.clear()
                 for (document in snapshot.documents) {
                     val item = document.toObject<Drink>()
@@ -89,11 +89,11 @@ class MainActivity : AppCompatActivity() {
                         DataManagerDrinks.drinkList.add(item)
                     }
                 }
-
+        //3
                 printDrinks()
             }
         }
-
+        //4
         val docRef =db.collection("restaurants").document("restaurant2").collection("dishes")
         docRef.addSnapshotListener{ snapshot, e ->
             if (snapshot != null) {
