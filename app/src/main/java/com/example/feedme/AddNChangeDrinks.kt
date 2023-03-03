@@ -51,7 +51,7 @@ class AddNChangeDrinks : AppCompatActivity() {
 
 
         if(drinkName.isNotEmpty()&&drinkPrice != null &&drinkSize.isNotEmpty()){
-            val newDrink = Drink("",drinkName,drinkSize,drinkCategory,drinkPrice)
+            val newDrink = Drink("","",drinkName,drinkSize,drinkPrice,drinkCategory)
 
 
         db.collection("restaurants")
