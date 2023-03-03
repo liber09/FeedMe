@@ -89,17 +89,6 @@
         app:srcCompat="@drawable/baseline_shopping_cart_24" />
 
 
-    <com.nex3z.notificationbadge.NotificationBadge
-        android:id="@+id/badge"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignTop="@+id/cartButton"
-        android:layout_toRightOf="@+id/cartButton"
-        app:nbMaxTextLength="2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="329dp"
-        tools:layout_editor_absoluteY="39dp" />
-
     <ImageButton
         android:id="@+id/ibtn_home_detailsview"
         android:layout_width="55dp"

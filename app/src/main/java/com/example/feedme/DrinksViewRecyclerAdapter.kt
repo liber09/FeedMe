@@ -71,42 +71,30 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>): 
         val drinkType: TextView = itemView.findViewById(R.id.drinkTypeTextView)
         val drinkSize: TextView = itemView.findViewById(R.id.sizeTextView)
         val priceTV: TextView = itemView.findViewById(R.id.priceTV)
-        val addToCart: Button = itemView.findViewById(R.id.cartAddButton)
-        var drinkDisplayPosition = 0
 
-
-
-        init {  // add to cart function
-            addToCart.setOnClickListener {
-                val selectedDrink = DataManagerDrinks.drinkList[drinkDisplayPosition]
-                selectedDrink.drinkSize = "33cl"
-                selectedDrink.drinkName += " "
-                handleExistsInCart(selectedDrink)
-
-            }
-            }
-        }
-
-
-
-
-        fun handleExistsInCart(selectedDrink: Drink) { // Funktion som hanterar dubletter i varukorg
-            var alreadyInCart = false
-            for (Drink in DataManagerShoppingCart.shoppingCartItems) {
-                if (selectedDrink.equals(Drink)) {
-                    Drink.count++
-                    alreadyInCart = true
-
-                }
-
-                if (!alreadyInCart) {
-                    selectedDrink.count++
-                    DataManagerShoppingCart.shoppingCartItems.add(Drink)
-
-                }
-            }
-        }
+      }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
