@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.feedme.MyPagesCustomer.customer
@@ -50,6 +51,13 @@ class CustomerMyPages : AppCompatActivity() {
             startActivity(intent)
 
 
+        }
+
+        val btnEdit = findViewById<Button>(R.id.btnMyPagesEdit)
+        btnEdit.setOnClickListener {
+            val intent = Intent(this, RegisterCustomerInfo::class.java)
+            if(user != null) { intent.putExtra("id", user.uid) }
+            startActivity(intent)
         }
 
         if (user != null) {

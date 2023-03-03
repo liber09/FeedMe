@@ -1,6 +1,7 @@
 package com.example.feedme
 
 import android.content.Context
+import android.content.DialogInterface.OnClickListener
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,7 +19,9 @@ import com.example.feedme.data.Restaurant
 //Todo byta dishes till restaurants när all data är ner
 
 class CollectOrderRecyclerAdapter(val context: Context,
-                                  val restaurants: List<Restaurant>) :
+                                  val restaurants: List<Restaurant>,
+                                  val listener: OnClickListener
+) :
 RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
 
     val layoutInflater = LayoutInflater.from(context)
@@ -75,10 +78,12 @@ RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
 
         init {
             btn_gps2restaurant.setOnClickListener {
-                val target = DataManagerRestaurants.restaurants[restaurantDisplayPosition]
+                val position = adapterPosition
+                listener.OnClick(position)
+              /*  val target = DataManagerRestaurants.restaurants[restaurantDisplayPosition]
                 val intent = Intent(context,DeliveryMapsActivity::class.java)
                 intent.putExtra("target","$target")
-                context.startActivity(intent)
+                context.startActivity(intent)*/
 
 
             }
@@ -86,8 +91,13 @@ RecyclerView.Adapter<CollectOrderRecyclerAdapter.ViewHolder>(){
 
 
 
-    }
 
+    }
+    interface OnClickListener {
+        fun OnClick(position: Int)
+
+
+    }
 
 
 

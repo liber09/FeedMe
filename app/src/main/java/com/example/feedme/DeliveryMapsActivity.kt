@@ -1,9 +1,11 @@
 package com.example.feedme
 import DirectionsApi
 import android.graphics.Color
+import android.location.Geocoder
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,6 +22,7 @@ import com.google.maps.android.PolyUtil
 class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    lateinit var kundAddress : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +31,15 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val backbutton = findViewById<FloatingActionButton>(R.id.FAB_Home)
         backbutton.setOnClickListener{ finish()}
 
+        kundAddress = intent.getStringExtra("target").toString()
+        Log.d("target",kundAddress)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
     }
 
     /**
@@ -48,13 +56,30 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         // Define the origin and destination points
-        val origin = LatLng(56.332639461378015, 13.671913141231613)
-        val destination = LatLng(56.155231527347276, 13.756392685407457)
+        //Engelbrektsgatan71 parkera budet sin bil i göteborg
+        val origin = LatLng(57.701391, 11.983791)
+
+        val address = kundAddress
+        val location = getLocationFromAddress(address)
+        var destination = LatLng(56.155231527347276, 13.756392685407457)
+        if (location != null) {
+            destination = LatLng(location.latitude, location.longitude)
+           // mMap.addMarker(MarkerOptions().position(destination).title(address))
+           // mMap.moveCamera(CameraUpdateFactory.newLatLng(destination))
+
+          /*  if (destination != null) {
+                val boundBuilder = LatLngBounds.Builder().include(latLng)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundBuilder.build(), 1000, 1000, 0))
+            }*/
+        }
+
+
 
         // Add a marker in the location and move the camera
         mMap.addMarker(MarkerOptions().position(origin).title("Origin"))
+        if (destination != null) {
         mMap.addMarker(MarkerOptions().position(destination).title("Destination"))
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true) }
 
 
        /* DirectionsApi.getRouteDetails(
@@ -125,7 +150,17 @@ class DeliveryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }*/
     }
 
+    private fun getLocationFromAddress(address: String): LatLng? {
+        val geocoder = Geocoder(this)
+        val addresses = geocoder.getFromLocationName(address, 1)
+        if (addresses!!.isNotEmpty()) {
+            val location = addresses[0]
+            return LatLng(location.latitude, location.longitude)
 
+
+        }
+        return null
+    }
 
 }
 

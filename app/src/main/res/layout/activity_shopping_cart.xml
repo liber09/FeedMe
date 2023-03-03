@@ -134,6 +134,7 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/messageToRestaurant"
+                android:textColorHint="@color/white"
                 android:inputType="textMultiLine"
                 android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
