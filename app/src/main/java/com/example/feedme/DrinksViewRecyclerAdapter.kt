@@ -13,12 +13,14 @@ import com.bumptech.glide.Glide
 import com.example.feedme.data.Dishes
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.nex3z.notificationbadge.NotificationBadge
 
 lateinit var drink: Drink
 
-class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>):
+class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>):                       // abstrakt klass som grund för att binda data till recycleview
     RecyclerView.Adapter<DrinksViewRecyclerAdapter.ViewHolder>()
 {
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +37,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>):
         holder.priceTV.text = currentItem.drinkPrice.toString() + " kr"
         holder.drinkType.text = currentItem.drinkType
         holder.imageDisplay
+
 
 
 
@@ -57,6 +60,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>):
     override fun getItemCount(): Int {
 
         return drink.size
+
     }
 
 
@@ -71,6 +75,7 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>):
         var drinkDisplayPosition = 0
 
 
+
         init {  // add to cart function
             addToCart.setOnClickListener {
                 val selectedDrink = DataManagerDrinks.drinkList[drinkDisplayPosition]
@@ -79,7 +84,11 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>):
                 handleExistsInCart(selectedDrink)
 
             }
+            }
         }
+
+
+
 
         fun handleExistsInCart(selectedDrink: Drink) { // Funktion som hanterar dubletter i varukorg
             var alreadyInCart = false
@@ -97,8 +106,8 @@ class DrinksViewRecyclerAdapter(val context: Context, val drink : List<Drink>):
                 }
             }
         }
-    }
 }
+
 
 
 

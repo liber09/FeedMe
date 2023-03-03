@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.nex3z.notificationbadge.NotificationBadge
 
 class DrinksViewActivity : AppCompatActivity() {
 
@@ -23,6 +24,7 @@ class DrinksViewActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var userUID : String
     lateinit var restaurantid: String   // variabler som ska initialiseras längre fram i koden
+    lateinit var nb: NotificationBadge
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,10 +66,12 @@ class DrinksViewActivity : AppCompatActivity() {
 
 
 
+
         drinksRecyclerView = findViewById<RecyclerView>(RV_Drinks)
         drinksRecyclerView.layoutManager= LinearLayoutManager(this)
         val adapter = DrinksViewRecyclerAdapter(this,DataManagerDrinks.drinkList)
         drinksRecyclerView.adapter = adapter
+
 
         val fab_add_drink = findViewById<FloatingActionButton>(R.id.FAB_ADD_Drink)
         fab_add_drink.isInvisible = true  //Lägga till dricka som restaurant till deras meny
